@@ -1,0 +1,45 @@
+{
+  "connection": {
+    "conn_type": "ap",
+    "robot_ip": "192.168.2.1",
+    "local_ip": null
+  },
+  "arm": {
+    "distal_servo_id": 1,
+    "distal_feedback_slot": 0,
+    "distal_hold_raw": 601,
+    "base_servo_id": 2,
+    "base_feedback_slot": 1,
+    "base_extended_raw": 1073,
+    "base_retracted_raw": 552,
+    "raw_tolerance": 8,
+    "distal_drift_limit_raw": 12,
+    "action_timeout_s": 15.0,
+    "settle_seconds": 0.5
+  },
+  "infrared": {
+    "feedback_slot": 0,
+    "threshold_mm": 30,
+    "consecutive_samples": 3,
+    "wait_timeout_s": 120.0,
+    "freshness_timeout_s": 1.0
+  },
+  "gripper": {
+    "open_power": 25,
+    "close_power": 30,
+    "open_seconds": 1.0,
+    "close_seconds": 1.0
+  },
+  "chassis": {
+    "place_turn_degrees": -90.0,
+    "turn_speed_dps": 30.0,
+    "action_timeout_s": 15.0
+  },
+  "vision": {
+    "enabled": true,
+    "model": "yolo26m.pt",
+    "confidence": 0.25,
+    "image_size": 640,
+    "frame_interval_s": 0.5
+  }
+}

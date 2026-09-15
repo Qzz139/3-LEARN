@@ -1,0 +1,120 @@
+import importlib.util
+import json
+from pathlib import Path
+import unittest
+
+
+ROOT = Path(__file__).resolve().parent.parent
+SPEC = importlib.util.spec_from_file_location(
+    "ir_pick_place_demo", ROOT / "scripts" / "ir_pick_place_demo.py")
+MODULE = importlib.util.module_from_spec(SPEC)
+SPEC.loader.exec_module(MODULE)
+
+
+class TestConfiguration(unittest.TestCase):
+    def test_default_configuration_and_raw_conversion(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        self.assertEqual(cfg["infrared"]["threshold_mm"], 30)
+        self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
+        self.assertEqual(cfg["arm"]["base_extended_raw"], 1073)
+        self.assertEqual(MODULE.raw_to_sdk_degrees(601), -120)
+        self.assertEqual(MODULE.sdk_degrees_to_raw(-120), 600)
+        self.assertEqual(MODULE.raw_to_sdk_degrees(1073), -73)
+        self.assertEqual(MODULE.sdk_degrees_to_raw(-73), 1070)
+
+    def test_rejects_wrong_ir_threshold(self):
+        cfg = json.loads((ROOT / "config" / "ir_pick_place.json").read_text())
+        cfg["infrared"]["threshold_mm"] = 31
+        with self.assertRaises(ValueError):
+            MODULE.validate_config(cfg)
+
+
+class FakeAction:
+    has_succeeded = True
+
+    def wait_for_completed(self, timeout):
+        return True
+
+
+class FakeServo:
+    def __init__(self):
+        self.commands = []
+
+    def moveto(self, index, angle):
+        self.commands.append((index, angle))
+        return FakeAction()
+
+
+class FakeFeedback:
+    def __init__(self, cfg):
+        self.cfg = cfg
+
+    def servo_raw(self, slot, freshness=1.0):
+        arm = self.cfg["arm"]
+        return arm["distal_hold_raw"] if slot == arm["distal_feedback_slot"] else self.target
+
+
+class TestServoGuard(unittest.TestCase):
+    def test_distal_is_commanded_once_then_only_base_moves(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        bot = type("Bot", (), {"servo": FakeServo()})()
+        feedback = FakeFeedback(cfg)
+        feedback.target = cfg["arm"]["distal_hold_raw"]
+        demo = MODULE.Demo(bot, cfg, feedback, lambda *args, **kwargs: None)
+        demo.lock_initial_distal()
+        feedback.target = cfg["arm"]["base_retracted_raw"]
+        demo.move_base(cfg["arm"]["base_retracted_raw"], "test")
+        ids = [item[0] for item in bot.servo.commands]
+        self.assertEqual(ids, [cfg["arm"]["distal_servo_id"], cfg["arm"]["base_servo_id"]])
+
+
+class TestSequence(unittest.TestCase):
+    def test_cycle_sequence_matches_physical_constraints(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+
+        class SequenceDemo(MODULE.Demo):
+            def __init__(self):
+                self.cfg = cfg
+                self.arm = cfg["arm"]
+                self.events = []
+
+            def lock_initial_distal(self):
+                self.events.append(("distal_lock", 601))
+
+            def initial_state(self, prefix):
+                self.events.append((prefix, "extended_open"))
+
+            def wait_for_object(self):
+                self.events.append(("infrared", 30))
+
+            def gripper(self, opened, stage):
+                self.events.append((stage, "open" if opened else "closed"))
+
+            def move_base(self, target_raw, stage):
+                self.events.append((stage, target_raw))
+
+            def turn(self, degrees, stage):
+                self.events.append((stage, degrees))
+
+            def record(self, stage, **values):
+                pass
+
+        demo = SequenceDemo()
+        demo.run()
+        self.assertEqual(demo.events, [
+            ("distal_lock", 601),
+            ("start", "extended_open"),
+            ("infrared", 30),
+            ("grasp_close", "closed"),
+            ("carry_retract", 552),
+            ("turn_to_place", -90.0),
+            ("place_extend", 1073),
+            ("place_release", "open"),
+            ("return_retract", 552),
+            ("turn_to_start", 90.0),
+            ("finish", "extended_open"),
+        ])
+
+
+if __name__ == "__main__":
+    unittest.main()
