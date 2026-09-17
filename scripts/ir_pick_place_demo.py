@@ -35,6 +35,8 @@ def validate_config(cfg):
     if any(key not in cfg for key in required):
         raise ValueError("configuration is missing a required section")
     arm = cfg["arm"]
+    if not isinstance(arm.get("calibration_verified", False), bool):
+        raise ValueError("arm.calibration_verified must be a boolean")
     for key in ("distal_servo_id", "base_servo_id"):
         if arm[key] not in (1, 2, 3):
             raise ValueError(key + " must be an SDK servo ID in [1, 3]")
@@ -243,7 +245,7 @@ class VisionSidecar:
             self.running = False
         if self.thread:
             self.thread.join(timeout=2.0)
-        if self.process:
+        if self.process and self.process.pid is not None:
             self.process.join(timeout=3.0)
             if self.process.is_alive():
                 self.process.terminate()
@@ -267,7 +269,10 @@ class Demo:
                 error, self.arm["distal_drift_limit_raw"]))
 
     def move_servo(self, servo_id, feedback_slot, target_raw, stage):
-        # The caller only ever passes the distal servo once, during lock_initial_distal.
+        if servo_id == self.arm["distal_servo_id"] and self.distal_locked:
+            raise RuntimeError("distal servo is locked; additional position commands are forbidden")
+        if servo_id not in (self.arm["distal_servo_id"], self.arm["base_servo_id"]):
+            raise RuntimeError("servo ID is outside the configured arm")
         self.record(stage + "_request", servo_id=servo_id, target_raw=target_raw,
                     target_degrees=raw_to_sdk_degrees(target_raw),
                     encoded_target_raw=sdk_degrees_to_raw(raw_to_sdk_degrees(target_raw)))
@@ -329,6 +334,7 @@ class Demo:
             with self.feedback.condition:
                 if (self.feedback.distance is None or
                         time.monotonic() - self.feedback.distance_time > ir["freshness_timeout_s"]):
+                    sequence = 0
                     self.feedback.condition.wait(timeout=0.1)
                     continue
                 distance = int(self.feedback.distance[slot])
@@ -336,6 +342,9 @@ class Demo:
                 self.feedback.condition.wait(timeout=0.05)
             if last_processed == measured_at:
                 continue
+            if (last_processed is not None and
+                    measured_at - last_processed > ir["freshness_timeout_s"]):
+                sequence = 0
             last_processed = measured_at
             self.record("infrared", slot=slot, distance_mm=distance,
                         threshold_mm=threshold)
@@ -423,6 +432,11 @@ def main():
         print("未连接机器人；实机运行需添加 --execute。")
         return 0
 
+    if not cfg["arm"].get("calibration_verified", False):
+        parser.error("servo ID/feedback mapping, raw-to-command conversion and extended/retracted poses "
+                     "have not been calibrated on this EP; verify them before setting "
+                     "arm.calibration_verified=true (no robot commands sent)")
+
     try:
         from robomaster import camera, config as rm_config, led, robot
     except ImportError as exc:
@@ -458,24 +472,31 @@ def main():
             raise RuntimeError("servo or infrared subscription was rejected")
         feedback.wait_ready()
         demo = Demo(bot, cfg, feedback, event_log.write)
-        vision = VisionSidecar(bot, cfg["vision"], output_dir / "detections.jsonl", event_log.write)
-        vision.start(camera)
+        try:
+            vision = VisionSidecar(bot, cfg["vision"], output_dir / "detections.jsonl", event_log.write)
+            vision.start(camera)
+        except Exception as vision_exc:
+            event_log.write("vision_start_error", error=str(vision_exc), control_continues=True)
         demo.run()
         report["completed"] = True
         event_log.write("finished_successfully", output_dir=str(output_dir))
         bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
     except BaseException as exc:
+        report["completed"] = False
         report["error"] = "{}: {}".format(type(exc).__name__, exc)
-        event_log.write("error", error=report["error"], automatic_return=False)
         if demo:
             demo.emergency_stop()
         try:
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=255, g=0, b=0, effect=led.EFFECT_ON)
         except Exception as led_exc:
             event_log.write("error_led_failed", error=str(led_exc))
+        event_log.write("error", error=report["error"], automatic_return=False)
     finally:
         if vision:
-            vision.stop()
+            try:
+                vision.stop()
+            except Exception as vision_exc:
+                event_log.write("vision_cleanup_error", error=str(vision_exc))
         if distance_subscribed:
             try:
                 bot.sensor.unsub_distance()

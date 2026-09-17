@@ -5,6 +5,7 @@
     "local_ip": null
   },
   "arm": {
+    "calibration_verified": false,
     "distal_servo_id": 1,
     "distal_feedback_slot": 0,
     "distal_hold_raw": 601,

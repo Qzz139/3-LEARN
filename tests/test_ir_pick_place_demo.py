@@ -2,6 +2,7 @@ import importlib.util
 import json
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,6 +18,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(cfg["infrared"]["threshold_mm"], 30)
         self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
         self.assertEqual(cfg["arm"]["base_extended_raw"], 1073)
+        self.assertFalse(cfg["arm"]["calibration_verified"])
         self.assertEqual(MODULE.raw_to_sdk_degrees(601), -120)
         self.assertEqual(MODULE.sdk_degrees_to_raw(-120), 600)
         self.assertEqual(MODULE.raw_to_sdk_degrees(1073), -73)
@@ -66,6 +68,43 @@ class TestServoGuard(unittest.TestCase):
         demo.move_base(cfg["arm"]["base_retracted_raw"], "test")
         ids = [item[0] for item in bot.servo.commands]
         self.assertEqual(ids, [cfg["arm"]["distal_servo_id"], cfg["arm"]["base_servo_id"]])
+
+    def test_direct_distal_command_is_rejected_after_lock(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        bot = type("Bot", (), {"servo": FakeServo()})()
+        demo = MODULE.Demo(bot, cfg, FakeFeedback(cfg), lambda *args, **kwargs: None)
+        demo.distal_locked = True
+        with self.assertRaises(RuntimeError):
+            demo.move_servo(1, 0, 601, "forbidden")
+        self.assertEqual(bot.servo.commands, [])
+
+
+class TestInfraredSamples(unittest.TestCase):
+    def test_one_sample_cannot_be_counted_three_times(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["infrared"]["wait_timeout_s"] = 0.5
+        cfg["infrared"]["freshness_timeout_s"] = 0.1
+        clock = [10.0]
+
+        class Condition:
+            def __enter__(self):
+                return self
+
+            def __exit__(self, *args):
+                pass
+
+            def wait(self, timeout):
+                clock[0] += timeout
+
+        feedback = type("Feedback", (), {
+            "condition": Condition(), "distance": [20, 0, 0, 0], "distance_time": 10.0,
+        })()
+        events = []
+        demo = MODULE.Demo(None, cfg, feedback, lambda stage, **kw: events.append(stage))
+        with patch.object(MODULE.time, "monotonic", side_effect=lambda: clock[0]):
+            with self.assertRaises(RuntimeError):
+                demo.wait_for_object()
+        self.assertNotIn("grasp_distance_confirmed", events)
 
 
 class TestSequence(unittest.TestCase):

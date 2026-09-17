@@ -216,3 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local Finder metadata and runtime locks/reports
+.DS_Store
+work/
