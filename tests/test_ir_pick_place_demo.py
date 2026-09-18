@@ -19,7 +19,8 @@ class TestConfiguration(unittest.TestCase):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
         self.assertEqual(cfg["infrared"]["threshold_mm"], 20)
         self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
-        self.assertEqual(cfg["arm"]["base_extended_raw"], 1073)
+        self.assertIsNone(cfg["arm"]["base_extended_raw"])
+        self.assertIsNone(cfg["arm"]["base_retracted_raw"])
         self.assertFalse(cfg["arm"]["calibration_verified"])
         self.assertEqual(MODULE.raw_to_sdk_degrees(601), -74)
         self.assertEqual(MODULE.sdk_degrees_to_raw(-74), 603)
@@ -37,6 +38,9 @@ class TestConfiguration(unittest.TestCase):
             MODULE.validate_config(cfg)
 
     def test_execute_with_unverified_config_reaches_sdk_without_motion(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        # Synthetic targets for mocked commands; these are not hardware poses.
+        cfg["arm"].update(base_extended_raw=1000, base_retracted_raw=1100)
         real_import = builtins.__import__
 
         def without_sdk(name, *args, **kwargs):
@@ -46,6 +50,7 @@ class TestConfiguration(unittest.TestCase):
 
         output, errors = io.StringIO(), io.StringIO()
         with patch("sys.argv", ["demo", "--execute"]), \
+                patch.object(MODULE, "load_config", return_value=cfg), \
                 patch("builtins.__import__", side_effect=without_sdk), \
                 patch("sys.stdout", output), patch("sys.stderr", errors):
             with self.assertRaises(SystemExit) as stopped:
@@ -53,6 +58,22 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(stopped.exception.code, 2)
         self.assertIn("本次按配置执行", output.getvalue())
         self.assertIn("RoboMaster SDK unavailable", errors.getvalue())
+
+    def test_missing_pose_targets_stop_before_sdk_import(self):
+        with patch("sys.argv", ["demo", "--execute"]), \
+                patch("sys.stderr", new_callable=io.StringIO) as errors:
+            with self.assertRaises(SystemExit) as stopped:
+                MODULE.main()
+        self.assertEqual(stopped.exception.code, 2)
+        self.assertIn("旧目标已作废", errors.getvalue())
+
+    def test_direct_cycle_cannot_start_with_missing_targets(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        demo = MODULE.Demo(None, cfg, None, lambda *args, **kwargs: None)
+        with patch.object(demo, "lock_initial_distal") as lock:
+            with self.assertRaisesRegex(ValueError, "外伸最低"):
+                demo.run()
+            lock.assert_not_called()
 
 
 class FakeAction:
@@ -102,6 +123,7 @@ class TestServoGuard(unittest.TestCase):
 
     def test_distal_is_commanded_once_then_only_base_moves(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["arm"]["base_retracted_raw"] = 1100  # Fake hardware only.
         bot = type("Bot", (), {"servo": FakeServo()})()
         feedback = FakeFeedback(cfg)
         feedback.target = cfg["arm"]["distal_hold_raw"]
@@ -183,8 +205,9 @@ class TestInfraredSamples(unittest.TestCase):
 
 
 class TestSequence(unittest.TestCase):
-    def test_cycle_sequence_matches_physical_constraints(self):
+    def test_cycle_command_order_with_synthetic_targets(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["arm"].update(base_extended_raw=1000, base_retracted_raw=1100)
 
         class SequenceDemo(MODULE.Demo):
             def __init__(self):
@@ -220,11 +243,11 @@ class TestSequence(unittest.TestCase):
             ("start", "extended_open"),
             ("infrared", 20),
             ("grasp_close", "closed"),
-            ("carry_retract", 552),
+            ("carry_retract", 1100),
             ("turn_to_place", -90.0),
-            ("place_extend", 1073),
+            ("place_extend", 1000),
             ("place_release", "open"),
-            ("return_retract", 552),
+            ("return_retract", 1100),
             ("turn_to_start", 90.0),
             ("finish", "extended_open"),
         ])

@@ -54,6 +54,8 @@ def validate_config(cfg):
         raise ValueError("distal and base feedback slots must differ")
     for key in ("distal_hold_raw", "base_extended_raw", "base_retracted_raw"):
         value = arm[key]
+        if value is None and key != "distal_hold_raw":
+            continue
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 2048:
             raise ValueError(key + " must be a DDS encoder value in [0, 2048]")
         if not -180 <= raw_to_sdk_degrees(value) <= 180:
@@ -68,6 +70,11 @@ def validate_config(cfg):
     if not -180 <= cfg["chassis"]["place_turn_degrees"] < 0:
         raise ValueError("place_turn_degrees must be negative for a right turn")
     return cfg
+
+
+def require_motion_targets(cfg):
+    if any(cfg["arm"][key] is None for key in ("base_extended_raw", "base_retracted_raw")):
+        raise ValueError("外伸最低、内收抬高的姿态目标尚未设置；旧目标已作废，不发送机器人命令")
 
 
 def load_config(path):
@@ -406,6 +413,7 @@ class Demo:
         self.assert_distal()
 
     def run(self):
+        require_motion_targets(self.cfg)
         self.lock_initial_distal()
         self.initial_state("start")
         self.record("initial_state_ready", arm="extended", gripper="open")
@@ -463,7 +471,14 @@ def main():
         print("预览：锁定抓夹侧 raw {} → 外伸/松爪 → 红外≤{} mm（连续{}次） → 夹紧 → 内收 → 右转90° → 外伸/松爪 → 内收 → 左转90° → 外伸/松爪".format(
             cfg["arm"]["distal_hold_raw"], cfg["infrared"]["threshold_mm"], cfg["infrared"]["consecutive_samples"]))
         print("未连接机器人；实机运行需添加 --execute。")
+        if cfg["arm"]["base_extended_raw"] is None or cfg["arm"]["base_retracted_raw"] is None:
+            print("姿态目标待设置：外伸必须为最低点，内收必须抬高；当前配置不能执行。")
         return 0
+
+    try:
+        require_motion_targets(cfg)
+    except ValueError as exc:
+        parser.error(str(exc))
 
     if not cfg["arm"].get("calibration_verified", False):
         print("提示：舵机映射及外伸/内收位置尚未实机确认；本次按配置执行，"
