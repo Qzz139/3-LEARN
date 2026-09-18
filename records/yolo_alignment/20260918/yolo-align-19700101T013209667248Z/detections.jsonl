@@ -1,0 +1,1 @@
+{"time_utc": "1970-01-01T01:32:38.784176+00:00", "frame": 1, "frame_age_s": 0.3808978240003853, "count": 1, "detections": [{"class_id": 32, "class_name": "sports ball", "confidence": 0.9449262022972107, "xyxy": [225.186767578125, 462.1506042480469, 416.7668151855469, 643.2171630859375], "image_width": 1280, "image_height": 720}]}

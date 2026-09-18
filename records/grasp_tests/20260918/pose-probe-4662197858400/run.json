@@ -1,0 +1,170 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:18:04.938052+00:00",
+      "stage": "before",
+      "distal_raw": 1075,
+      "base_raw": 597
+    },
+    {
+      "time_utc": "1970-01-01T01:18:04.939094+00:00",
+      "stage": "base_step_1_request",
+      "servo_id": 1,
+      "target_raw": 711,
+      "target_degrees": -55,
+      "expected_dds_raw": 711,
+      "encoded_target_wire": 1250
+    },
+    {
+      "time_utc": "1970-01-01T01:18:05.708385+00:00",
+      "stage": "base_step_1_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:06.209892+00:00",
+      "stage": "base_step_1_complete",
+      "actual_raw": 706
+    },
+    {
+      "time_utc": "1970-01-01T01:18:07.712527+00:00",
+      "stage": "base_step_2_request",
+      "servo_id": 1,
+      "target_raw": 740,
+      "target_degrees": -50,
+      "expected_dds_raw": 740,
+      "encoded_target_wire": 1300
+    },
+    {
+      "time_utc": "1970-01-01T01:18:08.428481+00:00",
+      "stage": "base_step_2_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:08.930018+00:00",
+      "stage": "base_step_2_complete",
+      "actual_raw": 735
+    },
+    {
+      "time_utc": "1970-01-01T01:18:10.433142+00:00",
+      "stage": "base_step_3_request",
+      "servo_id": 1,
+      "target_raw": 768,
+      "target_degrees": -45,
+      "expected_dds_raw": 768,
+      "encoded_target_wire": 1350
+    },
+    {
+      "time_utc": "1970-01-01T01:18:11.188270+00:00",
+      "stage": "base_step_3_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:11.689875+00:00",
+      "stage": "base_step_3_complete",
+      "actual_raw": 763
+    },
+    {
+      "time_utc": "1970-01-01T01:18:13.193214+00:00",
+      "stage": "base_step_4_request",
+      "servo_id": 1,
+      "target_raw": 796,
+      "target_degrees": -40,
+      "expected_dds_raw": 796,
+      "encoded_target_wire": 1400
+    },
+    {
+      "time_utc": "1970-01-01T01:18:13.908714+00:00",
+      "stage": "base_step_4_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:14.460438+00:00",
+      "stage": "base_step_4_complete",
+      "actual_raw": 791
+    },
+    {
+      "time_utc": "1970-01-01T01:18:15.963556+00:00",
+      "stage": "base_step_5_request",
+      "servo_id": 1,
+      "target_raw": 825,
+      "target_degrees": -35,
+      "expected_dds_raw": 825,
+      "encoded_target_wire": 1450
+    },
+    {
+      "time_utc": "1970-01-01T01:18:17.269268+00:00",
+      "stage": "base_step_5_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:17.770962+00:00",
+      "stage": "base_step_5_complete",
+      "actual_raw": 819
+    },
+    {
+      "time_utc": "1970-01-01T01:18:19.274191+00:00",
+      "stage": "base_step_6_request",
+      "servo_id": 1,
+      "target_raw": 853,
+      "target_degrees": -30,
+      "expected_dds_raw": 853,
+      "encoded_target_wire": 1500
+    },
+    {
+      "time_utc": "1970-01-01T01:18:19.988397+00:00",
+      "stage": "base_step_6_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:20.490147+00:00",
+      "stage": "base_step_6_complete",
+      "actual_raw": 848
+    },
+    {
+      "time_utc": "1970-01-01T01:18:21.991428+00:00",
+      "stage": "base_step_7_request",
+      "servo_id": 1,
+      "target_raw": 882,
+      "target_degrees": -25,
+      "expected_dds_raw": 882,
+      "encoded_target_wire": 1550
+    },
+    {
+      "time_utc": "1970-01-01T01:18:22.830146+00:00",
+      "stage": "base_step_7_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:18:23.331868+00:00",
+      "stage": "base_step_7_complete",
+      "actual_raw": 876
+    },
+    {
+      "time_utc": "1970-01-01T01:18:26.837160+00:00",
+      "stage": "after",
+      "distal_raw": 1075,
+      "base_raw": 877
+    }
+  ],
+  "completed": true,
+  "base_target_raw": [
+    711,
+    740,
+    768,
+    796,
+    825,
+    853,
+    882
+  ],
+  "distal_hold_raw": 1073,
+  "provisional_swapped_mapping": false,
+  "distal_servo_id": 2,
+  "base_servo_id": 1
+}

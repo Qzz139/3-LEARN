@@ -1,0 +1,46 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:00:18.353856+00:00",
+      "stage": "before",
+      "distal_raw": 602,
+      "base_raw": 1184
+    },
+    {
+      "time_utc": "1970-01-01T01:00:18.354859+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 1,
+      "target_raw": 601,
+      "target_degrees": -74,
+      "expected_dds_raw": 603,
+      "encoded_target_wire": 1060
+    },
+    {
+      "time_utc": "1970-01-01T01:00:18.484511+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:00:18.986491+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 602
+    },
+    {
+      "time_utc": "1970-01-01T01:00:18.987206+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 1,
+      "feedback_slot": 0,
+      "hold_raw": 601
+    },
+    {
+      "time_utc": "1970-01-01T01:00:20.989914+00:00",
+      "stage": "after",
+      "distal_raw": 602,
+      "base_raw": 1184
+    }
+  ],
+  "completed": true,
+  "base_target_raw": null,
+  "distal_hold_raw": 601
+}

@@ -1,0 +1,39 @@
+{
+  "completed": true,
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:48:22.824102+00:00",
+      "stage": "repeat_reset_9_degrees_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:48:23.966103+00:00",
+      "stage": "repeat_reset_9_degrees_complete",
+      "actual_raw": 1078
+    },
+    {
+      "time_utc": "1970-01-01T00:48:26.970511+00:00",
+      "stage": "repeat_plus_5_degrees_request",
+      "servo_id": 2,
+      "target_raw": 1104,
+      "target_degrees": 14,
+      "expected_dds_raw": 1104,
+      "encoded_target_wire": 1940
+    },
+    {
+      "time_utc": "1970-01-01T00:48:28.044742+00:00",
+      "stage": "repeat_plus_5_degrees_complete",
+      "actual_raw": 1101
+    },
+    {
+      "time_utc": "1970-01-01T00:48:31.048744+00:00",
+      "stage": "repeat_complete",
+      "distal_raw": 602,
+      "base_raw": 1101
+    }
+  ]
+}

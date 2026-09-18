@@ -1,0 +1,54 @@
+{
+  "label": "tennis-40mm",
+  "reference_mm": 40.0,
+  "motion_commands_sent": false,
+  "error": null,
+  "configured_slot": 0,
+  "max_callback_gap_s": 0.0646,
+  "slots": [
+    {
+      "samples": 157,
+      "valid_samples": 157,
+      "invalid_samples": 0,
+      "min_mm": 27,
+      "median_mm": 31,
+      "max_mm": 34,
+      "stdev_mm": 1.11,
+      "within_30mm_samples": 49,
+      "longest_within_30mm_streak": 3
+    },
+    {
+      "samples": 157,
+      "valid_samples": 0,
+      "invalid_samples": 157,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    },
+    {
+      "samples": 157,
+      "valid_samples": 0,
+      "invalid_samples": 157,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    },
+    {
+      "samples": 157,
+      "valid_samples": 0,
+      "invalid_samples": 157,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    }
+  ]
+}

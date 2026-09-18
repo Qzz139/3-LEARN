@@ -1,0 +1,83 @@
+{
+  "connection": {
+    "conn_type": "ap",
+    "robot_ip": "192.168.2.1",
+    "local_ip": null
+  },
+  "arm": {
+    "calibration_verified": true,
+    "distal_servo_id": 2,
+    "distal_feedback_slot": 1,
+    "distal_hold_raw": 1073,
+    "base_servo_id": 1,
+    "base_feedback_slot": 0,
+    "base_extended_raw": 600,
+    "base_retracted_raw": 1190,
+    "raw_tolerance": 8,
+    "distal_drift_limit_raw": 12,
+    "action_timeout_s": 15.0,
+    "settle_seconds": 0.5
+  },
+  "infrared": {
+    "feedback_slot": 0,
+    "threshold_mm": 20,
+    "consecutive_samples": 3,
+    "wait_timeout_s": 120.0,
+    "freshness_timeout_s": 1.0
+  },
+  "gripper": {
+    "open_power": 25,
+    "close_power": 30,
+    "open_seconds": 1.0,
+    "close_seconds": 1.0
+  },
+  "chassis": {
+    "place_turn_degrees": -90.0,
+    "turn_speed_dps": 30.0,
+    "action_timeout_s": 15.0
+  },
+  "vision": {
+    "enabled": true,
+    "stream_resolution": "540p",
+    "model": "yolo26m.pt",
+    "confidence": 0.4,
+    "image_size": 640,
+    "frame_interval_s": 0.5
+  },
+  "approach": {
+    "step_m": 0.01,
+    "speed_mps": 0.04,
+    "return_speed_mps": 0.03,
+    "max_travel_m": 0.2,
+    "position_freshness_s": 0.25,
+    "segment_timeout_s": 2.0,
+    "stall_timeout_s": 1.0,
+    "settle_seconds": 0.4,
+    "waypoint_tolerance_m": 0.002,
+    "center_tolerance_m": 0.03,
+    "stop_timeout_s": 2.0,
+    "stop_wheel_rpm": 8,
+    "stop_encoder_counts": 16,
+    "stop_stable_seconds": 0.3
+  },
+  "alignment": {
+    "target_class_ids": [
+      32
+    ],
+    "axis_x_ratio": 0.5,
+    "tolerance_ratio": 0.04,
+    "gain_degrees": 30.0,
+    "min_turn_degrees": 5.0,
+    "max_turn_degrees": 5.0,
+    "stable_frames": 3,
+    "lost_frames": 3,
+    "max_center_jump_ratio": 0.2,
+    "search_step_degrees": 15.0,
+    "search_limit_degrees": 60.0,
+    "timeout_s": 120.0,
+    "settle_seconds": 0.8,
+    "max_result_age_s": 2.0,
+    "heading_tolerance_degrees": 2.0,
+    "yaw_feedback_sign": -1
+  }
+}

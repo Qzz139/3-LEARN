@@ -1,0 +1,481 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.4,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 2.0,
+      "stall_timeout_s": 1.0,
+      "settle_seconds": 0.4,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.01,
+      "stop_timeout_s": 2.0,
+      "stop_linear_speed_mps": 0.01,
+      "stop_yaw_speed_dps": 1.0
+    },
+    "alignment": {
+      "target_class_ids": [
+        32
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.025,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 3,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 60.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T03:18:16.339424+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:39.376078+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T03:18:44.214041+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.346249+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.347680+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.379290+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.881071+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1074
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.882924+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.884167+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T03:18:45.919564+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:46.421972+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T03:18:46.423301+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T03:18:47.461858+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T03:18:47.463927+00:00",
+      "stage": "initial_state_ready",
+      "start_yaw": -6.93,
+      "start_position": [
+        5e-05,
+        -5e-05
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T03:18:47.873594+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 1,
+      "age_s": 0.381
+    },
+    {
+      "time_utc": "1970-01-01T03:18:47.874952+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.8815745711326599,
+        "xyxy": [
+          419.3388671875,
+          363.3795471191406,
+          564.1827392578125,
+          453.1189270019531
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.012250836690266942,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.009999999999990905
+    },
+    {
+      "time_utc": "1970-01-01T03:18:47.875931+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.217535+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 1,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.219100+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9051912426948547,
+        "xyxy": [
+          419.2972412109375,
+          363.6173400878906,
+          564.15283203125,
+          453.2458190917969
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.012213579813639353,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.220130+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.520192+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 1,
+      "age_s": 0.097
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.522831+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.8832787871360779,
+        "xyxy": [
+          419.1940612792969,
+          363.481201171875,
+          564.1356201171875,
+          453.3738098144531
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.012150875727335642,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.009999999999990905
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.524496+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.721453+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 11,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.723007+00:00",
+      "stage": "alignment_and_distance_ready",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.8832787871360779,
+        "xyxy": [
+          419.1940612792969,
+          363.481201171875,
+          564.1356201171875,
+          453.3738098144531
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "heading_offset": -0.0
+    },
+    {
+      "time_utc": "1970-01-01T03:18:48.724898+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T03:18:49.778597+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:49.780774+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T03:18:50.739078+00:00",
+      "stage": "carry_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:51.542078+00:00",
+      "stage": "carry_retract_complete",
+      "actual_raw": 1182
+    },
+    {
+      "time_utc": "1970-01-01T03:18:51.545105+00:00",
+      "stage": "startup_center_reached",
+      "position": [
+        0.00126,
+        -0.00193
+      ],
+      "error_m": 0.0022357325421436263
+    },
+    {
+      "time_utc": "1970-01-01T03:18:51.547156+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T03:18:53.123161+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T03:18:53.926628+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -44.31
+    },
+    {
+      "time_utc": "1970-01-01T03:18:55.499657+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -44.31
+    },
+    {
+      "time_utc": "1970-01-01T03:18:56.302744+00:00",
+      "stage": "turn_to_place_heading_reached",
+      "offset": -90.57,
+      "target": -90.0
+    },
+    {
+      "time_utc": "1970-01-01T03:18:56.305649+00:00",
+      "stage": "place_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T03:18:56.338827+00:00",
+      "stage": "place_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:18:57.643652+00:00",
+      "stage": "place_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T03:18:57.646509+00:00",
+      "stage": "place_release_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T03:18:58.683483+00:00",
+      "stage": "place_release_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T03:18:58.685883+00:00",
+      "stage": "return_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T03:18:59.698868+00:00",
+      "stage": "return_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:19:00.652590+00:00",
+      "stage": "return_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T03:19:00.655120+00:00",
+      "stage": "turn_to_start_request",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T03:19:02.181063+00:00",
+      "stage": "turn_to_start_complete",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T03:19:02.984216+00:00",
+      "stage": "turn_to_start_request",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T03:19:04.519298+00:00",
+      "stage": "turn_to_start_complete",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T03:19:05.323274+00:00",
+      "stage": "turn_to_start_heading_reached",
+      "offset": -0.37999999999999545,
+      "target": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:19:05.326360+00:00",
+      "stage": "finish_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T03:19:05.378482+00:00",
+      "stage": "finish_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:19:06.683093+00:00",
+      "stage": "finish_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T03:19:06.686189+00:00",
+      "stage": "finish_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T03:19:07.722880+00:00",
+      "stage": "finish_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T03:19:07.726251+00:00",
+      "stage": "cycle_complete",
+      "heading_offset": -0.5699999999999932,
+      "arm": "extended",
+      "gripper": "open"
+    },
+    {
+      "time_utc": "1970-01-01T03:19:07.738649+00:00",
+      "stage": "finished_successfully",
+      "directory": "/home/robot/projects/3-LEARN/work/yolo-align-19700101T031815924201Z"
+    }
+  ],
+  "completed": true,
+  "observe_only": false
+}

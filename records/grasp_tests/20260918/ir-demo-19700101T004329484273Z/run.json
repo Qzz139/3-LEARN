@@ -1,0 +1,170 @@
+{
+  "started_utc": "1970-01-01T00:43:29.484584+00:00",
+  "completed": false,
+  "error": "RuntimeError: carry_retract: servo feedback did not settle at target",
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": false,
+      "distal_servo_id": 1,
+      "distal_feedback_slot": 0,
+      "distal_hold_raw": 601,
+      "base_servo_id": 2,
+      "base_feedback_slot": 1,
+      "base_extended_raw": 1073,
+      "base_retracted_raw": 552,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "model": "yolo26m.pt",
+      "confidence": 0.25,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:43:29.484936+00:00",
+      "stage": "starting"
+    },
+    {
+      "time_utc": "1970-01-01T00:43:30.066144+00:00",
+      "stage": "vision_started",
+      "model": "/home/robot/projects/3-LEARN/models/yolo26m.pt",
+      "affects_control": false,
+      "detection_log": "/home/robot/projects/3-LEARN/work/ir-demo-19700101T004329484273Z/detections.jsonl"
+    },
+    {
+      "time_utc": "1970-01-01T00:43:30.067387+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 1,
+      "target_raw": 601,
+      "target_degrees": -74,
+      "expected_dds_raw": 603,
+      "encoded_target_wire": 1060
+    },
+    {
+      "time_utc": "1970-01-01T00:43:30.626260+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 606
+    },
+    {
+      "time_utc": "1970-01-01T00:43:30.627617+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 1,
+      "feedback_slot": 0,
+      "hold_raw": 601
+    },
+    {
+      "time_utc": "1970-01-01T00:43:30.628265+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:43:31.228156+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T00:43:31.229359+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.441701+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.443492+00:00",
+      "stage": "initial_state_ready",
+      "arm": "extended",
+      "gripper": "open"
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.461708+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 17,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.481823+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 19,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.541989+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 19,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.543168+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 19,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:43:32.543899+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T00:43:33.582000+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T00:43:33.583435+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 2,
+      "target_raw": 552,
+      "target_degrees": -83,
+      "expected_dds_raw": 552,
+      "encoded_target_wire": 970
+    },
+    {
+      "time_utc": "1970-01-01T00:43:48.704390+00:00",
+      "stage": "error",
+      "error": "RuntimeError: carry_retract: servo feedback did not settle at target",
+      "automatic_return": false
+    }
+  ],
+  "finished_utc": "1970-01-01T00:43:53.205272+00:00"
+}

@@ -1,0 +1,777 @@
+{
+  "started_utc": "1970-01-01T01:15:24.616193+00:00",
+  "completed": true,
+  "error": null,
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": false,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 711,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "model": "yolo26m.pt",
+      "confidence": 0.25,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:15:24.616555+00:00",
+      "stage": "starting"
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.355710+00:00",
+      "stage": "vision_started",
+      "model": "/home/robot/projects/3-LEARN/models/yolo26m.pt",
+      "affects_control": false,
+      "detection_log": "/home/robot/projects/3-LEARN/work/ir-demo-19700101T011524615886Z/detections.jsonl"
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.356966+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.410214+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.911444+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1075
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.912555+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.913478+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:15:25.950292+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:27.105059+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T01:15:27.106362+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.175323+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.177002+00:00",
+      "stage": "initial_state_ready",
+      "arm": "extended",
+      "gripper": "open"
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.209483+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.249912+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 36,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.310010+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.349776+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.409953+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.449973+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.509578+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.549444+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 36,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.609633+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.670262+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.746789+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.789382+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.851806+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.889941+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:28.950024+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.010491+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 34,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.049315+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.117060+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.171462+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.211030+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.273657+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.309920+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.373728+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.430818+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.490795+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.530514+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.590807+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.649935+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.691555+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 29,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.749582+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 25,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.789476+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.850033+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.909964+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 22,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:29.970287+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.011478+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.070292+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.112517+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 20,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.169781+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.229864+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.290605+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.329933+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.389712+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.429432+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 22,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.490262+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.549401+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.610044+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 20,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.649670+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 19,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.710885+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 32,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.769914+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.832442+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.870022+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 33,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.912647+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:30.988254+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 30,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.031398+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 30,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.089988+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 31,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.149385+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 30,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.189553+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 30,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.251221+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 28,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.289875+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 29,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.349706+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 29,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.389515+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 29,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.450025+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 27,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.509935+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 29,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.549848+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 25,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.589925+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 28,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.649508+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 25,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.709581+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 22,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.749502+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 21,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.809542+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 20,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.872118+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 20,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.909558+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 18,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.911780+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 18,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T01:15:31.913766+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T01:15:32.949113+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:32.951321+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 1,
+      "target_raw": 711,
+      "target_degrees": -55,
+      "expected_dds_raw": 711,
+      "encoded_target_wire": 1250
+    },
+    {
+      "time_utc": "1970-01-01T01:15:33.709847+00:00",
+      "stage": "carry_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:34.212506+00:00",
+      "stage": "carry_retract_complete",
+      "actual_raw": 707
+    },
+    {
+      "time_utc": "1970-01-01T01:15:34.216296+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:15:37.333156+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:15:37.336258+00:00",
+      "stage": "place_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:15:37.370613+00:00",
+      "stage": "place_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:38.575304+00:00",
+      "stage": "place_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T01:15:38.577699+00:00",
+      "stage": "place_release_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:15:39.610967+00:00",
+      "stage": "place_release_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:15:39.613434+00:00",
+      "stage": "return_retract_request",
+      "servo_id": 1,
+      "target_raw": 711,
+      "target_degrees": -55,
+      "expected_dds_raw": 711,
+      "encoded_target_wire": 1250
+    },
+    {
+      "time_utc": "1970-01-01T01:15:40.391422+00:00",
+      "stage": "return_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:40.894207+00:00",
+      "stage": "return_retract_complete",
+      "actual_raw": 706
+    },
+    {
+      "time_utc": "1970-01-01T01:15:40.896743+00:00",
+      "stage": "turn_to_start_request",
+      "degrees": 90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:15:43.890375+00:00",
+      "stage": "turn_to_start_complete",
+      "degrees": 90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:15:43.893550+00:00",
+      "stage": "finish_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:15:43.928983+00:00",
+      "stage": "finish_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:15:45.134821+00:00",
+      "stage": "finish_extend_complete",
+      "actual_raw": 601
+    },
+    {
+      "time_utc": "1970-01-01T01:15:45.137312+00:00",
+      "stage": "finish_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:15:46.190834+00:00",
+      "stage": "finish_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:15:46.193212+00:00",
+      "stage": "cycle_complete",
+      "arm": "extended",
+      "gripper": "open",
+      "heading_degrees": 0
+    },
+    {
+      "time_utc": "1970-01-01T01:15:46.196113+00:00",
+      "stage": "finished_successfully",
+      "output_dir": "/home/robot/projects/3-LEARN/work/ir-demo-19700101T011524615886Z"
+    }
+  ],
+  "finished_utc": "1970-01-01T01:15:49.617026+00:00"
+}

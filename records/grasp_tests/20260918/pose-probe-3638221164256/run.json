@@ -1,0 +1,43 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:01:00.953842+00:00",
+      "stage": "before",
+      "distal_raw": 602,
+      "base_raw": 1184
+    },
+    {
+      "time_utc": "1970-01-01T01:01:00.954927+00:00",
+      "stage": "base_candidate_request",
+      "servo_id": 2,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:01:01.005559+00:00",
+      "stage": "base_candidate_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:01:06.016688+00:00",
+      "stage": "base_candidate_feedback_failed",
+      "target_raw": 600,
+      "actual_raw": 953,
+      "min_observed_raw": 916,
+      "max_observed_raw": 1184
+    },
+    {
+      "time_utc": "1970-01-01T01:01:06.084419+00:00",
+      "stage": "error",
+      "error": "RuntimeError: base_candidate: servo feedback did not settle at target raw=600 (last raw=953)",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "base_target_raw": 600,
+  "distal_hold_raw": 601,
+  "error": "RuntimeError: base_candidate: servo feedback did not settle at target raw=600 (last raw=953)"
+}

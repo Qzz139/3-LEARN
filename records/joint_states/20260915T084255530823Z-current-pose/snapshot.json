@@ -1,0 +1,80 @@
+{
+  "feedback_complete": true,
+  "counts": {
+    "servo": 49,
+    "arm": 49
+  },
+  "latest": {
+    "servo": {
+      "time_utc": "2026-09-15T08:43:00.954925+00:00",
+      "source": "servo",
+      "data": {
+        "valid": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "speed_raw": [
+          6,
+          -15,
+          0,
+          0
+        ],
+        "angle_raw": [
+          601,
+          1073,
+          0,
+          0
+        ]
+      }
+    },
+    "arm": {
+      "time_utc": "2026-09-15T08:43:00.975430+00:00",
+      "source": "arm",
+      "data": {
+        "x_raw_sdk_mm": 209,
+        "y_raw_sdk_mm": 68
+      }
+    }
+  },
+  "age_seconds": {
+    "servo": 0.03910907000044972,
+    "arm": 0.018589952999718662
+  },
+  "servo_angle_ranges": {
+    "0": {
+      "samples": 49,
+      "min_raw": 600,
+      "max_raw": 601,
+      "span_raw": 1
+    },
+    "1": {
+      "samples": 49,
+      "min_raw": 1073,
+      "max_raw": 1074,
+      "span_raw": 1
+    }
+  },
+  "errors": [],
+  "started_utc": "2026-09-15T08:42:55.531507+00:00",
+  "finished_utc": "2026-09-15T08:43:00.994126+00:00",
+  "label": "current-pose",
+  "sdk_version": "unknown",
+  "conn_type": "ap",
+  "frequency_hz": 10,
+  "requested_seconds": 5.0,
+  "motion_commands_sent": false,
+  "joint_mapping": {
+    "near_base": null,
+    "far_from_base": null
+  },
+  "notes": [
+    "Servo slots are zero-based DDS array positions, not verified command IDs.",
+    "Servo angles and speeds are raw SDK values, not calibrated joint degrees.",
+    "Arm x/y are raw SDK position values: forward/up, not chassis x/y.",
+    "Feedback is asynchronous; each source has its own timestamp.",
+    "This records the pose; it does not lock or restore a joint."
+  ],
+  "status": "complete"
+}

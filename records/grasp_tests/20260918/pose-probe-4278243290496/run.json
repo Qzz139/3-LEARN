@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:11:40.979442+00:00",
+      "stage": "before",
+      "distal_raw": 1075,
+      "base_raw": 596
+    },
+    {
+      "time_utc": "1970-01-01T01:11:40.980455+00:00",
+      "stage": "base_candidate_request",
+      "servo_id": 1,
+      "target_raw": 626,
+      "target_degrees": -70,
+      "expected_dds_raw": 626,
+      "encoded_target_wire": 1100
+    },
+    {
+      "time_utc": "1970-01-01T01:11:42.209162+00:00",
+      "stage": "base_candidate_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:11:42.710839+00:00",
+      "stage": "base_candidate_complete",
+      "actual_raw": 620
+    },
+    {
+      "time_utc": "1970-01-01T01:11:44.714307+00:00",
+      "stage": "after",
+      "distal_raw": 1075,
+      "base_raw": 620
+    }
+  ],
+  "completed": true,
+  "base_target_raw": 626,
+  "distal_hold_raw": 1073,
+  "provisional_swapped_mapping": false,
+  "distal_servo_id": 2,
+  "base_servo_id": 1
+}
