@@ -86,12 +86,165 @@ class TestAlignment(unittest.TestCase):
         demo = M.AlignDemo(type('Bot', (), {'camera': None})(), cfg, None,
                           lambda stage, **kw: events.append(stage), detector)
         with patch.object(demo, 'assert_distal'), patch.object(demo, 'heading_offset', return_value=0), \
-                patch.object(demo, 'infrared_confirmed', side_effect=[False, True]) as infrared, \
+                patch.object(demo, 'infrared_state', side_effect=['wait', 'ready']) as infrared, \
                 patch.object(M.time, 'sleep'):
             demo.align_and_wait_for_grasp()
         self.assertEqual(infrared.call_count, 2)
         self.assertEqual(events.count('alignment_stable'), 4)
         self.assertEqual(events[-1], 'alignment_and_distance_ready')
+
+    def test_translation_requires_realigning_and_new_centered_frames(self):
+        cfg = config()
+        frames = iter([[box(640)]] * 3 + [[box(800)]] + [[box(640)]] * 3)
+        detector = type('Detector', (), {'detect': lambda *_: (next(frames), .01)})()
+        events = []
+        demo = M.AlignDemo(type('Bot', (), {'camera': None})(), cfg, None,
+                          lambda stage, **kw: events.append(stage), detector)
+        with patch.object(demo, 'assert_distal'), patch.object(demo, 'heading_offset', return_value=0), \
+                patch.object(demo, 'infrared_state', side_effect=['far', 'ready']), \
+                patch.object(demo, 'approach_step') as advance, patch.object(demo, 'turn') as turn, \
+                patch.object(M.time, 'sleep'):
+            demo.align_and_wait_for_grasp()
+        advance.assert_called_once()
+        turn.assert_called_once()
+        self.assertEqual(events.count('alignment_stable'), 6)
+
+    def test_unstable_near_infrared_never_advances(self):
+        cfg = config()
+        detector = type('Detector', (), {'detect': lambda *_: ([box(640)], .01)})()
+        demo = M.AlignDemo(type('Bot', (), {'camera': None})(), cfg, None, lambda *a, **k: None, detector)
+        with patch.object(demo, 'assert_distal'), patch.object(demo, 'heading_offset', return_value=0), \
+                patch.object(demo, 'infrared_state', side_effect=['wait', 'ready']), \
+                patch.object(demo, 'approach_step') as advance, patch.object(M.time, 'sleep'):
+            demo.align_and_wait_for_grasp()
+        advance.assert_not_called()
+
+    def test_infrared_uses_distinct_new_samples_and_rejects_invalid_data(self):
+        cfg = config()
+        for values, expected in (([15, 15, 15], 'ready'), ([90, 90, 90], 'far'),
+                                 ([15, 90, 15, 90], 'wait'), ([0], 'invalid')):
+            clock = [10.0]
+            feedback = M.Feedback()
+            feedback.distance, feedback.distance_time = (90,), 9.99
+            sequence = iter(values)
+            def wait(timeout):
+                clock[0] += timeout
+                value = next(sequence, None)
+                if value is not None:
+                    feedback.distance, feedback.distance_time = (value,), clock[0]
+            demo = M.AlignDemo(None, cfg, feedback, lambda *a, **k: None, None)
+            with self.subTest(values=values), patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                    patch.object(feedback.condition, 'wait', side_effect=wait), patch.object(demo, 'assert_distal'):
+                if expected == 'invalid':
+                    with self.assertRaisesRegex(RuntimeError, 'invalid'):
+                        demo.infrared_state()
+                elif expected == 'wait':
+                    # Alternating samples must not authorize forward drive; an
+                    # eventually stale stream is also correctly rejected.
+                    with self.assertRaisesRegex(RuntimeError, 'stale'):
+                        demo.infrared_state()
+                else:
+                    self.assertEqual(demo.infrared_state(), expected)
+
+    def test_stale_position_and_infrared_are_rejected(self):
+        feedback = M.Feedback()
+        feedback.position_value, feedback.position_time = (0, 0), 10
+        feedback.distance, feedback.distance_time = (100,), 10
+        demo = M.AlignDemo(None, config(), feedback, lambda *a, **k: None, None)
+        with patch.object(M.time, 'monotonic', return_value=10.3):
+            with self.assertRaisesRegex(RuntimeError, 'position.*stale'):
+                demo.position()
+            with self.assertRaisesRegex(RuntimeError, 'infrared.*stale'):
+                demo.infrared_value()
+
+    def test_maximum_travel_prevents_another_forward_command(self):
+        demo = M.AlignDemo(None, config(), None, lambda *a, **k: None, None)
+        demo.travel_m = .2
+        with patch.object(demo, 'translate') as move:
+            with self.assertRaisesRegex(RuntimeError, 'maximum approach'):
+                demo.approach_step()
+            move.assert_not_called()
+
+    def test_odometry_controls_slow_motion_and_retreats_to_waypoint(self):
+        cfg, clock, position, velocity, commands = config(), [10.0], [0.0, 0.0], [0.0], []
+        def drive_speed(x, y, z, timeout):
+            velocity[0] = x
+            commands.append(x)
+            return True
+        def sleep(duration):
+            clock[0] += duration
+            position[0] += velocity[0] * duration
+        chassis = type('Chassis', (), {'drive_speed': staticmethod(drive_speed)})()
+        demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), cfg, None, lambda *a, **k: None, None)
+        demo.start_position = (0, 0)
+        with patch.object(M.time, 'sleep', side_effect=sleep), \
+                patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(demo, 'assert_distal'), patch.object(demo, 'position', side_effect=lambda: tuple(position)), \
+                patch.object(demo, 'heading_offset', return_value=0), patch.object(demo, 'infrared_value', return_value=90), \
+                patch.object(demo, 'turn_to_offset'):
+            demo.approach_step()
+            self.assertAlmostEqual(demo.travel_m, .005)
+            self.assertEqual(len(demo.approach_path), 1)
+            demo.return_to_center()
+        self.assertLessEqual(abs(position[0]), cfg['approach']['waypoint_tolerance_m'])
+        self.assertEqual(commands[-1], 0)
+        self.assertEqual(set(commands), {0, .02, -.03})
+
+    def test_threshold_or_sensor_failure_stops_velocity_segment(self):
+        for readings, raises in (([10], False), ([90, RuntimeError('sensor failed')], True)):
+            cfg, clock, position, velocity, commands = config(), [10.0], [0.0, 0.0], [0.0], []
+            def drive_speed(x, y, z, timeout):
+                velocity[0] = x
+                commands.append(x)
+                return True
+            def sleep(duration):
+                clock[0] += duration
+                position[0] += velocity[0] * duration
+            demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed)})()})(),
+                               cfg, None, lambda *a, **k: None, None)
+            with self.subTest(raises=raises), patch.object(M.time, 'sleep', side_effect=sleep), \
+                    patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                    patch.object(demo, 'assert_distal'), patch.object(demo, 'position', side_effect=lambda: tuple(position)), \
+                    patch.object(demo, 'heading_offset', return_value=0), patch.object(demo, 'infrared_value', side_effect=readings):
+                if raises:
+                    with self.assertRaisesRegex(RuntimeError, 'sensor failed'):
+                        demo.approach_step()
+                else:
+                    demo.approach_step()
+            self.assertEqual(commands[-1], 0)
+            if not raises:
+                self.assertEqual(commands, [0])
+
+    def test_return_replays_headings_in_reverse_before_checking_center(self):
+        demo = M.AlignDemo(None, config(), None, lambda *a, **k: None, None)
+        demo.start_position = (0, 0)
+        demo.approach_path = [dict(start=(0, 0), heading=20), dict(start=(.005, 0), heading=25)]
+        position = [( .01, 0)]
+        def retreat(distance, stage, return_target):
+            position[0] = return_target
+        with patch.object(demo, 'position', side_effect=lambda: position[0]), \
+                patch.object(demo, 'translate', side_effect=retreat) as move, \
+                patch.object(demo, 'turn_to_offset') as turn:
+            demo.return_to_center()
+        self.assertEqual([c[0][0] for c in turn.call_args_list], [25, 20])
+        self.assertEqual([c[1]['return_target'] for c in move.call_args_list], [(.005, 0), (0, 0)])
+
+    def test_stalled_odometry_stops_chassis(self):
+        cfg, clock, commands = config(), [10.0], []
+        def drive_speed(x, y, z, timeout):
+            commands.append(x)
+            return True
+        def sleep(duration):
+            clock[0] += duration
+        demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed)})()})(),
+                           cfg, None, lambda *a, **k: None, None)
+        with patch.object(M.time, 'sleep', side_effect=sleep), \
+                patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(demo, 'assert_distal'), patch.object(demo, 'position', return_value=(0, 0)), \
+                patch.object(demo, 'heading_offset', return_value=0), patch.object(demo, 'infrared_value', return_value=90):
+            with self.assertRaisesRegex(RuntimeError, 'no odometry progress'):
+                demo.approach_step()
+        self.assertEqual(commands[-1], 0)
 
     def test_cycle_preserves_joint_roles_and_anchors_drop_heading(self):
         cfg, events = config(), []
@@ -110,11 +263,15 @@ class TestAlignment(unittest.TestCase):
                 events.append((stage, target))
             def heading_offset(self):
                 return 0
+            def position(self):
+                return (0, 0)
+            def return_to_center(self):
+                events.append(('return_center',))
         feedback = type('F', (), {'yaw': lambda _: 25.0})()
         demo = Demo(None, cfg, feedback, lambda *args, **kwargs: None, None)
         demo.run()
         self.assertEqual(events, [('lock',2,1073),('start','extended_open'),('align_then_ir',),
-                         ('grasp_close',False),('carry_retract',1,1190),('turn_to_place',-90),
+                         ('grasp_close',False),('carry_retract',1,1190),('return_center',),('turn_to_place',-90),
                          ('place_extend',1,600),('place_release',True),('return_retract',1,1190),
                          ('turn_to_start',0),('finish','extended_open')])
 

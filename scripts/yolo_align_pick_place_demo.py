@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Align one COCO sports ball by chassis yaw, then use the proven IR pick/place."""
+"""Align and approach one COCO sports ball, then use the proven IR pick/place."""
 import argparse
 from datetime import datetime, timezone
 import fcntl
@@ -16,6 +16,10 @@ ROOT = base.ROOT
 
 def wrap_degrees(angle):
     return (angle + 180.0) % 360.0 - 180.0
+
+
+def position_distance(first, second):
+    return math.hypot(first[0] - second[0], first[1] - second[1])
 
 
 def validate_alignment(cfg):
@@ -40,6 +44,16 @@ def validate_alignment(cfg):
             raise ValueError(key + ' must be an integer in [2, 10]')
     if cfg['vision']['model'] != 'yolo26m.pt' or not a['target_class_ids']:
         raise ValueError('this demo uses ordinary yolo26m.pt and configured COCO target classes')
+    p = cfg['approach']
+    for key, value in p.items():
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
+            raise ValueError('approach.' + key + ' must be positive and finite')
+    if not .001 <= p['step_m'] <= .01 or not p['step_m'] <= p['max_travel_m'] <= .5:
+        raise ValueError('approach steps must be 1–10mm and total travel at most 0.5m')
+    if max(p['speed_mps'], p['return_speed_mps']) > .05:
+        raise ValueError('approach/return speeds must be at most 0.05m/s')
+    if p['waypoint_tolerance_m'] >= p['step_m'] or p['position_freshness_s'] > .25:
+        raise ValueError('waypoint tolerance must be smaller than step; position freshness at most 0.25s')
     return cfg
 
 
@@ -92,6 +106,21 @@ class Feedback(base.Feedback):
         super().__init__()
         self.yaw_value = None
         self.yaw_time = 0.0
+        self.position_value = None
+        self.position_time = 0.0
+
+    def on_position(self, position):
+        with self.condition:
+            self.position_value = tuple(float(v) for v in position[:2])
+            self.position_time = time.monotonic()
+            self.condition.notify_all()
+
+    def position(self, freshness):
+        with self.condition:
+            if (self.position_value is None or time.monotonic() - self.position_time > freshness or
+                    not all(math.isfinite(v) for v in self.position_value)):
+                raise RuntimeError('chassis position feedback is missing, invalid or stale')
+            return self.position_value
 
     def on_attitude(self, attitude):
         with self.condition:
@@ -158,6 +187,101 @@ class AlignDemo(base.Demo):
         super().__init__(bot, cfg, feedback, record)
         self.detector = detector
         self.start_yaw = None
+        self.start_position = None
+        self.approach_path = []
+        self.travel_m = 0.0
+
+    def position(self):
+        return self.feedback.position(self.cfg['approach']['position_freshness_s'])
+
+    def infrared_value(self):
+        ir = self.cfg['infrared']
+        with self.feedback.condition:
+            if self.feedback.distance is None or time.monotonic() - self.feedback.distance_time > min(ir['freshness_timeout_s'], .25):
+                raise RuntimeError('infrared feedback is missing or stale; do not advance')
+            value = int(self.feedback.distance[ir['feedback_slot']])
+        if value <= 0:
+            raise RuntimeError('infrared feedback is invalid; do not advance')
+        return value
+
+    def stop_translation(self):
+        if not self.bot.chassis.drive_speed(x=0, y=0, z=0, timeout=.2):
+            raise RuntimeError('chassis stop command rejected')
+
+    def translate(self, distance, stage, return_target=None):
+        """Bounded velocity segment; odometry stops it, watchdog bounds a lost process."""
+        p = self.cfg['approach']
+        self.assert_distal()
+        start, heading = self.position(), self.heading_offset()
+        deadline = time.monotonic() + p['segment_timeout_s']
+        direction = 1 if return_target is None else -1
+        speed = p['speed_mps'] if direction > 0 else p['return_speed_mps']
+        self.record(stage + '_request', distance_m=distance, speed_mps=direction * speed,
+                    start_position=start, heading_offset=heading, return_target=return_target)
+        previous_progress, progress_time = 0.0, time.monotonic()
+        target_distance = position_distance(start, return_target) if return_target is not None else None
+        try:
+            while time.monotonic() < deadline:
+                self.assert_distal()
+                current = self.position()
+                self.heading_offset()  # Refuse to drive with stale yaw feedback.
+                travelled = position_distance(start, current)
+                if return_target is None:
+                    progress = travelled
+                    if self.infrared_value() <= self.cfg['infrared']['threshold_mm']:
+                        self.record('approach_threshold_seen', position=current)
+                        break
+                    if travelled >= distance:
+                        break
+                else:
+                    remaining = position_distance(current, return_target)
+                    progress = target_distance - remaining
+                    if remaining <= p['waypoint_tolerance_m']:
+                        break
+                    if remaining > target_distance + p['waypoint_tolerance_m'] or travelled > distance + p['waypoint_tolerance_m']:
+                        raise RuntimeError(stage + ': return path diverged from recorded waypoint')
+                if progress > previous_progress + .0005:
+                    previous_progress, progress_time = progress, time.monotonic()
+                if time.monotonic() - progress_time > p['stall_timeout_s']:
+                    raise RuntimeError(stage + ': no odometry progress')
+                if not self.bot.chassis.drive_speed(x=direction * speed, y=0, z=0, timeout=.2):
+                    raise RuntimeError(stage + ': velocity command rejected')
+                time.sleep(.025)
+            else:
+                raise RuntimeError(stage + ': translation timed out')
+        finally:
+            self.stop_translation()
+        time.sleep(p['settle_seconds'])
+        end = self.position()
+        actual = position_distance(start, end)
+        self.assert_distal()
+        self.record(stage + '_complete', end_position=end, actual_distance_m=actual)
+        if return_target is None and actual > .0001:
+            self.approach_path.append(dict(start=start, end=end, heading=heading, distance=actual))
+            self.travel_m += actual
+        return actual
+
+    def approach_step(self):
+        p = self.cfg['approach']
+        remaining = p['max_travel_m'] - self.travel_m
+        if remaining < .001:
+            raise RuntimeError('maximum approach travel reached; no grasp')
+        self.translate(min(p['step_m'], remaining), 'approach_step')
+        if self.travel_m > p['max_travel_m'] + p['waypoint_tolerance_m']:
+            raise RuntimeError('actual approach travel exceeded configured limit')
+
+    def return_to_center(self):
+        # Revisit each measured segment in reverse, preserving its original heading.
+        # This needs no unverified world/body coordinate conversion.
+        for segment in reversed(self.approach_path):
+            self.turn_to_offset(segment['heading'], 'return_path_turn')
+            distance = position_distance(self.position(), segment['start'])
+            if distance > self.cfg['approach']['waypoint_tolerance_m']:
+                self.translate(distance, 'return_path_step', return_target=segment['start'])
+        error = position_distance(self.position(), self.start_position)
+        if error > self.cfg['approach']['center_tolerance_m']:
+            raise RuntimeError('return center error exceeds configured tolerance')
+        self.record('startup_center_reached', position=self.position(), error_m=error)
 
     def heading_offset(self):
         return self.cfg['alignment']['yaw_feedback_sign'] * wrap_degrees(self.feedback.yaw() - self.start_yaw)
@@ -173,25 +297,29 @@ class AlignDemo(base.Demo):
             time.sleep(self.cfg['alignment']['settle_seconds'])
         raise RuntimeError(stage + ': yaw feedback did not reach target heading')
 
-    def infrared_confirmed(self):
-        ir, sequence, last = self.cfg['infrared'], 0, None
+    def infrared_state(self):
+        ir, sequence, far_sequence, last = self.cfg['infrared'], 0, 0, None
         started = time.monotonic()
         deadline = started + .6
         while time.monotonic() < deadline:
             self.assert_distal()
             with self.feedback.condition:
                 stamped = self.feedback.distance_time
-                if self.feedback.distance is None or time.monotonic() - stamped > ir['freshness_timeout_s']:
-                    sequence = 0
-                elif stamped >= started and stamped != last:
-                    value = int(self.feedback.distance[ir['feedback_slot']])
-                    sequence = sequence + 1 if 0 < value <= ir['threshold_mm'] else 0
+                if stamped >= started and stamped != last:
+                    value = self.infrared_value()
+                    near = value <= ir['threshold_mm']
+                    sequence = sequence + 1 if near else 0
+                    far_sequence = far_sequence + 1 if not near else 0
                     last = stamped
                     if sequence >= ir['consecutive_samples']:
                         self.record('grasp_distance_confirmed', distance_mm=value, consecutive_samples=sequence)
-                        return True
+                        return 'ready'
+                    if far_sequence >= ir['consecutive_samples']:
+                        self.record('approach_distance_pending', distance_mm=value, consecutive_samples=far_sequence)
+                        return 'far'
                 self.feedback.condition.wait(timeout=.05)
-        return False
+        self.infrared_value()
+        return 'wait'
 
     def align_and_wait_for_grasp(self):
         a, previous, stable, lost = self.cfg['alignment'], None, 0, 0
@@ -235,21 +363,28 @@ class AlignDemo(base.Demo):
                 continue
             stable += 1
             self.record('alignment_stable', consecutive_frames=stable)
-            if stable >= a['stable_frames'] and self.infrared_confirmed():
-                self.record('alignment_and_distance_ready', target=target, heading_offset=self.heading_offset())
-                return
+            if stable >= a['stable_frames']:
+                distance_state = self.infrared_state()
+                if distance_state == 'ready':
+                    self.record('alignment_and_distance_ready', target=target, heading_offset=self.heading_offset())
+                    return
+                if distance_state == 'far':
+                    self.approach_step()
+                    stable = 0  # Require three new centered images after every translation.
             time.sleep(.1)
-        raise RuntimeError('target did not become aligned and IR-ready before timeout; no forward drive is performed')
+        raise RuntimeError('target did not become aligned and IR-ready before timeout')
 
     def run(self):
         base.require_motion_targets(self.cfg)
         self.start_yaw = self.feedback.yaw()
+        self.start_position = self.position()
         self.lock_initial_distal()
         self.initial_state('start')
-        self.record('initial_state_ready', start_yaw=self.start_yaw)
+        self.record('initial_state_ready', start_yaw=self.start_yaw, start_position=self.start_position)
         self.align_and_wait_for_grasp()
         self.gripper(False, 'grasp_close')
         self.move_base(self.arm['base_retracted_raw'], 'carry_retract')
+        self.return_to_center()
         # Placement is anchored to startup, independent of how much alignment turned.
         self.turn_to_offset(self.cfg['chassis']['place_turn_degrees'], 'turn_to_place')
         self.move_base(self.arm['base_extended_raw'], 'place_extend')
@@ -275,7 +410,7 @@ def main():
         parser.error(str(exc))
     if not args.execute and not args.observe:
         print(json.dumps(cfg, ensure_ascii=False, indent=2))
-        print('预览：YOLO网球 → 底盘小步对准 → 连续居中且红外≤20mm → 抓取 → 启动朝向右侧90°放置 → 返回；不自动前进。')
+        print('预览：YOLO网球 → 小步转向对准 → 低速约5mm一步接近 → 居中且红外≤20mm → 抓取内收 → 退回起始中心 → 启动朝向右侧90°放置 → 返回。')
         return 0
     from robomaster import camera, config, led, robot
     directory = ROOT / 'work' / ('yolo-align-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
@@ -299,15 +434,17 @@ def main():
                 (bot.servo.sub_servo_info, bot.servo.unsub_servo_info, feedback.on_servo),
                 (bot.sensor.sub_distance, bot.sensor.unsub_distance, feedback.on_distance),
                 (bot.chassis.sub_attitude, bot.chassis.unsub_attitude, feedback.on_attitude),
+                (bot.chassis.sub_position, bot.chassis.unsub_position, feedback.on_position),
             ):
                 if not subscribe(freq=20, callback=callback):
                     raise RuntimeError('feedback subscription rejected')
                 cleanups.append(unsubscribe)
             feedback.wait_ready()
             deadline = time.monotonic() + 5
-            while feedback.yaw_value is None and time.monotonic() < deadline:
+            while (feedback.yaw_value is None or feedback.position_value is None) and time.monotonic() < deadline:
                 time.sleep(.05)
             feedback.yaw()
+            feedback.position(cfg['approach']['position_freshness_s'])
             demo = AlignDemo(bot, cfg, feedback, log.write, None)
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
         if not bot.camera.start_video_stream(display=False, resolution=camera.STREAM_720P):

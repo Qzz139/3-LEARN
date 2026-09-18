@@ -43,6 +43,18 @@
     "image_size": 640,
     "frame_interval_s": 0.5
   },
+  "approach": {
+    "step_m": 0.005,
+    "speed_mps": 0.02,
+    "return_speed_mps": 0.03,
+    "max_travel_m": 0.2,
+    "position_freshness_s": 0.25,
+    "segment_timeout_s": 2.0,
+    "stall_timeout_s": 0.6,
+    "settle_seconds": 0.4,
+    "waypoint_tolerance_m": 0.002,
+    "center_tolerance_m": 0.01
+  },
   "alignment": {
     "target_class_ids": [
       32
