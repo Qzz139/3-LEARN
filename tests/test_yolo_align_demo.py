@@ -47,7 +47,11 @@ class TestAlignment(unittest.TestCase):
         self.assertEqual(M.correction_degrees(M.pixel_error(box(320), .5), a), 5)
         self.assertEqual(M.correction_degrees(M.pixel_error(box(960), .5), a), -5)
         self.assertEqual(M.correction_degrees(M.pixel_error(box(650), .5), a), 0)
-        self.assertGreater(M.correction_degrees(-.03, a), 0)
+        self.assertEqual(M.correction_degrees(-.03, a), 0)
+        self.assertEqual(M.correction_degrees(.04, a), 0)
+        self.assertEqual(M.correction_degrees(-.04, a), 0)
+        self.assertGreater(M.correction_degrees(-.041, a), 0)
+        self.assertLess(M.correction_degrees(.041, a), 0)
 
     def test_target_selection_excludes_bottles_and_tracks_one_ball(self):
         a = config()['alignment']
@@ -219,6 +223,34 @@ class TestAlignment(unittest.TestCase):
         self.assertEqual(commands[-1], 0)
         self.assertEqual(set(commands), {0, .04, -.03})
 
+    def test_retreat_can_pass_waypoint_with_small_lateral_error(self):
+        cfg, clock, position, velocity = config(), [10.0], [.02, 0.0], [0.0]
+        def drive_speed(x, y, z, timeout):
+            velocity[0] = x
+            return False
+        def drive_wheels(**kw):
+            velocity[0] = 0
+            return True
+        def sleep(dt):
+            position[0] += velocity[0]*dt
+            clock[0] += dt
+        chassis = type('C', (), {'drive_speed': staticmethod(drive_speed), 'drive_wheels': staticmethod(drive_wheels)})()
+        feedback = type('F', (), {
+            'velocity_snapshot': lambda _, freshness: ((0, 0, 0), clock[0]),
+            'esc_snapshot': lambda _, freshness: (((0,)*4, (0,)*4, (clock[0],)*4), clock[0])})()
+        demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), cfg, feedback, lambda *a, **k: None, None)
+        with patch.object(M.time, 'sleep', side_effect=sleep), \
+                patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(demo, 'assert_distal'), patch.object(demo, 'position', side_effect=lambda: tuple(position)), \
+                patch.object(demo, 'heading_offset', return_value=0):
+            demo.translate(M.position_distance(tuple(position), (0, .004)), 'return_path_step', return_target=(0, .004))
+            self.assertLess(position[0], .002)
+            self.assertEqual(position[1], 0)
+            position[0] = .02
+            with self.assertRaisesRegex(RuntimeError, 'return path diverged'):
+                demo.translate(M.position_distance(tuple(position), (0, .05)), 'return_path_step', return_target=(0, .05))
+        self.assertEqual(velocity[0], 0)
+
     def test_threshold_or_sensor_failure_stops_velocity_segment(self):
         for readings, raises in (([10], False), ([90, RuntimeError('sensor failed')], True)):
             cfg, clock, position, velocity, commands = config(), [10.0], [0.0, 0.0], [0.0], []
@@ -335,6 +367,47 @@ class TestAlignment(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'wheel feedback.*stale'):
                 feedback.esc_snapshot(.25)
 
+    def test_return_uses_recorded_forward_axis_after_retract_drift(self):
+        demo = M.AlignDemo(None, config(), None, lambda *a, **k: None, None)
+        demo.start_position = (.00163, .00879)
+        demo.approach_path = [dict(start=demo.start_position, heading=0, axis=(1, 0))]
+        with patch.object(demo, 'position', return_value=(.00202, .01235)), \
+                patch.object(demo, 'turn_to_offset'), patch.object(demo, 'translate') as move:
+            demo.return_to_center()
+            move.assert_not_called()  # Only .39mm along the real forward axis; do not reverse toward sideways drift.
+        demo.approach_path[0]['axis'] = None
+        with patch.object(demo, 'position', return_value=(.05, .00879)), patch.object(demo, 'turn_to_offset'):
+            with self.assertRaisesRegex(RuntimeError, 'no reliable return direction'):
+                demo.return_to_center()
+
+    def test_return_accepts_three_cm_center_error_without_extra_correction(self):
+        for residual, succeeds in ((.025, True), (.03, True), (.035, False)):
+            demo = M.AlignDemo(None, config(), None, lambda *a, **k: None, None)
+            demo.start_position = (0, 0)
+            demo.approach_path = [dict(start=(residual, 0), heading=5, axis=(1, 0))]
+            with self.subTest(residual=residual), patch.object(demo, 'position', return_value=(residual, 0)), \
+                    patch.object(demo, 'turn_to_offset'), patch.object(demo, 'translate') as motion:
+                if succeeds:
+                    demo.return_to_center()
+                else:
+                    with self.assertRaisesRegex(RuntimeError, 'return center error'):
+                        demo.return_to_center()
+                motion.assert_not_called()
+
+    def test_startup_baseline_is_recorded_after_initial_pose_and_stop(self):
+        position, yaw = [(0, 0)], [25]
+        feedback = type('F', (), {'yaw': lambda _: yaw[0]})()
+        demo = M.AlignDemo(None, config(), feedback, lambda *a, **k: None, None)
+        def initial(prefix):
+            position[0], yaw[0] = (.002, .003), 30
+        with patch.object(demo, 'lock_initial_distal'), patch.object(demo, 'initial_state', side_effect=initial), \
+                patch.object(demo, 'wait_stationary'), patch.object(demo, 'position', side_effect=lambda: position[0]), \
+                patch.object(demo, 'align_and_wait_for_grasp', side_effect=RuntimeError('test stops at baseline')):
+            with self.assertRaisesRegex(RuntimeError, 'test stops at baseline'):
+                demo.run()
+        self.assertEqual(demo.start_yaw, 30)
+        self.assertEqual(demo.start_position, (.002, .003))
+
     def test_cycle_preserves_joint_roles_and_anchors_drop_heading(self):
         cfg, events = config(), []
         class Demo(M.AlignDemo):
@@ -342,6 +415,8 @@ class TestAlignment(unittest.TestCase):
                 events.append(('lock', self.arm['distal_servo_id'], self.arm['distal_hold_raw']))
             def initial_state(self, prefix):
                 events.append((prefix, 'extended_open'))
+            def wait_stationary(self):
+                events.append(('startup_stopped',))
             def align_and_wait_for_grasp(self):
                 events.append(('align_then_ir',))
             def gripper(self, opened, stage):
@@ -359,7 +434,7 @@ class TestAlignment(unittest.TestCase):
         feedback = type('F', (), {'yaw': lambda _: 25.0})()
         demo = Demo(None, cfg, feedback, lambda *args, **kwargs: None, None)
         demo.run()
-        self.assertEqual(events, [('lock',2,1073),('start','extended_open'),('align_then_ir',),
+        self.assertEqual(events, [('lock',2,1073),('start','extended_open'),('startup_stopped',),('align_then_ir',),
                          ('grasp_close',False),('carry_retract',1,1190),('return_center',),('turn_to_place',-90),
                          ('place_extend',1,600),('place_release',True),('return_retract',1,1190),
                          ('turn_to_start',0),('finish','extended_open')])

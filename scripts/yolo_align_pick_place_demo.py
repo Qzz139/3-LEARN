@@ -16,14 +16,17 @@ import ir_pick_place_demo as base
 ROOT = base.ROOT
 
 
+# 将角度归一化到 [-180, 180)，便于计算跨越 ±180° 时的最短转角。
 def wrap_degrees(angle):
     return (angle + 180.0) % 360.0 - 180.0
 
 
+# 计算两个平面里程计位置之间的直线距离，单位为米。
 def position_distance(first, second):
     return math.hypot(first[0] - second[0], first[1] - second[1])
 
 
+# 先复用基础配置校验，再检查视觉对准、接近速度和停车判据的取值范围。
 def validate_alignment(cfg):
     base.validate_config(cfg)
     a = cfg['alignment']
@@ -63,19 +66,22 @@ def validate_alignment(cfg):
     return cfg
 
 
+# 检测框中心相对抓取轴的水平偏差，以图像宽度归一化；正值表示目标在右侧。
 def pixel_error(target, axis):
     return (target['xyxy'][0] + target['xyxy'][2]) / 2.0 / target['image_width'] - axis
 
 
+# 偏差落入容差时无需转向，否则按比例计算并限制单次修正角度。
 def correction_degrees(error, alignment):
     if abs(error) <= alignment['tolerance_ratio']:
         return 0.0
     magnitude = min(alignment['max_turn_degrees'],
                     max(alignment['min_turn_degrees'], abs(error) * alignment['gain_degrees']))
-    # Image right -> clockwise chassis -> SDK negative z; image left -> positive.
+    # 目标在画面右侧时底盘顺时针转动（SDK 的 z 为负）；左侧则反向。
     return -math.copysign(magnitude, error)
 
 
+# 首次选择最接近抓取轴的目标；后续结合类别、中心位移和面积变化维持同一目标。
 def choose_target(detections, alignment, previous=None):
     candidates = [d for d in detections if d['class_id'] in alignment['target_class_ids']]
     if previous is None:
@@ -98,6 +104,7 @@ def choose_target(detections, alignment, previous=None):
     return min(ranked, key=lambda item: item[:2])[2] if ranked else None
 
 
+# 生成相对启动朝向的搜索角度：左右交替，并逐步扩大搜索范围。
 def search_offsets(alignment):
     step, limit = alignment['search_step_degrees'], alignment['search_limit_degrees']
     offsets, angle = [], step
@@ -107,6 +114,7 @@ def search_offsets(alignment):
     return offsets
 
 
+# 扩展基础反馈缓存：线程安全地保存航向、位置、速度及四轮状态。
 class Feedback(base.Feedback):
     def __init__(self):
         super().__init__()
@@ -119,12 +127,14 @@ class Feedback(base.Feedback):
         self.esc_value = None
         self.esc_time = 0.0
 
+    # 缓存四轮转速、编码器角度和数据包标识，并记录本机单调时钟时间。
     def on_esc(self, data):
         with self.condition:
             self.esc_value = tuple(tuple(int(v) for v in field) for field in data[:3])
             self.esc_time = time.monotonic()
             self.condition.notify_all()
 
+    # 读取轮组反馈快照；数据缺失、过期或字段长度异常时拒绝继续。
     def esc_snapshot(self, freshness):
         with self.condition:
             if (self.esc_value is None or time.monotonic() - self.esc_time > freshness or
@@ -132,12 +142,14 @@ class Feedback(base.Feedback):
                 raise RuntimeError('wheel feedback is missing, invalid or stale')
             return self.esc_value, self.esc_time
 
+    # 取 SDK 速度反馈的后半部分，即机体坐标系中的三个速度分量。
     def on_velocity(self, velocity):
         with self.condition:
             self.velocity_value = tuple(float(v) for v in velocity[3:6])
             self.velocity_time = time.monotonic()
             self.condition.notify_all()
 
+    # 检查速度反馈是否及时、数值是否有限，再返回快照及接收时间。
     def velocity_snapshot(self, freshness):
         with self.condition:
             if (self.velocity_value is None or time.monotonic() - self.velocity_time > freshness or
@@ -145,12 +157,14 @@ class Feedback(base.Feedback):
                 raise RuntimeError('chassis velocity feedback is missing, invalid or stale')
             return self.velocity_value, self.velocity_time
 
+    # 保存平面位置的 x、y 分量；唤醒等待新反馈的线程。
     def on_position(self, position):
         with self.condition:
             self.position_value = tuple(float(v) for v in position[:2])
             self.position_time = time.monotonic()
             self.condition.notify_all()
 
+    # 读取新鲜的位置反馈，避免依据过期里程计数据控制运动。
     def position(self, freshness):
         with self.condition:
             if (self.position_value is None or time.monotonic() - self.position_time > freshness or
@@ -158,12 +172,14 @@ class Feedback(base.Feedback):
                 raise RuntimeError('chassis position feedback is missing, invalid or stale')
             return self.position_value
 
+    # 保存偏航角，用于转向闭环及相对启动朝向的计算。
     def on_attitude(self, attitude):
         with self.condition:
-            self.yaw_value = float(attitude[0])  # Official SDK: yaw, pitch, roll.
+            self.yaw_value = float(attitude[0])  # SDK 姿态字段依次为偏航、俯仰、横滚。
             self.yaw_time = time.monotonic()
             self.condition.notify_all()
 
+    # 航向反馈超过一秒未更新时中止控制，防止使用过期姿态。
     def yaw(self):
         with self.condition:
             if self.yaw_value is None or time.monotonic() - self.yaw_time > 1.0:
@@ -171,6 +187,7 @@ class Feedback(base.Feedback):
             return self.yaw_value
 
 
+# 后台持续读取相机最新帧，防止解码队列积压影响后续取图。
 class CameraFeed:
     """Continuously drain SDK decoded frames so its H264 receive queue can flow."""
     def __init__(self, camera):
@@ -182,9 +199,11 @@ class CameraFeed:
         self.error = None
         self.thread = threading.Thread(target=self.capture, daemon=True)
 
+    # 启动后台采集线程。
     def start(self):
         self.thread.start()
 
+    # 只保留最新图像；取图超时可重试，其他错误交由调用方处理。
     def capture(self):
         while not self.stop_event.is_set():
             try:
@@ -201,6 +220,7 @@ class CameraFeed:
                     self.condition.notify_all()
                 return
 
+    # 等待本次调用之后采集的图像，避免使用运动前残留的旧帧。
     def read_latest(self, timeout=3):
         requested = time.monotonic()
         with self.condition:
@@ -213,6 +233,7 @@ class CameraFeed:
                 self.condition.wait(timeout=remaining)
             return self.frame, self.captured
 
+    # 通知采集线程退出，同时唤醒可能正在等待图像的调用方。
     def stop(self):
         self.stop_event.set()
         with self.condition:
@@ -220,6 +241,7 @@ class CameraFeed:
         self.thread.join(timeout=2)
 
 
+# 负责模型预热、单帧识别，以及检测日志和现场图像的保存。
 class Detector:
     def __init__(self, cfg, directory, record):
         from ultralytics import YOLO
@@ -229,10 +251,12 @@ class Detector:
         self.feed = None
         self.model = YOLO(str(ROOT / 'models' / cfg['vision']['model']))
         record('vision_warming', model=cfg['vision']['model'])
+        # 使用空白图预热模型，减少首次实际检测的初始化延迟。
         self.model.predict(np.zeros((640, 640, 3), dtype=np.uint8), imgsz=cfg['vision']['image_size'], verbose=False)
         record('vision_ready', model_ready=True)
         self.sequence = 0
 
+    # 获取图像并执行 YOLO 推理，返回检测列表及图像从采集到推理结束的耗时。
     def detect(self, camera):
         import cv2
         captured = time.monotonic()
@@ -261,7 +285,7 @@ class Detector:
                  'count': len(detections), 'detections': detections}
         with self.path.open('a', encoding='utf-8') as stream:
             stream.write(json.dumps(event, ensure_ascii=False) + '\n')
-        # Keep the raw frame and an image with detections plus the configured grab axis.
+        # 同时保存原始图像和标注图；标注图叠加检测框及配置中的抓取轴。
         cv2.imwrite(str(self.directory / 'latest_camera.jpg'), frame)
         annotated = results[0].plot() if results else frame.copy()
         axis = round(width * self.cfg['alignment']['axis_x_ratio'])
@@ -271,6 +295,7 @@ class Detector:
         return detections, age
 
 
+# 在基础机械臂抓放流程上增加视觉对准、低速接近和按记录路径返回。
 class AlignDemo(base.Demo):
     def __init__(self, bot, cfg, feedback, record, detector):
         super().__init__(bot, cfg, feedback, record)
@@ -280,9 +305,11 @@ class AlignDemo(base.Demo):
         self.approach_path = []
         self.travel_m = 0.0
 
+    # 读取新鲜的位置反馈，避免依据过期里程计数据控制运动。
     def position(self):
         return self.feedback.position(self.cfg['approach']['position_freshness_s'])
 
+    # 读取指定红外通道；反馈需足够新且距离为正，否则禁止前进。
     def infrared_value(self):
         ir = self.cfg['infrared']
         with self.feedback.condition:
@@ -293,14 +320,15 @@ class AlignDemo(base.Demo):
             raise RuntimeError('infrared feedback is invalid; do not advance')
         return value
 
+    # 发送四轮零转速命令，并检查 SDK 是否收到确认。
     def stop_translation(self):
-        # Wheel commands have ACK. Cancel the velocity API timer by replacing
-        # it with a wheel-stop timer; avoid switching back to velocity mode.
+        # 轮速命令有应答确认；用停车定时器替换速度接口定时器，避免重新切回速度模式。
         accepted = self.bot.chassis.drive_wheels(w1=0, w2=0, w3=0, w4=0, timeout=.2)
         self.record('wheel_stop_ack', accepted=bool(accepted))
         if not accepted:
             raise RuntimeError('four-wheel stop command was not acknowledged')
 
+    # 先执行基础急停，再补发四轮停车；停车异常写入运行日志。
     def emergency_stop(self):
         super().emergency_stop()
         try:
@@ -308,6 +336,7 @@ class AlignDemo(base.Demo):
         except Exception as exc:
             self.record('emergency_wheel_stop_error', error=str(exc))
 
+    # 持续检查轮速及编码器变化，达到规定样本数和稳定时长后才确认停稳。
     def wait_stationary(self):
         p, started = self.cfg['approach'], time.monotonic()
         sequence, last_packet, anchor, stable_since = 0, None, None, None
@@ -316,11 +345,13 @@ class AlignDemo(base.Demo):
             self.assert_distal()
             velocity, _ = self.feedback.velocity_snapshot(p['position_freshness_s'])
             (speeds, angles, packet), stamped = self.feedback.esc_snapshot(p['position_freshness_s'])
+            # 只统计开始等待之后的新数据包，重复反馈不增加稳定样本数。
             if stamped >= started and packet != last_packet:
                 last_packet = packet
                 if max(abs(v) for v in speeds) > p['stop_wheel_rpm']:
                     anchor, stable_since, sequence = None, None, 0
                 else:
+                    # 编码器按 32768 回绕，取最短差值判断是否仍有轮子移动。
                     if anchor is None or any(abs((v - ref + 16384) % 32768 - 16384) >
                                              p['stop_encoder_counts'] for v, ref in zip(angles, anchor)):
                         anchor, stable_since, sequence = angles, stamped, 0
@@ -339,7 +370,8 @@ class AlignDemo(base.Demo):
                     consecutive_samples=sequence)
         raise RuntimeError('wheel encoders did not settle after stop')
 
-    def translate(self, distance, stage, return_target=None):
+    # 执行一段平移：前进依据里程计和红外停止，后退依据已记录的路径点停止。
+    def translate(self, distance, stage, return_target=None, return_axis=None):
         """Odometry controls each segment; the SDK timer stops a stalled main loop."""
         p = self.cfg['approach']
         self.assert_distal()
@@ -351,14 +383,21 @@ class AlignDemo(base.Demo):
                     start_position=start, heading_offset=heading, return_target=return_target)
         previous_progress, progress_time = 0.0, time.monotonic()
         target_distance = position_distance(start, return_target) if return_target is not None else None
+        if return_axis is None:
+            return_axis = tuple((start[i] - return_target[i]) / target_distance for i in range(2)) if target_distance else None
+        elif return_target is not None:
+            target_distance = sum((start[i] - return_target[i]) * return_axis[i] for i in range(2))
+        peak_distance, peak_position = 0.0, start
         try:
             while time.monotonic() < deadline:
                 self.assert_distal()
                 current = self.position()
-                self.heading_offset()  # Refuse to drive with stale yaw feedback.
+                self.heading_offset()  # 航向反馈过期时禁止继续行驶。
                 travelled = position_distance(start, current)
                 if return_target is None:
                     progress = travelled
+                    if travelled > peak_distance:
+                        peak_distance, peak_position = travelled, current
                     value = self.infrared_value()
                     if value <= self.cfg['infrared']['threshold_mm']:
                         self.record('approach_threshold_seen', position=current, distance_mm=value)
@@ -366,16 +405,22 @@ class AlignDemo(base.Demo):
                     if travelled >= distance:
                         break
                 else:
-                    remaining = position_distance(current, return_target)
-                    progress = target_distance - remaining
+                    # 按沿回退方向的投影判断是否到达路径点所在截面；
+                    # 横向误差另行检查，避免直线回退时错过路径点附近的小圆形区域。
+                    progress = sum((start[i] - current[i]) * return_axis[i] for i in range(2)) if return_axis else 0
+                    remaining = target_distance - progress
+                    lateral = abs((current[0] - return_target[0]) * return_axis[1] -
+                                  (current[1] - return_target[1]) * return_axis[0]) if return_axis else 0
+                    if progress < -p['waypoint_tolerance_m'] or lateral > p['center_tolerance_m']:
+                        self.record(stage + '_diverged', position=current, progress_m=progress, lateral_error_m=lateral)
+                        raise RuntimeError(stage + ': return path diverged from recorded waypoint')
                     if remaining <= p['waypoint_tolerance_m']:
                         break
-                    if remaining > target_distance + p['waypoint_tolerance_m'] or travelled > distance + p['waypoint_tolerance_m']:
-                        raise RuntimeError(stage + ': return path diverged from recorded waypoint')
                 if progress > previous_progress + .0005:
                     previous_progress, progress_time = progress, time.monotonic()
                 if time.monotonic() - progress_time > p['stall_timeout_s']:
                     raise RuntimeError(stage + ': no odometry progress')
+                # 周期续发带 0.2 秒超时的速度命令，主循环卡住时由 SDK 定时停止。
                 self.bot.chassis.drive_speed(x=direction * speed, y=0, z=0, timeout=.2)
                 time.sleep(.025)
             else:
@@ -389,10 +434,15 @@ class AlignDemo(base.Demo):
         self.assert_distal()
         self.record(stage + '_complete', end_position=end, actual_distance_m=actual)
         if return_target is None and actual > .0001:
-            self.approach_path.append(dict(start=start, end=end, heading=heading, distance=actual))
+            axis = tuple((peak_position[i] - start[i]) / peak_distance for i in range(2)) if peak_distance >= .005 else None
+            self.approach_path.append(dict(start=start, end=end, heading=heading, distance=actual,
+                                          axis=axis, peak_distance=peak_distance))
+            self.record('approach_path_recorded', start_position=start, end_position=end,
+                        forward_axis=axis, peak_distance_m=peak_distance)
             self.travel_m += actual
         return actual
 
+    # 在剩余总行程预算内前进一步，并核对实际位移是否超限。
     def approach_step(self):
         p = self.cfg['approach']
         remaining = p['max_travel_m'] - self.travel_m
@@ -402,22 +452,43 @@ class AlignDemo(base.Demo):
         if self.travel_m > p['max_travel_m'] + p['waypoint_tolerance_m']:
             raise RuntimeError('actual approach travel exceeded configured limit')
 
+    # 倒序回退接近阶段记录的各段路径，最后核对与启动位置的距离误差。
     def return_to_center(self):
-        # Revisit each measured segment in reverse, preserving its original heading.
-        # This needs no unverified world/body coordinate conversion.
+        # 倒序回退每个实测路段，并恢复该段原有朝向，无需转换世界坐标与机体坐标。
         for segment in reversed(self.approach_path):
             self.turn_to_offset(segment['heading'], 'return_path_turn')
-            distance = position_distance(self.position(), segment['start'])
+            current = self.position()
+            distance = position_distance(current, segment['start'])
+            if 'axis' in segment:
+                axis = segment['axis']
+                if axis is None:
+                    if distance > self.cfg['approach']['center_tolerance_m']:
+                        raise RuntimeError('short forward segment has no reliable return direction')
+                    self.record('return_short_segment_skipped', error_m=distance)
+                    continue
+                delta = tuple(current[i] - segment['start'][i] for i in range(2))
+                distance = sum(delta[i] * axis[i] for i in range(2))
+                lateral = abs(delta[0] * axis[1] - delta[1] * axis[0])
+                if lateral > self.cfg['approach']['center_tolerance_m'] or distance < -self.cfg['approach']['center_tolerance_m']:
+                    raise RuntimeError('return waypoint error exceeds configured tolerance')
+                if distance > self.cfg['approach']['waypoint_tolerance_m']:
+                    self.translate(distance, 'return_path_step', return_target=segment['start'], return_axis=axis)
+                else:
+                    self.record('return_waypoint_already_reached', remaining_m=distance, lateral_error_m=lateral)
+                continue
             if distance > self.cfg['approach']['waypoint_tolerance_m']:
                 self.translate(distance, 'return_path_step', return_target=segment['start'])
         error = position_distance(self.position(), self.start_position)
         if error > self.cfg['approach']['center_tolerance_m']:
+            self.record('return_center_failed', position=self.position(), error_m=error)
             raise RuntimeError('return center error exceeds configured tolerance')
         self.record('startup_center_reached', position=self.position(), error_m=error)
 
+    # 计算相对启动航向的偏转角，并按配置统一反馈方向与控制方向。
     def heading_offset(self):
         return self.cfg['alignment']['yaw_feedback_sign'] * wrap_degrees(self.feedback.yaw() - self.start_yaw)
 
+    # 利用航向反馈反复修正到指定相对角度，单次最多转动 45°。
     def turn_to_offset(self, target, stage):
         tolerance = self.cfg['alignment']['heading_tolerance_degrees']
         for _ in range(8):
@@ -429,6 +500,7 @@ class AlignDemo(base.Demo):
             time.sleep(self.cfg['alignment']['settle_seconds'])
         raise RuntimeError(stage + ': yaw feedback did not reach target heading')
 
+    # 执行视觉修正转向，并通过实际航向变化确认转向方向和进展。
     def align_turn(self, degrees):
         before = self.heading_offset()
         self.turn(degrees, 'align_turn')
@@ -438,6 +510,7 @@ class AlignDemo(base.Demo):
         if actual * degrees <= 0 or abs(actual) < min(.5, abs(degrees) * .25):
             raise RuntimeError('alignment turn completed without actual yaw progress')
 
+    # 用连续的新红外样本消除抖动：返回可抓取、仍偏远或继续等待。
     def infrared_state(self):
         ir, sequence, far_sequence, last = self.cfg['infrared'], 0, 0, None
         started = time.monotonic()
@@ -462,6 +535,7 @@ class AlignDemo(base.Demo):
         self.infrared_value()
         return 'wait'
 
+    # 循环识别、搜索和对准；连续居中后检查距离，必要时小步接近。
     def align_and_wait_for_grasp(self):
         a, previous, stable, lost = self.cfg['alignment'], None, 0, 0
         offsets = iter(search_offsets(a))
@@ -472,6 +546,7 @@ class AlignDemo(base.Demo):
             self.assert_distal()
             if time.monotonic() >= deadline:
                 break
+            # 推理结果过旧时重新取图，不用滞后画面决定下一步运动。
             if age > a['max_result_age_s']:
                 self.record('stale_vision_discarded', age_s=age)
                 continue
@@ -481,6 +556,7 @@ class AlignDemo(base.Demo):
                 if previous is not None:
                     lost += 1
                     self.record('target_missing', consecutive_frames=lost)
+                    # 已锁定目标持续丢失时终止，避免突然改抓另一物体。
                     if lost >= a['lost_frames']:
                         raise RuntimeError('locked target lost; stop instead of switching objects')
                     continue
@@ -510,22 +586,24 @@ class AlignDemo(base.Demo):
                     return
                 if distance_state == 'far':
                     self.approach_step()
-                    stable = 0  # Require three new centered images after every translation.
+                    stable = 0  # 每次平移后重新累计居中帧数，所需帧数由 stable_frames 配置。
             time.sleep(.1)
         raise RuntimeError('target did not become aligned and IR-ready before timeout')
 
+    # 完成一次抓放：记录起点、对准接近、抓取内收、退回中心、转向放置并恢复初态。
     def run(self):
         base.require_motion_targets(self.cfg)
-        self.start_yaw = self.feedback.yaw()
-        self.start_position = self.position()
         self.lock_initial_distal()
         self.initial_state('start')
+        self.wait_stationary()
+        self.start_yaw = self.feedback.yaw()
+        self.start_position = self.position()
         self.record('initial_state_ready', start_yaw=self.start_yaw, start_position=self.start_position)
         self.align_and_wait_for_grasp()
         self.gripper(False, 'grasp_close')
         self.move_base(self.arm['base_retracted_raw'], 'carry_retract')
         self.return_to_center()
-        # Placement is anchored to startup, independent of how much alignment turned.
+        # 放置方向以启动朝向为基准，避免视觉对准时的累计转向改变最终放置方位。
         self.turn_to_offset(self.cfg['chassis']['place_turn_degrees'], 'turn_to_place')
         self.move_base(self.arm['base_extended_raw'], 'place_extend')
         self.gripper(True, 'place_release')
@@ -535,6 +613,7 @@ class AlignDemo(base.Demo):
         self.record('cycle_complete', heading_offset=self.heading_offset(), arm='extended', gripper='open')
 
 
+# 解析参数并管理机器人连接、反馈订阅、视觉采集、执行流程及资源清理。
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--config', type=Path, default=ROOT / 'config/yolo_align_pick_place.json')
@@ -551,6 +630,7 @@ def main():
             raise ValueError('--observe-frames must be 1–100 and requires --observe')
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))
+    # 默认只输出配置和流程预览；显式指定执行或观察模式后才连接机器人。
     if not args.execute and not args.observe:
         print(json.dumps(cfg, ensure_ascii=False, indent=2))
         print('预览：YOLO网球 → 小步转向对准 → 低速约{:g}mm一步接近 → 居中且红外≤20mm → 抓取内收 → 退回起始中心 → 启动朝向右侧90°放置 → 返回。'.format(cfg['approach']['step_m'] * 1000))
@@ -561,6 +641,7 @@ def main():
     report = {'config': cfg, 'events': [], 'completed': False, 'observe_only': args.observe}
     log = base.EventLog(directory / 'run.json', report)
     lock = (ROOT / 'work/real-control.lock').open('w')
+    # 非阻塞独占锁：已有控制进程占用机器人时，本次立即退出。
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
     def interrupted(*_):
         raise KeyboardInterrupt('operator stop')
@@ -573,6 +654,7 @@ def main():
             raise RuntimeError('SDK initialize failed')
         if args.execute:
             feedback = Feedback()
+            # 按 20 Hz 订阅反馈，并记录对应的取消订阅方法用于退出清理。
             for subscribe, unsubscribe, callback in (
                 (bot.servo.sub_servo_info, bot.servo.unsub_servo_info, feedback.on_servo),
                 (bot.sensor.sub_distance, bot.sensor.unsub_distance, feedback.on_distance),
@@ -618,6 +700,7 @@ def main():
                 time.sleep(cfg['vision']['frame_interval_s'])
         report['completed'] = True
         log.write('finished_successfully', directory=str(directory))
+    # 包含用户中断在内的异常统一记录；执行模式下急停并点亮红灯。
     except BaseException as exc:
         report['error'] = '{}: {}'.format(type(exc).__name__, exc)
         if demo:
@@ -636,6 +719,7 @@ def main():
                 bot.camera.stop_video_stream()
             except Exception:
                 pass
+        # 按订阅的相反顺序释放反馈资源，即使某项失败也继续清理其余项目。
         for unsubscribe in reversed(cleanups):
             try:
                 unsubscribe()
