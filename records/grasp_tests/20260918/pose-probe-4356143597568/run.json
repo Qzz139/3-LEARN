@@ -1,0 +1,86 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:12:58.881943+00:00",
+      "stage": "before",
+      "distal_raw": 1075,
+      "base_raw": 621
+    },
+    {
+      "time_utc": "1970-01-01T01:12:58.882964+00:00",
+      "stage": "base_step_1_request",
+      "servo_id": 1,
+      "target_raw": 654,
+      "target_degrees": -65,
+      "expected_dds_raw": 654,
+      "encoded_target_wire": 1150
+    },
+    {
+      "time_utc": "1970-01-01T01:12:59.691509+00:00",
+      "stage": "base_step_1_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:13:00.193009+00:00",
+      "stage": "base_step_1_complete",
+      "actual_raw": 649
+    },
+    {
+      "time_utc": "1970-01-01T01:13:01.696027+00:00",
+      "stage": "base_step_2_request",
+      "servo_id": 1,
+      "target_raw": 683,
+      "target_degrees": -60,
+      "expected_dds_raw": 683,
+      "encoded_target_wire": 1200
+    },
+    {
+      "time_utc": "1970-01-01T01:13:02.531472+00:00",
+      "stage": "base_step_2_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:13:03.083158+00:00",
+      "stage": "base_step_2_complete",
+      "actual_raw": 677
+    },
+    {
+      "time_utc": "1970-01-01T01:13:04.586228+00:00",
+      "stage": "base_step_3_request",
+      "servo_id": 1,
+      "target_raw": 711,
+      "target_degrees": -55,
+      "expected_dds_raw": 711,
+      "encoded_target_wire": 1250
+    },
+    {
+      "time_utc": "1970-01-01T01:13:05.377781+00:00",
+      "stage": "base_step_3_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:13:05.879392+00:00",
+      "stage": "base_step_3_complete",
+      "actual_raw": 706
+    },
+    {
+      "time_utc": "1970-01-01T01:13:09.384462+00:00",
+      "stage": "after",
+      "distal_raw": 1075,
+      "base_raw": 707
+    }
+  ],
+  "completed": true,
+  "base_target_raw": [
+    654,
+    683,
+    711
+  ],
+  "distal_hold_raw": 1073,
+  "provisional_swapped_mapping": false,
+  "distal_servo_id": 2,
+  "base_servo_id": 1
+}

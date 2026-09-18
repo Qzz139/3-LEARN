@@ -21,8 +21,8 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(cfg["arm"]["distal_hold_raw"], 1073)
         self.assertEqual((cfg["arm"]["distal_servo_id"], cfg["arm"]["distal_feedback_slot"]), (2, 1))
         self.assertEqual((cfg["arm"]["base_servo_id"], cfg["arm"]["base_feedback_slot"]), (1, 0))
-        self.assertIsNone(cfg["arm"]["base_extended_raw"])
-        self.assertIsNone(cfg["arm"]["base_retracted_raw"])
+        self.assertEqual(cfg["arm"]["base_extended_raw"], 600)
+        self.assertEqual(cfg["arm"]["base_retracted_raw"], 711)
         self.assertFalse(cfg["arm"]["calibration_verified"])
         self.assertEqual(MODULE.raw_to_sdk_degrees(601), -74)
         self.assertEqual(MODULE.sdk_degrees_to_raw(-74), 603)
@@ -62,7 +62,10 @@ class TestConfiguration(unittest.TestCase):
         self.assertIn("RoboMaster SDK unavailable", errors.getvalue())
 
     def test_missing_pose_targets_stop_before_sdk_import(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["arm"]["base_retracted_raw"] = None
         with patch("sys.argv", ["demo", "--execute"]), \
+                patch.object(MODULE, "load_config", return_value=cfg), \
                 patch("sys.stderr", new_callable=io.StringIO) as errors:
             with self.assertRaises(SystemExit) as stopped:
                 MODULE.main()
@@ -71,6 +74,7 @@ class TestConfiguration(unittest.TestCase):
 
     def test_direct_cycle_cannot_start_with_missing_targets(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["arm"]["base_retracted_raw"] = None
         demo = MODULE.Demo(None, cfg, None, lambda *args, **kwargs: None)
         with patch.object(demo, "lock_initial_distal") as lock:
             with self.assertRaisesRegex(ValueError, "外伸最低"):
