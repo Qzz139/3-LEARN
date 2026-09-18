@@ -27,7 +27,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual((cfg["arm"]["base_servo_id"], cfg["arm"]["base_feedback_slot"]), (1, 0))
         self.assertEqual(cfg["arm"]["base_extended_raw"], 600)
         self.assertEqual(cfg["arm"]["base_retracted_raw"], 1190)
-        self.assertFalse(cfg["arm"]["calibration_verified"])
+        self.assertTrue(cfg["arm"]["calibration_verified"])
         self.assertEqual(MODULE.raw_to_sdk_degrees(601), -74)
         self.assertEqual(MODULE.sdk_degrees_to_raw(-74), 603)
         self.assertEqual(MODULE.sdk_degrees_to_wire(-74), 1060)
@@ -45,6 +45,7 @@ class TestConfiguration(unittest.TestCase):
 
     def test_execute_with_unverified_config_reaches_sdk_without_motion(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        cfg["arm"]["calibration_verified"] = False
         # Synthetic targets for mocked commands; these are not hardware poses.
         cfg["arm"].update(base_extended_raw=1000, base_retracted_raw=1100)
         real_import = builtins.__import__

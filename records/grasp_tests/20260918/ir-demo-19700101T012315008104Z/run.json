@@ -1,0 +1,301 @@
+{
+  "started_utc": "1970-01-01T01:23:15.008410+00:00",
+  "completed": true,
+  "error": null,
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": false,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "model": "yolo26m.pt",
+      "confidence": 0.25,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:23:15.008777+00:00",
+      "stage": "starting"
+    },
+    {
+      "time_utc": "1970-01-01T01:23:15.776861+00:00",
+      "stage": "vision_started",
+      "model": "/home/robot/projects/3-LEARN/models/yolo26m.pt",
+      "affects_control": false,
+      "detection_log": "/home/robot/projects/3-LEARN/work/ir-demo-19700101T012315008104Z/detections.jsonl"
+    },
+    {
+      "time_utc": "1970-01-01T01:23:15.778037+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T01:23:15.858954+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:16.360646+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1072
+    },
+    {
+      "time_utc": "1970-01-01T01:23:16.361821+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T01:23:16.362527+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:23:16.413311+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:21.683952+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 597
+    },
+    {
+      "time_utc": "1970-01-01T01:23:21.685193+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.731744+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.733102+00:00",
+      "stage": "initial_state_ready",
+      "arm": "extended",
+      "gripper": "open"
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.754130+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 20,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.792300+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 19,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.853590+00:00",
+      "stage": "infrared",
+      "slot": 0,
+      "distance_mm": 18,
+      "threshold_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.854857+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 18,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T01:23:22.855732+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T01:23:23.892578+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:23.894076+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T01:23:24.832488+00:00",
+      "stage": "carry_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:25.735393+00:00",
+      "stage": "carry_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T01:23:25.738846+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:23:28.851693+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:23:28.853128+00:00",
+      "stage": "place_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:23:28.892392+00:00",
+      "stage": "place_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:30.151091+00:00",
+      "stage": "place_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T01:23:30.153058+00:00",
+      "stage": "place_release_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:23:31.191646+00:00",
+      "stage": "place_release_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:23:31.195123+00:00",
+      "stage": "return_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T01:23:32.155487+00:00",
+      "stage": "return_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:33.059942+00:00",
+      "stage": "return_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T01:23:33.061636+00:00",
+      "stage": "turn_to_start_request",
+      "degrees": 90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:23:36.052001+00:00",
+      "stage": "turn_to_start_complete",
+      "degrees": 90.0
+    },
+    {
+      "time_utc": "1970-01-01T01:23:36.053670+00:00",
+      "stage": "finish_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T01:23:36.133097+00:00",
+      "stage": "finish_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:23:37.494497+00:00",
+      "stage": "finish_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T01:23:37.496150+00:00",
+      "stage": "finish_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T01:23:38.536673+00:00",
+      "stage": "finish_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T01:23:38.538844+00:00",
+      "stage": "cycle_complete",
+      "arm": "extended",
+      "gripper": "open",
+      "heading_degrees": 0
+    },
+    {
+      "time_utc": "1970-01-01T01:23:38.540445+00:00",
+      "stage": "finished_successfully",
+      "output_dir": "/home/robot/projects/3-LEARN/work/ir-demo-19700101T012315008104Z"
+    }
+  ],
+  "finished_utc": "1970-01-01T01:23:45.292680+00:00"
+}
