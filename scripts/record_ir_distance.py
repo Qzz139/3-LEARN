@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# 红外只读测量工具：保存四通道原始读数，与人工尺量结果分别记录。
 """Record EP distance telemetry only; never issue motion or LED commands."""
 import argparse
 import copy
@@ -14,6 +15,7 @@ import time
 from ir_pick_place_demo import ROOT, configure_network, load_config
 
 
+# 统计正数有效读数和阈值内最长连续段，辅助比较尺量距离与红外原始值。
 def summarize(values, threshold_mm):
     valid = [v for v in values if 0 < v <= 10000]
     longest = streak = 0
@@ -33,6 +35,7 @@ def summarize(values, threshold_mm):
     }
 
 
+# 只订阅测距并保存原始样本和统计报告，不发送底盘、舵机、抓夹或LED命令。
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "config" / "ir_pick_place.json")
@@ -62,6 +65,7 @@ def main():
     started = time.monotonic()
     error = None
     with (directory / "samples.jsonl").open("w", encoding="utf-8") as stream:
+        # 回调中先复制四通道数组，再在锁内逐行保存，避免SDK复用数组污染记录。
         def receive(data):
             raw = copy.deepcopy(data)
             if len(raw) != 4:

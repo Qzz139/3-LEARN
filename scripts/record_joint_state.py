@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# 关节状态只读记录工具：保留SDK原始反馈，不移动或锁定任何关节。
 """Read EP telemetry without sending arm, servo, chassis or gripper motion commands."""
 import argparse
 import copy
@@ -11,11 +12,14 @@ import threading
 import time
 
 
+# 生成记录时间标签；反馈年龄和采样时长均使用不受系统校时影响的monotonic。
 def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 
+# 线程安全记录舵机原始数组和机械臂末端位置，不推断尚未确认的舵机ID映射。
 class Recorder:
+    # 初始化最新反馈、各源时间戳及各反馈槽的角度采样历史。
     def __init__(self, stream):
         self.stream = stream
         self.lock = threading.Lock()
@@ -25,6 +29,7 @@ class Recorder:
         self.angles = {str(i): [] for i in range(4)}
         self.errors = []
 
+    # 校验并复制异步反馈，保存来源和时间；保留原始值，不自动换算成关节角度。
     def receive(self, kind, data):
         # The SDK reuses its telemetry lists. Copy inside the callback.
         raw = copy.deepcopy(data)
@@ -58,6 +63,7 @@ class Recorder:
             except (TypeError, ValueError) as exc:
                 self.errors.append("{} callback: {}".format(kind, exc))
 
+    # 汇总反馈次数、新鲜度和在线状态，同时给出每个舵机槽的原始角度波动范围。
     def snapshot(self):
         with self.lock:
             ages = {key: time.monotonic() - value for key, value in self.received.items()}
@@ -73,6 +79,7 @@ class Recorder:
                     "servo_angle_ranges": ranges, "errors": list(self.errors)}
 
 
+# 连接并只读订阅两个反馈源，中断或订阅失败时也先保存部分结果再关闭SDK。
 def record(bot, directory, seconds, freq, label, conn_type, sdk_version):
     directory.mkdir(parents=True, exist_ok=False)
     started = utc_now()
@@ -140,6 +147,7 @@ def record(bot, directory, seconds, freq, label, conn_type, sdk_version):
     return 130 if interrupted else (0 if summary["status"] == "complete" else 2)
 
 
+# 校验采样时长和标签，选择连接地址及输出目录，随后启动只读记录。
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--label", default="current-pose")

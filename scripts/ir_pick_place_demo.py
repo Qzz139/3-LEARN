@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# 红外单次抓放入口与公共动作封装；独立YOLO进程只写识别日志。
 """One-shot EP infrared-triggered pick/place demo with independent YOLO logging."""
 import argparse
 import copy
@@ -17,24 +18,29 @@ import time
 ROOT = Path(__file__).resolve().parent.parent
 
 
+# 生成日志用UTC时间；动作超时另用monotonic，避免系统校时影响控制。
 def utc_now():
     return datetime.now(timezone.utc).isoformat()
 
 
+# 将DDS原始角度换成SDK定位角度，整数取整可能产生少量反馈误差。
 def raw_to_sdk_degrees(raw):
     """DDS encoder: 1024 = 180 degrees; SDK action angle is centred at 180."""
     return int(round(float(raw) * 180.0 / 1024.0 - 180.0))
 
 
+# 从实际下发的整数角度反算DDS预期值，不与协议线上的编码混用。
 def sdk_degrees_to_raw(degrees):
     """Expected DDS encoder value, distinct from the action's wire encoding."""
     return int(round((int(degrees) + 180) * 1024.0 / 180.0))
 
 
+# 记录定位协议的角度编码，便于与原始反馈和SDK角度分别核对。
 def sdk_degrees_to_wire(degrees):
     return int((int(degrees) + 180) * 10)
 
 
+# 检查舵机ID、反馈槽、姿态目标和红外参数；旧demo默认只允许右侧放置。
 def validate_config(cfg, allow_left_turn=False):
     required = ("connection", "arm", "infrared", "gripper", "chassis", "vision")
     if any(key not in cfg for key in required):
@@ -75,21 +81,26 @@ def validate_config(cfg, allow_left_turn=False):
     return cfg
 
 
+# 执行前要求外伸和内收目标都已填写，避免使用空姿态目标。
 def require_motion_targets(cfg):
     if any(cfg["arm"][key] is None for key in ("base_extended_raw", "base_retracted_raw")):
         raise ValueError("外伸最低、内收抬高的姿态目标尚未设置；旧目标已作废，不发送机器人命令")
 
 
+# 读取JSON并校验基本参数，此步骤不连接机器人。
 def load_config(path):
     return validate_config(json.loads(Path(path).read_text(encoding="utf-8")))
 
 
+# 把动作阶段同步写到控制台和run.json，异常时保留已经完成的步骤。
 class EventLog:
+    # 保存报告对象和输出路径，用锁协调主流程及视觉采集线程写日志。
     def __init__(self, path, report):
         self.path = path
         self.report = report
         self.lock = threading.Lock()
 
+    # 先写临时文件再替换正式报告，避免读到只写了一部分的JSON。
     def write(self, stage, **values):
         item = {"time_utc": utc_now(), "stage": stage, **values}
         with self.lock:
@@ -101,7 +112,9 @@ class EventLog:
         print(json.dumps(item, ensure_ascii=False), flush=True)
 
 
+# 保存舵机和红外的异步反馈，使用本机接收时间判断是否过期。
 class Feedback:
+    # 为两个反馈源分别维护缓存和时间戳，通过条件变量唤醒等待者。
     def __init__(self):
         self.condition = threading.Condition()
         self.servo = None
@@ -109,6 +122,7 @@ class Feedback:
         self.distance = None
         self.distance_time = 0.0
 
+    # 复制SDK复用的三组四通道数组，再更新舵机缓存和接收时间。
     def on_servo(self, value):
         raw = copy.deepcopy(value)
         if len(raw) != 3 or any(len(part) != 4 for part in raw):
@@ -118,6 +132,7 @@ class Feedback:
             self.servo_time = time.monotonic()
             self.condition.notify_all()
 
+    # 复制四通道测距数据；这里保留原始读数，不做尺量距离换算。
     def on_distance(self, value):
         raw = copy.deepcopy(value)
         if len(raw) != 4:
@@ -127,6 +142,7 @@ class Feedback:
             self.distance_time = time.monotonic()
             self.condition.notify_all()
 
+    # 等待两个反馈源首次到达；各动作还需另行检查新鲜度和有效性。
     def wait_ready(self, timeout=5.0):
         deadline = time.monotonic() + timeout
         with self.condition:
@@ -136,6 +152,7 @@ class Feedback:
                 self.condition.wait(timeout=0.1)
         raise RuntimeError("servo or infrared feedback did not arrive")
 
+    # 按零起始反馈槽读取在线舵机原始角度，离线或过期时终止当前动作。
     def servo_raw(self, slot, freshness=1.0):
         with self.condition:
             if self.servo is None or time.monotonic() - self.servo_time > freshness:
@@ -146,8 +163,10 @@ class Feedback:
             return int(angle[slot])
 
 
+# 独立子进程只做YOLO推理和日志，不把识别结果送回抓取控制流程。
 def yolo_worker(frame_queue, stop_event, model_name, confidence, image_size, log_path):
     """Inference-only subprocess. Its output is deliberately not returned to control."""
+    # 逐行追加视觉事件，识别失败也留在视觉日志中便于定位。
     def emit(stage, **values):
         item = {"time_utc": utc_now(), "stage": stage, **values}
         with Path(log_path).open("a", encoding="utf-8") as stream:
@@ -189,7 +208,9 @@ def yolo_worker(frame_queue, stop_event, model_name, confidence, image_size, log
         emit("vision_error", error="{}: {}".format(type(exc).__name__, exc))
 
 
+# 管理相机线程和独立推理子进程，让日志推理与抓取动作解耦。
 class VisionSidecar:
+    # 采用spawn创建独立进程，初始化采集、退出信号和资源句柄。
     def __init__(self, bot, cfg, log_path, record):
         self.bot, self.cfg, self.log_path, self.record = bot, cfg, log_path, record
         self.context = mp.get_context("spawn")
@@ -200,6 +221,7 @@ class VisionSidecar:
         self.thread = None
         self.running = False
 
+    # 先启动推理和容量为一的帧队列，再开启相机；相机失败不阻塞抓放主流程。
     def start(self, camera_module):
         if not self.cfg["enabled"]:
             self.record("vision_disabled")
@@ -234,6 +256,7 @@ class VisionSidecar:
         self.record("vision_started", model=model_arg, affects_control=False,
                     detection_log=str(self.log_path))
 
+    # 持续取最新帧，队列满时替换旧帧，避免推理跟不上造成积压。
     def _capture(self):
         interval = self.cfg["frame_interval_s"]
         try:
@@ -256,6 +279,7 @@ class VisionSidecar:
             self.record("vision_capture_error", error="{}: {}".format(type(exc).__name__, exc),
                         control_continues=True)
 
+    # 停止采集并给推理有限退出时间，最后关闭队列管理进程。
     def stop(self):
         self.stop_event.set()
         if self.running:
@@ -285,13 +309,16 @@ class VisionSidecar:
             self.frames = None
 
 
+# 封装已验证的单次抓放动作：抓夹侧只定位一次，后续只驱动底盘侧舵机。
 class Demo:
+    # 绑定配置、反馈和日志接口，并保存远端关节是否已经锁定。
     def __init__(self, bot, cfg, feedback, record):
         self.bot, self.cfg, self.feedback, self.record = bot, cfg, feedback, record
         self.arm = cfg["arm"]
         self.distal_locked = False
         self.active_action = None
 
+    # 检查抓夹侧反馈相对固定目标的偏差；检查不会重新下发定位命令。
     def assert_distal(self):
         if not self.distal_locked:
             return
@@ -301,6 +328,7 @@ class Demo:
             raise RuntimeError("distal servo moved: raw error {} exceeds {}".format(
                 error, self.arm["distal_drift_limit_raw"]))
 
+    # 下发前核对ID，先确认SDK动作成功，再用新鲜原始反馈确认姿态稳定。
     def move_servo(self, servo_id, feedback_slot, target_raw, stage):
         if servo_id == self.arm["distal_servo_id"] and self.distal_locked:
             raise RuntimeError("distal servo is locked; additional position commands are forbidden")
@@ -344,6 +372,7 @@ class Demo:
         raise RuntimeError(stage + ": servo feedback did not settle at target raw={} "
                            "(last raw={})".format(target_raw, observed[-1] if observed else None))
 
+    # 先将抓夹侧设到固定值，成功后禁止再次向它发送定位命令。
     def lock_initial_distal(self):
         if self.distal_locked:
             raise RuntimeError("distal servo lock may only be issued once")
@@ -353,12 +382,14 @@ class Demo:
         self.record("distal_command_guard_enabled", servo_id=self.arm["distal_servo_id"],
                     feedback_slot=self.arm["distal_feedback_slot"], hold_raw=self.arm["distal_hold_raw"])
 
+    # 仅按底盘侧ID及其反馈槽移动，并在前后检查抓夹侧是否漂移。
     def move_base(self, target_raw, stage):
         self.assert_distal()
         self.move_servo(self.arm["base_servo_id"], self.arm["base_feedback_slot"],
                         target_raw, stage)
         self.assert_distal()
 
+    # 按开闭状态选择力度，持续配置的时间后pause停止施力；没有独立抓住物体的反馈。
     def gripper(self, opened, stage):
         self.assert_distal()
         section = self.cfg["gripper"]
@@ -373,6 +404,7 @@ class Demo:
         self.assert_distal()
         self.record(stage + "_complete", opened=opened)
 
+    # 只计入不同接收时间的连续正数近距样本，同一包不允许反复计数。
     def wait_for_object(self):
         ir = self.cfg["infrared"]
         slot, threshold = ir["feedback_slot"], ir["threshold_mm"]
@@ -405,6 +437,7 @@ class Demo:
                 return
         raise RuntimeError("no object stayed within {} mm before timeout".format(threshold))
 
+    # 执行原地转向并核对SDK动作结果；实际yaw到位检查由视觉demo补充。
     def turn(self, degrees, stage):
         self.assert_distal()
         chassis = self.cfg["chassis"]
@@ -418,11 +451,13 @@ class Demo:
         self.assert_distal()
         self.record(stage + "_complete", degrees=degrees)
 
+    # 统一开始和结束姿态：机械臂外伸，抓夹松开。
     def initial_state(self, prefix):
         self.move_base(self.arm["base_extended_raw"], prefix + "_extend")
         self.gripper(True, prefix + "_open_gripper")
         self.assert_distal()
 
+    # 按红外触发完成一次夹紧、内收搬运、转向释放和返回初始姿态。
     def run(self):
         require_motion_targets(self.cfg)
         self.lock_initial_distal()
@@ -440,6 +475,7 @@ class Demo:
         self.initial_state("finish")
         self.record("cycle_complete", arm="extended", gripper="open", heading_degrees=0)
 
+    # 请求底盘和执行器停止，不自动回位或松爪；舵机pause禁用控制而非保持力矩。
     def emergency_stop(self):
         try:
             self.bot.chassis.drive_speed(x=0, y=0, z=0, timeout=0.5)
@@ -455,6 +491,7 @@ class Demo:
             pass
 
 
+# 指定EP地址，通过到EP的UDP路由选择本机接口，避免误用Mac到Jetson的SSH地址。
 def configure_network(connection, rm_config):
     if connection.get("local_ip"):
         rm_config.LOCAL_IP_STR = connection["local_ip"]
@@ -465,6 +502,7 @@ def configure_network(connection, rm_config):
     rm_config.ROBOT_IP_STR = connection["robot_ip"]
 
 
+# 处理预览或实机模式，管理独占锁、反馈订阅、异常红灯和资源释放。
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--config", type=Path, default=ROOT / "config" / "ir_pick_place.json")
@@ -514,6 +552,7 @@ def main():
     except BlockingIOError:
         parser.exit(2, "another real-robot control process holds work/real-control.lock\n")
 
+    # 把终止信号转为中断异常，让统一异常处理请求停车并记录退出原因。
     def interrupted(_signum, _frame):
         raise KeyboardInterrupt("operator requested stop")
 

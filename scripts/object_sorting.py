@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# main稳定版分拣：按配置方位顺序抓取，球右放、瓶左放，各使用三个位置。
 """Sort balls and bottles from configured directions into three slots per class."""
 import math
 import time
@@ -9,6 +10,7 @@ import yolo_align_pick_place_demo as align
 CLASS_NAMES = {32: 'ball', 39: 'bottle'}
 
 
+# 复用demo2参数校验，再核对六个抓取方位及每类三个放置角度。
 def validate_sorting(cfg):
     align.validate_alignment(cfg)
     if set(cfg['alignment']['target_class_ids']) != set(CLASS_NAMES):
@@ -40,14 +42,17 @@ def validate_sorting(cfg):
     return cfg
 
 
+# 实机执行前要求六个放置角度都已填写；预览允许保留空位置。
 def require_placement_slots(cfg):
     if any(v is None for slots in cfg['sorting']['placement_headings_degrees'].values() for v in slots):
         raise ValueError('fill the six placement headings in config/object_sorting.json before executing')
 
 
+# 稳定版按配置顺序处理方位，复用视觉对准、红外接近和路径回退。
 class SortingDemo(align.AlignDemo):
     """Keep the starting center and heading as the reference for every object."""
 
+    # 内收转到预定角度后外伸识别；无目标时左右扫描，不直接换锁定目标。
     def find_target(self, heading, available_classes):
         selection = dict(self.cfg['alignment'], target_class_ids=available_classes)
         for offset in self.cfg['sorting']['sector_scan_offsets_degrees']:
@@ -71,6 +76,7 @@ class SortingDemo(align.AlignDemo):
                 raise RuntimeError('no fresh camera results during sector scan')
         return None
 
+    # 整轮共享启动中心与朝向，两类分别计数并按顺序占用各自三个放置位。
     def run(self):
         require_placement_slots(self.cfg)
         self.lock_initial_distal()
