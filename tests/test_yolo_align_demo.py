@@ -102,12 +102,19 @@ class TestAlignment(unittest.TestCase):
                           lambda stage, **kw: events.append(stage), detector)
         with patch.object(demo, 'assert_distal'), patch.object(demo, 'heading_offset', return_value=0), \
                 patch.object(demo, 'infrared_state', side_effect=['far', 'ready']), \
-                patch.object(demo, 'approach_step') as advance, patch.object(demo, 'turn') as turn, \
+                patch.object(demo, 'approach_step') as advance, patch.object(demo, 'align_turn') as turn, \
                 patch.object(M.time, 'sleep'):
             demo.align_and_wait_for_grasp()
         advance.assert_called_once()
         turn.assert_called_once()
         self.assertEqual(events.count('alignment_stable'), 6)
+
+    def test_successful_action_without_yaw_progress_is_rejected(self):
+        demo = M.AlignDemo(None, config(), None, lambda *a, **k: None, None)
+        with patch.object(demo, 'heading_offset', side_effect=[0, .02]), \
+                patch.object(demo, 'turn'), patch.object(M.time, 'sleep'):
+            with self.assertRaisesRegex(RuntimeError, 'without actual yaw progress'):
+                demo.align_turn(5)
 
     def test_unstable_near_infrared_never_advances(self):
         cfg = config()
@@ -170,12 +177,13 @@ class TestAlignment(unittest.TestCase):
         def drive_speed(x, y, z, timeout):
             velocity[0] = x
             commands.append(x)
-            return True
+            return False  # Actual official no-ACK SDK behavior, not a rejection.
         def sleep(duration):
             clock[0] += duration
             position[0] += velocity[0] * duration
         chassis = type('Chassis', (), {'drive_speed': staticmethod(drive_speed)})()
-        demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), cfg, None, lambda *a, **k: None, None)
+        feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0])})()
+        demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), cfg, feedback, lambda *a, **k: None, None)
         demo.start_position = (0, 0)
         with patch.object(M.time, 'sleep', side_effect=sleep), \
                 patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
@@ -183,12 +191,12 @@ class TestAlignment(unittest.TestCase):
                 patch.object(demo, 'heading_offset', return_value=0), patch.object(demo, 'infrared_value', return_value=90), \
                 patch.object(demo, 'turn_to_offset'):
             demo.approach_step()
-            self.assertAlmostEqual(demo.travel_m, .005)
+            self.assertAlmostEqual(demo.travel_m, .01)
             self.assertEqual(len(demo.approach_path), 1)
             demo.return_to_center()
         self.assertLessEqual(abs(position[0]), cfg['approach']['waypoint_tolerance_m'])
         self.assertEqual(commands[-1], 0)
-        self.assertEqual(set(commands), {0, .02, -.03})
+        self.assertEqual(set(commands), {0, .04, -.03})
 
     def test_threshold_or_sensor_failure_stops_velocity_segment(self):
         for readings, raises in (([10], False), ([90, RuntimeError('sensor failed')], True)):
@@ -200,8 +208,9 @@ class TestAlignment(unittest.TestCase):
             def sleep(duration):
                 clock[0] += duration
                 position[0] += velocity[0] * duration
+            feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0])})()
             demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed)})()})(),
-                               cfg, None, lambda *a, **k: None, None)
+                               cfg, feedback, lambda *a, **k: None, None)
             with self.subTest(raises=raises), patch.object(M.time, 'sleep', side_effect=sleep), \
                     patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
                     patch.object(demo, 'assert_distal'), patch.object(demo, 'position', side_effect=lambda: tuple(position)), \
@@ -245,6 +254,30 @@ class TestAlignment(unittest.TestCase):
             with self.assertRaisesRegex(RuntimeError, 'no odometry progress'):
                 demo.approach_step()
         self.assertEqual(commands[-1], 0)
+
+    def test_stop_requires_three_new_near_zero_velocity_samples(self):
+        cfg, clock, events = config(), [10.0], []
+        velocities = iter([.04, .02, 0, 0, 0])
+        feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((next(velocities), 0, 0), clock[0])})()
+        demo = M.AlignDemo(None, cfg, feedback, lambda stage, **kw: events.append(stage), None)
+        def sleep(duration):
+            clock[0] += duration
+        with patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(M.time, 'sleep', side_effect=sleep), patch.object(demo, 'assert_distal'):
+            demo.wait_stationary()
+        self.assertEqual(events, ['translation_stop_confirmed'])
+
+    def test_duplicate_or_moving_velocity_cannot_confirm_stop(self):
+        for velocity, repeated_timestamp in ((.04, False), (0, True)):
+            cfg, clock = config(), [10.0]
+            feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity, 0, 0), 10 if repeated_timestamp else clock[0])})()
+            demo = M.AlignDemo(None, cfg, feedback, lambda *a, **k: None, None)
+            def sleep(duration):
+                clock[0] += duration
+            with self.subTest(velocity=velocity), patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                    patch.object(M.time, 'sleep', side_effect=sleep), patch.object(demo, 'assert_distal'):
+                with self.assertRaisesRegex(RuntimeError, 'velocity did not settle'):
+                    demo.wait_stationary()
 
     def test_cycle_preserves_joint_roles_and_anchors_drop_heading(self):
         cfg, events = config(), []

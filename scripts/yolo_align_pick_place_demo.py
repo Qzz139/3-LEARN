@@ -44,6 +44,8 @@ def validate_alignment(cfg):
             raise ValueError(key + ' must be an integer in [2, 10]')
     if cfg['vision']['model'] != 'yolo26m.pt' or not a['target_class_ids']:
         raise ValueError('this demo uses ordinary yolo26m.pt and configured COCO target classes')
+    if cfg['vision']['stream_resolution'] not in ('360p', '540p', '720p'):
+        raise ValueError('unsupported video stream resolution')
     p = cfg['approach']
     for key, value in p.items():
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value) or value <= 0:
@@ -54,6 +56,8 @@ def validate_alignment(cfg):
         raise ValueError('approach/return speeds must be at most 0.05m/s')
     if p['waypoint_tolerance_m'] >= p['step_m'] or p['position_freshness_s'] > .25:
         raise ValueError('waypoint tolerance must be smaller than step; position freshness at most 0.25s')
+    if p['stop_linear_speed_mps'] > .01 or p['stop_yaw_speed_dps'] > 2:
+        raise ValueError('stationary speed tolerances must be at most 0.01m/s and 2deg/s')
     return cfg
 
 
@@ -108,6 +112,21 @@ class Feedback(base.Feedback):
         self.yaw_time = 0.0
         self.position_value = None
         self.position_time = 0.0
+        self.velocity_value = None
+        self.velocity_time = 0.0
+
+    def on_velocity(self, velocity):
+        with self.condition:
+            self.velocity_value = tuple(float(v) for v in velocity[3:6])
+            self.velocity_time = time.monotonic()
+            self.condition.notify_all()
+
+    def velocity_snapshot(self, freshness):
+        with self.condition:
+            if (self.velocity_value is None or time.monotonic() - self.velocity_time > freshness or
+                    not all(math.isfinite(v) for v in self.velocity_value)):
+                raise RuntimeError('chassis velocity feedback is missing, invalid or stale')
+            return self.velocity_value, self.velocity_time
 
     def on_position(self, position):
         with self.condition:
@@ -205,11 +224,28 @@ class AlignDemo(base.Demo):
         return value
 
     def stop_translation(self):
-        if not self.bot.chassis.drive_speed(x=0, y=0, z=0, timeout=.2):
-            raise RuntimeError('chassis stop command rejected')
+        # ProtoChassisSpeedMode is PUSH/no-ACK. Official SDK returns False even
+        # after sending; verify physical progress/stop using position instead.
+        self.bot.chassis.drive_speed(x=0, y=0, z=0, timeout=.2)
+
+    def wait_stationary(self):
+        p, started = self.cfg['approach'], time.monotonic()
+        sequence, last = 0, None
+        while time.monotonic() < started + p['stop_timeout_s']:
+            self.assert_distal()
+            velocity, stamped = self.feedback.velocity_snapshot(p['position_freshness_s'])
+            if stamped >= started and stamped != last:
+                sequence = sequence + 1 if (math.hypot(*velocity[:2]) <= p['stop_linear_speed_mps'] and
+                                             abs(velocity[2]) <= p['stop_yaw_speed_dps']) else 0
+                last = stamped
+                if sequence >= 3:
+                    self.record('translation_stop_confirmed', body_velocity=velocity, consecutive_samples=sequence)
+                    return
+            time.sleep(.025)
+        raise RuntimeError('chassis velocity did not settle after stop')
 
     def translate(self, distance, stage, return_target=None):
-        """Bounded velocity segment; odometry stops it, watchdog bounds a lost process."""
+        """Odometry controls each segment; the SDK timer stops a stalled main loop."""
         p = self.cfg['approach']
         self.assert_distal()
         start, heading = self.position(), self.heading_offset()
@@ -228,8 +264,9 @@ class AlignDemo(base.Demo):
                 travelled = position_distance(start, current)
                 if return_target is None:
                     progress = travelled
-                    if self.infrared_value() <= self.cfg['infrared']['threshold_mm']:
-                        self.record('approach_threshold_seen', position=current)
+                    value = self.infrared_value()
+                    if value <= self.cfg['infrared']['threshold_mm']:
+                        self.record('approach_threshold_seen', position=current, distance_mm=value)
                         break
                     if travelled >= distance:
                         break
@@ -244,14 +281,14 @@ class AlignDemo(base.Demo):
                     previous_progress, progress_time = progress, time.monotonic()
                 if time.monotonic() - progress_time > p['stall_timeout_s']:
                     raise RuntimeError(stage + ': no odometry progress')
-                if not self.bot.chassis.drive_speed(x=direction * speed, y=0, z=0, timeout=.2):
-                    raise RuntimeError(stage + ': velocity command rejected')
+                self.bot.chassis.drive_speed(x=direction * speed, y=0, z=0, timeout=.2)
                 time.sleep(.025)
             else:
                 raise RuntimeError(stage + ': translation timed out')
         finally:
             self.stop_translation()
         time.sleep(p['settle_seconds'])
+        self.wait_stationary()
         end = self.position()
         actual = position_distance(start, end)
         self.assert_distal()
@@ -296,6 +333,15 @@ class AlignDemo(base.Demo):
             self.turn(max(-45, min(45, error)), stage)
             time.sleep(self.cfg['alignment']['settle_seconds'])
         raise RuntimeError(stage + ': yaw feedback did not reach target heading')
+
+    def align_turn(self, degrees):
+        before = self.heading_offset()
+        self.turn(degrees, 'align_turn')
+        time.sleep(self.cfg['alignment']['settle_seconds'])
+        actual = wrap_degrees(self.heading_offset() - before)
+        self.record('align_turn_feedback', requested_degrees=degrees, actual_degrees=actual)
+        if actual * degrees <= 0 or abs(actual) < min(.5, abs(degrees) * .25):
+            raise RuntimeError('alignment turn completed without actual yaw progress')
 
     def infrared_state(self):
         ir, sequence, far_sequence, last = self.cfg['infrared'], 0, 0, None
@@ -358,8 +404,7 @@ class AlignDemo(base.Demo):
                 stable = 0
                 if abs(self.heading_offset() + turn) > a['search_limit_degrees']:
                     raise RuntimeError('target requires a turn beyond configured search range')
-                self.turn(turn, 'align_turn')
-                time.sleep(a['settle_seconds'])
+                self.align_turn(turn)
                 continue
             stable += 1
             self.record('alignment_stable', consecutive_frames=stable)
@@ -410,7 +455,7 @@ def main():
         parser.error(str(exc))
     if not args.execute and not args.observe:
         print(json.dumps(cfg, ensure_ascii=False, indent=2))
-        print('预览：YOLO网球 → 小步转向对准 → 低速约5mm一步接近 → 居中且红外≤20mm → 抓取内收 → 退回起始中心 → 启动朝向右侧90°放置 → 返回。')
+        print('预览：YOLO网球 → 小步转向对准 → 低速约{:g}mm一步接近 → 居中且红外≤20mm → 抓取内收 → 退回起始中心 → 启动朝向右侧90°放置 → 返回。'.format(cfg['approach']['step_m'] * 1000))
         return 0
     from robomaster import camera, config, led, robot
     directory = ROOT / 'work' / ('yolo-align-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
@@ -435,23 +480,27 @@ def main():
                 (bot.sensor.sub_distance, bot.sensor.unsub_distance, feedback.on_distance),
                 (bot.chassis.sub_attitude, bot.chassis.unsub_attitude, feedback.on_attitude),
                 (bot.chassis.sub_position, bot.chassis.unsub_position, feedback.on_position),
+                (bot.chassis.sub_velocity, bot.chassis.unsub_velocity, feedback.on_velocity),
             ):
                 if not subscribe(freq=20, callback=callback):
                     raise RuntimeError('feedback subscription rejected')
                 cleanups.append(unsubscribe)
             feedback.wait_ready()
             deadline = time.monotonic() + 5
-            while (feedback.yaw_value is None or feedback.position_value is None) and time.monotonic() < deadline:
+            while (feedback.yaw_value is None or feedback.position_value is None or feedback.velocity_value is None) and time.monotonic() < deadline:
                 time.sleep(.05)
             feedback.yaw()
             feedback.position(cfg['approach']['position_freshness_s'])
+            feedback.velocity_snapshot(cfg['approach']['position_freshness_s'])
             demo = AlignDemo(bot, cfg, feedback, log.write, None)
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
-        if not bot.camera.start_video_stream(display=False, resolution=camera.STREAM_720P):
-            raise RuntimeError('camera stream rejected')
-        camera_started = True
         log.write('vision_loading', motion_started=False)
         detector = Detector(cfg, directory, log.write)
+        if not bot.camera.start_video_stream(display=False, resolution=cfg['vision']['stream_resolution']):
+            raise RuntimeError('camera stream rejected')
+        camera_started = True
+        time.sleep(1.0)
+        log.write('camera_ready', resolution=cfg['vision']['stream_resolution'])
         if demo:
             demo.detector = detector
             demo.run()
