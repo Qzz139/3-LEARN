@@ -1,0 +1,58 @@
+{
+  "completed": true,
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:46:53.802304+00:00",
+      "stage": "before_probe",
+      "distal_raw": 602,
+      "base_raw": 1049
+    },
+    {
+      "time_utc": "1970-01-01T00:46:53.803224+00:00",
+      "stage": "probe_release_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:46:54.843016+00:00",
+      "stage": "probe_release_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:46:54.843952+00:00",
+      "stage": "probe_known_pose_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:46:56.044584+00:00",
+      "stage": "probe_known_pose_complete",
+      "actual_raw": 1074
+    },
+    {
+      "time_utc": "1970-01-01T00:46:56.045630+00:00",
+      "stage": "probe_plus_5_degrees_request",
+      "servo_id": 2,
+      "target_raw": 1104,
+      "target_degrees": 14,
+      "expected_dds_raw": 1104,
+      "encoded_target_wire": 1940
+    },
+    {
+      "time_utc": "1970-01-01T00:46:57.113786+00:00",
+      "stage": "probe_plus_5_degrees_complete",
+      "actual_raw": 1101
+    },
+    {
+      "time_utc": "1970-01-01T00:46:57.114797+00:00",
+      "stage": "small_step_complete",
+      "distal_raw": 602,
+      "base_raw": 1101,
+      "distal_commands_sent": 0,
+      "chassis_moved": false
+    }
+  ]
+}

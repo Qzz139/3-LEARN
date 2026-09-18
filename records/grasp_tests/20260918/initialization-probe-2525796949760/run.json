@@ -1,0 +1,65 @@
+{
+  "completed": true,
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:42:28.800111+00:00",
+      "stage": "before_init",
+      "distal_raw": 620,
+      "base_raw": 1077
+    },
+    {
+      "time_utc": "1970-01-01T00:42:28.800940+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 1,
+      "target_raw": 601,
+      "target_degrees": -74,
+      "expected_dds_raw": 603,
+      "encoded_target_wire": 1060
+    },
+    {
+      "time_utc": "1970-01-01T00:42:29.842298+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 605
+    },
+    {
+      "time_utc": "1970-01-01T00:42:29.843962+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 1,
+      "feedback_slot": 0,
+      "hold_raw": 601
+    },
+    {
+      "time_utc": "1970-01-01T00:42:29.844857+00:00",
+      "stage": "probe_start_extend_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:42:30.382708+00:00",
+      "stage": "probe_start_extend_complete",
+      "actual_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T00:42:30.383896+00:00",
+      "stage": "probe_start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:42:31.419965+00:00",
+      "stage": "probe_start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:42:31.421029+00:00",
+      "stage": "initialization_only_complete",
+      "distal_raw": 605,
+      "base_raw": 1073,
+      "gripper": "open",
+      "chassis_moved": false
+    }
+  ]
+}

@@ -304,9 +304,13 @@ class Demo:
                                "If EP is configured as a robotic arm in the App, direct servo "
                                "control is unavailable; configure independent servos for this demo."
                                .format(state, reason, done))
+        self.record(stage + "_action_completed", state=getattr(action, "state", "succeeded"),
+                    feedback_validated=False)
         deadline = time.monotonic() + self.arm["action_timeout_s"]
+        observed = []
         while time.monotonic() < deadline:
             actual = self.feedback.servo_raw(feedback_slot)
+            observed.append(actual)
             if abs(actual - target_raw) <= self.arm["raw_tolerance"]:
                 time.sleep(self.arm["settle_seconds"])
                 actual = self.feedback.servo_raw(feedback_slot)
@@ -315,7 +319,12 @@ class Demo:
                     self.record(stage + "_complete", actual_raw=actual)
                     return
             time.sleep(0.05)
-        raise RuntimeError(stage + ": servo feedback did not settle at target")
+        self.record(stage + "_feedback_failed", target_raw=target_raw,
+                    actual_raw=observed[-1] if observed else None,
+                    min_observed_raw=min(observed) if observed else None,
+                    max_observed_raw=max(observed) if observed else None)
+        raise RuntimeError(stage + ": servo feedback did not settle at target raw={} "
+                           "(last raw={})".format(target_raw, observed[-1] if observed else None))
 
     def lock_initial_distal(self):
         if self.distal_locked:

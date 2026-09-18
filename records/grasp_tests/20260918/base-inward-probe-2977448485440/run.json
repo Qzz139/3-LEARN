@@ -1,0 +1,72 @@
+{
+  "completed": true,
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:50:00.204527+00:00",
+      "stage": "inward_step_19_request",
+      "servo_id": 2,
+      "target_raw": 1132,
+      "target_degrees": 19,
+      "expected_dds_raw": 1132,
+      "encoded_target_wire": 1990
+    },
+    {
+      "time_utc": "1970-01-01T00:50:00.804897+00:00",
+      "stage": "inward_step_19_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:50:01.306606+00:00",
+      "stage": "inward_step_19_complete",
+      "actual_raw": 1128
+    },
+    {
+      "time_utc": "1970-01-01T00:50:03.310142+00:00",
+      "stage": "inward_step_24_request",
+      "servo_id": 2,
+      "target_raw": 1161,
+      "target_degrees": 24,
+      "expected_dds_raw": 1161,
+      "encoded_target_wire": 2040
+    },
+    {
+      "time_utc": "1970-01-01T00:50:03.805432+00:00",
+      "stage": "inward_step_24_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:50:04.507383+00:00",
+      "stage": "inward_step_24_complete",
+      "actual_raw": 1155
+    },
+    {
+      "time_utc": "1970-01-01T00:50:06.510910+00:00",
+      "stage": "inward_step_29_request",
+      "servo_id": 2,
+      "target_raw": 1189,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:50:07.168294+00:00",
+      "stage": "inward_step_29_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:50:07.870204+00:00",
+      "stage": "inward_step_29_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:50:09.873737+00:00",
+      "stage": "inward_probe_complete",
+      "distal_raw": 602,
+      "base_raw": 1183,
+      "sdk_degrees": 29
+    }
+  ]
+}
