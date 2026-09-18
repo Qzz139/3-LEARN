@@ -40,12 +40,19 @@ class TestAlignment(unittest.TestCase):
 
     def test_heading_wrap_and_place_compensation_use_startup_reference(self):
         cfg = config()
-        feedback = type('F', (), {'yaw': lambda self: -160.0})()
+        feedback = type('F', (), {'yaw': lambda self: 160.0})()
         demo = M.AlignDemo(None, cfg, feedback, lambda *args, **kwargs: None, None)
-        demo.start_yaw = 170
+        demo.start_yaw = -170
         self.assertEqual(demo.heading_offset(), 30)
         # Aligned 30deg left -> startup-right placement needs -120deg total, not -90.
         self.assertEqual(M.wrap_degrees(-90 - demo.heading_offset()), -120)
+
+    def test_measured_yaw_decreases_for_positive_sdk_turn_on_this_ep(self):
+        cfg = config()
+        feedback = type('F', (), {'yaw': lambda _: .87})()
+        demo = M.AlignDemo(None, cfg, feedback, lambda *args, **kwargs: None, None)
+        demo.start_yaw = 6.04
+        self.assertAlmostEqual(demo.heading_offset(), 5.17)
 
     def test_search_offsets_stay_within_configured_range(self):
         self.assertEqual(M.search_offsets(config()['alignment']), [15, -15, 30, -30, 45, -45, 60, -60])

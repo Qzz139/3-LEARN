@@ -21,6 +21,8 @@ def wrap_degrees(angle):
 def validate_alignment(cfg):
     base.validate_config(cfg)
     a = cfg['alignment']
+    if a['yaw_feedback_sign'] not in (-1, 1):
+        raise ValueError('yaw_feedback_sign must be -1 or 1')
     for key in ('axis_x_ratio', 'tolerance_ratio', 'max_center_jump_ratio'):
         if not 0 < a[key] < 1:
             raise ValueError(key + ' must be between 0 and 1')
@@ -113,7 +115,7 @@ class Detector:
         self.model = YOLO(str(ROOT / 'models' / cfg['vision']['model']))
         record('vision_warming', model=cfg['vision']['model'])
         self.model.predict(np.zeros((640, 640, 3), dtype=np.uint8), imgsz=cfg['vision']['image_size'], verbose=False)
-        record('vision_ready', control_enabled=True)
+        record('vision_ready', model_ready=True)
         self.sequence = 0
 
     def detect(self, camera):
@@ -158,7 +160,7 @@ class AlignDemo(base.Demo):
         self.start_yaw = None
 
     def heading_offset(self):
-        return wrap_degrees(self.feedback.yaw() - self.start_yaw)
+        return self.cfg['alignment']['yaw_feedback_sign'] * wrap_degrees(self.feedback.yaw() - self.start_yaw)
 
     def turn_to_offset(self, target, stage):
         tolerance = self.cfg['alignment']['heading_tolerance_degrees']

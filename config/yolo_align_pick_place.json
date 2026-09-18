@@ -60,6 +60,7 @@
     "timeout_s": 120.0,
     "settle_seconds": 0.8,
     "max_result_age_s": 2.0,
-    "heading_tolerance_degrees": 2.0
+    "heading_tolerance_degrees": 2.0,
+    "yaw_feedback_sign": -1
   }
 }

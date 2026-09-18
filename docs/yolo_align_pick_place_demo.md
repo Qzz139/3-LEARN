@@ -30,6 +30,8 @@
 
 抓取后ID1内收，利用实际底盘yaw反馈转至“启动朝向−90°”，外伸松爪放置；
 然后内收、返回启动朝向、外伸松爪。比如对准时已左转30°，去放置方向需右转约120°。
+实测本EP的SDK正转角对应yaw读数减少，`yaw_feedback_sign=-1`将实际姿态差
+转换为与指令一致的朝向差；不能直接用原始yaw差做补偿。
 转向不会改变本demo放置区域的基准；后续六物品分拣仍需明确两类各自对应的放置区域。
 
 ## 命令与文件
@@ -54,3 +56,6 @@ Jetson未同步系统时钟时，目录与UTC日期仍可能显示1970年。
 [大疆SDK底盘角度及姿态接口](https://robomaster-dev.readthedocs.io/en/latest/python_sdk/robomaster.html#module-robomaster.chassis)。
 
 本地测试：`python3 -m unittest discover -s tests -v`。
+
+实测进度：只读识别已检出左侧网球；首次自动测试转向两次后因目标连续性丢失停止，
+尚未完成自动抓取。实测发现yaw符号与指令相反，已修正；详见[实测记录](yolo_alignment_hardware_tests.md)。
