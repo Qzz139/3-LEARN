@@ -22,6 +22,26 @@ def box(cx, cls=32, width=1280, height=720, scale=1):
 
 
 class TestAlignment(unittest.TestCase):
+    def test_camera_feed_drains_while_control_is_idle_and_returns_a_new_frame(self):
+        class Camera:
+            count = 0
+            def read_cv2_image(self, **kwargs):
+                M.time.sleep(.005)
+                self.count += 1
+                return self.count
+        camera = Camera()
+        feed = M.CameraFeed(camera)
+        feed.start()
+        try:
+            first, first_time = feed.read_latest()
+            M.time.sleep(.03)
+            second, second_time = feed.read_latest()
+            self.assertGreater(second, first + 1)
+            self.assertGreater(second_time, first_time)
+        finally:
+            feed.stop()
+        self.assertFalse(feed.thread.is_alive())
+
     def test_image_left_turns_left_and_right_turns_right_with_limited_steps(self):
         a = config()['alignment']
         self.assertEqual(M.correction_degrees(M.pixel_error(box(320), .5), a), 5)

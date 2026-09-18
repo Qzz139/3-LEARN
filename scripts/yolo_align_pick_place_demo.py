@@ -6,7 +6,9 @@ import fcntl
 import json
 import math
 from pathlib import Path
+import queue
 import signal
+import threading
 import time
 
 import ir_pick_place_demo as base
@@ -154,12 +156,62 @@ class Feedback(base.Feedback):
             return self.yaw_value
 
 
+class CameraFeed:
+    """Continuously drain SDK decoded frames so its H264 receive queue can flow."""
+    def __init__(self, camera):
+        self.camera = camera
+        self.condition = threading.Condition()
+        self.stop_event = threading.Event()
+        self.frame = None
+        self.captured = 0.0
+        self.error = None
+        self.thread = threading.Thread(target=self.capture, daemon=True)
+
+    def start(self):
+        self.thread.start()
+
+    def capture(self):
+        while not self.stop_event.is_set():
+            try:
+                frame = self.camera.read_cv2_image(strategy='newest', timeout=1)
+                if frame is not None:
+                    with self.condition:
+                        self.frame, self.captured = frame, time.monotonic()
+                        self.condition.notify_all()
+            except queue.Empty:
+                continue
+            except Exception as exc:
+                with self.condition:
+                    self.error = str(exc)
+                    self.condition.notify_all()
+                return
+
+    def read_latest(self, timeout=3):
+        requested = time.monotonic()
+        with self.condition:
+            while self.frame is None or self.captured < requested:
+                if self.error or self.stop_event.is_set():
+                    raise RuntimeError('camera feed stopped: ' + str(self.error))
+                remaining = requested + timeout - time.monotonic()
+                if remaining <= 0:
+                    raise RuntimeError('camera feed returned no fresh image')
+                self.condition.wait(timeout=remaining)
+            return self.frame, self.captured
+
+    def stop(self):
+        self.stop_event.set()
+        with self.condition:
+            self.condition.notify_all()
+        self.thread.join(timeout=2)
+
+
 class Detector:
     def __init__(self, cfg, directory, record):
         from ultralytics import YOLO
         import numpy as np
         self.cfg, self.directory, self.record = cfg, directory, record
         self.path = directory / 'detections.jsonl'
+        self.feed = None
         self.model = YOLO(str(ROOT / 'models' / cfg['vision']['model']))
         record('vision_warming', model=cfg['vision']['model'])
         self.model.predict(np.zeros((640, 640, 3), dtype=np.uint8), imgsz=cfg['vision']['image_size'], verbose=False)
@@ -169,7 +221,10 @@ class Detector:
     def detect(self, camera):
         import cv2
         captured = time.monotonic()
-        frame = camera.read_cv2_image(strategy='newest', timeout=3)
+        if self.feed:
+            frame, captured = self.feed.read_latest()
+        else:
+            frame = camera.read_cv2_image(strategy='newest', timeout=3)
         if frame is None:
             raise RuntimeError('camera returned no image')
         self.sequence += 1
@@ -445,12 +500,15 @@ def main():
     parser.add_argument('--config', type=Path, default=ROOT / 'config/yolo_align_pick_place.json')
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--observe', action='store_true', help='camera and YOLO only; no motion or LED commands')
+    parser.add_argument('--observe-frames', type=int, default=1, help='number of stationary read-only detections')
     args = parser.parse_args()
     try:
         cfg = validate_alignment(json.loads(args.config.read_text(encoding='utf-8')))
         base.require_motion_targets(cfg)
         if args.execute and args.observe:
             raise ValueError('choose --execute or --observe')
+        if not 1 <= args.observe_frames <= 100 or (args.observe_frames != 1 and not args.observe):
+            raise ValueError('--observe-frames must be 1–100 and requires --observe')
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))
     if not args.execute and not args.observe:
@@ -468,7 +526,7 @@ def main():
         raise KeyboardInterrupt('operator stop')
     signal.signal(signal.SIGINT, interrupted)
     signal.signal(signal.SIGTERM, interrupted)
-    bot, demo, camera_started, cleanups = robot.Robot(), None, False, []
+    bot, demo, camera_started, cleanups, feed = robot.Robot(), None, False, [], None
     try:
         base.configure_network(cfg['connection'], config)
         if not bot.initialize(conn_type=cfg['connection']['conn_type'], proto_type='udp'):
@@ -499,6 +557,9 @@ def main():
         if not bot.camera.start_video_stream(display=False, resolution=cfg['vision']['stream_resolution']):
             raise RuntimeError('camera stream rejected')
         camera_started = True
+        feed = CameraFeed(bot.camera)
+        feed.start()
+        detector.feed = feed
         time.sleep(1.0)
         log.write('camera_ready', resolution=cfg['vision']['stream_resolution'])
         if demo:
@@ -506,11 +567,13 @@ def main():
             demo.run()
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
         else:
-            detections, age = detector.detect(bot.camera)
-            target = choose_target(detections, cfg['alignment'])
-            log.write('observe_result', target=target, age_s=age,
-                      proposed_turn=correction_degrees(pixel_error(target, cfg['alignment']['axis_x_ratio']), cfg['alignment']) if target else None,
-                      motion_commands_sent=False)
+            for _ in range(args.observe_frames):
+                detections, age = detector.detect(bot.camera)
+                target = choose_target(detections, cfg['alignment'])
+                log.write('observe_result', target=target, age_s=age,
+                          proposed_turn=correction_degrees(pixel_error(target, cfg['alignment']['axis_x_ratio']), cfg['alignment']) if target else None,
+                          motion_commands_sent=False)
+                time.sleep(cfg['vision']['frame_interval_s'])
         report['completed'] = True
         log.write('finished_successfully', directory=str(directory))
     except BaseException as exc:
@@ -524,6 +587,8 @@ def main():
                 pass
         log.write('error', error=report['error'], automatic_return=False)
     finally:
+        if feed:
+            feed.stop()
         if camera_started:
             try:
                 bot.camera.stop_video_stream()
