@@ -81,3 +81,16 @@
 红外距离实测使用 `bash scripts/run_ir_distance_ubuntu.sh --seconds 8 --label tennis-30mm --reference-mm 30`。
 此程序只记录距离反馈，不发送动作；先按尺量距离摆好目标，再运行。详见
 [红外实测说明](docs/ir_distance_measurement.md)。
+
+## YOLO转向对准抓放demo（单个网球）
+
+针对物品偏左/偏右的情况，底盘根据YOLO框中心每次小转最多5°，重新识别后再修正。
+连续三帧居中且红外连续三次满足原始20mm阈值后抓取。只调整角度，物品需处于转正后的可抓距离。
+抓夹侧ID2固定1073；底盘侧ID1在600和1190间动作。放置仍为启动朝向右侧90°，对准转角由实际yaw反馈补偿。
+
+```bash
+bash scripts/run_yolo_align_demo_ubuntu.sh --observe
+bash scripts/run_yolo_align_demo_ubuntu.sh --execute
+```
+
+仅预览运行脚本不带参数。详见[新demo说明](docs/yolo_align_pick_place_demo.md)。
