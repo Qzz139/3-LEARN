@@ -1,0 +1,147 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:20:51.446860+00:00",
+      "stage": "before",
+      "distal_raw": 1075,
+      "base_raw": 1048
+    },
+    {
+      "time_utc": "1970-01-01T01:20:51.448047+00:00",
+      "stage": "base_step_1_request",
+      "servo_id": 1,
+      "target_raw": 1081,
+      "target_degrees": 10,
+      "expected_dds_raw": 1081,
+      "encoded_target_wire": 1900
+    },
+    {
+      "time_utc": "1970-01-01T01:20:52.074364+00:00",
+      "stage": "base_step_1_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:20:52.575947+00:00",
+      "stage": "base_step_1_complete",
+      "actual_raw": 1076
+    },
+    {
+      "time_utc": "1970-01-01T01:20:54.078953+00:00",
+      "stage": "base_step_2_request",
+      "servo_id": 1,
+      "target_raw": 1109,
+      "target_degrees": 15,
+      "expected_dds_raw": 1109,
+      "encoded_target_wire": 1950
+    },
+    {
+      "time_utc": "1970-01-01T01:20:54.694392+00:00",
+      "stage": "base_step_2_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:20:55.196331+00:00",
+      "stage": "base_step_2_complete",
+      "actual_raw": 1105
+    },
+    {
+      "time_utc": "1970-01-01T01:20:56.699381+00:00",
+      "stage": "base_step_3_request",
+      "servo_id": 1,
+      "target_raw": 1138,
+      "target_degrees": 20,
+      "expected_dds_raw": 1138,
+      "encoded_target_wire": 2000
+    },
+    {
+      "time_utc": "1970-01-01T01:20:57.637332+00:00",
+      "stage": "base_step_3_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:20:58.138955+00:00",
+      "stage": "base_step_3_complete",
+      "actual_raw": 1133
+    },
+    {
+      "time_utc": "1970-01-01T01:20:59.642127+00:00",
+      "stage": "base_step_4_request",
+      "servo_id": 1,
+      "target_raw": 1166,
+      "target_degrees": 25,
+      "expected_dds_raw": 1166,
+      "encoded_target_wire": 2050
+    },
+    {
+      "time_utc": "1970-01-01T01:21:00.313949+00:00",
+      "stage": "base_step_4_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:21:01.066032+00:00",
+      "stage": "base_step_4_complete",
+      "actual_raw": 1161
+    },
+    {
+      "time_utc": "1970-01-01T01:21:02.569222+00:00",
+      "stage": "base_step_5_request",
+      "servo_id": 1,
+      "target_raw": 1195,
+      "target_degrees": 30,
+      "expected_dds_raw": 1195,
+      "encoded_target_wire": 2100
+    },
+    {
+      "time_utc": "1970-01-01T01:21:03.559417+00:00",
+      "stage": "base_step_5_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:21:04.412277+00:00",
+      "stage": "base_step_5_complete",
+      "actual_raw": 1190
+    },
+    {
+      "time_utc": "1970-01-01T01:21:05.914929+00:00",
+      "stage": "base_step_6_request",
+      "servo_id": 1,
+      "target_raw": 1223,
+      "target_degrees": 35,
+      "expected_dds_raw": 1223,
+      "encoded_target_wire": 2150
+    },
+    {
+      "time_utc": "1970-01-01T01:21:10.916767+00:00",
+      "stage": "base_step_6_action_failed",
+      "state": "action_exception",
+      "failure_reason": "None",
+      "actual_raw": 1167,
+      "waited_to_completion": false
+    },
+    {
+      "time_utc": "1970-01-01T01:21:10.975117+00:00",
+      "stage": "error",
+      "error": "RuntimeError: base_step_6: servo action failed (state=action_exception, reason=None, completed=False). If EP is configured as a robotic arm in the App, direct servo control is unavailable; configure independent servos for this demo.",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "base_target_raw": [
+    1081,
+    1109,
+    1138,
+    1166,
+    1195,
+    1223
+  ],
+  "distal_hold_raw": 1073,
+  "provisional_swapped_mapping": false,
+  "distal_servo_id": 2,
+  "base_servo_id": 1,
+  "error": "RuntimeError: base_step_6: servo action failed (state=action_exception, reason=None, completed=False). If EP is configured as a robotic arm in the App, direct servo control is unavailable; configure independent servos for this demo."
+}

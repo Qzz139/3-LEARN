@@ -155,10 +155,13 @@ def yolo_worker(frame_queue, stop_event, model_name, confidence, image_size, log
         from ultralytics import YOLO
         model = YOLO(model_name)
         emit("model_ready", model=model_name)
-        while not stop_event.is_set():
+        # Finish one buffered frame even if the arm cycle ended during cold load.
+        while True:
             try:
                 frame = frame_queue.get(timeout=0.5)
             except queue.Empty:
+                if stop_event.is_set():
+                    break
                 continue
             if frame is None:
                 break
@@ -177,6 +180,8 @@ def yolo_worker(frame_queue, stop_event, model_name, confidence, image_size, log
                         "xyxy": [round(float(v), 1) for v in box.xyxy[0].tolist()],
                     })
             emit("detections", count=len(detections), detections=detections)
+            if stop_event.is_set():
+                break
     except BaseException as exc:
         emit("vision_error", error="{}: {}".format(type(exc).__name__, exc))
 
@@ -264,8 +269,11 @@ class VisionSidecar:
             except (queue.Full, EOFError, BrokenPipeError):
                 pass
         if self.process and self.process.pid is not None:
-            self.process.join(timeout=3.0)
+            # Motion has already finished/stopped; allow cold inference to log
+            # its buffered frame without delaying any grasp state transition.
+            self.process.join(timeout=30.0)
             if self.process.is_alive():
+                self.record("vision_shutdown_timeout", affects_control=False)
                 self.process.terminate()
                 self.process.join(timeout=2.0)
         if self.manager is not None:
@@ -514,6 +522,7 @@ def main():
     try:
         if not bot.initialize(conn_type=cfg["connection"]["conn_type"], proto_type="udp"):
             raise RuntimeError("SDK initialization failed")
+        bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
         feedback = Feedback()
         servo_subscribed = bool(bot.servo.sub_servo_info(freq=20, callback=feedback.on_servo))
         distance_subscribed = bool(bot.sensor.sub_distance(freq=20, callback=feedback.on_distance))

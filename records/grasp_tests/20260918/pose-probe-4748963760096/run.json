@@ -1,0 +1,149 @@
+{
+  "events": [
+    {
+      "time_utc": "1970-01-01T01:19:32.210353+00:00",
+      "stage": "before",
+      "distal_raw": 1075,
+      "base_raw": 876
+    },
+    {
+      "time_utc": "1970-01-01T01:19:32.211160+00:00",
+      "stage": "base_step_1_request",
+      "servo_id": 1,
+      "target_raw": 910,
+      "target_degrees": -20,
+      "expected_dds_raw": 910,
+      "encoded_target_wire": 1600
+    },
+    {
+      "time_utc": "1970-01-01T01:19:32.909761+00:00",
+      "stage": "base_step_1_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:33.411168+00:00",
+      "stage": "base_step_1_complete",
+      "actual_raw": 905
+    },
+    {
+      "time_utc": "1970-01-01T01:19:34.913689+00:00",
+      "stage": "base_step_2_request",
+      "servo_id": 1,
+      "target_raw": 939,
+      "target_degrees": -15,
+      "expected_dds_raw": 939,
+      "encoded_target_wire": 1650
+    },
+    {
+      "time_utc": "1970-01-01T01:19:35.630401+00:00",
+      "stage": "base_step_2_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:36.131984+00:00",
+      "stage": "base_step_2_complete",
+      "actual_raw": 934
+    },
+    {
+      "time_utc": "1970-01-01T01:19:37.634654+00:00",
+      "stage": "base_step_3_request",
+      "servo_id": 1,
+      "target_raw": 967,
+      "target_degrees": -10,
+      "expected_dds_raw": 967,
+      "encoded_target_wire": 1700
+    },
+    {
+      "time_utc": "1970-01-01T01:19:38.309758+00:00",
+      "stage": "base_step_3_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:38.861439+00:00",
+      "stage": "base_step_3_complete",
+      "actual_raw": 962
+    },
+    {
+      "time_utc": "1970-01-01T01:19:40.364536+00:00",
+      "stage": "base_step_4_request",
+      "servo_id": 1,
+      "target_raw": 996,
+      "target_degrees": -5,
+      "expected_dds_raw": 996,
+      "encoded_target_wire": 1750
+    },
+    {
+      "time_utc": "1970-01-01T01:19:41.030041+00:00",
+      "stage": "base_step_4_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:41.532036+00:00",
+      "stage": "base_step_4_complete",
+      "actual_raw": 991
+    },
+    {
+      "time_utc": "1970-01-01T01:19:43.034820+00:00",
+      "stage": "base_step_5_request",
+      "servo_id": 1,
+      "target_raw": 1024,
+      "target_degrees": 0,
+      "expected_dds_raw": 1024,
+      "encoded_target_wire": 1800
+    },
+    {
+      "time_utc": "1970-01-01T01:19:43.713370+00:00",
+      "stage": "base_step_5_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:44.214999+00:00",
+      "stage": "base_step_5_complete",
+      "actual_raw": 1019
+    },
+    {
+      "time_utc": "1970-01-01T01:19:45.718247+00:00",
+      "stage": "base_step_6_request",
+      "servo_id": 1,
+      "target_raw": 1052,
+      "target_degrees": 5,
+      "expected_dds_raw": 1052,
+      "encoded_target_wire": 1850
+    },
+    {
+      "time_utc": "1970-01-01T01:19:46.350474+00:00",
+      "stage": "base_step_6_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T01:19:46.902291+00:00",
+      "stage": "base_step_6_complete",
+      "actual_raw": 1048
+    },
+    {
+      "time_utc": "1970-01-01T01:19:50.407420+00:00",
+      "stage": "after",
+      "distal_raw": 1075,
+      "base_raw": 1048
+    }
+  ],
+  "completed": true,
+  "base_target_raw": [
+    910,
+    939,
+    967,
+    996,
+    1024,
+    1052
+  ],
+  "distal_hold_raw": 1073,
+  "provisional_swapped_mapping": false,
+  "distal_servo_id": 2,
+  "base_servo_id": 1
+}

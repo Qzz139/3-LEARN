@@ -2,6 +2,10 @@ import importlib.util
 import builtins
 import io
 import json
+import queue
+import tempfile
+import threading
+import types
 from pathlib import Path
 import unittest
 from unittest.mock import patch
@@ -22,7 +26,7 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual((cfg["arm"]["distal_servo_id"], cfg["arm"]["distal_feedback_slot"]), (2, 1))
         self.assertEqual((cfg["arm"]["base_servo_id"], cfg["arm"]["base_feedback_slot"]), (1, 0))
         self.assertEqual(cfg["arm"]["base_extended_raw"], 600)
-        self.assertEqual(cfg["arm"]["base_retracted_raw"], 711)
+        self.assertEqual(cfg["arm"]["base_retracted_raw"], 1190)
         self.assertFalse(cfg["arm"]["calibration_verified"])
         self.assertEqual(MODULE.raw_to_sdk_degrees(601), -74)
         self.assertEqual(MODULE.sdk_degrees_to_raw(-74), 603)
@@ -257,6 +261,36 @@ class TestSequence(unittest.TestCase):
             ("turn_to_start", 90.0),
             ("finish", "extended_open"),
         ])
+
+
+class TestVisionShutdown(unittest.TestCase):
+    def test_pending_frame_is_logged_when_cycle_finishes_during_model_load(self):
+        frames, stopped, calls = queue.Queue(), threading.Event(), []
+        frames.put(object())
+        stopped.set()
+        class Model:
+            def predict(self, frame, **kwargs):
+                calls.append(frame)
+                return []
+        fake = types.SimpleNamespace(YOLO=lambda name: Model())
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'detections.jsonl'
+            with patch.dict('sys.modules', {'ultralytics': fake}), patch('sys.stdout', new_callable=io.StringIO):
+                MODULE.yolo_worker(frames, stopped, 'test.pt', .25, 640, str(path))
+            events = [json.loads(line) for line in path.read_text().splitlines()]
+        self.assertEqual(len(calls), 1)
+        self.assertEqual([event['stage'] for event in events], ['model_ready', 'detections'])
+
+    def test_stopped_worker_without_frames_exits_without_inference(self):
+        frames, stopped = queue.Queue(), threading.Event()
+        stopped.set()
+        fake = types.SimpleNamespace(YOLO=lambda name: None)
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'detections.jsonl'
+            with patch.dict('sys.modules', {'ultralytics': fake}), patch('sys.stdout', new_callable=io.StringIO):
+                MODULE.yolo_worker(frames, stopped, 'test.pt', .25, 640, str(path))
+            events = [json.loads(line) for line in path.read_text().splitlines()]
+        self.assertEqual([event['stage'] for event in events], ['model_ready'])
 
 
 if __name__ == "__main__":
