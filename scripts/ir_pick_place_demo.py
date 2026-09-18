@@ -61,8 +61,8 @@ def validate_config(cfg):
     ir = cfg["infrared"]
     if ir["feedback_slot"] not in range(4):
         raise ValueError("infrared.feedback_slot must be in [0, 3]")
-    if ir["threshold_mm"] != 30:
-        raise ValueError("this demo requires an infrared threshold of exactly 30 mm")
+    if isinstance(ir["threshold_mm"], bool) or not isinstance(ir["threshold_mm"], int) or not 1 <= ir["threshold_mm"] <= 10000:
+        raise ValueError("infrared.threshold_mm must be an integer in [1, 10000]")
     if not 2 <= ir["consecutive_samples"] <= 20:
         raise ValueError("infrared.consecutive_samples must be in [2, 20]")
     if not -180 <= cfg["chassis"]["place_turn_degrees"] < 0:
@@ -376,7 +376,7 @@ class Demo:
                 self.record("grasp_distance_confirmed", distance_mm=distance,
                             consecutive_samples=sequence)
                 return
-        raise RuntimeError("no object stayed within 30 mm before timeout")
+        raise RuntimeError("no object stayed within {} mm before timeout".format(threshold))
 
     def turn(self, degrees, stage):
         self.assert_distal()
@@ -451,7 +451,8 @@ def main():
         cfg["vision"]["enabled"] = False
     if not args.execute:
         print(json.dumps(cfg, ensure_ascii=False, indent=2))
-        print("预览：锁定抓夹侧 raw 601 → 外伸/松爪 → 红外≤30 mm → 夹紧 → 内收 → 右转90° → 外伸/松爪 → 内收 → 左转90° → 外伸/松爪")
+        print("预览：锁定抓夹侧 raw {} → 外伸/松爪 → 红外≤{} mm（连续{}次） → 夹紧 → 内收 → 右转90° → 外伸/松爪 → 内收 → 左转90° → 外伸/松爪".format(
+            cfg["arm"]["distal_hold_raw"], cfg["infrared"]["threshold_mm"], cfg["infrared"]["consecutive_samples"]))
         print("未连接机器人；实机运行需添加 --execute。")
         return 0
 

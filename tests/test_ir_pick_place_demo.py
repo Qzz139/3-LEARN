@@ -17,7 +17,7 @@ SPEC.loader.exec_module(MODULE)
 class TestConfiguration(unittest.TestCase):
     def test_default_configuration_and_raw_conversion(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
-        self.assertEqual(cfg["infrared"]["threshold_mm"], 30)
+        self.assertEqual(cfg["infrared"]["threshold_mm"], 20)
         self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
         self.assertEqual(cfg["arm"]["base_extended_raw"], 1073)
         self.assertFalse(cfg["arm"]["calibration_verified"])
@@ -30,9 +30,9 @@ class TestConfiguration(unittest.TestCase):
         self.assertAlmostEqual(564 * 180 / 1024, 99.1, delta=0.1)
         self.assertEqual(MODULE.raw_to_sdk_degrees(564), -81)
 
-    def test_rejects_wrong_ir_threshold(self):
+    def test_rejects_invalid_ir_threshold(self):
         cfg = json.loads((ROOT / "config" / "ir_pick_place.json").read_text())
-        cfg["infrared"]["threshold_mm"] = 31
+        cfg["infrared"]["threshold_mm"] = 0
         with self.assertRaises(ValueError):
             MODULE.validate_config(cfg)
 
@@ -123,6 +123,38 @@ class TestServoGuard(unittest.TestCase):
 
 
 class TestInfraredSamples(unittest.TestCase):
+    def test_three_fresh_20mm_samples_trigger_but_21mm_does_not(self):
+        for distance, should_trigger in [(20, True), (21, False)]:
+            with self.subTest(distance=distance):
+                cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+                cfg["infrared"]["wait_timeout_s"] = 0.5
+                clock = [10.0]
+                feedback = type("Feedback", (), {
+                    "distance": [distance, 0, 0, 0], "distance_time": 10.0,
+                })()
+
+                class Condition:
+                    def __enter__(self):
+                        return self
+
+                    def __exit__(self, *args):
+                        pass
+
+                    def wait(self, timeout):
+                        clock[0] += timeout
+                        feedback.distance_time = clock[0]
+
+                feedback.condition = Condition()
+                events = []
+                demo = MODULE.Demo(None, cfg, feedback, lambda stage, **kw: events.append(stage))
+                with patch.object(MODULE.time, "monotonic", side_effect=lambda: clock[0]):
+                    if should_trigger:
+                        demo.wait_for_object()
+                    else:
+                        with self.assertRaises(RuntimeError):
+                            demo.wait_for_object()
+                self.assertEqual("grasp_distance_confirmed" in events, should_trigger)
+
     def test_one_sample_cannot_be_counted_three_times(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
         cfg["infrared"]["wait_timeout_s"] = 0.5
@@ -167,7 +199,7 @@ class TestSequence(unittest.TestCase):
                 self.events.append((prefix, "extended_open"))
 
             def wait_for_object(self):
-                self.events.append(("infrared", 30))
+                self.events.append(("infrared", 20))
 
             def gripper(self, opened, stage):
                 self.events.append((stage, "open" if opened else "closed"))
@@ -186,7 +218,7 @@ class TestSequence(unittest.TestCase):
         self.assertEqual(demo.events, [
             ("distal_lock", 601),
             ("start", "extended_open"),
-            ("infrared", 30),
+            ("infrared", 20),
             ("grasp_close", "closed"),
             ("carry_retract", 552),
             ("turn_to_place", -90.0),

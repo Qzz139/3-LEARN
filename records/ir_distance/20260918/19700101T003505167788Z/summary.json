@@ -1,0 +1,53 @@
+{
+  "label": "current-unmeasured",
+  "reference_mm": null,
+  "motion_commands_sent": false,
+  "error": null,
+  "configured_slot": 0,
+  "slots": [
+    {
+      "samples": 99,
+      "valid_samples": 99,
+      "invalid_samples": 0,
+      "min_mm": 137,
+      "median_mm": 158,
+      "max_mm": 166,
+      "stdev_mm": 8.67,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    },
+    {
+      "samples": 99,
+      "valid_samples": 0,
+      "invalid_samples": 99,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    },
+    {
+      "samples": 99,
+      "valid_samples": 0,
+      "invalid_samples": 99,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    },
+    {
+      "samples": 99,
+      "valid_samples": 0,
+      "invalid_samples": 99,
+      "min_mm": null,
+      "median_mm": null,
+      "max_mm": null,
+      "stdev_mm": null,
+      "within_30mm_samples": 0,
+      "longest_within_30mm_streak": 0
+    }
+  ]
+}

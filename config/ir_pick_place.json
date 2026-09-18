@@ -20,7 +20,7 @@
   },
   "infrared": {
     "feedback_slot": 0,
-    "threshold_mm": 30,
+    "threshold_mm": 20,
     "consecutive_samples": 3,
     "wait_timeout_s": 120.0,
     "freshness_timeout_s": 1.0
