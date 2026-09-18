@@ -18,7 +18,9 @@ class TestConfiguration(unittest.TestCase):
     def test_default_configuration_and_raw_conversion(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
         self.assertEqual(cfg["infrared"]["threshold_mm"], 20)
-        self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
+        self.assertEqual(cfg["arm"]["distal_hold_raw"], 1073)
+        self.assertEqual((cfg["arm"]["distal_servo_id"], cfg["arm"]["distal_feedback_slot"]), (2, 1))
+        self.assertEqual((cfg["arm"]["base_servo_id"], cfg["arm"]["base_feedback_slot"]), (1, 0))
         self.assertIsNone(cfg["arm"]["base_extended_raw"])
         self.assertIsNone(cfg["arm"]["base_retracted_raw"])
         self.assertFalse(cfg["arm"]["calibration_verified"])
@@ -119,7 +121,7 @@ class TestServoGuard(unittest.TestCase):
             demo.lock_initial_distal()
         self.assertFalse(demo.distal_locked)
         self.assertEqual(events[-1][0], "lock_distal_action_failed")
-        self.assertEqual(events[-1][1]["actual_raw"], 601)
+        self.assertEqual(events[-1][1]["actual_raw"], 1073)
 
     def test_distal_is_commanded_once_then_only_base_moves(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
@@ -140,7 +142,7 @@ class TestServoGuard(unittest.TestCase):
         demo = MODULE.Demo(bot, cfg, FakeFeedback(cfg), lambda *args, **kwargs: None)
         demo.distal_locked = True
         with self.assertRaises(RuntimeError):
-            demo.move_servo(1, 0, 601, "forbidden")
+            demo.move_servo(2, 1, 1073, "forbidden")
         self.assertEqual(bot.servo.commands, [])
 
 
@@ -216,7 +218,7 @@ class TestSequence(unittest.TestCase):
                 self.events = []
 
             def lock_initial_distal(self):
-                self.events.append(("distal_lock", 601))
+                self.events.append(("distal_lock", 1073))
 
             def initial_state(self, prefix):
                 self.events.append((prefix, "extended_open"))
@@ -239,7 +241,7 @@ class TestSequence(unittest.TestCase):
         demo = SequenceDemo()
         demo.run()
         self.assertEqual(demo.events, [
-            ("distal_lock", 601),
+            ("distal_lock", 1073),
             ("start", "extended_open"),
             ("infrared", 20),
             ("grasp_close", "closed"),
