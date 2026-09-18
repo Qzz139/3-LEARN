@@ -35,7 +35,7 @@ def sdk_degrees_to_wire(degrees):
     return int((int(degrees) + 180) * 10)
 
 
-def validate_config(cfg):
+def validate_config(cfg, allow_left_turn=False):
     required = ("connection", "arm", "infrared", "gripper", "chassis", "vision")
     if any(key not in cfg for key in required):
         raise ValueError("configuration is missing a required section")
@@ -67,7 +67,10 @@ def validate_config(cfg):
         raise ValueError("infrared.threshold_mm must be an integer in [1, 10000]")
     if not 2 <= ir["consecutive_samples"] <= 20:
         raise ValueError("infrared.consecutive_samples must be in [2, 20]")
-    if not -180 <= cfg["chassis"]["place_turn_degrees"] < 0:
+    turn = cfg["chassis"]["place_turn_degrees"]
+    if allow_left_turn and (not -180 <= turn <= 180 or turn == 0):
+        raise ValueError("place_turn_degrees must be nonzero and within [-180, 180]")
+    if not allow_left_turn and not -180 <= turn < 0:
         raise ValueError("place_turn_degrees must be negative for a right turn")
     return cfg
 

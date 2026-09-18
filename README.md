@@ -82,18 +82,37 @@
 此程序只记录距离反馈，不发送动作；先按尺量距离摆好目标，再运行。详见
 [红外实测说明](docs/ir_distance_measurement.md)。
 
-## YOLO转向与距离调整抓放demo（单个网球）
+## YOLO转向与距离调整抓放demo（单个网球或瓶子）
 
 针对物品偏左/偏右的情况，底盘根据YOLO框中心每次小转最多5°，重新识别后再修正。
 连续三帧居中后，红外高于阈值则以4cm/s约1cm一步接近，停车重新识别；默认最多前进20cm。
 红外连续三次满足原始20mm阈值后抓取，此阈值不是实际2cm。无效反馈或目标丢失时停止亮红灯。
 抓夹侧ID2固定1073；底盘侧ID1在600和1190间动作。抓取内收后按里程记录退回起始中心，
-再朝启动方向右侧90°放置，实际yaw反馈补偿对准转角。使用持续后台取帧与540p图传。
-从可抓位置开始的完整抓放已获实机确认；接近后倒车返回中心的整轮流程仍待验证。
+再朝启动方向右侧90°放球；`--target bottle`只跟踪瓶子，并改为左侧90°放置。
+实际yaw反馈补偿对准转角。使用普通`yolo26m.pt`、持续后台取帧与540p图传。
+网球和瓶子均已实机完成对准、接近、抓取、倒车回位、分类方向放置和恢复初态，并获现场确认。
 
 ```bash
 bash scripts/run_yolo_align_demo_ubuntu.sh --observe
 bash scripts/run_yolo_align_demo_ubuntu.sh --execute
+bash scripts/run_yolo_align_demo_ubuntu.sh --target bottle --observe
+bash scripts/run_yolo_align_demo_ubuntu.sh --target bottle --execute
 ```
 
 仅预览运行脚本不带参数。详见[新demo说明](docs/yolo_align_pick_place_demo.md)。
+
+## 六物品正式分拣
+
+复用demo2，按配置方向搜索球和瓶；抓取后退回启动中心，球放右区、瓶放左区，每区三个角度固定放置位。
+放置后松爪内收，直接转到下一搜索角度后再外伸；左右扫描同样先内收转向再外伸，整轮结束先内收回正再恢复初态。
+抓取与六个放置角度暂定在`config/object_sorting.json`，首次多物品实测尚未完成整轮，修正后的转向流程待复测。
+
+```bash
+bash scripts/run_sorting_ubuntu.sh
+bash scripts/run_sorting_ubuntu.sh --observe --observe-frames 3
+bash scripts/run_sorting_ubuntu.sh --execute
+```
+
+详见[分拣流程与角度配置](docs/object_sorting.md)。
+
+当前用户指定的稳定版标签：`stable-2026-09-18`。参数与验证范围见[稳定版基线](docs/stable_version.md)。

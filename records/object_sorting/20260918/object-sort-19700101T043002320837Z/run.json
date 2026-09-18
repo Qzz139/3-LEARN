@@ -1,0 +1,6090 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.4,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 2.0,
+      "stall_timeout_s": 1.0,
+      "settle_seconds": 0.4,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.03,
+      "stop_timeout_s": 2.0,
+      "stop_wheel_rpm": 8,
+      "stop_encoder_counts": 16,
+      "stop_stable_seconds": 0.3
+    },
+    "alignment": {
+      "target_class_ids": [
+        32,
+        39
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.04,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 3,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 15.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    },
+    "sorting": {
+      "pick_headings_degrees": [
+        0,
+        36,
+        -36,
+        144,
+        -144,
+        180
+      ],
+      "sector_scan_offsets_degrees": [
+        0,
+        15,
+        -15
+      ],
+      "placement_headings_degrees": {
+        "ball": [
+          -90,
+          -72,
+          -108
+        ],
+        "bottle": [
+          90,
+          72,
+          108
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T04:30:02.840528+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:25.948162+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T04:30:30.850349+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:31.986313+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T04:30:31.988289+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T04:30:32.021595+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:32.524929+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1078
+    },
+    {
+      "time_utc": "1970-01-01T04:30:32.527415+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T04:30:32.529090+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T04:30:32.562322+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:33.065250+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T04:30:33.067306+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.101302+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.178418+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -1,
+        -7,
+        5
+      ],
+      "encoder_counts": [
+        14920,
+        19077,
+        14974,
+        2395
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.281811+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        2,
+        2
+      ],
+      "encoder_counts": [
+        14921,
+        19079,
+        14974,
+        2394
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.386182+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        7,
+        0,
+        0
+      ],
+      "encoder_counts": [
+        14920,
+        19080,
+        14974,
+        2395
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.489010+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        3,
+        -5,
+        -2
+      ],
+      "encoder_counts": [
+        14920,
+        19078,
+        14975,
+        2395
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3237320959997305
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.491716+00:00",
+      "stage": "sorting_started",
+      "start_yaw": -3.26,
+      "start_position": [
+        4e-05,
+        -0.0
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:30:34.493583+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T04:30:35.421085+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:36.274301+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1182
+    },
+    {
+      "time_utc": "1970-01-01T04:30:36.276002+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": -0.12999999999999545,
+      "target": 0.0
+    },
+    {
+      "time_utc": "1970-01-01T04:30:36.277313+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T04:30:36.321280+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:37.626010+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.048198+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 4,
+      "age_s": 0.376
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.049901+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9577692747116089,
+        "xyxy": [
+          403.8602294921875,
+          310.1122741699219,
+          520.8031005859375,
+          429.5638427734375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.375955232000706
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.215894+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 3,
+      "age_s": 0.113
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.217694+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9553401470184326,
+        "xyxy": [
+          403.81951904296875,
+          310.2421569824219,
+          520.9697265625,
+          429.33392333984375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.018338934580485022,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.06999999999999318
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.218897+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.477370+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 3,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.479460+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9533678889274597,
+        "xyxy": [
+          403.9337158203125,
+          310.3167724609375,
+          520.9844970703125,
+          429.30230712890625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.018271764119466127,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.06999999999999318
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.480818+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.712387+00:00",
+      "stage": "vision_frame",
+      "frame": 4,
+      "count": 3,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.715043+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9558383226394653,
+        "xyxy": [
+          404.10333251953125,
+          310.4627685546875,
+          520.7099609375,
+          429.2425231933594
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.01832640965779625,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.06999999999999318
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.716746+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.842176+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 91,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:38.844350+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.00145,
+        0.00196
+      ],
+      "heading_offset": -0.06999999999999318,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:30:39.348005+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:39.776088+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        1,
+        -1,
+        2
+      ],
+      "encoder_counts": [
+        17513,
+        16689,
+        12546,
+        5076
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:39.903735+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        3,
+        -3,
+        -1,
+        1
+      ],
+      "encoder_counts": [
+        17568,
+        16628,
+        12492,
+        5134
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.007201+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -1,
+        -4,
+        -3
+      ],
+      "encoder_counts": [
+        17637,
+        16543,
+        12420,
+        5202
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.136120+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -2,
+        -2,
+        -3
+      ],
+      "encoder_counts": [
+        17601,
+        16590,
+        12461,
+        5168
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.264144+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        -2,
+        -3,
+        -1
+      ],
+      "encoder_counts": [
+        17615,
+        16570,
+        12443,
+        5183
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.392927+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        0,
+        -1,
+        -1
+      ],
+      "encoder_counts": [
+        17609,
+        16576,
+        12451,
+        5177
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.497071+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        5,
+        -2,
+        -2
+      ],
+      "encoder_counts": [
+        17617,
+        16567,
+        12442,
+        5185
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.550716+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        3,
+        -2,
+        0
+      ],
+      "encoder_counts": [
+        17616,
+        16569,
+        12444,
+        5183
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3006495680001535
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.554295+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.02598,
+        -0.00198
+      ],
+      "actual_distance_m": 0.024844405808954254
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.557166+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.00145,
+        0.00196
+      ],
+      "end_position": [
+        0.02598,
+        -0.00198
+      ],
+      "forward_axis": [
+        0.9938970468902111,
+        -0.11031165025924321
+      ],
+      "peak_distance_m": 0.018311755786925513
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.797664+00:00",
+      "stage": "vision_frame",
+      "frame": 5,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.800142+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9534203410148621,
+        "xyxy": [
+          402.3871765136719,
+          330.3923034667969,
+          528.100341796875,
+          448.6572265625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.015371084213256836,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.2400000000000091
+    },
+    {
+      "time_utc": "1970-01-01T04:30:40.802062+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.031072+00:00",
+      "stage": "vision_frame",
+      "frame": 6,
+      "count": 3,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.033465+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9586583971977234,
+        "xyxy": [
+          402.0360107421875,
+          330.01416015625,
+          528.1074829101562,
+          448.5742492675781
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.015550263722737656,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.22999999999998977
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.035618+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.263840+00:00",
+      "stage": "vision_frame",
+      "frame": 7,
+      "count": 3,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.266402+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9604636430740356,
+        "xyxy": [
+          402.28826904296875,
+          330.2250061035156,
+          528.080078125,
+          448.5455322265625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.015433152516682924,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.2400000000000091
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.268310+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.382581+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 62,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.385173+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.02668,
+        -0.00164
+      ],
+      "heading_offset": 0.2400000000000091,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:30:41.862092+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.341030+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -4,
+        -3,
+        4
+      ],
+      "encoder_counts": [
+        20433,
+        13815,
+        9483,
+        7832
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.496011+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -6,
+        4,
+        -1,
+        -1
+      ],
+      "encoder_counts": [
+        20501,
+        13755,
+        9440,
+        7886
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.649767+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -5,
+        1,
+        -3,
+        -4
+      ],
+      "encoder_counts": [
+        20495,
+        13757,
+        9441,
+        7882
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.755074+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        1,
+        -2,
+        5
+      ],
+      "encoder_counts": [
+        20483,
+        13770,
+        9451,
+        7872
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.885034+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        3,
+        -3,
+        -2
+      ],
+      "encoder_counts": [
+        20490,
+        13763,
+        9446,
+        7878
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.989425+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        6,
+        -3,
+        -2
+      ],
+      "encoder_counts": [
+        20487,
+        13767,
+        9449,
+        7875
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3227758399989398
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.993866+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.04833,
+        -0.0028
+      ],
+      "actual_distance_m": 0.021681053941171768
+    },
+    {
+      "time_utc": "1970-01-01T04:30:42.997257+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.02668,
+        -0.00164
+      ],
+      "end_position": [
+        0.04833,
+        -0.0028
+      ],
+      "forward_axis": [
+        0.9991526902858597,
+        -0.0411570345691809
+      ],
+      "peak_distance_m": 0.011419676002409175
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.230627+00:00",
+      "stage": "vision_frame",
+      "frame": 8,
+      "count": 3,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.233871+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9324946403503418,
+        "xyxy": [
+          392.57122802734375,
+          357.6220397949219,
+          532.9263305664062,
+          449.4512939453125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.017970021565755223,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.030000000000001137
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.236252+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.459961+00:00",
+      "stage": "vision_frame",
+      "frame": 9,
+      "count": 3,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.462875+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9389209747314453,
+        "xyxy": [
+          392.51373291015625,
+          357.5089111328125,
+          532.9923095703125,
+          449.4668884277344
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.01796560287475585,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.030000000000001137
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.466314+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.694806+00:00",
+      "stage": "vision_frame",
+      "frame": 10,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.698141+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9361398816108704,
+        "xyxy": [
+          392.5740051269531,
+          357.54644775390625,
+          532.85302734375,
+          449.365478515625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.0180067539215088,
+      "correction_degrees": 0.0,
+      "heading_offset": 0.030000000000001137
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.700788+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.822042+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 26,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:43.825668+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.0511,
+        -0.00293
+      ],
+      "heading_offset": 0.030000000000001137,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:30:44.241694+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:44.671107+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        2,
+        2,
+        3
+      ],
+      "encoder_counts": [
+        23369,
+        11021,
+        6657,
+        10537
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:44.827299+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -6,
+        -1,
+        0
+      ],
+      "encoder_counts": [
+        23342,
+        11049,
+        6659,
+        10508
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:44.981866+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        1,
+        0,
+        -4
+      ],
+      "encoder_counts": [
+        23365,
+        11030,
+        6650,
+        10530
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.087082+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        0,
+        -1,
+        -7
+      ],
+      "encoder_counts": [
+        23356,
+        11037,
+        6655,
+        10521
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.193236+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.12,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        2,
+        -4,
+        -1
+      ],
+      "encoder_counts": [
+        23365,
+        11026,
+        6647,
+        10531
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.323718+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        1,
+        -2,
+        -2
+      ],
+      "encoder_counts": [
+        23360,
+        11031,
+        6650,
+        10527
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.428537+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -3,
+        3,
+        -6
+      ],
+      "encoder_counts": [
+        23360,
+        11032,
+        6652,
+        10526
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.482397+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -7,
+        2,
+        4
+      ],
+      "encoder_counts": [
+        23359,
+        11031,
+        6651,
+        10526
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.30029756799922325
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.487150+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.0742,
+        -0.0042
+      ],
+      "actual_distance_m": 0.023134884914345268
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.491788+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.0511,
+        -0.00293
+      ],
+      "end_position": [
+        0.0742,
+        -0.0042
+      ],
+      "forward_axis": [
+        0.9963586901958397,
+        -0.08526054463367383
+      ],
+      "peak_distance_m": 0.010086728904853152
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.719926+00:00",
+      "stage": "vision_frame",
+      "frame": 11,
+      "count": 2,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.724118+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9492496252059937,
+        "xyxy": [
+          397.76031494140625,
+          364.7893981933594,
+          541.9873657226562,
+          449.6243591308594
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.010548082987467455,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0800000000000125
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.727158+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.952628+00:00",
+      "stage": "vision_frame",
+      "frame": 12,
+      "count": 2,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.956782+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9495655298233032,
+        "xyxy": [
+          397.7503662109375,
+          364.7059326171875,
+          542.1436767578125,
+          449.5205383300781
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.010471852620442701,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0800000000000125
+    },
+    {
+      "time_utc": "1970-01-01T04:30:45.959753+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.192161+00:00",
+      "stage": "vision_frame",
+      "frame": 13,
+      "count": 2,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.196233+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9523455500602722,
+        "xyxy": [
+          397.5802001953125,
+          364.8330078125,
+          542.1091918945312,
+          449.5115966796875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.010578441619873036,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0800000000000125
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.199504+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.362743+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 17,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.369043+00:00",
+      "stage": "alignment_and_distance_ready",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9523455500602722,
+        "xyxy": [
+          397.5802001953125,
+          364.8330078125,
+          542.1091918945312,
+          449.5115966796875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "heading_offset": -0.0800000000000125
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.374393+00:00",
+      "stage": "sorting_grasp",
+      "class_id": 32,
+      "slot": 1,
+      "place_heading": -90
+    },
+    {
+      "time_utc": "1970-01-01T04:30:46.380469+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T04:30:47.418097+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:47.421970+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T04:30:48.341928+00:00",
+      "stage": "carry_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:30:49.249156+00:00",
+      "stage": "carry_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T04:30:49.254967+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": -0.09000000000000341,
+      "target": 0.030000000000001137
+    },
+    {
+      "time_utc": "1970-01-01T04:30:49.259219+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.028649575370362078,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.07985,
+        -0.00298
+      ],
+      "heading_offset": -0.09000000000000341,
+      "return_target": [
+        0.0511,
+        -0.00293
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:30:50.183510+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:50.637777+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        8,
+        0,
+        0,
+        3
+      ],
+      "encoder_counts": [
+        20806,
+        14168,
+        9501,
+        7913
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:50.744649+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        6,
+        -3,
+        -1
+      ],
+      "encoder_counts": [
+        20764,
+        14222,
+        9535,
+        7878
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:50.823772+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -1,
+        -1,
+        -3
+      ],
+      "encoder_counts": [
+        20768,
+        14215,
+        9525,
+        7877
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:50.954614+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -2,
+        1,
+        -7
+      ],
+      "encoder_counts": [
+        20768,
+        14215,
+        9526,
+        7879
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:30:51.061613+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        3,
+        1,
+        2,
+        1
+      ],
+      "encoder_counts": [
+        20770,
+        14211,
+        9523,
+        7878
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:30:51.218078+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        4,
+        1,
+        1
+      ],
+      "encoder_counts": [
+        20768,
+        14214,
+        9524,
+        7878
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3174327680007991
+    },
+    {
+      "time_utc": "1970-01-01T04:30:51.223891+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.05138,
+        -0.00147
+      ],
+      "actual_distance_m": 0.028510015783931097
+    },
+    {
+      "time_utc": "1970-01-01T04:30:51.227508+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 0.4000000000000057,
+      "target": 0.2400000000000091
+    },
+    {
+      "time_utc": "1970-01-01T04:30:51.233431+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.024672074754183978,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.05138,
+        -0.00147
+      ],
+      "heading_offset": 0.4000000000000057,
+      "return_target": [
+        0.02668,
+        -0.00164
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:30:52.143018+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:52.573494+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        1,
+        -1,
+        0
+      ],
+      "encoder_counts": [
+        18244,
+        17169,
+        12413,
+        5218
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:52.730636+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -5,
+        -5,
+        1,
+        2
+      ],
+      "encoder_counts": [
+        18256,
+        17153,
+        12397,
+        5229
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:52.837888+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        1,
+        -2,
+        2
+      ],
+      "encoder_counts": [
+        18244,
+        17164,
+        12406,
+        5220
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:52.995058+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        2,
+        3,
+        -5
+      ],
+      "encoder_counts": [
+        18251,
+        17157,
+        12401,
+        5227
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.103045+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        3,
+        1,
+        1
+      ],
+      "encoder_counts": [
+        18243,
+        17167,
+        12410,
+        5219
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.207702+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        1,
+        -1,
+        -2
+      ],
+      "encoder_counts": [
+        18249,
+        17160,
+        12402,
+        5225
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.365533+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -2,
+        -3,
+        2
+      ],
+      "encoder_counts": [
+        18247,
+        17161,
+        12404,
+        5223
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.422730+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        0,
+        -2
+      ],
+      "encoder_counts": [
+        18250,
+        17159,
+        12401,
+        5225
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.31865257600111363
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.427107+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.02465,
+        0.00143
+      ],
+      "actual_distance_m": 0.02688685366494191
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.433240+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 0.6800000000000068,
+      "target": -0.06999999999999318
+    },
+    {
+      "time_utc": "1970-01-01T04:30:53.439130+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.023116876662490293,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.02465,
+        0.00143
+      ],
+      "heading_offset": 0.6800000000000068,
+      "return_target": [
+        0.00145,
+        0.00196
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:30:54.283369+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:30:54.738574+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        1,
+        0,
+        3
+      ],
+      "encoder_counts": [
+        15625,
+        19939,
+        14967,
+        2363
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:54.845707+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        -2,
+        -6,
+        2
+      ],
+      "encoder_counts": [
+        15597,
+        19964,
+        14985,
+        2344
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:54.952646+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -2,
+        -3,
+        -3
+      ],
+      "encoder_counts": [
+        15628,
+        19935,
+        14962,
+        2368
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.085817+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -3,
+        -1,
+        -2
+      ],
+      "encoder_counts": [
+        15611,
+        19950,
+        14973,
+        2354
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.217936+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -3,
+        -3,
+        1
+      ],
+      "encoder_counts": [
+        15617,
+        19945,
+        14969,
+        2359
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.326475+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.01,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -1,
+        -4,
+        -5
+      ],
+      "encoder_counts": [
+        15617,
+        19946,
+        14969,
+        2359
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3197734719997243
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.333928+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        -0.00095,
+        0.00231
+      ],
+      "actual_distance_m": 0.025615120534559267
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.340830+00:00",
+      "stage": "startup_center_reached",
+      "position": [
+        -0.00095,
+        0.00231
+      ],
+      "error_m": 0.0025132051249350897
+    },
+    {
+      "time_utc": "1970-01-01T04:30:55.347874+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T04:30:56.945196+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T04:30:57.754593+00:00",
+      "stage": "turn_to_place_request",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T04:30:59.343089+00:00",
+      "stage": "turn_to_place_complete",
+      "degrees": -45
+    },
+    {
+      "time_utc": "1970-01-01T04:31:00.151559+00:00",
+      "stage": "turn_to_place_heading_reached",
+      "offset": -88.48000000000002,
+      "target": -90
+    },
+    {
+      "time_utc": "1970-01-01T04:31:00.159528+00:00",
+      "stage": "place_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T04:31:00.205293+00:00",
+      "stage": "place_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:01.463240+00:00",
+      "stage": "place_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T04:31:01.467979+00:00",
+      "stage": "place_release_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T04:31:02.504237+00:00",
+      "stage": "place_release_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:02.509973+00:00",
+      "stage": "after_place_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T04:31:03.462819+00:00",
+      "stage": "after_place_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.321419+00:00",
+      "stage": "after_place_retract_complete",
+      "actual_raw": 1182
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.402876+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -5,
+        -4,
+        0,
+        5
+      ],
+      "encoder_counts": [
+        15349,
+        19579,
+        14910,
+        2028
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.509019+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -3,
+        -1,
+        -1
+      ],
+      "encoder_counts": [
+        15345,
+        19582,
+        14912,
+        2023
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.667781+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        3,
+        -2,
+        1,
+        -4
+      ],
+      "encoder_counts": [
+        15348,
+        19580,
+        14911,
+        2025
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.723059+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -8,
+        -3,
+        0,
+        2
+      ],
+      "encoder_counts": [
+        15347,
+        19581,
+        14911,
+        2025
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.31839235199913674
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.729078+00:00",
+      "stage": "sorting_item_placed",
+      "class_id": 32,
+      "slot": 1,
+      "counts": {
+        "32": 1,
+        "39": 0
+      },
+      "center_error_m": 0.008653698631221219
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.735152+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T04:31:04.782506+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:05.287899+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T04:31:05.295978+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T04:31:06.822546+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T04:31:07.629640+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T04:31:09.162725+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": 45
+    },
+    {
+      "time_utc": "1970-01-01T04:31:09.971463+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": 35.28
+    },
+    {
+      "time_utc": "1970-01-01T04:31:11.182688+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": 35.28
+    },
+    {
+      "time_utc": "1970-01-01T04:31:11.991610+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": 36.0,
+      "target": 36.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:11.998301+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T04:31:12.042486+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.450181+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.623891+00:00",
+      "stage": "vision_frame",
+      "frame": 14,
+      "count": 4,
+      "age_s": 0.14
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.630939+00:00",
+      "stage": "sector_observed",
+      "heading": 36,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.936914324760437,
+        "xyxy": [
+          245.17047119140625,
+          85.87639617919922,
+          360.15924072265625,
+          370.96539306640625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.13998022400119225
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.775177+00:00",
+      "stage": "vision_frame",
+      "frame": 15,
+      "count": 4,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.780181+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9424634575843811,
+        "xyxy": [
+          245.6609344482422,
+          86.05084228515625,
+          359.1854553222656,
+          370.02532958984375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.18497583866119383,
+      "correction_degrees": 5.0,
+      "heading_offset": 35.870000000000005
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.784849+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:13.962816+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:14.770836+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.579999999999984
+    },
+    {
+      "time_utc": "1970-01-01T04:31:14.913916+00:00",
+      "stage": "vision_frame",
+      "frame": 16,
+      "count": 4,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T04:31:14.919458+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.8411069512367249,
+        "xyxy": [
+          300.2744140625,
+          83.46339416503906,
+          411.0859375,
+          383.1927490234375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.12949981689453127,
+      "correction_degrees": 5.0,
+      "heading_offset": 40.44999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:14.924717+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:15.103602+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:15.909815+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.320000000000022
+    },
+    {
+      "time_utc": "1970-01-01T04:31:16.048911+00:00",
+      "stage": "vision_frame",
+      "frame": 17,
+      "count": 4,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T04:31:16.054252+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9301506280899048,
+        "xyxy": [
+          351.8840026855469,
+          81.96260833740234,
+          457.3475341796875,
+          383.1514892578125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.07852524121602378,
+      "correction_degrees": 5.0,
+      "heading_offset": 44.73000000000002
+    },
+    {
+      "time_utc": "1970-01-01T04:31:16.059615+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:16.244929+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.052195+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.22999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.181212+00:00",
+      "stage": "vision_frame",
+      "frame": 18,
+      "count": 4,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.187208+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9403707981109619,
+        "xyxy": [
+          404.99676513671875,
+          79.7572021484375,
+          505.6828308105469,
+          390.233642578125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.025687710444132483,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.94999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.192332+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.441798+00:00",
+      "stage": "vision_frame",
+      "frame": 19,
+      "count": 4,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.448273+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9075765013694763,
+        "xyxy": [
+          401.6549377441406,
+          79.67564392089844,
+          506.1837158203125,
+          391.0388488769531
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027167367935180653,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.96000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.453082+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.712669+00:00",
+      "stage": "vision_frame",
+      "frame": 20,
+      "count": 4,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.718676+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9337347745895386,
+        "xyxy": [
+          403.3831787109375,
+          79.90258026123047,
+          505.62408447265625,
+          390.828857421875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.026558717091878237,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.96000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.723852+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.885843+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 138,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:17.893267+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.02634,
+        -0.03508
+      ],
+      "heading_offset": 48.96000000000001,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:18.362820+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:18.795079+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        2,
+        3
+      ],
+      "encoder_counts": [
+        10906,
+        29934,
+        23482,
+        27054
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:18.954410+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        -2,
+        -3,
+        4
+      ],
+      "encoder_counts": [
+        11066,
+        29787,
+        23348,
+        27212
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.087757+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -1,
+        0,
+        -4
+      ],
+      "encoder_counts": [
+        11042,
+        29810,
+        23373,
+        27192
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.168742+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -3,
+        -2,
+        1
+      ],
+      "encoder_counts": [
+        11023,
+        29826,
+        23382,
+        27169
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.277836+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        2,
+        0,
+        -6
+      ],
+      "encoder_counts": [
+        11050,
+        29799,
+        23362,
+        27199
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.436153+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        3,
+        2,
+        0
+      ],
+      "encoder_counts": [
+        11035,
+        29815,
+        23374,
+        27183
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.545262+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -3,
+        6,
+        1
+      ],
+      "encoder_counts": [
+        11044,
+        29806,
+        23367,
+        27193
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.655668+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        4,
+        2,
+        1
+      ],
+      "encoder_counts": [
+        11035,
+        29812,
+        23372,
+        27185
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.686355+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        0,
+        -1,
+        0
+      ],
+      "encoder_counts": [
+        11040,
+        29808,
+        23368,
+        27189
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.32037404800030345
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.692032+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.03981,
+        -0.05466
+      ],
+      "actual_distance_m": 0.023765885213894306
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.697180+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.02634,
+        -0.03508
+      ],
+      "end_position": [
+        0.03981,
+        -0.05466
+      ],
+      "forward_axis": [
+        0.5481372282247368,
+        -0.8363884139764867
+      ],
+      "peak_distance_m": 0.01304417877829034
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.935137+00:00",
+      "stage": "vision_frame",
+      "frame": 21,
+      "count": 4,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.941013+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9453886151313782,
+        "xyxy": [
+          402.0325012207031,
+          77.91636657714844,
+          514.9057006835938,
+          414.2962646484375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.022428019841512048,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.31
+    },
+    {
+      "time_utc": "1970-01-01T04:31:19.947456+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.174784+00:00",
+      "stage": "vision_frame",
+      "frame": 22,
+      "count": 4,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.181097+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9435036778450012,
+        "xyxy": [
+          402.63726806640625,
+          77.82815551757812,
+          514.935302734375,
+          414.30084228515625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02209761937459309,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.31
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.186829+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.438304+00:00",
+      "stage": "vision_frame",
+      "frame": 23,
+      "count": 4,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.445576+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9444422721862793,
+        "xyxy": [
+          402.93145751953125,
+          77.79517364501953,
+          515.2913818359375,
+          414.33856201171875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02175893783569338,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.31
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.450799+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.582896+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 117,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:20.591432+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.04001,
+        -0.05502
+      ],
+      "heading_offset": 49.31,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:21.084493+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:21.541939+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -10,
+        14,
+        5,
+        -14
+      ],
+      "encoder_counts": [
+        11748,
+        29723,
+        23610,
+        28306
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:21.654047+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -11,
+        8,
+        2,
+        -8
+      ],
+      "encoder_counts": [
+        11429,
+        29984,
+        23864,
+        27945
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:21.764964+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -3,
+        -5,
+        0
+      ],
+      "encoder_counts": [
+        11255,
+        30020,
+        23905,
+        27780
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:21.925479+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.03,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        3,
+        -3,
+        1
+      ],
+      "encoder_counts": [
+        11172,
+        29931,
+        23657,
+        27564
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.087076+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -5,
+        -1,
+        1,
+        -2
+      ],
+      "encoder_counts": [
+        10996,
+        29873,
+        23374,
+        27147
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.172467+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        3,
+        -2,
+        -1,
+        5
+      ],
+      "encoder_counts": [
+        10997,
+        29869,
+        23365,
+        27130
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.281332+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -6,
+        1,
+        -2
+      ],
+      "encoder_counts": [
+        11012,
+        29858,
+        23356,
+        27146
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.414481+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -1,
+        2,
+        -1
+      ],
+      "encoder_counts": [
+        11011,
+        29862,
+        23360,
+        27143
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.521426+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -6,
+        4,
+        -1,
+        -4
+      ],
+      "encoder_counts": [
+        11010,
+        29860,
+        23359,
+        27143
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.579849+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        3,
+        2,
+        -4
+      ],
+      "encoder_counts": [
+        11007,
+        29861,
+        23361,
+        27141
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.34049702400079696
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.588058+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.03452,
+        -0.05209
+      ],
+      "actual_distance_m": 0.006222941426688827
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.599054+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.04001,
+        -0.05502
+      ],
+      "end_position": [
+        0.03452,
+        -0.05209
+      ],
+      "forward_axis": [
+        0.5912993346086991,
+        -0.806452166524035
+      ],
+      "peak_distance_m": 0.013478790746947597
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.832156+00:00",
+      "stage": "vision_frame",
+      "frame": 24,
+      "count": 4,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.838762+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9442080855369568,
+        "xyxy": [
+          402.13287353515625,
+          77.94486999511719,
+          514.6212768554688,
+          413.9698791503906
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.022523880004882812,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.94999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:22.845171+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.072753+00:00",
+      "stage": "vision_frame",
+      "frame": 25,
+      "count": 4,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.079683+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9383881092071533,
+        "xyxy": [
+          402.49530029296875,
+          77.83831787109375,
+          514.9349365234375,
+          414.05987548828125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02217175165812174,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.94999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.086144+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.349772+00:00",
+      "stage": "vision_frame",
+      "frame": 26,
+      "count": 4,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.356848+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9357609748840332,
+        "xyxy": [
+          402.7002868652344,
+          77.93051147460938,
+          514.5408935546875,
+          414.0428466796875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.022270218531290686,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.96000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.362405+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.523840+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 114,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:23.532187+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.03605,
+        -0.05398
+      ],
+      "heading_offset": 48.94999999999999,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.023309+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.481112+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -8,
+        11,
+        11,
+        -2
+      ],
+      "encoder_counts": [
+        11765,
+        29514,
+        23365,
+        28260
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.568055+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -9,
+        -4,
+        7,
+        -6
+      ],
+      "encoder_counts": [
+        11437,
+        29827,
+        23699,
+        27968
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.704113+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -6,
+        -2,
+        -1,
+        0
+      ],
+      "encoder_counts": [
+        11202,
+        29937,
+        23781,
+        27717
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.788820+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.04,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        1,
+        -7,
+        -3
+      ],
+      "encoder_counts": [
+        11041,
+        29953,
+        23652,
+        27431
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:24.950304+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        0,
+        1,
+        1
+      ],
+      "encoder_counts": [
+        10941,
+        29909,
+        23530,
+        27220
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.060244+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -1,
+        -2,
+        -1
+      ],
+      "encoder_counts": [
+        11012,
+        29829,
+        23449,
+        27287
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.171738+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        -1,
+        -3,
+        -1
+      ],
+      "encoder_counts": [
+        10990,
+        29851,
+        23471,
+        27267
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.309421+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        7,
+        0,
+        1,
+        2
+      ],
+      "encoder_counts": [
+        11001,
+        29840,
+        23459,
+        27276
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.471229+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -2,
+        -3,
+        1
+      ],
+      "encoder_counts": [
+        10991,
+        29850,
+        23469,
+        27268
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.583397+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.07,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -3,
+        5,
+        -4
+      ],
+      "encoder_counts": [
+        10996,
+        29845,
+        23465,
+        27272
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3028485120012192
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.591616+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.03597,
+        -0.05051
+      ],
+      "actual_distance_m": 0.0034709220676932525
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.602450+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.03605,
+        -0.05398
+      ],
+      "end_position": [
+        0.03597,
+        -0.05051
+      ],
+      "forward_axis": [
+        0.6714940463413525,
+        -0.741009949817219
+      ],
+      "peak_distance_m": 0.01352208563794802
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.828808+00:00",
+      "stage": "vision_frame",
+      "frame": 27,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.835948+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9511332511901855,
+        "xyxy": [
+          402.848388671875,
+          77.27735137939453,
+          515.1087646484375,
+          413.21649169921875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.021897315979003906,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.06999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:25.843073+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.092033+00:00",
+      "stage": "vision_frame",
+      "frame": 28,
+      "count": 2,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.100317+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9418331980705261,
+        "xyxy": [
+          402.1375732421875,
+          77.37258911132812,
+          514.8731689453125,
+          413.78997802734375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02239023844401039,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.06999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.107394+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.358538+00:00",
+      "stage": "vision_frame",
+      "frame": 29,
+      "count": 2,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.366229+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9407873153686523,
+        "xyxy": [
+          402.7086181640625,
+          77.54959106445312,
+          515.3767700195312,
+          413.9006652832031
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.021830526987711596,
+      "correction_degrees": 0.0,
+      "heading_offset": 49.06999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.373174+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.483068+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 114,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.493311+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.03772,
+        -0.05205
+      ],
+      "heading_offset": 49.06999999999999,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:26.966685+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:27.400372+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        -2,
+        4,
+        -4
+      ],
+      "encoder_counts": [
+        13756,
+        27077,
+        20658,
+        29883
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:27.511762+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -6,
+        -7,
+        2
+      ],
+      "encoder_counts": [
+        13735,
+        27095,
+        20663,
+        29849
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:27.646799+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -1,
+        -2,
+        1
+      ],
+      "encoder_counts": [
+        13829,
+        27005,
+        20598,
+        29956
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:27.808455+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        5,
+        -2,
+        -2,
+        2
+      ],
+      "encoder_counts": [
+        13787,
+        27043,
+        20634,
+        29913
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:27.946168+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        -1,
+        0,
+        -1
+      ],
+      "encoder_counts": [
+        13797,
+        27035,
+        20626,
+        29925
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.059377+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        1,
+        -1,
+        -1
+      ],
+      "encoder_counts": [
+        13804,
+        27027,
+        20620,
+        29931
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.170551+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        -7,
+        3,
+        0
+      ],
+      "encoder_counts": [
+        13796,
+        27033,
+        20625,
+        29925
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.34052800000063144
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.184201+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.05374,
+        -0.07378
+      ],
+      "actual_distance_m": 0.02699691278646505
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.192520+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.03772,
+        -0.05205
+      ],
+      "end_position": [
+        0.05374,
+        -0.07378
+      ],
+      "forward_axis": [
+        0.5622206109958122,
+        -0.8269872940810491
+      ],
+      "peak_distance_m": 0.01223718921975141
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.427777+00:00",
+      "stage": "vision_frame",
+      "frame": 30,
+      "count": 4,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.435797+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9509896039962769,
+        "xyxy": [
+          394.5257568359375,
+          76.28549194335938,
+          517.5506591796875,
+          446.0289001464844
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.024960199991861998,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.99000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.442972+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.694266+00:00",
+      "stage": "vision_frame",
+      "frame": 31,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.702008+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9605947732925415,
+        "xyxy": [
+          395.8556213378906,
+          76.53140258789062,
+          516.3728637695312,
+          445.4957275390625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.024880997339884414,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.99000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.710401+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.955986+00:00",
+      "stage": "vision_frame",
+      "frame": 32,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.964993+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9610426425933838,
+        "xyxy": [
+          394.9197998046875,
+          76.61322784423828,
+          517.0218505859375,
+          445.4583740234375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.025030390421549475,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.99000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:28.971989+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:29.143132+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 83,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:29.151305+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.05465,
+        -0.07485
+      ],
+      "heading_offset": 48.99000000000001,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:29.605297+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.065048+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -8,
+        3,
+        1,
+        -3
+      ],
+      "encoder_counts": [
+        16572,
+        24299,
+        17747,
+        32665
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.154736+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -7,
+        2,
+        -1
+      ],
+      "encoder_counts": [
+        16439,
+        24394,
+        17816,
+        32561
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.268737+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -4,
+        -1,
+        2
+      ],
+      "encoder_counts": [
+        16596,
+        24264,
+        17693,
+        32669
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.381926+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -3,
+        -1,
+        4
+      ],
+      "encoder_counts": [
+        16567,
+        24291,
+        17723,
+        32653
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.542973+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        -1,
+        1
+      ],
+      "encoder_counts": [
+        16566,
+        24293,
+        17721,
+        32648
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.653602+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        4,
+        0,
+        -3
+      ],
+      "encoder_counts": [
+        16559,
+        24300,
+        17730,
+        32644
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.743229+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        -3,
+        -4,
+        18
+      ],
+      "encoder_counts": [
+        16556,
+        24301,
+        17729,
+        32642
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:30.854244+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -6,
+        3,
+        -1
+      ],
+      "encoder_counts": [
+        16563,
+        24296,
+        17727,
+        32646
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.015179+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        6,
+        -4,
+        1,
+        3
+      ],
+      "encoder_counts": [
+        16559,
+        24299,
+        17728,
+        32643
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.179468+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -4,
+        0,
+        2
+      ],
+      "encoder_counts": [
+        16564,
+        24295,
+        17724,
+        32647
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.341590+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.02,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -4,
+        -3,
+        3
+      ],
+      "encoder_counts": [
+        16555,
+        24303,
+        17733,
+        32641
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3248824640013481
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.349822+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.06947,
+        -0.09635
+      ],
+      "actual_distance_m": 0.02611287804896275
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.357755+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.05465,
+        -0.07485
+      ],
+      "end_position": [
+        0.06947,
+        -0.09635
+      ],
+      "forward_axis": [
+        0.5861448225386949,
+        -0.8102062990443123
+      ],
+      "peak_distance_m": 0.011157652082763658
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.587815+00:00",
+      "stage": "vision_frame",
+      "frame": 33,
+      "count": 4,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.597452+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9370080828666687,
+        "xyxy": [
+          386.1087341308594,
+          74.0797119140625,
+          521.894287109375,
+          449.24139404296875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027081759770711256,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.69
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.605801+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.858825+00:00",
+      "stage": "vision_frame",
+      "frame": 34,
+      "count": 4,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.868141+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9329667091369629,
+        "xyxy": [
+          385.66302490234375,
+          74.3562240600586,
+          520.772216796875,
+          449.48236083984375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027898311614990234,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.68000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:31.875574+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.125581+00:00",
+      "stage": "vision_frame",
+      "frame": 35,
+      "count": 4,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.134033+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9310640692710876,
+        "xyxy": [
+          385.57342529296875,
+          74.31449890136719,
+          522.0924682617188,
+          449.67657470703125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027257347106933616,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.69
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.141517+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.303282+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 47,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.315057+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.07015,
+        -0.09665
+      ],
+      "heading_offset": 48.68000000000001,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:32.782949+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.267162+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -7,
+        10,
+        14,
+        -3
+      ],
+      "encoder_counts": [
+        17319,
+        23764,
+        17391,
+        781
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.382248+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -6,
+        7,
+        3,
+        -5
+      ],
+      "encoder_counts": [
+        16922,
+        24300,
+        17989,
+        484
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.469287+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -7,
+        0,
+        -3,
+        -12
+      ],
+      "encoder_counts": [
+        16529,
+        24557,
+        18228,
+        64
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.610204+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        3,
+        -1,
+        2,
+        4
+      ],
+      "encoder_counts": [
+        16297,
+        24669,
+        18249,
+        32553
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.724899+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -4,
+        -9,
+        0
+      ],
+      "encoder_counts": [
+        16496,
+        24463,
+        17983,
+        32685
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.840215+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -5,
+        -1,
+        -4
+      ],
+      "encoder_counts": [
+        16577,
+        24298,
+        17700,
+        32662
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:33.949864+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        2,
+        -2,
+        -1
+      ],
+      "encoder_counts": [
+        16592,
+        24296,
+        17702,
+        32670
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.063166+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        2,
+        1,
+        -1
+      ],
+      "encoder_counts": [
+        16581,
+        24308,
+        17712,
+        32662
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.176632+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        -2,
+        2,
+        -3
+      ],
+      "encoder_counts": [
+        16580,
+        24309,
+        17715,
+        32662
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.290663+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -5,
+        5,
+        -2
+      ],
+      "encoder_counts": [
+        16575,
+        24310,
+        17715,
+        32658
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.405313+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        4,
+        4,
+        -8
+      ],
+      "encoder_counts": [
+        16580,
+        24307,
+        17712,
+        32662
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.439098+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.06,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        5,
+        -1,
+        5
+      ],
+      "encoder_counts": [
+        16579,
+        24308,
+        17714,
+        32660
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3201458879993879
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.448212+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.07014,
+        -0.09323
+      ],
+      "actual_distance_m": 0.0034200146198517987
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.456613+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.07015,
+        -0.09665
+      ],
+      "end_position": [
+        0.07014,
+        -0.09323
+      ],
+      "forward_axis": [
+        0.6540102225157118,
+        -0.7564857096105312
+      ],
+      "peak_distance_m": 0.012002870490011964
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.712967+00:00",
+      "stage": "vision_frame",
+      "frame": 36,
+      "count": 2,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.722218+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9578145742416382,
+        "xyxy": [
+          385.67144775390625,
+          74.29019165039062,
+          523.254150390625,
+          449.3057556152344
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02660125096638999,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.50999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.731605+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.977456+00:00",
+      "stage": "vision_frame",
+      "frame": 37,
+      "count": 2,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.987708+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9599355459213257,
+        "xyxy": [
+          385.97698974609375,
+          73.94197082519531,
+          522.1796875,
+          449.54296875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027001730600992813,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.50999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:34.996906+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.247061+00:00",
+      "stage": "vision_frame",
+      "frame": 38,
+      "count": 3,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.256438+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9569043517112732,
+        "xyxy": [
+          385.0057373046875,
+          73.57644653320312,
+          522.0797119140625,
+          449.479248046875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.027559661865234397,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.50999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.265230+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.423515+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 45,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.437715+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.07165,
+        -0.09439
+      ],
+      "heading_offset": 48.50999999999999,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:35.902946+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.337878+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -5,
+        5,
+        3,
+        -6
+      ],
+      "encoder_counts": [
+        19455,
+        21621,
+        14981,
+        2640
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.447945+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        2,
+        2,
+        1
+      ],
+      "encoder_counts": [
+        19231,
+        21832,
+        15168,
+        2407
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.586964+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        -1,
+        -9,
+        2
+      ],
+      "encoder_counts": [
+        19339,
+        21723,
+        15050,
+        2507
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.704273+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -2,
+        -2,
+        2
+      ],
+      "encoder_counts": [
+        19479,
+        21583,
+        14936,
+        2657
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.818941+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.04,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        2,
+        -6,
+        -5
+      ],
+      "encoder_counts": [
+        19410,
+        21655,
+        14997,
+        2581
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:36.932453+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        0,
+        -25,
+        5
+      ],
+      "encoder_counts": [
+        19434,
+        21629,
+        14972,
+        2606
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.070335+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        1,
+        -2,
+        5
+      ],
+      "encoder_counts": [
+        19433,
+        21632,
+        14977,
+        2606
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.185335+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -2,
+        1,
+        -4
+      ],
+      "encoder_counts": [
+        19431,
+        21631,
+        14975,
+        2604
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.353033+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        4,
+        -3,
+        0
+      ],
+      "encoder_counts": [
+        19435,
+        21628,
+        14972,
+        2609
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.389886+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        3,
+        -3,
+        -1
+      ],
+      "encoder_counts": [
+        19433,
+        21630,
+        14974,
+        2606
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3218654720003542
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.406260+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.08612,
+        -0.11456
+      ],
+      "actual_distance_m": 0.024823573473615752
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.419148+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.07165,
+        -0.09439
+      ],
+      "end_position": [
+        0.08612,
+        -0.11456
+      ],
+      "forward_axis": [
+        0.5313607436077117,
+        -0.8471456546265582
+      ],
+      "peak_distance_m": 0.011875171577707832
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.683744+00:00",
+      "stage": "vision_frame",
+      "frame": 39,
+      "count": 3,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.694398+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9377365112304688,
+        "xyxy": [
+          380.04107666015625,
+          71.0196533203125,
+          530.0860595703125,
+          450.16094970703125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.025975449879964196,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.53
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.703752+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.947776+00:00",
+      "stage": "vision_frame",
+      "frame": 40,
+      "count": 3,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.958209+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.950035810470581,
+        "xyxy": [
+          378.90716552734375,
+          71.12608337402344,
+          529.4068603515625,
+          450.1121520996094
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.026919778188069676,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.53
+    },
+    {
+      "time_utc": "1970-01-01T04:31:37.968213+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.213556+00:00",
+      "stage": "vision_frame",
+      "frame": 41,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.224590+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.7554020285606384,
+        "xyxy": [
+          379.7624206542969,
+          71.02702331542969,
+          529.826904296875,
+          450.1170654296875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.02625555992126466,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.53
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.233536+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.482997+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 21,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.496322+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        0.08677,
+        -0.11467
+      ],
+      "heading_offset": 48.53,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.590010+00:00",
+      "stage": "approach_threshold_seen",
+      "position": [
+        0.08677,
+        -0.11472
+      ],
+      "distance_mm": 20
+    },
+    {
+      "time_utc": "1970-01-01T04:31:38.622280+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.059152+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        -1,
+        0,
+        3
+      ],
+      "encoder_counts": [
+        19467,
+        21587,
+        14947,
+        2642
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.176400+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        2,
+        -4,
+        -2
+      ],
+      "encoder_counts": [
+        19474,
+        21579,
+        14939,
+        2650
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.341797+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        -4,
+        -1,
+        1
+      ],
+      "encoder_counts": [
+        19469,
+        21584,
+        14943,
+        2645
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.381044+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.03,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        1,
+        -3,
+        -7
+      ],
+      "encoder_counts": [
+        19472,
+        21582,
+        14941,
+        2648
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.31915507199846616
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.398015+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.08577,
+        -0.11371
+      ],
+      "actual_distance_m": 0.001386217876093069
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.411072+00:00",
+      "stage": "approach_path_recorded",
+      "start_position": [
+        0.08677,
+        -0.11467
+      ],
+      "end_position": [
+        0.08577,
+        -0.11371
+      ],
+      "forward_axis": null,
+      "peak_distance_m": 5.000000000000837e-05
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.646902+00:00",
+      "stage": "vision_frame",
+      "frame": 42,
+      "count": 3,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.658398+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9406749606132507,
+        "xyxy": [
+          379.68475341796875,
+          71.00711059570312,
+          530.0335083007812,
+          449.8713684082031
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.0261884053548177,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.46000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.671301+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.898790+00:00",
+      "stage": "vision_frame",
+      "frame": 43,
+      "count": 3,
+      "age_s": 0.097
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.909287+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9454438090324402,
+        "xyxy": [
+          379.071044921875,
+          71.01969909667969,
+          530.764404296875,
+          449.8851013183594
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.0261273701985677,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.46000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:39.918500+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.174148+00:00",
+      "stage": "vision_frame",
+      "frame": 44,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.185363+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9260846376419067,
+        "xyxy": [
+          380.46661376953125,
+          71.02317810058594,
+          529.7429809570312,
+          449.8028869628906
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.025932502746582042,
+      "correction_degrees": 0.0,
+      "heading_offset": 48.46000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.194441+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.563695+00:00",
+      "stage": "grasp_distance_confirmed",
+      "distance_mm": 20,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.579188+00:00",
+      "stage": "alignment_and_distance_ready",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.9260846376419067,
+        "xyxy": [
+          380.46661376953125,
+          71.02317810058594,
+          529.7429809570312,
+          449.8028869628906
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "heading_offset": 48.46000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.593831+00:00",
+      "stage": "sorting_grasp",
+      "class_id": 39,
+      "slot": 1,
+      "place_heading": 90
+    },
+    {
+      "time_utc": "1970-01-01T04:31:40.607073+00:00",
+      "stage": "grasp_close_request",
+      "opened": false,
+      "power": 30
+    },
+    {
+      "time_utc": "1970-01-01T04:31:41.664439+00:00",
+      "stage": "grasp_close_complete",
+      "opened": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:41.677124+00:00",
+      "stage": "carry_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T04:31:42.623487+00:00",
+      "stage": "carry_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T04:31:43.491322+00:00",
+      "stage": "carry_retract_complete",
+      "actual_raw": 1182
+    },
+    {
+      "time_utc": "1970-01-01T04:31:43.508428+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 48.420000000000016,
+      "target": 48.53
+    },
+    {
+      "time_utc": "1970-01-01T04:31:43.522723+00:00",
+      "stage": "return_short_segment_skipped",
+      "error_m": 0.0015741029191256898
+    },
+    {
+      "time_utc": "1970-01-01T04:31:43.537192+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 48.420000000000016,
+      "target": 48.50999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:43.548610+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.026398010163362084,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.08836,
+        -0.11507
+      ],
+      "heading_offset": 48.420000000000016,
+      "return_target": [
+        0.07165,
+        -0.09439
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:31:44.443433+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:44.879644+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        0,
+        -2,
+        -5
+      ],
+      "encoder_counts": [
+        16854,
+        24687,
+        17723,
+        32615
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.020434+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        41,
+        0,
+        4
+      ],
+      "encoder_counts": [
+        16878,
+        24665,
+        17703,
+        32631
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.132809+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -1,
+        2,
+        -11
+      ],
+      "encoder_counts": [
+        16857,
+        24685,
+        17722,
+        32617
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.249069+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        -5,
+        -2,
+        2
+      ],
+      "encoder_counts": [
+        16865,
+        24676,
+        17713,
+        32621
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.359749+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -1,
+        0,
+        3
+      ],
+      "encoder_counts": [
+        16861,
+        24680,
+        17717,
+        32620
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.526166+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        3,
+        4
+      ],
+      "encoder_counts": [
+        16862,
+        24678,
+        17715,
+        32621
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.32289200000013807
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.541495+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.07075,
+        -0.09379
+      ],
+      "actual_distance_m": 0.027621558609173383
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.560973+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 48.69999999999999,
+      "target": 48.68000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.575648+00:00",
+      "stage": "return_waypoint_already_reached",
+      "remaining_m": -0.001722288015787746,
+      "lateral_error_m": 0.0023349997838702052
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.587248+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 48.69999999999999,
+      "target": 48.99000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:45.597251+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.024829990928645143,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.07079,
+        -0.09382
+      ],
+      "heading_offset": 48.69999999999999,
+      "return_target": [
+        0.05465,
+        -0.07485
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:31:46.444417+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:46.930672+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        3,
+        1,
+        -4
+      ],
+      "encoder_counts": [
+        14242,
+        27644,
+        20585,
+        29861
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.042024+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        -2,
+        -4,
+        3
+      ],
+      "encoder_counts": [
+        14254,
+        27633,
+        20575,
+        29872
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.134340+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        1,
+        0,
+        -3
+      ],
+      "encoder_counts": [
+        14240,
+        27646,
+        20587,
+        29860
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.225092+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        5,
+        1,
+        0
+      ],
+      "encoder_counts": [
+        14252,
+        27635,
+        20578,
+        29871
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.31819267200080503
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.241138+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.0548,
+        -0.07299
+      ],
+      "actual_distance_m": 0.02625964584681218
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.259580+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 48.94,
+      "target": 49.06999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:47.273407+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.026881467148440693,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.05482,
+        -0.07293
+      ],
+      "heading_offset": 48.94,
+      "return_target": [
+        0.03772,
+        -0.05205
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:31:48.203013+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:48.690102+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        -1,
+        -3,
+        2
+      ],
+      "encoder_counts": [
+        11589,
+        30670,
+        23390,
+        27128
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:48.807440+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        7,
+        4,
+        0,
+        2
+      ],
+      "encoder_counts": [
+        11583,
+        30648,
+        23363,
+        27095
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:48.925724+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -1,
+        1,
+        -2
+      ],
+      "encoder_counts": [
+        11583,
+        30649,
+        23364,
+        27095
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.039134+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -2,
+        -2,
+        1
+      ],
+      "encoder_counts": [
+        11587,
+        30639,
+        23360,
+        27099
+      ],
+      "consecutive_samples": 4
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.132144+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        2,
+        3,
+        -4
+      ],
+      "encoder_counts": [
+        11585,
+        30638,
+        23359,
+        27098
+      ],
+      "consecutive_samples": 6
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.193316+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        5,
+        -1,
+        1,
+        1
+      ],
+      "encoder_counts": [
+        11583,
+        30642,
+        23362,
+        27095
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3210380159998749
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.209249+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.03744,
+        -0.05117
+      ],
+      "actual_distance_m": 0.027848913802875686
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.226724+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 49.08000000000001,
+      "target": 48.94999999999999
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.239279+00:00",
+      "stage": "return_waypoint_already_reached",
+      "remaining_m": -0.0011488612345719037,
+      "lateral_error_m": 0.002916902100465137
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.251290+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 49.08000000000001,
+      "target": 49.31
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.261175+00:00",
+      "stage": "return_waypoint_already_reached",
+      "remaining_m": -0.0046126689824960545,
+      "lateral_error_m": 0.0004060601653927639
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.271629+00:00",
+      "stage": "return_path_turn_heading_reached",
+      "offset": 49.08000000000001,
+      "target": 48.96000000000001
+    },
+    {
+      "time_utc": "1970-01-01T04:31:49.281288+00:00",
+      "stage": "return_path_step_request",
+      "distance_m": 0.01954299341743704,
+      "speed_mps": -0.03,
+      "start_position": [
+        0.03761,
+        -0.05106
+      ],
+      "heading_offset": 49.08000000000001,
+      "return_target": [
+        0.02634,
+        -0.03508
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.064300+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.503003+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        8,
+        1,
+        0,
+        2
+      ],
+      "encoder_counts": [
+        8952,
+        695,
+        26047,
+        24359
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.620975+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.02,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        0,
+        0,
+        -4
+      ],
+      "encoder_counts": [
+        8930,
+        712,
+        26073,
+        24343
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.737251+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        8,
+        -2,
+        3,
+        1
+      ],
+      "encoder_counts": [
+        8917,
+        721,
+        26075,
+        24331
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.830192+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -3,
+        -3,
+        0,
+        -7
+      ],
+      "encoder_counts": [
+        8936,
+        701,
+        26057,
+        24344
+      ],
+      "consecutive_samples": 2
+    },
+    {
+      "time_utc": "1970-01-01T04:31:50.943092+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.01,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        1,
+        -1,
+        3
+      ],
+      "encoder_counts": [
+        8921,
+        715,
+        26071,
+        24334
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.034982+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.02,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        -2,
+        -3,
+        -3
+      ],
+      "encoder_counts": [
+        8937,
+        700,
+        26057,
+        24345
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.152814+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -4,
+        -6,
+        2
+      ],
+      "encoder_counts": [
+        8924,
+        713,
+        26068,
+        24336
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.245294+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.0,
+        -0.01,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        3,
+        -2,
+        -1
+      ],
+      "encoder_counts": [
+        8931,
+        704,
+        26062,
+        24339
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3166344000001118
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.259763+00:00",
+      "stage": "return_path_step_complete",
+      "end_position": [
+        0.02066,
+        -0.02958
+      ],
+      "actual_distance_m": 0.027362253196694164
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.271402+00:00",
+      "stage": "return_center_failed",
+      "position": [
+        0.02066,
+        -0.02958
+      ],
+      "error_m": 0.036057742580477774
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.344484+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T04:31:51.364248+00:00",
+      "stage": "error",
+      "error": "RuntimeError: return center error exceeds configured tolerance",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: return center error exceeds configured tolerance"
+}

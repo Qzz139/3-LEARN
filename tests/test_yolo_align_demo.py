@@ -53,6 +53,21 @@ class TestAlignment(unittest.TestCase):
         self.assertGreater(M.correction_degrees(-.041, a), 0)
         self.assertLess(M.correction_degrees(.041, a), 0)
 
+    def test_bottle_mode_selects_and_tracks_bottle_without_grabbing_ball(self):
+        cfg = M.validate_alignment(M.select_target_mode(config(), 'bottle'))
+        a = cfg['alignment']
+        ball, bottle = box(640), box(760, 39)
+        self.assertEqual(a['target_class_ids'], [39])
+        self.assertEqual(cfg['chassis']['place_turn_degrees'], 90)
+        self.assertEqual(cfg['arm'], config()['arm'])
+        self.assertEqual(M.choose_target([ball, bottle], a), bottle)
+        self.assertIsNone(M.choose_target([ball], a, bottle))
+        next_bottle = box(720, 39)
+        self.assertEqual(M.choose_target([ball, next_bottle], a, bottle), next_bottle)
+        cfg = M.select_target_mode(cfg, 'ball')
+        self.assertEqual(cfg['alignment']['target_class_ids'], [32])
+        self.assertEqual(cfg['chassis']['place_turn_degrees'], -90)
+
     def test_target_selection_excludes_bottles_and_tracks_one_ball(self):
         a = config()['alignment']
         previous = box(320)

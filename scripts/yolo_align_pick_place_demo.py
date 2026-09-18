@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Align and approach one COCO sports ball, then use the proven IR pick/place."""
+"""Align and approach one COCO sports ball or bottle, then use IR pick/place."""
 import argparse
 from datetime import datetime, timezone
 import fcntl
@@ -16,6 +16,14 @@ import ir_pick_place_demo as base
 ROOT = base.ROOT
 
 
+def select_target_mode(cfg, target):
+    if target is not None:
+        class_id, place_angle = {'ball': (32, -90.0), 'bottle': (39, 90.0)}[target]
+        cfg['alignment']['target_class_ids'] = [class_id]
+        cfg['chassis']['place_turn_degrees'] = place_angle
+    return cfg
+
+
 # 将角度归一化到 [-180, 180)，便于计算跨越 ±180° 时的最短转角。
 def wrap_degrees(angle):
     return (angle + 180.0) % 360.0 - 180.0
@@ -28,7 +36,7 @@ def position_distance(first, second):
 
 # 先复用基础配置校验，再检查视觉对准、接近速度和停车判据的取值范围。
 def validate_alignment(cfg):
-    base.validate_config(cfg)
+    base.validate_config(cfg, allow_left_turn=True)
     a = cfg['alignment']
     if a['yaw_feedback_sign'] not in (-1, 1):
         raise ValueError('yaw_feedback_sign must be -1 or 1')
@@ -45,8 +53,9 @@ def validate_alignment(cfg):
     if not a['max_turn_degrees'] <= a['search_limit_degrees'] <= 180:
         raise ValueError('search limit must cover correction step and be at most 180 degrees')
     for key in ('stable_frames', 'lost_frames'):
-        if not isinstance(a[key], int) or not 2 <= a[key] <= 10:
-            raise ValueError(key + ' must be an integer in [2, 10]')
+        maximum = 100 if key == 'lost_frames' else 10
+        if not isinstance(a[key], int) or not 2 <= a[key] <= maximum:
+            raise ValueError(key + ' must be an integer in [2, {}]'.format(maximum))
     if cfg['vision']['model'] != 'yolo26m.pt' or not a['target_class_ids']:
         raise ValueError('this demo uses ordinary yolo26m.pt and configured COCO target classes')
     if cfg['vision']['stream_resolution'] not in ('360p', '540p', '720p'):
@@ -536,8 +545,8 @@ class AlignDemo(base.Demo):
         return 'wait'
 
     # 循环识别、搜索和对准；连续居中后检查距离，必要时小步接近。
-    def align_and_wait_for_grasp(self):
-        a, previous, stable, lost = self.cfg['alignment'], None, 0, 0
+    def align_and_wait_for_grasp(self, initial_target=None, search_center=0.0):
+        a, previous, stable, lost = self.cfg['alignment'], initial_target, 0, 0
         offsets = iter(search_offsets(a))
         deadline = time.monotonic() + a['timeout_s']
         while time.monotonic() < deadline:
@@ -564,7 +573,7 @@ class AlignDemo(base.Demo):
                 if offset is None:
                     raise RuntimeError('no target found within configured yaw search range')
                 self.record('search_target', offset=offset)
-                self.turn_to_offset(offset, 'search_turn')
+                self.turn_to_offset(wrap_degrees(search_center + offset), 'search_turn')
                 continue
             previous, lost = target, 0
             error = pixel_error(target, a['axis_x_ratio'])
@@ -573,7 +582,7 @@ class AlignDemo(base.Demo):
                         correction_degrees=turn, heading_offset=self.heading_offset())
             if turn:
                 stable = 0
-                if abs(self.heading_offset() + turn) > a['search_limit_degrees']:
+                if abs(wrap_degrees(self.heading_offset() + turn - search_center)) > a['search_limit_degrees']:
                     raise RuntimeError('target requires a turn beyond configured search range')
                 self.align_turn(turn)
                 continue
@@ -583,7 +592,7 @@ class AlignDemo(base.Demo):
                 distance_state = self.infrared_state()
                 if distance_state == 'ready':
                     self.record('alignment_and_distance_ready', target=target, heading_offset=self.heading_offset())
-                    return
+                    return target
                 if distance_state == 'far':
                     self.approach_step()
                     stable = 0  # 每次平移后重新累计居中帧数，所需帧数由 stable_frames 配置。
@@ -614,29 +623,38 @@ class AlignDemo(base.Demo):
 
 
 # 解析参数并管理机器人连接、反馈订阅、视觉采集、执行流程及资源清理。
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--config', type=Path, default=ROOT / 'config/yolo_align_pick_place.json')
+def main(demo_class=AlignDemo, default_config=None, validator=validate_alignment,
+         execution_check=None, preview=None):
+    parser = argparse.ArgumentParser(description=demo_class.__doc__ or __doc__)
+    parser.add_argument('--config', type=Path, default=default_config or ROOT / 'config/yolo_align_pick_place.json')
+    parser.add_argument('--target', choices=('ball', 'bottle'), help='ball: place right; bottle: place left; default uses config')
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--observe', action='store_true', help='camera and YOLO only; no motion or LED commands')
     parser.add_argument('--observe-frames', type=int, default=1, help='number of stationary read-only detections')
     args = parser.parse_args()
     try:
-        cfg = validate_alignment(json.loads(args.config.read_text(encoding='utf-8')))
+        cfg = validator(select_target_mode(json.loads(args.config.read_text(encoding='utf-8')), args.target))
         base.require_motion_targets(cfg)
         if args.execute and args.observe:
             raise ValueError('choose --execute or --observe')
         if not 1 <= args.observe_frames <= 100 or (args.observe_frames != 1 and not args.observe):
             raise ValueError('--observe-frames must be 1–100 and requires --observe')
+        if args.execute and execution_check:
+            execution_check(cfg)
     except (OSError, ValueError, KeyError) as exc:
         parser.error(str(exc))
     # 默认只输出配置和流程预览；显式指定执行或观察模式后才连接机器人。
     if not args.execute and not args.observe:
         print(json.dumps(cfg, ensure_ascii=False, indent=2))
-        print('预览：YOLO网球 → 小步转向对准 → 低速约{:g}mm一步接近 → 居中且红外≤20mm → 抓取内收 → 退回起始中心 → 启动朝向右侧90°放置 → 返回。'.format(cfg['approach']['step_m'] * 1000))
+        if preview:
+            print(preview)
+            return 0
+        target_name = '瓶子' if cfg['alignment']['target_class_ids'] == [39] else '网球'
+        print('预览：YOLO{} → 小步转向对准 → 低速约{:g}mm一步接近 → 居中且红外≤{:g}mm → 抓取内收 → 退回起始中心 → 启动偏角{:g}°放置 → 返回。'.format(target_name, cfg['approach']['step_m'] * 1000, cfg['infrared']['threshold_mm'], cfg['chassis']['place_turn_degrees']))
         return 0
     from robomaster import camera, config, led, robot
-    directory = ROOT / 'work' / ('yolo-align-' + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
+    prefix = 'yolo-align-' if demo_class is AlignDemo else 'object-sort-'
+    directory = ROOT / 'work' / (prefix + datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ'))
     directory.mkdir(parents=True)
     report = {'config': cfg, 'events': [], 'completed': False, 'observe_only': args.observe}
     log = base.EventLog(directory / 'run.json', report)
@@ -674,7 +692,7 @@ def main():
             feedback.position(cfg['approach']['position_freshness_s'])
             feedback.velocity_snapshot(cfg['approach']['position_freshness_s'])
             feedback.esc_snapshot(cfg['approach']['position_freshness_s'])
-            demo = AlignDemo(bot, cfg, feedback, log.write, None)
+            demo = demo_class(bot, cfg, feedback, log.write, None)
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
         log.write('vision_loading', motion_started=False)
         detector = Detector(cfg, directory, log.write)
