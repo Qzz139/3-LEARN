@@ -21,10 +21,14 @@ class TestConfiguration(unittest.TestCase):
         self.assertEqual(cfg["arm"]["distal_hold_raw"], 601)
         self.assertEqual(cfg["arm"]["base_extended_raw"], 1073)
         self.assertFalse(cfg["arm"]["calibration_verified"])
-        self.assertEqual(MODULE.raw_to_sdk_degrees(601), -120)
-        self.assertEqual(MODULE.sdk_degrees_to_raw(-120), 600)
-        self.assertEqual(MODULE.raw_to_sdk_degrees(1073), -73)
-        self.assertEqual(MODULE.sdk_degrees_to_raw(-73), 1070)
+        self.assertEqual(MODULE.raw_to_sdk_degrees(601), -74)
+        self.assertEqual(MODULE.sdk_degrees_to_raw(-74), 603)
+        self.assertEqual(MODULE.sdk_degrees_to_wire(-74), 1060)
+        self.assertEqual(MODULE.raw_to_sdk_degrees(1073), 9)
+        self.assertEqual(MODULE.sdk_degrees_to_raw(9), 1075)
+        # Real EP read: DDS 564 paired with get_angle() 99.1 degrees.
+        self.assertAlmostEqual(564 * 180 / 1024, 99.1, delta=0.1)
+        self.assertEqual(MODULE.raw_to_sdk_degrees(564), -81)
 
     def test_rejects_wrong_ir_threshold(self):
         cfg = json.loads((ROOT / "config" / "ir_pick_place.json").read_text())
@@ -77,6 +81,25 @@ class FakeFeedback:
 
 
 class TestServoGuard(unittest.TestCase):
+    def test_failed_action_is_reported_even_if_feedback_matches_target(self):
+        cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
+        action = FakeAction()
+        action.has_succeeded = False
+        action.state = "action_failed"
+        action.failure_reason = None
+        servo = FakeServo()
+        servo.moveto = lambda **kwargs: action
+        bot = type("Bot", (), {"servo": servo})()
+        feedback = FakeFeedback(cfg)
+        feedback.target = cfg["arm"]["distal_hold_raw"]
+        events = []
+        demo = MODULE.Demo(bot, cfg, feedback, lambda stage, **values: events.append((stage, values)))
+        with self.assertRaisesRegex(RuntimeError, "state=action_failed"):
+            demo.lock_initial_distal()
+        self.assertFalse(demo.distal_locked)
+        self.assertEqual(events[-1][0], "lock_distal_action_failed")
+        self.assertEqual(events[-1][1]["actual_raw"], 601)
+
     def test_distal_is_commanded_once_then_only_base_moves(self):
         cfg = MODULE.load_config(ROOT / "config" / "ir_pick_place.json")
         bot = type("Bot", (), {"servo": FakeServo()})()

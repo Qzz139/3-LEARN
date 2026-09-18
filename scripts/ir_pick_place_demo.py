@@ -22,11 +22,16 @@ def utc_now():
 
 
 def raw_to_sdk_degrees(raw):
-    """Convert raw feedback to the nearest integer accepted by Servo.moveto."""
-    return int(round(float(raw) / 10.0 - 180.0))
+    """DDS encoder: 1024 = 180 degrees; SDK action angle is centred at 180."""
+    return int(round(float(raw) * 180.0 / 1024.0 - 180.0))
 
 
 def sdk_degrees_to_raw(degrees):
+    """Expected DDS encoder value, distinct from the action's wire encoding."""
+    return int(round((int(degrees) + 180) * 1024.0 / 180.0))
+
+
+def sdk_degrees_to_wire(degrees):
     return int((int(degrees) + 180) * 10)
 
 
@@ -49,8 +54,8 @@ def validate_config(cfg):
         raise ValueError("distal and base feedback slots must differ")
     for key in ("distal_hold_raw", "base_extended_raw", "base_retracted_raw"):
         value = arm[key]
-        if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 3600:
-            raise ValueError(key + " must be a raw servo value in [0, 3600]")
+        if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 2048:
+            raise ValueError(key + " must be a DDS encoder value in [0, 2048]")
         if not -180 <= raw_to_sdk_degrees(value) <= 180:
             raise ValueError(key + " cannot be represented by Servo.moveto")
     ir = cfg["infrared"]
@@ -173,7 +178,8 @@ class VisionSidecar:
     def __init__(self, bot, cfg, log_path, record):
         self.bot, self.cfg, self.log_path, self.record = bot, cfg, log_path, record
         self.context = mp.get_context("spawn")
-        self.frames = self.context.Queue(maxsize=1)
+        self.manager = None
+        self.frames = None
         self.stop_event = self.context.Event()
         self.process = None
         self.thread = None
@@ -183,6 +189,10 @@ class VisionSidecar:
         if not self.cfg["enabled"]:
             self.record("vision_disabled")
             return
+        # A managed queue has no parent-side feeder thread writing to a killed
+        # inference process. This also permits bounded shutdown during model load.
+        self.manager = self.context.Manager()
+        self.frames = self.manager.Queue(maxsize=1)
         model = self.cfg["model"]
         local_model = ROOT / "models" / model
         model_arg = str(local_model) if local_model.exists() else model
@@ -233,10 +243,6 @@ class VisionSidecar:
 
     def stop(self):
         self.stop_event.set()
-        try:
-            self.frames.put_nowait(None)
-        except queue.Full:
-            pass
         if self.running:
             try:
                 self.bot.camera.stop_video_stream()
@@ -245,11 +251,20 @@ class VisionSidecar:
             self.running = False
         if self.thread:
             self.thread.join(timeout=2.0)
+        if self.frames is not None:
+            try:
+                self.frames.put_nowait(None)
+            except (queue.Full, EOFError, BrokenPipeError):
+                pass
         if self.process and self.process.pid is not None:
             self.process.join(timeout=3.0)
             if self.process.is_alive():
                 self.process.terminate()
                 self.process.join(timeout=2.0)
+        if self.manager is not None:
+            self.manager.shutdown()
+            self.manager = None
+            self.frames = None
 
 
 class Demo:
@@ -275,12 +290,20 @@ class Demo:
             raise RuntimeError("servo ID is outside the configured arm")
         self.record(stage + "_request", servo_id=servo_id, target_raw=target_raw,
                     target_degrees=raw_to_sdk_degrees(target_raw),
-                    encoded_target_raw=sdk_degrees_to_raw(raw_to_sdk_degrees(target_raw)))
+                    expected_dds_raw=sdk_degrees_to_raw(raw_to_sdk_degrees(target_raw)),
+                    encoded_target_wire=sdk_degrees_to_wire(raw_to_sdk_degrees(target_raw)))
         action = self.bot.servo.moveto(index=servo_id, angle=raw_to_sdk_degrees(target_raw))
         self.active_action = action
         done = action.wait_for_completed(timeout=self.arm["action_timeout_s"])
         if not done or not action.has_succeeded:
-            raise RuntimeError(stage + ": servo action failed or timed out")
+            state = getattr(action, "state", "unknown")
+            reason = getattr(action, "failure_reason", None)
+            self.record(stage + "_action_failed", state=state, failure_reason=str(reason),
+                        actual_raw=self.feedback.servo_raw(feedback_slot), waited_to_completion=done)
+            raise RuntimeError(stage + ": servo action failed (state={}, reason={}, completed={}). "
+                               "If EP is configured as a robotic arm in the App, direct servo "
+                               "control is unavailable; configure independent servos for this demo."
+                               .format(state, reason, done))
         deadline = time.monotonic() + self.arm["action_timeout_s"]
         while time.monotonic() < deadline:
             actual = self.feedback.servo_raw(feedback_slot)
