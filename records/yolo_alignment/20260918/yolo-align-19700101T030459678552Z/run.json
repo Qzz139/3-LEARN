@@ -1,0 +1,625 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "model": "yolo26m.pt",
+      "confidence": 0.4,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.005,
+      "speed_mps": 0.02,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 2.0,
+      "stall_timeout_s": 0.6,
+      "settle_seconds": 0.4,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.01
+    },
+    "alignment": {
+      "target_class_ids": [
+        32
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.025,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 3,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 60.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T03:05:00.197730+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T03:05:23.503724+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T03:05:28.474928+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T03:05:28.477059+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T03:05:28.552282+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.054059+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1074
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.055758+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.056976+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.092332+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.593652+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T03:05:29.594933+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T03:05:30.631634+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T03:05:30.632961+00:00",
+      "stage": "initial_state_ready",
+      "start_yaw": 2.32,
+      "start_position": [
+        0.0,
+        -0.0001
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T03:05:31.050513+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 4,
+      "age_s": 0.386
+    },
+    {
+      "time_utc": "1970-01-01T03:05:31.053500+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9475751519203186,
+        "xyxy": [
+          459.8427429199219,
+          383.1364440917969,
+          597.16796875,
+          521.9050903320312
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.08710519075393675,
+      "correction_degrees": 5.0,
+      "heading_offset": -0.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:31.054518+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:31.231746+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:32.034226+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.47999999999999
+    },
+    {
+      "time_utc": "1970-01-01T03:05:32.164363+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 4,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T03:05:32.165894+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9361034035682678,
+        "xyxy": [
+          532.4989624023438,
+          391.5892333984375,
+          673.8145141601562,
+          535.6390991210938
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.028783798217773438,
+      "correction_degrees": 5.0,
+      "heading_offset": 4.47999999999999
+    },
+    {
+      "time_utc": "1970-01-01T03:05:32.166911+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:32.352485+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:33.155154+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.6200000000000045
+    },
+    {
+      "time_utc": "1970-01-01T03:05:33.282102+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 2,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T03:05:33.283745+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.934319257736206,
+        "xyxy": [
+          603.405517578125,
+          388.7169189453125,
+          744.0175170898438,
+          531.6087646484375
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": 0.02633712291717527,
+      "correction_degrees": -5.0,
+      "heading_offset": 9.099999999999994
+    },
+    {
+      "time_utc": "1970-01-01T03:05:33.284855+00:00",
+      "stage": "align_turn_request",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:33.474447+00:00",
+      "stage": "align_turn_complete",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:34.277680+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": -5.0,
+      "actual_degrees": -4.530000000000001
+    },
+    {
+      "time_utc": "1970-01-01T03:05:34.404750+00:00",
+      "stage": "vision_frame",
+      "frame": 4,
+      "count": 4,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T03:05:34.406448+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9302881956100464,
+        "xyxy": [
+          527.9696044921875,
+          389.42645263671875,
+          669.142333984375,
+          532.4939575195312
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.032378149032592785,
+      "correction_degrees": 5.0,
+      "heading_offset": 4.569999999999993
+    },
+    {
+      "time_utc": "1970-01-01T03:05:34.407586+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:34.591313+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:35.395078+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 5.180000000000007
+    },
+    {
+      "time_utc": "1970-01-01T03:05:35.519391+00:00",
+      "stage": "vision_frame",
+      "frame": 5,
+      "count": 2,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T03:05:35.521224+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9164854884147644,
+        "xyxy": [
+          608.7589721679688,
+          390.8762512207031,
+          750.6324462890625,
+          534.7477416992188
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": 0.03101227283477781,
+      "correction_degrees": -5.0,
+      "heading_offset": 9.75
+    },
+    {
+      "time_utc": "1970-01-01T03:05:35.522473+00:00",
+      "stage": "align_turn_request",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:35.711369+00:00",
+      "stage": "align_turn_complete",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.514326+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": -5.0,
+      "actual_degrees": -3.8300000000000125
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.639914+00:00",
+      "stage": "vision_frame",
+      "frame": 6,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.641772+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9013431668281555,
+        "xyxy": [
+          546.245361328125,
+          392.765869140625,
+          689.3616943359375,
+          538.2942504882812
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.017340993881225564,
+      "correction_degrees": 0.0,
+      "heading_offset": 5.9199999999999875
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.643033+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.869749+00:00",
+      "stage": "vision_frame",
+      "frame": 7,
+      "count": 3,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.872306+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9062463045120239,
+        "xyxy": [
+          546.4619140625,
+          392.8089599609375,
+          689.4862060546875,
+          538.1522216796875
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.017207765579223655,
+      "correction_degrees": 0.0,
+      "heading_offset": 5.9199999999999875
+    },
+    {
+      "time_utc": "1970-01-01T03:05:36.874217+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T03:05:37.100645+00:00",
+      "stage": "vision_frame",
+      "frame": 8,
+      "count": 3,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T03:05:37.102682+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9364497065544128,
+        "xyxy": [
+          546.6702880859375,
+          392.67132568359375,
+          689.2837524414062,
+          537.886474609375
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.017205452919006325,
+      "correction_degrees": 0.0,
+      "heading_offset": 5.9199999999999875
+    },
+    {
+      "time_utc": "1970-01-01T03:05:37.104162+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:05:37.252374+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 126,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:05:37.254564+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.005,
+      "speed_mps": 0.02,
+      "start_position": [
+        0.01507,
+        0.00298
+      ],
+      "heading_offset": 5.9199999999999875,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.196909+00:00",
+      "stage": "approach_step_complete",
+      "end_position": [
+        0.02118,
+        0.00276
+      ],
+      "actual_distance_m": 0.006113959437222332
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.426161+00:00",
+      "stage": "vision_frame",
+      "frame": 9,
+      "count": 3,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.428716+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9645532965660095,
+        "xyxy": [
+          548.6783447265625,
+          399.6109313964844,
+          695.1080322265625,
+          548.19970703125
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.014145946502685525,
+      "correction_degrees": 0.0,
+      "heading_offset": 6.150000000000006
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.430575+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.658896+00:00",
+      "stage": "vision_frame",
+      "frame": 10,
+      "count": 3,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.661219+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.963140070438385,
+        "xyxy": [
+          549.046630859375,
+          399.69500732421875,
+          695.3501586914062,
+          548.3743286132812
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.013907504081726085,
+      "correction_degrees": 0.0,
+      "heading_offset": 6.150000000000006
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.662888+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.886054+00:00",
+      "stage": "vision_frame",
+      "frame": 11,
+      "count": 3,
+      "age_s": 0.097
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.888436+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.9641416668891907,
+        "xyxy": [
+          549.4699096679688,
+          399.7810974121094,
+          695.70361328125,
+          548.3135986328125
+        ],
+        "image_width": 1280,
+        "image_height": 720
+      },
+      "pixel_error_ratio": -0.013604092597961415,
+      "correction_degrees": 0.0,
+      "heading_offset": 6.150000000000006
+    },
+    {
+      "time_utc": "1970-01-01T03:05:38.890004+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:05:39.036712+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 113,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:05:39.039639+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.005,
+      "speed_mps": 0.02,
+      "start_position": [
+        0.02282,
+        0.00321
+      ],
+      "heading_offset": 6.180000000000007,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T03:05:40.293552+00:00",
+      "stage": "error",
+      "error": "RuntimeError: approach_step: no odometry progress",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: approach_step: no odometry progress"
+}
