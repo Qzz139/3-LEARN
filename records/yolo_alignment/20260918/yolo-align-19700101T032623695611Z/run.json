@@ -1,0 +1,476 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 20,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.4,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 2.0,
+      "stall_timeout_s": 1.0,
+      "settle_seconds": 0.4,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.01,
+      "stop_timeout_s": 2.0,
+      "stop_linear_speed_mps": 0.01,
+      "stop_yaw_speed_dps": 1.0
+    },
+    "alignment": {
+      "target_class_ids": [
+        32
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.025,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 3,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 60.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T03:26:24.065594+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T03:26:47.120726+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T03:26:52.003115+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.151411+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.153236+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.205288+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.707378+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1076
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.709190+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.710457+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T03:26:53.787869+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T03:26:54.290975+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T03:26:54.292984+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T03:26:55.325398+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T03:26:55.328032+00:00",
+      "stage": "initial_state_ready",
+      "start_yaw": -7.84,
+      "start_position": [
+        5e-05,
+        6e-05
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T03:26:55.796979+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 2,
+      "age_s": 0.38
+    },
+    {
+      "time_utc": "1970-01-01T03:26:55.798429+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.7416431307792664,
+        "xyxy": [
+          436.63946533203125,
+          286.4933166503906,
+          541.5027465820312,
+          393.1875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.00944906870524087,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:55.799302+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.055117+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 2,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.056645+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.787917971611023,
+        "xyxy": [
+          436.47821044921875,
+          286.58160400390625,
+          541.6583862304688,
+          393.1610107421875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.009446144104003906,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.009999999999990905
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.057756+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.273768+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 2,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.275281+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.7628188729286194,
+        "xyxy": [
+          436.5130920410156,
+          286.4305725097656,
+          541.6507568359375,
+          392.94000244140625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.00946033795674639,
+      "correction_degrees": 0.0,
+      "heading_offset": -0.0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.276402+00:00",
+      "stage": "alignment_stable",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.405013+00:00",
+      "stage": "approach_distance_pending",
+      "distance_mm": 125,
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.406818+00:00",
+      "stage": "approach_step_request",
+      "distance_m": 0.01,
+      "speed_mps": 0.04,
+      "start_position": [
+        2e-05,
+        3e-05
+      ],
+      "heading_offset": -0.0,
+      "return_target": null
+    },
+    {
+      "time_utc": "1970-01-01T03:26:56.846748+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.274233+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        -0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.427845+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        -0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.530290+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        -0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.608274+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.11,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.786684+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.889720+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:57.993077+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.096049+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.224359+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.378700+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        0.02,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.506811+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.1,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.609303+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.09,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.787699+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.08,
+        0.01,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:58.941766+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.07,
+        0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:59.045410+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.06,
+        0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:59.198576+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.05,
+        -0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:59.252435+00:00",
+      "stage": "translation_stop_timeout",
+      "body_velocity": [
+        -0.05,
+        -0.0,
+        0.0
+      ],
+      "consecutive_samples": 0
+    },
+    {
+      "time_utc": "1970-01-01T03:26:59.349068+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T03:26:59.364891+00:00",
+      "stage": "error",
+      "error": "RuntimeError: chassis velocity did not settle after stop",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: chassis velocity did not settle after stop"
+}

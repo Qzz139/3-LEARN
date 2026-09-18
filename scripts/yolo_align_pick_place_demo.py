@@ -58,8 +58,8 @@ def validate_alignment(cfg):
         raise ValueError('approach/return speeds must be at most 0.05m/s')
     if p['waypoint_tolerance_m'] >= p['step_m'] or p['position_freshness_s'] > .25:
         raise ValueError('waypoint tolerance must be smaller than step; position freshness at most 0.25s')
-    if p['stop_linear_speed_mps'] > .01 or p['stop_yaw_speed_dps'] > 2:
-        raise ValueError('stationary speed tolerances must be at most 0.01m/s and 2deg/s')
+    if p['stop_wheel_rpm'] > 8 or p['stop_encoder_counts'] > 16 or p['stop_stable_seconds'] < .3:
+        raise ValueError('wheel stop requires at most 8rpm/16 encoder counts and at least 0.3 seconds')
     return cfg
 
 
@@ -116,6 +116,21 @@ class Feedback(base.Feedback):
         self.position_time = 0.0
         self.velocity_value = None
         self.velocity_time = 0.0
+        self.esc_value = None
+        self.esc_time = 0.0
+
+    def on_esc(self, data):
+        with self.condition:
+            self.esc_value = tuple(tuple(int(v) for v in field) for field in data[:3])
+            self.esc_time = time.monotonic()
+            self.condition.notify_all()
+
+    def esc_snapshot(self, freshness):
+        with self.condition:
+            if (self.esc_value is None or time.monotonic() - self.esc_time > freshness or
+                    any(len(field) != 4 for field in self.esc_value)):
+                raise RuntimeError('wheel feedback is missing, invalid or stale')
+            return self.esc_value, self.esc_time
 
     def on_velocity(self, velocity):
         with self.condition:
@@ -279,25 +294,50 @@ class AlignDemo(base.Demo):
         return value
 
     def stop_translation(self):
-        # ProtoChassisSpeedMode is PUSH/no-ACK. Official SDK returns False even
-        # after sending; verify physical progress/stop using position instead.
-        self.bot.chassis.drive_speed(x=0, y=0, z=0, timeout=.2)
+        # Wheel commands have ACK. Cancel the velocity API timer by replacing
+        # it with a wheel-stop timer; avoid switching back to velocity mode.
+        accepted = self.bot.chassis.drive_wheels(w1=0, w2=0, w3=0, w4=0, timeout=.2)
+        self.record('wheel_stop_ack', accepted=bool(accepted))
+        if not accepted:
+            raise RuntimeError('four-wheel stop command was not acknowledged')
+
+    def emergency_stop(self):
+        super().emergency_stop()
+        try:
+            self.stop_translation()
+        except Exception as exc:
+            self.record('emergency_wheel_stop_error', error=str(exc))
 
     def wait_stationary(self):
         p, started = self.cfg['approach'], time.monotonic()
-        sequence, last = 0, None
+        sequence, last_packet, anchor, stable_since = 0, None, None, None
+        last_logged, velocity, speeds = started - .1, None, None
         while time.monotonic() < started + p['stop_timeout_s']:
             self.assert_distal()
-            velocity, stamped = self.feedback.velocity_snapshot(p['position_freshness_s'])
-            if stamped >= started and stamped != last:
-                sequence = sequence + 1 if (math.hypot(*velocity[:2]) <= p['stop_linear_speed_mps'] and
-                                             abs(velocity[2]) <= p['stop_yaw_speed_dps']) else 0
-                last = stamped
-                if sequence >= 3:
-                    self.record('translation_stop_confirmed', body_velocity=velocity, consecutive_samples=sequence)
-                    return
+            velocity, _ = self.feedback.velocity_snapshot(p['position_freshness_s'])
+            (speeds, angles, packet), stamped = self.feedback.esc_snapshot(p['position_freshness_s'])
+            if stamped >= started and packet != last_packet:
+                last_packet = packet
+                if max(abs(v) for v in speeds) > p['stop_wheel_rpm']:
+                    anchor, stable_since, sequence = None, None, 0
+                else:
+                    if anchor is None or any(abs((v - ref + 16384) % 32768 - 16384) >
+                                             p['stop_encoder_counts'] for v, ref in zip(angles, anchor)):
+                        anchor, stable_since, sequence = angles, stamped, 0
+                    sequence += 1
+                    if sequence >= 3 and stamped - stable_since >= p['stop_stable_seconds']:
+                        self.record('translation_stop_confirmed', body_velocity=velocity, wheel_rpm=speeds,
+                                    encoder_counts=angles, consecutive_samples=sequence,
+                                    stable_seconds=stamped - stable_since)
+                        return
+                if stamped - last_logged >= .1:
+                    self.record('translation_stop_sample', body_velocity=velocity, wheel_rpm=speeds,
+                                encoder_counts=angles, consecutive_samples=sequence)
+                    last_logged = stamped
             time.sleep(.025)
-        raise RuntimeError('chassis velocity did not settle after stop')
+        self.record('translation_stop_timeout', body_velocity=velocity, wheel_rpm=speeds,
+                    consecutive_samples=sequence)
+        raise RuntimeError('wheel encoders did not settle after stop')
 
     def translate(self, distance, stage, return_target=None):
         """Odometry controls each segment; the SDK timer stops a stalled main loop."""
@@ -539,17 +579,19 @@ def main():
                 (bot.chassis.sub_attitude, bot.chassis.unsub_attitude, feedback.on_attitude),
                 (bot.chassis.sub_position, bot.chassis.unsub_position, feedback.on_position),
                 (bot.chassis.sub_velocity, bot.chassis.unsub_velocity, feedback.on_velocity),
+                (bot.chassis.sub_esc, bot.chassis.unsub_esc, feedback.on_esc),
             ):
                 if not subscribe(freq=20, callback=callback):
                     raise RuntimeError('feedback subscription rejected')
                 cleanups.append(unsubscribe)
             feedback.wait_ready()
             deadline = time.monotonic() + 5
-            while (feedback.yaw_value is None or feedback.position_value is None or feedback.velocity_value is None) and time.monotonic() < deadline:
+            while (feedback.yaw_value is None or feedback.position_value is None or feedback.velocity_value is None or feedback.esc_value is None) and time.monotonic() < deadline:
                 time.sleep(.05)
             feedback.yaw()
             feedback.position(cfg['approach']['position_freshness_s'])
             feedback.velocity_snapshot(cfg['approach']['position_freshness_s'])
+            feedback.esc_snapshot(cfg['approach']['position_freshness_s'])
             demo = AlignDemo(bot, cfg, feedback, log.write, None)
             bot.led.set_led(comp=led.COMP_BOTTOM_ALL, r=0, g=0, b=0, effect=led.EFFECT_OFF)
         log.write('vision_loading', motion_started=False)

@@ -56,8 +56,9 @@
     "waypoint_tolerance_m": 0.002,
     "center_tolerance_m": 0.01,
     "stop_timeout_s": 2.0,
-    "stop_linear_speed_mps": 0.01,
-    "stop_yaw_speed_dps": 1.0
+    "stop_wheel_rpm": 8,
+    "stop_encoder_counts": 16,
+    "stop_stable_seconds": 0.3
   },
   "alignment": {
     "target_class_ids": [

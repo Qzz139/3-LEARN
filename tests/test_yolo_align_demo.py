@@ -201,8 +201,9 @@ class TestAlignment(unittest.TestCase):
         def sleep(duration):
             clock[0] += duration
             position[0] += velocity[0] * duration
-        chassis = type('Chassis', (), {'drive_speed': staticmethod(drive_speed)})()
-        feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0])})()
+        chassis = type('Chassis', (), {'drive_speed': staticmethod(drive_speed), 'drive_wheels': staticmethod(lambda **kw: drive_speed(0, 0, 0, kw['timeout']) or True)})()
+        feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0]),
+                                 'esc_snapshot': lambda _, freshness: (((0,)*4, (0,)*4, (clock[0],)*4), clock[0])})()
         demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), cfg, feedback, lambda *a, **k: None, None)
         demo.start_position = (0, 0)
         with patch.object(M.time, 'sleep', side_effect=sleep), \
@@ -228,8 +229,9 @@ class TestAlignment(unittest.TestCase):
             def sleep(duration):
                 clock[0] += duration
                 position[0] += velocity[0] * duration
-            feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0])})()
-            demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed)})()})(),
+            feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity[0], 0, 0), clock[0]),
+                                 'esc_snapshot': lambda _, freshness: (((0,)*4, (0,)*4, (clock[0],)*4), clock[0])})()
+            demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed), 'drive_wheels': staticmethod(lambda **kw: drive_speed(0, 0, 0, kw['timeout']) or True)})()})(),
                                cfg, feedback, lambda *a, **k: None, None)
             with self.subTest(raises=raises), patch.object(M.time, 'sleep', side_effect=sleep), \
                     patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
@@ -265,7 +267,7 @@ class TestAlignment(unittest.TestCase):
             return True
         def sleep(duration):
             clock[0] += duration
-        demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed)})()})(),
+        demo = M.AlignDemo(type('Bot', (), {'chassis': type('C', (), {'drive_speed': staticmethod(drive_speed), 'drive_wheels': staticmethod(lambda **kw: drive_speed(0, 0, 0, kw['timeout']) or True)})()})(),
                            cfg, None, lambda *a, **k: None, None)
         with patch.object(M.time, 'sleep', side_effect=sleep), \
                 patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
@@ -275,29 +277,63 @@ class TestAlignment(unittest.TestCase):
                 demo.approach_step()
         self.assertEqual(commands[-1], 0)
 
-    def test_stop_requires_three_new_near_zero_velocity_samples(self):
-        cfg, clock, events = config(), [10.0], []
-        velocities = iter([.04, .02, 0, 0, 0])
-        feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((next(velocities), 0, 0), clock[0])})()
-        demo = M.AlignDemo(None, cfg, feedback, lambda stage, **kw: events.append(stage), None)
-        def sleep(duration):
-            clock[0] += duration
-        with patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
-                patch.object(M.time, 'sleep', side_effect=sleep), patch.object(demo, 'assert_distal'):
-            demo.wait_stationary()
-        self.assertEqual(events, ['translation_stop_confirmed'])
+    def test_acknowledged_wheel_stop_brakes_when_velocity_stop_is_ignored(self):
+        velocity, requests = [.04], []
+        def drive_speed(**kw):
+            return False
+        def drive_wheels(**kw):
+            requests.append(kw)
+            velocity[0] = 0
+            return True
+        chassis = type('C', (), {'drive_speed': staticmethod(drive_speed),
+                                'drive_wheels': staticmethod(drive_wheels)})()
+        demo = M.AlignDemo(type('Bot', (), {'chassis': chassis})(), config(), None, lambda *a, **k: None, None)
+        demo.stop_translation()
+        self.assertEqual(velocity[0], 0)
+        self.assertEqual(requests, [dict(w1=0, w2=0, w3=0, w4=0, timeout=.2)])
+        with patch.object(chassis, 'drive_wheels', return_value=False):
+            with self.assertRaisesRegex(RuntimeError, 'stop command was not acknowledged'):
+                demo.stop_translation()
 
-    def test_duplicate_or_moving_velocity_cannot_confirm_stop(self):
-        for velocity, repeated_timestamp in ((.04, False), (0, True)):
+    def test_stable_encoders_confirm_stop_despite_velocity_estimate_lag(self):
+        cfg, clock, events = config(), [10.0], []
+        feedback = type('F', (), {
+            'velocity_snapshot': lambda _, freshness: ((-.08, 0, 0), clock[0]),
+            'esc_snapshot': lambda _, freshness: (((-3, 1, 0, 2), (32765, 100, 200, 300), (clock[0],)*4), clock[0])})()
+        demo = M.AlignDemo(None, cfg, feedback, lambda stage, **kw: events.append((stage, kw)), None)
+        with patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                patch.object(M.time, 'sleep', side_effect=lambda dt: clock.__setitem__(0, clock[0]+dt)), \
+                patch.object(demo, 'assert_distal'):
+            demo.wait_stationary()
+        self.assertEqual(events[-1][0], 'translation_stop_confirmed')
+        self.assertGreaterEqual(events[-1][1]['stable_seconds'], .3)
+
+    def test_duplicate_packets_or_creeping_encoders_cannot_confirm_stop(self):
+        for repeated, rpm in ((True, 0), (False, 0), (False, 20)):
             cfg, clock = config(), [10.0]
-            feedback = type('F', (), {'velocity_snapshot': lambda _, freshness: ((velocity, 0, 0), 10 if repeated_timestamp else clock[0])})()
+            feedback = type('F', (), {
+                'velocity_snapshot': lambda _, freshness: ((0, 0, 0), clock[0]),
+                'esc_snapshot': lambda _, freshness: (((rpm,)*4,
+                    (0 if repeated else int((clock[0]-10)*1000),)*4,
+                    (10 if repeated else clock[0],)*4), clock[0])})()
             demo = M.AlignDemo(None, cfg, feedback, lambda *a, **k: None, None)
-            def sleep(duration):
-                clock[0] += duration
-            with self.subTest(velocity=velocity), patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
-                    patch.object(M.time, 'sleep', side_effect=sleep), patch.object(demo, 'assert_distal'):
-                with self.assertRaisesRegex(RuntimeError, 'velocity did not settle'):
+            with self.subTest(repeated=repeated, rpm=rpm), \
+                    patch.object(M.time, 'monotonic', side_effect=lambda: clock[0]), \
+                    patch.object(M.time, 'sleep', side_effect=lambda dt: clock.__setitem__(0, clock[0]+dt)), \
+                    patch.object(demo, 'assert_distal'):
+                with self.assertRaisesRegex(RuntimeError, 'encoders did not settle'):
                     demo.wait_stationary()
+
+    def test_esc_feedback_is_copied_and_rejects_stale_data(self):
+        feedback = M.Feedback()
+        data = [[0]*4, [100]*4, [1]*4, [0]*4]
+        with patch.object(M.time, 'monotonic', return_value=10):
+            feedback.on_esc(data)
+            data[1][0] = 200
+            self.assertEqual(feedback.esc_snapshot(.25)[0][1][0], 100)
+        with patch.object(M.time, 'monotonic', return_value=10.3):
+            with self.assertRaisesRegex(RuntimeError, 'wheel feedback.*stale'):
+                feedback.esc_snapshot(.25)
 
     def test_cycle_preserves_joint_roles_and_anchors_drop_heading(self):
         cfg, events = config(), []
