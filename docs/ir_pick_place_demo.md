@@ -13,9 +13,10 @@
 配置中的 `ID 1 → 槽 0 → 抓夹连杆侧`、`ID 2 → 槽 1 → 肩部侧` 是参考模型的假定映射，
 尚未在这台 EP 上确认；`1073` 是记录姿态，并未证明是最远外伸位置。
 `raw=552` 是参考模型推算的内收候选值，不能视为实机最内位置。
-因此默认 `arm.calibration_verified=false`，`--execute` 会在发送机器人命令前拒绝运行。
-须先在实机核对舵机映射、反馈与命令角度对应关系，以及可用的外伸/内收位置，
-更新 `config/ir_pick_place.json` 后再将该项设为 `true`。
+`arm.calibration_verified=false` 记录当前参数尚未实机确认；它不再阻止 `--execute`。
+执行时会先打印参数未确认的提示，然后按当前配置发送动作命令。
+实测核对舵机映射、反馈与命令角度对应关系，以及可用的外伸/内收位置后，
+更新 `config/ir_pick_place.json`，再将该项设为 `true` 以关闭提示。
 
 红外安装在夹爪上方并朝夹取方向，因此 30 mm 使用传感器到
 目标表面的原始距离；当前使用反馈槽 0，可通过 `infrared.feedback_slot` 改端口。
@@ -58,7 +59,8 @@ bash -n scripts/run_ir_demo_ubuntu.sh
 仓库已包含普通官方权重 `models/yolo26m.pt`，程序优先从该文件加载，无需在 EP 网络上
 下载。文件大小和 SHA-256 已核对
 [官方 YOLO26 发布信息](https://github.com/ultralytics/assets/releases/tag/v8.4.0)，
-来源及校验值保存在 `models/yolo26m.source.json`。尚未验证 Jetson 上的真实检测结果。
+来源及校验值保存在 `models/yolo26m.source.json`。Jetson 已完成静态照片推理验证，
+照片中的球检测为 `sports ball`，置信度约 0.955；尚未验证实时视频检测效果。
 
 程序捕获异常或动作超时后，先请求停止底盘、底盘侧舵机与夹爪，再请求底盘装甲 LED
 常亮红色；异常路径不会自动回初始态。网络断开或进程被强制终止时，无法保证停止和

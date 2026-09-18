@@ -433,9 +433,10 @@ def main():
         return 0
 
     if not cfg["arm"].get("calibration_verified", False):
-        parser.error("servo ID/feedback mapping, raw-to-command conversion and extended/retracted poses "
-                     "have not been calibrated on this EP; verify them before setting "
-                     "arm.calibration_verified=true (no robot commands sent)")
+        print("提示：舵机映射及外伸/内收位置尚未实机确认；本次按配置执行，"
+              "抓夹侧 raw={}，外伸 raw={}，内收 raw={}。".format(
+                  cfg["arm"]["distal_hold_raw"], cfg["arm"]["base_extended_raw"],
+                  cfg["arm"]["base_retracted_raw"]), flush=True)
 
     try:
         from robomaster import camera, config as rm_config, led, robot

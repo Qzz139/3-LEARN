@@ -1,4 +1,6 @@
 import importlib.util
+import builtins
+import io
 import json
 from pathlib import Path
 import unittest
@@ -29,6 +31,24 @@ class TestConfiguration(unittest.TestCase):
         cfg["infrared"]["threshold_mm"] = 31
         with self.assertRaises(ValueError):
             MODULE.validate_config(cfg)
+
+    def test_execute_with_unverified_config_reaches_sdk_without_motion(self):
+        real_import = builtins.__import__
+
+        def without_sdk(name, *args, **kwargs):
+            if name == "robomaster":
+                raise ImportError("test SDK unavailable")
+            return real_import(name, *args, **kwargs)
+
+        output, errors = io.StringIO(), io.StringIO()
+        with patch("sys.argv", ["demo", "--execute"]), \
+                patch("builtins.__import__", side_effect=without_sdk), \
+                patch("sys.stdout", output), patch("sys.stderr", errors):
+            with self.assertRaises(SystemExit) as stopped:
+                MODULE.main()
+        self.assertEqual(stopped.exception.code, 2)
+        self.assertIn("本次按配置执行", output.getvalue())
+        self.assertIn("RoboMaster SDK unavailable", errors.getvalue())
 
 
 class FakeAction:
