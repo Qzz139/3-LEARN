@@ -92,7 +92,8 @@ def correction_degrees(error, alignment):
 
 # 首次选择最接近抓取轴的目标；后续结合类别、中心位移和面积变化维持同一目标。
 def choose_target(detections, alignment, previous=None):
-    candidates = [d for d in detections if d['class_id'] in alignment['target_class_ids']]
+    candidates = [d for d in detections if d['class_id'] in alignment['target_class_ids'] or
+                  (previous is not None and previous['class_id'] == 39 and d['class_id'] == 75)]
     if previous is None:
         return min(candidates, key=lambda d: (abs(pixel_error(d, alignment['axis_x_ratio'])),
                                               -d['confidence'])) if candidates else None
@@ -102,15 +103,24 @@ def choose_target(detections, alignment, previous=None):
              (previous['xyxy'][3] - previous['xyxy'][1])) / (previous['image_width'] * previous['image_height'])
     ranked = []
     for d in candidates:
-        if d['class_id'] != previous['class_id']:
+        same_class = d['class_id'] == previous['class_id']
+        if not same_class and not (previous['class_id'] == 39 and d['class_id'] == 75):
             continue
         dc = [(d['xyxy'][i] + d['xyxy'][i + 2]) / 2.0 /
               d['image_width' if i == 0 else 'image_height'] for i in (0, 1)]
         jump = math.hypot(dc[0] - pc[0], dc[1] - pc[1])
         area = max(1.0, (d['xyxy'][2] - d['xyxy'][0]) * (d['xyxy'][3] - d['xyxy'][1])) / (d['image_width'] * d['image_height'])
-        if jump <= alignment['max_center_jump_ratio'] and .4 <= area / pa <= 2.5:
-            ranked.append((jump, -d['confidence'], d))
-    return min(ranked, key=lambda item: item[:2])[2] if ranked else None
+        ratio = area / pa
+        if not same_class:
+            # 实测同一水瓶近距离会被YOLO误报为vase；只允许紧邻上一帧的同框延续。
+            if jump > .04 or not .8 <= ratio <= 1.25:
+                continue
+            d = dict(d, class_id=39, class_name=previous.get('class_name', 'bottle'),
+                     observed_class_id=75)
+        elif jump > alignment['max_center_jump_ratio'] or not .4 <= ratio <= 2.5:
+            continue
+        ranked.append((not same_class, jump, -d['confidence'], d))
+    return min(ranked, key=lambda item: item[:3])[3] if ranked else None
 
 
 # 生成相对启动朝向的搜索角度：左右交替，并逐步扩大搜索范围。

@@ -40,7 +40,7 @@
     "enabled": true,
     "stream_resolution": "540p",
     "model": "yolo26m.pt",
-    "confidence": 0.4,
+    "confidence": 0.3,
     "image_size": 640,
     "frame_interval_s": 0.5
   },
@@ -74,11 +74,11 @@
     "lost_frames": 30,
     "max_center_jump_ratio": 0.2,
     "search_step_degrees": 15.0,
-    "search_limit_degrees": 25.0,
+    "search_limit_degrees": 35.0,
     "timeout_s": 120.0,
     "settle_seconds": 0.8,
     "max_result_age_s": 2.0,
-    "heading_tolerance_degrees": 2.0,
+    "heading_tolerance_degrees": 3.0,
     "yaw_feedback_sign": -1
   },
   "sorting": {

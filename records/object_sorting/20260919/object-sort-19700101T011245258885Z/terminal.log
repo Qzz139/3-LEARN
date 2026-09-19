@@ -1,0 +1,1042 @@
+{"time_utc": "1970-01-01T01:12:45.655534+00:00", "stage": "vision_loading", "motion_started": false}
+{"time_utc": "1970-01-01T01:13:08.692112+00:00", "stage": "vision_warming", "model": "yolo26m.pt"}
+{"time_utc": "1970-01-01T01:13:13.673772+00:00", "stage": "vision_ready", "model_ready": true}
+{"time_utc": "1970-01-01T01:13:14.822057+00:00", "stage": "camera_ready", "resolution": "540p"}
+{"time_utc": "1970-01-01T01:13:14.824012+00:00", "stage": "lock_distal_request", "servo_id": 2, "target_raw": 1073, "target_degrees": 9, "expected_dds_raw": 1075, "encoded_target_wire": 1890}
+{"time_utc": "1970-01-01T01:13:14.856004+00:00", "stage": "lock_distal_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:15.357948+00:00", "stage": "lock_distal_complete", "actual_raw": 1076}
+{"time_utc": "1970-01-01T01:13:15.359855+00:00", "stage": "distal_command_guard_enabled", "servo_id": 2, "feedback_slot": 1, "hold_raw": 1073}
+{"time_utc": "1970-01-01T01:13:15.361277+00:00", "stage": "start_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:13:15.395921+00:00", "stage": "start_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:15.897967+00:00", "stage": "start_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:13:15.900066+00:00", "stage": "start_open_gripper_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:13:16.937207+00:00", "stage": "start_open_gripper_complete", "opened": true}
+{"time_utc": "1970-01-01T01:13:16.990206+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [3, 4, 5, -4], "encoder_counts": [17468, 10906, 4424, 15904], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:17.092896+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-2, -1, -1, 0], "encoder_counts": [17468, 10906, 4425, 15904], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:17.195727+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [4, 0, 1, 5], "encoder_counts": [17469, 10905, 4423, 15905], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:17.298367+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-3, -1, 0, 2], "encoder_counts": [17468, 10906, 4424, 15903], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:17.450721+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-3, 2, 1, -2], "encoder_counts": [17468, 10906, 4425, 15904], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:17.553707+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [3, 6, 1, 4], "encoder_counts": [17469, 10902, 4423, 15907], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:17.706707+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-3, -9, 2, -2], "encoder_counts": [17469, 10902, 4424, 15907], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:13:17.860160+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [0, 2, -6, 0], "encoder_counts": [17469, 10901, 4423, 15909], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:18.038488+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [5, -3, -3, -5], "encoder_counts": [17470, 10900, 4422, 15908], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:13:18.066573+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-5, -5, 3, 3], "encoder_counts": [17469, 10902, 4424, 15906], "consecutive_samples": 7, "stable_seconds": 0.3008672320002006}
+{"time_utc": "1970-01-01T01:13:18.068594+00:00", "stage": "sorting_started", "start_yaw": 4.84, "start_position": [3e-05, -6e-05], "directions": [{"heading": 0, "status": "pending"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "pending"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:13:18.070832+00:00", "stage": "next_pick_direction", "heading": 0, "current_heading": -0.0, "turn_degrees": 0.0, "directions": [{"heading": 0, "status": "pending"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "pending"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:13:18.073145+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:13:18.117469+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:18.620031+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:13:19.050297+00:00", "stage": "vision_frame", "frame": 1, "count": 7, "age_s": 0.386}
+{"time_utc": "1970-01-01T01:13:19.052168+00:00", "stage": "sector_observed", "heading": 0, "scan_offset": 0, "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.6984694004058838, "xyxy": [428.40020751953125, 313.4869079589844, 545.63427734375, 431.9118347167969], "image_width": 960, "image_height": 540}, "age_s": 0.38614268800029095, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:13:19.211811+00:00", "stage": "vision_frame", "frame": 2, "count": 7, "age_s": 0.121}
+{"time_utc": "1970-01-01T01:13:19.214056+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.6337306499481201, "xyxy": [428.5030517578125, 313.60833740234375, 545.6039428710938, 432.09307861328125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.007347393035888716, "correction_degrees": 0.0, "heading_offset": -0.0}
+{"time_utc": "1970-01-01T01:13:19.216321+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:19.468022+00:00", "stage": "vision_frame", "frame": 3, "count": 6, "age_s": 0.104}
+{"time_utc": "1970-01-01T01:13:19.470115+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.6637172698974609, "xyxy": [428.4390563964844, 313.1324462890625, 545.6239013671875, 432.46697998046875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0073244571685791016, "correction_degrees": 0.0, "heading_offset": -0.0}
+{"time_utc": "1970-01-01T01:13:19.471620+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:19.698204+00:00", "stage": "vision_frame", "frame": 4, "count": 6, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:13:19.700885+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.6469975709915161, "xyxy": [428.615234375, 313.8255615234375, 545.6522827148438, 432.455322265625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.007430998484293627, "correction_degrees": 0.0, "heading_offset": -0.0}
+{"time_utc": "1970-01-01T01:13:19.702485+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:19.855757+00:00", "stage": "approach_distance_pending", "distance_mm": 81, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:19.858492+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [1e-05, -6e-05], "heading_offset": -0.0, "return_target": null}
+{"time_utc": "1970-01-01T01:13:20.296773+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:20.650236+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.0, 0.0], "wheel_rpm": [-5, -1, 0, 23], "encoder_counts": [20462, 8092, 1607, 18844], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:13:20.778279+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [3, 1, -1, 0], "encoder_counts": [20332, 8215, 1684, 18739], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:20.857427+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [8, -8, -1, 2], "encoder_counts": [20379, 8182, 1646, 18776], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:21.035900+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-1, -5, 0, -5], "encoder_counts": [20375, 8184, 1653, 18775], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:21.139194+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [1, -4, 5, 5], "encoder_counts": [20388, 8169, 1640, 18787], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:21.294523+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-3, 3, 1, -5], "encoder_counts": [20378, 8177, 1650, 18777], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:21.399117+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-3, 0, -2, -4], "encoder_counts": [20383, 8171, 1643, 18783], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:21.503581+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [1, 0, -7, -3], "encoder_counts": [20386, 8169, 1641, 18785], "consecutive_samples": 7, "stable_seconds": 0.3209842240003127}
+{"time_utc": "1970-01-01T01:13:21.507724+00:00", "stage": "approach_step_complete", "end_position": [0.02732, 0.00273], "actual_distance_m": 0.02745214381428161}
+{"time_utc": "1970-01-01T01:13:21.511223+00:00", "stage": "approach_path_recorded", "start_position": [1e-05, -6e-05], "end_position": [0.02732, 0.00273], "forward_axis": [0.9909797767126065, 0.13401150005366208], "peak_distance_m": 0.011342310170331263}
+{"time_utc": "1970-01-01T01:13:21.752681+00:00", "stage": "vision_frame", "frame": 5, "count": 5, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:13:21.755186+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.7458276152610779, "xyxy": [423.8984375, 334.9899597167969, 552.3707275390625, 448.0168762207031], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.008473523457845022, "correction_degrees": 0.0, "heading_offset": 0.05000000000001137}
+{"time_utc": "1970-01-01T01:13:21.758142+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:21.992870+00:00", "stage": "vision_frame", "frame": 6, "count": 5, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:13:21.996243+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.7684274911880493, "xyxy": [424.0476379394531, 334.6943664550781, 552.289306640625, 448.0637512207031], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.008508825302124046, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:21.998704+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:22.222851+00:00", "stage": "vision_frame", "frame": 7, "count": 5, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:13:22.225725+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.7183499932289124, "xyxy": [424.0579833984375, 334.83099365234375, 552.428955078125, 448.07513427734375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.00858694712320962, "correction_degrees": 0.0, "heading_offset": 0.05000000000001137}
+{"time_utc": "1970-01-01T01:13:22.227892+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:22.335955+00:00", "stage": "approach_distance_pending", "distance_mm": 43, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:22.338639+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.02764, 0.003], "heading_offset": 0.05000000000001137, "return_target": null}
+{"time_utc": "1970-01-01T01:13:22.797779+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:23.126533+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.01, 0.0], "wheel_rpm": [1, -4, 3, 3], "encoder_counts": [23204, 5550, 31759, 21477], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:23.231599+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.01, 0.0], "wheel_rpm": [3, 4, -4, -3], "encoder_counts": [23197, 5532, 31698, 21446], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:23.387434+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.01, 0.0], "wheel_rpm": [7, 0, 0, -3], "encoder_counts": [23189, 5540, 31705, 21437], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:23.492126+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.0, 0.0], "wheel_rpm": [-2, -2, 3, 2], "encoder_counts": [23187, 5542, 31705, 21435], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:23.597834+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.0, 0.0], "wheel_rpm": [0, -6, -2, 0], "encoder_counts": [23190, 5539, 31703, 21438], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:23.702360+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.0, 0.0], "wheel_rpm": [-5, 3, 1, 1], "encoder_counts": [23186, 5541, 31705, 21435], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:23.808252+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [2, 0, 1, 0], "encoder_counts": [23187, 5543, 31705, 21435], "consecutive_samples": 7, "stable_seconds": 0.31961190400033956}
+{"time_utc": "1970-01-01T01:13:23.813250+00:00", "stage": "approach_step_complete", "end_position": [0.05118, 0.00436], "actual_distance_m": 0.023579253592936313}
+{"time_utc": "1970-01-01T01:13:23.817487+00:00", "stage": "approach_path_recorded", "start_position": [0.02764, 0.003], "end_position": [0.05118, 0.00436], "forward_axis": [0.998299408877304, 0.05829485599283529], "peak_distance_m": 0.012351004007771997}
+{"time_utc": "1970-01-01T01:13:24.054747+00:00", "stage": "vision_frame", "frame": 8, "count": 5, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:24.059279+00:00", "stage": "target_missing", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:24.185041+00:00", "stage": "vision_frame", "frame": 9, "count": 5, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:13:24.188031+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.33905845880508423, "xyxy": [417.0205993652344, 359.79248046875, 560.2433471679688, 448.59771728515625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.00899163881937659, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:24.190631+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:24.419330+00:00", "stage": "vision_frame", "frame": 10, "count": 6, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:13:24.422797+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.3423718214035034, "xyxy": [417.23260498046875, 359.2539367675781, 560.234375, 448.6632385253906], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.009097385406494185, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:24.425382+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:24.653718+00:00", "stage": "vision_frame", "frame": 11, "count": 4, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:24.657012+00:00", "stage": "target_missing", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:24.781668+00:00", "stage": "vision_frame", "frame": 12, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:24.784876+00:00", "stage": "target_missing", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:24.911620+00:00", "stage": "vision_frame", "frame": 13, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:24.914732+00:00", "stage": "target_missing", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:25.046678+00:00", "stage": "vision_frame", "frame": 14, "count": 3, "age_s": 0.097}
+{"time_utc": "1970-01-01T01:13:25.049882+00:00", "stage": "target_missing", "consecutive_frames": 4}
+{"time_utc": "1970-01-01T01:13:25.179750+00:00", "stage": "vision_frame", "frame": 15, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:25.183182+00:00", "stage": "target_missing", "consecutive_frames": 5}
+{"time_utc": "1970-01-01T01:13:25.310537+00:00", "stage": "vision_frame", "frame": 16, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:25.313795+00:00", "stage": "target_missing", "consecutive_frames": 6}
+{"time_utc": "1970-01-01T01:13:25.450849+00:00", "stage": "vision_frame", "frame": 17, "count": 4, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:13:25.454101+00:00", "stage": "target_missing", "consecutive_frames": 7}
+{"time_utc": "1970-01-01T01:13:25.578386+00:00", "stage": "vision_frame", "frame": 18, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:25.581583+00:00", "stage": "target_missing", "consecutive_frames": 8}
+{"time_utc": "1970-01-01T01:13:25.719320+00:00", "stage": "vision_frame", "frame": 19, "count": 3, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:13:25.722657+00:00", "stage": "target_missing", "consecutive_frames": 9}
+{"time_utc": "1970-01-01T01:13:25.849860+00:00", "stage": "vision_frame", "frame": 20, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:13:25.853205+00:00", "stage": "target_missing", "consecutive_frames": 10}
+{"time_utc": "1970-01-01T01:13:25.978953+00:00", "stage": "vision_frame", "frame": 21, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:25.982508+00:00", "stage": "target_missing", "consecutive_frames": 11}
+{"time_utc": "1970-01-01T01:13:26.108245+00:00", "stage": "vision_frame", "frame": 22, "count": 4, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:26.111522+00:00", "stage": "target_missing", "consecutive_frames": 12}
+{"time_utc": "1970-01-01T01:13:26.245228+00:00", "stage": "vision_frame", "frame": 23, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:26.248613+00:00", "stage": "target_missing", "consecutive_frames": 13}
+{"time_utc": "1970-01-01T01:13:26.379152+00:00", "stage": "vision_frame", "frame": 24, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:13:26.382599+00:00", "stage": "target_missing", "consecutive_frames": 14}
+{"time_utc": "1970-01-01T01:13:26.512156+00:00", "stage": "vision_frame", "frame": 25, "count": 4, "age_s": 0.097}
+{"time_utc": "1970-01-01T01:13:26.516273+00:00", "stage": "target_missing", "consecutive_frames": 15}
+{"time_utc": "1970-01-01T01:13:26.648960+00:00", "stage": "vision_frame", "frame": 26, "count": 4, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:13:26.653309+00:00", "stage": "target_missing", "consecutive_frames": 16}
+{"time_utc": "1970-01-01T01:13:26.784024+00:00", "stage": "vision_frame", "frame": 27, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:26.787489+00:00", "stage": "target_missing", "consecutive_frames": 17}
+{"time_utc": "1970-01-01T01:13:26.911327+00:00", "stage": "vision_frame", "frame": 28, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:26.914735+00:00", "stage": "target_missing", "consecutive_frames": 18}
+{"time_utc": "1970-01-01T01:13:27.044917+00:00", "stage": "vision_frame", "frame": 29, "count": 3, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:13:27.048345+00:00", "stage": "target_missing", "consecutive_frames": 19}
+{"time_utc": "1970-01-01T01:13:27.177611+00:00", "stage": "vision_frame", "frame": 30, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:13:27.181221+00:00", "stage": "target_missing", "consecutive_frames": 20}
+{"time_utc": "1970-01-01T01:13:27.307498+00:00", "stage": "vision_frame", "frame": 31, "count": 3, "age_s": 0.096}
+{"time_utc": "1970-01-01T01:13:27.311184+00:00", "stage": "target_missing", "consecutive_frames": 21}
+{"time_utc": "1970-01-01T01:13:27.444568+00:00", "stage": "vision_frame", "frame": 32, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:27.448082+00:00", "stage": "target_missing", "consecutive_frames": 22}
+{"time_utc": "1970-01-01T01:13:27.573970+00:00", "stage": "vision_frame", "frame": 33, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:27.578395+00:00", "stage": "target_missing", "consecutive_frames": 23}
+{"time_utc": "1970-01-01T01:13:27.710156+00:00", "stage": "vision_frame", "frame": 34, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:27.714054+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.3464961349964142, "xyxy": [417.15545654296875, 359.1746520996094, 560.2874145507812, 448.640380859375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.009084828694661429, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:27.718669+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:27.951020+00:00", "stage": "vision_frame", "frame": 35, "count": 5, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:13:27.954949+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.32766830921173096, "xyxy": [416.79779052734375, 360.0370178222656, 560.2728271484375, 448.66015625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.008890946706136105, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:27.958607+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:28.218080+00:00", "stage": "vision_frame", "frame": 36, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:28.222235+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.3357699513435364, "xyxy": [416.543701171875, 359.7178955078125, 560.2276000976562, 448.6006164550781], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.008735052744547556, "correction_degrees": 0.0, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:28.225619+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:28.375825+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 15, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:28.381319+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.3357699513435364, "xyxy": [416.543701171875, 359.7178955078125, 560.2276000976562, 448.6006164550781], "image_width": 960, "image_height": 540}, "heading_offset": 0.03999999999999204}
+{"time_utc": "1970-01-01T01:13:28.387795+00:00", "stage": "sorting_grasp", "class_id": 32, "slot": 1, "place_heading": -90}
+{"time_utc": "1970-01-01T01:13:28.392047+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:13:29.435875+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:13:29.440462+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:13:30.355770+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:31.211388+00:00", "stage": "carry_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:13:31.216487+00:00", "stage": "return_path_turn_heading_reached", "offset": 0.12000000000000455, "target": 0.05000000000001137}
+{"time_utc": "1970-01-01T01:13:31.220302+00:00", "stage": "return_path_step_request", "distance_m": 0.025236353239288325, "speed_mps": -0.03, "start_position": [0.05283, 0.00453], "heading_offset": 0.12000000000000455, "return_target": [0.02764, 0.003]}
+{"time_utc": "1970-01-01T01:13:32.115726+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:32.445700+00:00", "stage": "translation_stop_sample", "body_velocity": [0.08, -0.0, 0.0], "wheel_rpm": [1, 2, -8, 0], "encoder_counts": [20588, 8619, 1795, 18816], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:32.552235+00:00", "stage": "translation_stop_sample", "body_velocity": [0.07, -0.01, 0.0], "wheel_rpm": [1, 1, -7, 4], "encoder_counts": [20648, 8509, 1690, 18841], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:32.709214+00:00", "stage": "translation_stop_sample", "body_velocity": [0.07, -0.0, 0.0], "wheel_rpm": [-1, 1, -2, 0], "encoder_counts": [20607, 8567, 1738, 18808], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:32.867537+00:00", "stage": "translation_stop_sample", "body_velocity": [0.07, -0.0, 0.0], "wheel_rpm": [6, 4, 0, 3], "encoder_counts": [20613, 8556, 1727, 18814], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:32.972936+00:00", "stage": "translation_stop_sample", "body_velocity": [0.08, -0.0, 0.0], "wheel_rpm": [-3, 1, -2, 6], "encoder_counts": [20616, 8556, 1728, 18815], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:33.077815+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.07, -0.0, 0.0], "wheel_rpm": [0, -2, 1, -4], "encoder_counts": [20617, 8551, 1724, 18817], "consecutive_samples": 7, "stable_seconds": 0.3194956480001565}
+{"time_utc": "1970-01-01T01:13:33.084293+00:00", "stage": "return_path_step_complete", "end_position": [0.03086, 0.00169], "actual_distance_m": 0.022152798920226764}
+{"time_utc": "1970-01-01T01:13:33.089770+00:00", "stage": "return_path_turn_heading_reached", "offset": 0.3300000000000125, "target": -0.0}
+{"time_utc": "1970-01-01T01:13:33.094863+00:00", "stage": "return_path_step_request", "distance_m": 0.03080624623667782, "speed_mps": -0.03, "start_position": [0.03086, 0.00169], "heading_offset": 0.3300000000000125, "return_target": [1e-05, -6e-05]}
+{"time_utc": "1970-01-01T01:13:34.179956+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:34.509895+00:00", "stage": "translation_stop_sample", "body_velocity": [0.06, -0.01, 0.0], "wheel_rpm": [0, -3, -3, 2], "encoder_counts": [17702, 11891, 5073, 15929], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:34.617558+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, -0.01, 0.0], "wheel_rpm": [-2, 0, -4, 4], "encoder_counts": [17719, 11854, 5032, 15938], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:34.697449+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, -0.01, 0.0], "wheel_rpm": [-3, -2, 1, -1], "encoder_counts": [17676, 11902, 5069, 15896], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:34.830566+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, -0.01, 0.0], "wheel_rpm": [-5, -2, -4, 2], "encoder_counts": [17697, 11882, 5050, 15915], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:34.938320+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, -0.01, 0.0], "wheel_rpm": [3, -2, 1, 0], "encoder_counts": [17697, 11880, 5049, 15917], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:35.095696+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, -0.01, 0.0], "wheel_rpm": [0, -1, -4, 7], "encoder_counts": [17697, 11879, 5049, 15916], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:13:35.150536+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.04, -0.01, 0.0], "wheel_rpm": [-8, 0, -3, -7], "encoder_counts": [17695, 11880, 5050, 15914], "consecutive_samples": 7, "stable_seconds": 0.3204446400004599}
+{"time_utc": "1970-01-01T01:13:35.157660+00:00", "stage": "return_path_step_complete", "end_position": [0.00123, -0.00096], "actual_distance_m": 0.029748267176425588}
+{"time_utc": "1970-01-01T01:13:35.164965+00:00", "stage": "startup_center_reached", "position": [0.00123, -0.00096], "error_m": 0.0014999999999999998}
+{"time_utc": "1970-01-01T01:13:35.172126+00:00", "stage": "turn_to_place_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:36.755734+00:00", "stage": "turn_to_place_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:37.561471+00:00", "stage": "turn_to_place_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:39.138347+00:00", "stage": "turn_to_place_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:39.946580+00:00", "stage": "turn_to_place_heading_reached", "offset": -89.5, "target": -90}
+{"time_utc": "1970-01-01T01:13:39.954640+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:13:39.995525+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:41.304007+00:00", "stage": "place_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:13:41.312197+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:13:42.356014+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:13:42.361097+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:13:43.275807+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:44.233292+00:00", "stage": "after_place_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:13:44.265216+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.02, 0.0], "wheel_rpm": [-3, 1, -1, -5], "encoder_counts": [17912, 10721, 4415, 15975], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:44.371627+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.02, 0.0], "wheel_rpm": [-1, -3, -1, -6], "encoder_counts": [17909, 10722, 4417, 15973], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:44.479751+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.02, 0.0], "wheel_rpm": [0, -3, 4, 7], "encoder_counts": [17913, 10722, 4415, 15975], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:44.588492+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, 0.02, 0.0], "wheel_rpm": [0, -2, -2, -2], "encoder_counts": [17912, 10723, 4415, 15974], "consecutive_samples": 7, "stable_seconds": 0.3208978559996467}
+{"time_utc": "1970-01-01T01:13:44.593448+00:00", "stage": "sorting_item_placed", "class_id": 32, "slot": 1, "counts": {"32": 1, "39": 0}, "center_error_m": 0.0068716882932798986, "pick_heading": 0, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "pending"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:13:44.599045+00:00", "stage": "next_pick_direction", "heading": -144, "current_heading": -90.44, "turn_degrees": -53.56, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "pending"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:13:44.604396+00:00", "stage": "search_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:13:44.655183+00:00", "stage": "search_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:45.162564+00:00", "stage": "search_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:13:45.171379+00:00", "stage": "sector_scan_turn_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:46.759197+00:00", "stage": "sector_scan_turn_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:13:47.568942+00:00", "stage": "sector_scan_turn_request", "degrees": -7.980000000000018}
+{"time_utc": "1970-01-01T01:13:47.875691+00:00", "stage": "sector_scan_turn_complete", "degrees": -7.980000000000018}
+{"time_utc": "1970-01-01T01:13:48.683028+00:00", "stage": "sector_scan_turn_heading_reached", "offset": -143.81, "target": -144.0}
+{"time_utc": "1970-01-01T01:13:48.688766+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:13:48.735531+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:13:50.043910+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:13:50.230873+00:00", "stage": "vision_frame", "frame": 37, "count": 3, "age_s": 0.133}
+{"time_utc": "1970-01-01T01:13:50.237618+00:00", "stage": "sector_observed", "heading": -144, "scan_offset": 0, "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9093620181083679, "xyxy": [495.7469482421875, 288.9071960449219, 603.3887939453125, 397.74609375], "image_width": 960, "image_height": 540}, "age_s": 0.13282815999991726, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:13:50.377048+00:00", "stage": "vision_frame", "frame": 38, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:13:50.382316+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9412885308265686, "xyxy": [495.7262878417969, 288.72003173828125, 603.41650390625, 397.49908447265625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.07247020403544113, "correction_degrees": -5.0, "heading_offset": -143.82}
+{"time_utc": "1970-01-01T01:13:50.387098+00:00", "stage": "align_turn_request", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:13:50.575448+00:00", "stage": "align_turn_complete", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:13:51.382293+00:00", "stage": "align_turn_feedback", "requested_degrees": -5.0, "actual_degrees": -4.680000000000007}
+{"time_utc": "1970-01-01T01:13:51.516081+00:00", "stage": "vision_frame", "frame": 39, "count": 2, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:51.522646+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.927829921245575, "xyxy": [438.8634033203125, 286.3748474121094, 545.1282348632812, 394.4167785644531], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.012495644887288382, "correction_degrees": 0.0, "heading_offset": -148.5}
+{"time_utc": "1970-01-01T01:13:51.527577+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:51.777919+00:00", "stage": "vision_frame", "frame": 40, "count": 3, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:51.783351+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9274255037307739, "xyxy": [438.915283203125, 286.2355651855469, 545.0408935546875, 394.4793701171875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.012477175394694062, "correction_degrees": 0.0, "heading_offset": -148.5}
+{"time_utc": "1970-01-01T01:13:51.788481+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:52.014924+00:00", "stage": "vision_frame", "frame": 41, "count": 2, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:52.021423+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9307302832603455, "xyxy": [438.79193115234375, 286.3551025390625, 545.0654296875, 394.58343505859375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.012425708770751998, "correction_degrees": 0.0, "heading_offset": -148.5}
+{"time_utc": "1970-01-01T01:13:52.026317+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:52.176958+00:00", "stage": "approach_distance_pending", "distance_mm": 129, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:52.184403+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.00772, 0.00068], "heading_offset": -148.5, "return_target": null}
+{"time_utc": "1970-01-01T01:13:52.576856+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:52.908176+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-5, 0, -1, -4], "encoder_counts": [30195, 19822, 15464, 29126], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:53.014335+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [4, -4, -7, 0], "encoder_counts": [30281, 19736, 15315, 29192], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:53.173504+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-2, 0, -1, 1], "encoder_counts": [30389, 19645, 15230, 29307], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:53.256159+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [-1, 3, -6, 4], "encoder_counts": [30336, 19690, 15269, 29252], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:53.440253+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [4, 6, 4, -2], "encoder_counts": [30353, 19682, 15255, 29265], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:53.598852+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-3, -3, 0, 4], "encoder_counts": [30339, 19694, 15266, 29251], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:13:53.755410+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-1, 5, 1, 3], "encoder_counts": [30341, 19691, 15264, 29254], "consecutive_samples": 7, "stable_seconds": 0.3189338239999415}
+{"time_utc": "1970-01-01T01:13:53.761968+00:00", "stage": "approach_step_complete", "end_position": [-0.0185, 0.00675], "actual_distance_m": 0.012371471214047258}
+{"time_utc": "1970-01-01T01:13:53.771044+00:00", "stage": "approach_path_recorded", "start_position": [-0.00772, 0.00068], "end_position": [-0.0185, 0.00675], "forward_axis": [-0.9023729404308282, 0.43095600283349256], "peak_distance_m": 0.010627534991709034}
+{"time_utc": "1970-01-01T01:13:54.007900+00:00", "stage": "vision_frame", "frame": 42, "count": 1, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:54.015183+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9375748634338379, "xyxy": [440.1207275390625, 294.47589111328125, 550.084228515625, 407.505126953125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.015731747945149754, "correction_degrees": 0.0, "heading_offset": -148.27999999999997}
+{"time_utc": "1970-01-01T01:13:54.021771+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:54.273349+00:00", "stage": "vision_frame", "frame": 43, "count": 1, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:54.280587+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9399088025093079, "xyxy": [440.045166015625, 294.4130554199219, 550.1286010742188, 407.2605285644531], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.015715503692626975, "correction_degrees": 0.0, "heading_offset": -148.27999999999997}
+{"time_utc": "1970-01-01T01:13:54.285910+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:54.542109+00:00", "stage": "vision_frame", "frame": 44, "count": 2, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:54.548655+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9269663691520691, "xyxy": [440.19439697265625, 294.4981384277344, 550.1357421875, 407.1455383300781], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.01579694747924809, "correction_degrees": 0.0, "heading_offset": -148.27999999999997}
+{"time_utc": "1970-01-01T01:13:54.553754+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:54.694910+00:00", "stage": "approach_distance_pending", "distance_mm": 121, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:54.701391+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.0184, 0.00675], "heading_offset": -148.27999999999997, "return_target": null}
+{"time_utc": "1970-01-01T01:13:55.115101+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:55.472544+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-5, 2, 2, 1], "encoder_counts": [694, 16803, 12558, 32540], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:55.557381+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, -0.01, 0.0], "wheel_rpm": [-7, 3, 3, -4], "encoder_counts": [432, 17140, 12776, 32329], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:55.694185+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [0, -8, 7, 0], "encoder_counts": [330, 17241, 12871, 32214], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:55.851765+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [7, 0, 3, 5], "encoder_counts": [564, 17042, 12674, 32440], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:56.010353+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-1, -2, -2, -4], "encoder_counts": [507, 17087, 12713, 32393], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:56.095298+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [0, -3, 1, -3], "encoder_counts": [539, 17058, 12686, 32419], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:56.227775+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, 4, -2, -2], "encoder_counts": [553, 17038, 12669, 32432], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:56.361352+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, -3, -3, 0], "encoder_counts": [533, 17062, 12691, 32415], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:13:56.498136+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, -5, -2, -7], "encoder_counts": [540, 17053, 12682, 32421], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:13:56.609096+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-1, 1, -1, 0], "encoder_counts": [543, 17051, 12681, 32422], "consecutive_samples": 7, "stable_seconds": 0.34012928000083775}
+{"time_utc": "1970-01-01T01:13:56.616670+00:00", "stage": "approach_step_complete", "end_position": [-0.04173, 0.01716], "actual_distance_m": 0.02554715248320251}
+{"time_utc": "1970-01-01T01:13:56.622623+00:00", "stage": "approach_path_recorded", "start_position": [-0.0184, 0.00675], "end_position": [-0.04173, 0.01716], "forward_axis": [-0.8809678649237275, 0.4731760993242678], "peak_distance_m": 0.011623579483102438}
+{"time_utc": "1970-01-01T01:13:56.873695+00:00", "stage": "vision_frame", "frame": 45, "count": 2, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:13:56.881175+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.947785496711731, "xyxy": [439.5764465332031, 312.8022766113281, 559.371337890625, 435.62603759765625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.020285304387410497, "correction_degrees": 0.0, "heading_offset": -147.96000000000004}
+{"time_utc": "1970-01-01T01:13:56.886639+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:13:57.136927+00:00", "stage": "vision_frame", "frame": 46, "count": 2, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:13:57.143210+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9489706158638, "xyxy": [439.5240783691406, 312.7275390625, 559.4408569335938, 435.720947265625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.020294237136840865, "correction_degrees": 0.0, "heading_offset": -147.96000000000004}
+{"time_utc": "1970-01-01T01:13:57.148946+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:13:57.397625+00:00", "stage": "vision_frame", "frame": 47, "count": 2, "age_s": 0.097}
+{"time_utc": "1970-01-01T01:13:57.404028+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9468904137611389, "xyxy": [439.4059753417969, 313.0380554199219, 559.4588623046875, 435.825439453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.02024210294087725, "correction_degrees": 0.0, "heading_offset": -147.96000000000004}
+{"time_utc": "1970-01-01T01:13:57.409781+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:13:57.554918+00:00", "stage": "approach_distance_pending", "distance_mm": 84, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:13:57.561685+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.04211, 0.01701], "heading_offset": -147.96000000000004, "return_target": null}
+{"time_utc": "1970-01-01T01:13:58.055562+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:13:58.388189+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, -0.01, 0.0], "wheel_rpm": [-4, 10, 3, -6], "encoder_counts": [3430, 14206, 9829, 2435], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:13:58.549542+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [3, 4, 1, 4], "encoder_counts": [3084, 14653, 10218, 2079], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:58.661895+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [0, -4, -4, 4], "encoder_counts": [3165, 14585, 10150, 2139], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:58.824295+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-2, 4, 0, 1], "encoder_counts": [3427, 14270, 9839, 2399], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:58.985938+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, -0.01, 0.0], "wheel_rpm": [1, 3, 1, -2], "encoder_counts": [3360, 14340, 9920, 2326], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:59.148040+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-1, 5, -3, 4], "encoder_counts": [3387, 14317, 9892, 2356], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:59.306415+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [-1, 3, -5, 0], "encoder_counts": [3369, 14336, 9913, 2337], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:13:59.466612+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, -1, 1, -3], "encoder_counts": [3381, 14324, 9899, 2350], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:13:59.576888+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, 0, 2, -3], "encoder_counts": [3374, 14330, 9906, 2342], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:13:59.659016+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [1, 0, 0, 3], "encoder_counts": [3373, 14331, 9907, 2342], "consecutive_samples": 7, "stable_seconds": 0.3403167360002044}
+{"time_utc": "1970-01-01T01:13:59.671521+00:00", "stage": "approach_step_complete", "end_position": [-0.06412, 0.02965], "actual_distance_m": 0.025381286413418837}
+{"time_utc": "1970-01-01T01:13:59.681704+00:00", "stage": "approach_path_recorded", "start_position": [-0.04211, 0.01701], "end_position": [-0.06412, 0.02965], "forward_axis": [-0.8997783058979296, 0.4363473389806013], "peak_distance_m": 0.013292163104626725}
+{"time_utc": "1970-01-01T01:13:59.934408+00:00", "stage": "vision_frame", "frame": 48, "count": 1, "age_s": 0.097}
+{"time_utc": "1970-01-01T01:13:59.942781+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9560344815254211, "xyxy": [435.93280029296875, 334.0826110839844, 568.088623046875, 448.48480224609375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.022927824656168605, "correction_degrees": 0.0, "heading_offset": -147.95}
+{"time_utc": "1970-01-01T01:13:59.948965+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:00.201943+00:00", "stage": "vision_frame", "frame": 49, "count": 2, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:14:00.209904+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9522003531455994, "xyxy": [435.52099609375, 334.11932373046875, 568.0596923828125, 448.552978515625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.022698275248209665, "correction_degrees": 0.0, "heading_offset": -147.95}
+{"time_utc": "1970-01-01T01:14:00.216596+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:00.472625+00:00", "stage": "vision_frame", "frame": 50, "count": 1, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:14:00.480420+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9541844725608826, "xyxy": [435.4464111328125, 334.19671630859375, 568.17138671875, 448.514404296875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.022717603047688772, "correction_degrees": 0.0, "heading_offset": -147.95}
+{"time_utc": "1970-01-01T01:14:00.486653+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:00.637054+00:00", "stage": "approach_distance_pending", "distance_mm": 43, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:00.648968+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.06458, 0.02963], "heading_offset": -147.95, "return_target": null}
+{"time_utc": "1970-01-01T01:14:01.115058+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:01.498378+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [-9, 4, 4, -3], "encoder_counts": [6164, 11597, 7148, 5156], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:14:01.660011+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [-1, -1, 1, -1], "encoder_counts": [6000, 11769, 7337, 4986], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:01.746396+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [3, -4, -5, 5], "encoder_counts": [6048, 11726, 7287, 5036], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:01.858196+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [3, -1, -3, 2], "encoder_counts": [6127, 11648, 7203, 5114], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:01.996066+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [1, -1, -2, -2], "encoder_counts": [6135, 11634, 7188, 5124], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:02.105376+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-1, -2, 0, 4], "encoder_counts": [6136, 11637, 7188, 5125], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:02.269386+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [4, 0, -4, -2], "encoder_counts": [6137, 11634, 7187, 5126], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:02.355314+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [-4, -3, -3, -1], "encoder_counts": [6135, 11638, 7190, 5124], "consecutive_samples": 7, "stable_seconds": 0.31790819200068654}
+{"time_utc": "1970-01-01T01:14:02.362781+00:00", "stage": "approach_step_complete", "end_position": [-0.08838, 0.04106], "actual_distance_m": 0.026402365424332722}
+{"time_utc": "1970-01-01T01:14:02.369762+00:00", "stage": "approach_path_recorded", "start_position": [-0.06458, 0.02963], "end_position": [-0.08838, 0.04106], "forward_axis": [-0.9051236536865643, 0.42514841118965047], "peak_distance_m": 0.010396369558648828}
+{"time_utc": "1970-01-01T01:14:02.621948+00:00", "stage": "vision_frame", "frame": 51, "count": 2, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:14:02.629372+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9178133010864258, "xyxy": [430.94482421875, 359.25689697265625, 577.7501220703125, 454.26507568359375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.025361951192220067, "correction_degrees": 0.0, "heading_offset": -147.94}
+{"time_utc": "1970-01-01T01:14:02.637522+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:02.888447+00:00", "stage": "vision_frame", "frame": 52, "count": 2, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:14:02.897087+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.907778263092041, "xyxy": [430.8990478515625, 359.4312744140625, 577.7892456054688, 454.4184265136719], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.025358486175537154, "correction_degrees": 0.0, "heading_offset": -147.94}
+{"time_utc": "1970-01-01T01:14:02.905710+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:03.159070+00:00", "stage": "vision_frame", "frame": 53, "count": 2, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:14:03.167487+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9005005955696106, "xyxy": [430.74371337890625, 359.6049499511719, 577.9786987304688, 454.9552917480469], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.02537625630696616, "correction_degrees": 0.0, "heading_offset": -147.94}
+{"time_utc": "1970-01-01T01:14:03.175599+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:03.314860+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 16, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:03.325588+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9005005955696106, "xyxy": [430.74371337890625, 359.6049499511719, 577.9786987304688, 454.9552917480469], "image_width": 960, "image_height": 540}, "heading_offset": -147.94}
+{"time_utc": "1970-01-01T01:14:03.339065+00:00", "stage": "sorting_grasp", "class_id": 32, "slot": 2, "place_heading": -72}
+{"time_utc": "1970-01-01T01:14:03.350172+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:14:04.398853+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:14:04.407230+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:05.314962+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:06.176449+00:00", "stage": "carry_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:14:06.189935+00:00", "stage": "return_path_turn_heading_reached", "offset": -147.89, "target": -147.95}
+{"time_utc": "1970-01-01T01:14:06.200881+00:00", "stage": "return_path_step_request", "distance_m": 0.020309868633358028, "speed_mps": -0.03, "start_position": [-0.08289, 0.03842], "heading_offset": -147.89, "return_target": [-0.06458, 0.02963]}
+{"time_utc": "1970-01-01T01:14:06.874626+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:07.208338+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, 0.0, 0.0], "wheel_rpm": [-3, -8, -5, 4], "encoder_counts": [3498, 14747, 10065, 2366], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:07.371086+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-3, 3, 0, 3], "encoder_counts": [3558, 14612, 9922, 2421], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:07.480191+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [0, 6, 1, -3], "encoder_counts": [3508, 14662, 9962, 2369], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:07.593679+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [5, -4, 1, 2], "encoder_counts": [3512, 14662, 9959, 2373], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:07.707333+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-2, -1, 4, 1], "encoder_counts": [3524, 14644, 9942, 2386], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:07.795252+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [0, 2, 2, 0], "encoder_counts": [3515, 14656, 9954, 2376], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:07.936310+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-1, 2, 2, 1], "encoder_counts": [3520, 14649, 9948, 2383], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:08.019874+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-1, 1, 0, 4], "encoder_counts": [3520, 14650, 9948, 2383], "consecutive_samples": 7, "stable_seconds": 0.31987734399990586}
+{"time_utc": "1970-01-01T01:14:08.031516+00:00", "stage": "return_path_step_complete", "end_position": [-0.06274, 0.02951], "actual_distance_m": 0.022032035766129287}
+{"time_utc": "1970-01-01T01:14:08.045200+00:00", "stage": "return_path_turn_heading_reached", "offset": -147.86, "target": -147.96000000000004}
+{"time_utc": "1970-01-01T01:14:08.057639+00:00", "stage": "return_path_step_request", "distance_m": 0.024016768187931806, "speed_mps": -0.03, "start_position": [-0.06274, 0.02951], "heading_offset": -147.86, "return_target": [-0.04211, 0.01701]}
+{"time_utc": "1970-01-01T01:14:08.934329+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:09.293600+00:00", "stage": "translation_stop_sample", "body_velocity": [0.06, -0.0, 0.0], "wheel_rpm": [2, -4, -6, -1], "encoder_counts": [994, 17587, 12714, 32502], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:09.407733+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.0, 0.0], "wheel_rpm": [-5, 4, -1, -1], "encoder_counts": [1011, 17522, 12655, 32486], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:09.547064+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.0, 0.0], "wheel_rpm": [-3, -5, -1, 0], "encoder_counts": [988, 17554, 12663, 32464], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:09.661016+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.0, 0.0], "wheel_rpm": [-2, -4, 1, -2], "encoder_counts": [1003, 17532, 12648, 32478], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:09.770635+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.0, 0.0], "wheel_rpm": [5, 1, -1, -2], "encoder_counts": [986, 17552, 12665, 32462], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:09.935839+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.01, 0.0], "wheel_rpm": [-2, 0, 1, 1], "encoder_counts": [996, 17541, 12656, 32471], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:14:10.076085+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.01, 0.0], "wheel_rpm": [4, -3, 2, -3], "encoder_counts": [996, 17542, 12657, 32470], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:10.190161+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.01, 0.0], "wheel_rpm": [-1, 3, 0, 1], "encoder_counts": [993, 17544, 12658, 32469], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:14:10.354566+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.04, 0.01, 0.0], "wheel_rpm": [-3, -3, 0, 1], "encoder_counts": [992, 17544, 12659, 32468], "consecutive_samples": 7, "stable_seconds": 0.3200023359995612}
+{"time_utc": "1970-01-01T01:14:10.367408+00:00", "stage": "return_path_step_complete", "end_position": [-0.04161, 0.0189], "actual_distance_m": 0.023644217051955855}
+{"time_utc": "1970-01-01T01:14:10.378829+00:00", "stage": "return_path_turn_heading_reached", "offset": -147.86, "target": -148.27999999999997}
+{"time_utc": "1970-01-01T01:14:10.390659+00:00", "stage": "return_path_step_request", "distance_m": 0.02619635375166957, "speed_mps": -0.03, "start_position": [-0.04161, 0.0189], "heading_offset": -147.86, "return_target": [-0.0184, 0.00675]}
+{"time_utc": "1970-01-01T01:14:11.234663+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:11.594359+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-4, 1, -1, 5], "encoder_counts": [31304, 20373, 15304, 29675], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:11.684390+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [0, 1, 3, -1], "encoder_counts": [31299, 20368, 15309, 29673], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:11.797048+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [-1, -1, -1, 1], "encoder_counts": [31279, 20387, 15324, 29651], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:11.982145+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [-3, -3, 0, -3], "encoder_counts": [31293, 20377, 15315, 29664], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:12.069457+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [0, -1, 4, 1], "encoder_counts": [31295, 20376, 15314, 29666], "consecutive_samples": 6, "stable_seconds": 0.33996233600009873}
+{"time_utc": "1970-01-01T01:14:12.081137+00:00", "stage": "return_path_step_complete", "end_position": [-0.01571, 0.00504], "actual_distance_m": 0.029375322976947848}
+{"time_utc": "1970-01-01T01:14:12.091695+00:00", "stage": "return_path_turn_heading_reached", "offset": -147.73000000000002, "target": -148.5}
+{"time_utc": "1970-01-01T01:14:12.101792+00:00", "stage": "return_path_step_request", "distance_m": 0.009088927966396342, "speed_mps": -0.03, "start_position": [-0.01571, 0.00504], "heading_offset": -147.73000000000002, "return_target": [-0.00772, 0.00068]}
+{"time_utc": "1970-01-01T01:14:12.574851+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:12.910598+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [0, -3, -7, 4], "encoder_counts": [30497, 21762, 16534, 28855], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:12.995035+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [4, -4, -5, 4], "encoder_counts": [30700, 21559, 16339, 29010], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.158490+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [3, 0, -6, 1], "encoder_counts": [30942, 21319, 16140, 29186], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.275460+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [-3, -4, -3, 8], "encoder_counts": [31104, 21161, 15992, 29307], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.386932+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [8, -12, -5, 1], "encoder_counts": [31327, 20925, 15722, 29522], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:14:13.476853+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.02, 0.0], "wheel_rpm": [3, -6, -3, -4], "encoder_counts": [31558, 20614, 15335, 29724], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.636703+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [-1, -3, 0, -3], "encoder_counts": [31470, 20673, 15367, 29613], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.772046+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.0, 0.0], "wheel_rpm": [0, -4, -2, -3], "encoder_counts": [31481, 20672, 15354, 29615], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:13.861513+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, -0.0, 0.0], "wheel_rpm": [7, 2, -4, -1], "encoder_counts": [31514, 20632, 15328, 29656], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:13.977305+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [0, 3, 1, -2], "encoder_counts": [31493, 20651, 15345, 29636], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:14:14.092071+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [1, -2, 0, -1], "encoder_counts": [31506, 20641, 15334, 29648], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:14:14.156564+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.06, -0.0, 0.0], "wheel_rpm": [-4, 0, 0, 4], "encoder_counts": [31508, 20637, 15331, 29650], "consecutive_samples": 7, "stable_seconds": 0.3401685759999964}
+{"time_utc": "1970-01-01T01:14:14.168968+00:00", "stage": "return_path_step_complete", "end_position": [-0.00966, 0.00321], "actual_distance_m": 0.00632071198521179}
+{"time_utc": "1970-01-01T01:14:14.178374+00:00", "stage": "startup_center_reached", "position": [-0.00966, 0.00321], "error_m": 0.01022687635595542}
+{"time_utc": "1970-01-01T01:14:14.188253+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:15.715669+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:16.526062+00:00", "stage": "turn_to_place_request", "degrees": 31.05000000000001}
+{"time_utc": "1970-01-01T01:14:17.595189+00:00", "stage": "turn_to_place_complete", "degrees": 31.05000000000001}
+{"time_utc": "1970-01-01T01:14:18.408474+00:00", "stage": "turn_to_place_heading_reached", "offset": -72.67000000000002, "target": -72}
+{"time_utc": "1970-01-01T01:14:18.420679+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:14:18.476312+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:19.788355+00:00", "stage": "place_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:14:19.806051+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:14:20.854416+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:14:20.870028+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:21.842419+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:22.552647+00:00", "stage": "after_place_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:14:22.594455+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [-2, -3, 0, 7], "encoder_counts": [27731, 16104, 9951, 24447], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:22.757499+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [2, -2, -5, -1], "encoder_counts": [27718, 16121, 9966, 24436], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:22.847125+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [-4, 0, 5, -1], "encoder_counts": [27729, 16109, 9955, 24443], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:23.014212+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [2, 1, 4, -6], "encoder_counts": [27727, 16112, 9957, 24442], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:14:23.107001+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [-1, -4, 1, -2], "encoder_counts": [27723, 16115, 9962, 24440], "consecutive_samples": 8, "stable_seconds": 0.35902572799932386}
+{"time_utc": "1970-01-01T01:14:23.122747+00:00", "stage": "sorting_item_placed", "class_id": 32, "slot": 2, "counts": {"32": 2, "39": 0}, "center_error_m": 0.009776727468841504, "pick_heading": -144, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:14:23.137919+00:00", "stage": "next_pick_direction", "heading": -36, "current_heading": -70.91, "turn_degrees": 34.91, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "pending"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:14:23.150094+00:00", "stage": "search_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:23.195987+00:00", "stage": "search_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:23.706438+00:00", "stage": "search_retract_complete", "actual_raw": 1184}
+{"time_utc": "1970-01-01T01:14:23.720449+00:00", "stage": "sector_scan_turn_request", "degrees": 34.920000000000016}
+{"time_utc": "1970-01-01T01:14:24.914595+00:00", "stage": "sector_scan_turn_complete", "degrees": 34.920000000000016}
+{"time_utc": "1970-01-01T01:14:25.730446+00:00", "stage": "sector_scan_turn_heading_reached", "offset": -35.98000000000002, "target": -36.0}
+{"time_utc": "1970-01-01T01:14:25.741954+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:14:25.797486+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:27.164092+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:14:27.347286+00:00", "stage": "vision_frame", "frame": 54, "count": 3, "age_s": 0.135}
+{"time_utc": "1970-01-01T01:14:27.358196+00:00", "stage": "sector_observed", "heading": -36, "scan_offset": 0, "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9250166416168213, "xyxy": [413.9263000488281, 147.55609130859375, 546.4807739257812, 443.9873046875], "image_width": 960, "image_height": 540}, "age_s": 0.13493513600042206, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:14:27.488133+00:00", "stage": "vision_frame", "frame": 55, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:14:27.499254+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9203159213066101, "xyxy": [413.9773864746094, 148.07272338867188, 546.3935546875, 441.0678405761719], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.00019319852193200315, "correction_degrees": 0.0, "heading_offset": -35.639999999999986}
+{"time_utc": "1970-01-01T01:14:27.508145+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:27.750742+00:00", "stage": "vision_frame", "frame": 56, "count": 4, "age_s": 0.097}
+{"time_utc": "1970-01-01T01:14:27.761357+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.927307665348053, "xyxy": [414.08734130859375, 147.71177673339844, 546.443115234375, 443.34503173828125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0002762794494628462, "correction_degrees": 0.0, "heading_offset": -35.639999999999986}
+{"time_utc": "1970-01-01T01:14:27.770361+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:28.025602+00:00", "stage": "vision_frame", "frame": 57, "count": 3, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:14:28.036448+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9238669276237488, "xyxy": [414.0539245605469, 147.44268798828125, 546.5584716796875, 443.7662353515625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0003189563751220259, "correction_degrees": 0.0, "heading_offset": -35.639999999999986}
+{"time_utc": "1970-01-01T01:14:28.045528+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:28.214551+00:00", "stage": "approach_distance_pending", "distance_mm": 74, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:28.230310+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.00213, 0.01204], "heading_offset": -35.639999999999986, "return_target": null}
+{"time_utc": "1970-01-01T01:14:28.674101+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:29.034711+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, 0.0, 0.0], "wheel_rpm": [5, -3, -6, 4], "encoder_counts": [11831, 25866, 18953, 7814], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:29.174757+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-1, -3, -8, -5], "encoder_counts": [12209, 25416, 18441, 7983], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:29.292011+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, 0.0, 0.0], "wheel_rpm": [-2, 1, 3, -2], "encoder_counts": [12213, 25411, 18380, 7951], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:29.407169+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.01, 0.0], "wheel_rpm": [1, -6, -2, 3], "encoder_counts": [12212, 25444, 18399, 7944], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:29.497125+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.01, 0.0], "wheel_rpm": [3, 3, 0, 1], "encoder_counts": [12217, 25436, 18394, 7948], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:29.663043+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.01, 0.0], "wheel_rpm": [2, -3, -4, 4], "encoder_counts": [12217, 25440, 18396, 7946], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:29.777570+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.01, 0.0], "wheel_rpm": [-4, 0, -2, -1], "encoder_counts": [12215, 25441, 18397, 7944], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:29.895297+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, 0.01, 0.0], "wheel_rpm": [0, 0, -5, -2], "encoder_counts": [12216, 25442, 18397, 7946], "consecutive_samples": 7, "stable_seconds": 0.32053104000078747}
+{"time_utc": "1970-01-01T01:14:29.914059+00:00", "stage": "approach_step_complete", "end_position": [0.02507, 0.02881], "actual_distance_m": 0.028416130982243163}
+{"time_utc": "1970-01-01T01:14:29.928087+00:00", "stage": "approach_path_recorded", "start_position": [0.00213, 0.01204], "end_position": [0.02507, 0.02881], "forward_axis": [0.7411794634546459, 0.6713069364702582], "peak_distance_m": 0.011306303551559193}
+{"time_utc": "1970-01-01T01:14:30.186781+00:00", "stage": "vision_frame", "frame": 58, "count": 3, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:14:30.198257+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9428152441978455, "xyxy": [406.5812072753906, 153.5061798095703, 554.6243896484375, 448.49102783203125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0006279150644937781, "correction_degrees": 0.0, "heading_offset": -35.670000000000016}
+{"time_utc": "1970-01-01T01:14:30.207768+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:30.454154+00:00", "stage": "vision_frame", "frame": 59, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:14:30.466373+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9434362649917603, "xyxy": [406.64117431640625, 153.70339965820312, 554.5702514648438, 448.42987060546875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0006309509277343528, "correction_degrees": 0.0, "heading_offset": -35.68000000000001}
+{"time_utc": "1970-01-01T01:14:30.476641+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:30.717899+00:00", "stage": "vision_frame", "frame": 60, "count": 3, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:14:30.730372+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9348958134651184, "xyxy": [406.58306884765625, 153.47296142578125, 554.22802734375, 448.3626708984375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.00042244593302409594, "correction_degrees": 0.0, "heading_offset": -35.68000000000001}
+{"time_utc": "1970-01-01T01:14:30.742118+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:30.874574+00:00", "stage": "approach_distance_pending", "distance_mm": 32, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:30.889144+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.02534, 0.02896], "heading_offset": -35.670000000000016, "return_target": null}
+{"time_utc": "1970-01-01T01:14:31.242246+00:00", "stage": "approach_threshold_seen", "position": [0.0278, 0.03157], "distance_mm": 22}
+{"time_utc": "1970-01-01T01:14:31.274740+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:31.610786+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, 0.01, 0.0], "wheel_rpm": [2, -8, -6, -4], "encoder_counts": [15163, 22615, 15465, 10781], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:31.725963+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.09, 0.02, 0.0], "wheel_rpm": [-6, 1, 1, -2], "encoder_counts": [15063, 22646, 15419, 10616], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:31.816828+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.09, 0.01, 0.0], "wheel_rpm": [-3, 3, 3, -7], "encoder_counts": [14881, 22890, 15672, 10457], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:31.956716+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.02, 0.0], "wheel_rpm": [-5, 1, -2, 3], "encoder_counts": [14771, 23007, 15807, 10370], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:32.047073+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.02, 0.0], "wheel_rpm": [2, 4, -4, -5], "encoder_counts": [14880, 22907, 15690, 10454], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:32.213999+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.09, 0.02, 0.0], "wheel_rpm": [-1, 1, 2, -4], "encoder_counts": [14903, 22877, 15655, 10475], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:32.356250+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.02, 0.0], "wheel_rpm": [-3, -1, -4, 0], "encoder_counts": [14868, 22913, 15698, 10445], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:32.476410+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.02, 0.0], "wheel_rpm": [-4, -1, -1, 3], "encoder_counts": [14891, 22891, 15673, 10464], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:32.594540+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.02, 0.0], "wheel_rpm": [0, -6, -2, -2], "encoder_counts": [14884, 22895, 15677, 10458], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:32.714965+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, 0.02, 0.0], "wheel_rpm": [1, -4, 0, -4], "encoder_counts": [14877, 22907, 15689, 10452], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:14:32.782281+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.04, 0.02, 0.0], "wheel_rpm": [4, -5, 3, 0], "encoder_counts": [14879, 22904, 15685, 10453], "consecutive_samples": 7, "stable_seconds": 0.3181892479997259}
+{"time_utc": "1970-01-01T01:14:32.798921+00:00", "stage": "approach_step_complete", "end_position": [0.04257, 0.04416], "actual_distance_m": 0.022976355237504485}
+{"time_utc": "1970-01-01T01:14:32.816683+00:00", "stage": "approach_path_recorded", "start_position": [0.02534, 0.02896], "end_position": [0.04257, 0.04416], "forward_axis": null, "peak_distance_m": 0.003586600061339428}
+{"time_utc": "1970-01-01T01:14:33.053407+00:00", "stage": "vision_frame", "frame": 61, "count": 3, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:14:33.064994+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9174705147743225, "xyxy": [398.21685791015625, 158.46255493164062, 564.854736328125, 449.96978759765625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0015997886657714844, "correction_degrees": 0.0, "heading_offset": -35.78}
+{"time_utc": "1970-01-01T01:14:33.075729+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:33.319796+00:00", "stage": "vision_frame", "frame": 62, "count": 3, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:14:33.331048+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.925625205039978, "xyxy": [398.42340087890625, 158.41314697265625, 564.6278686523438, 450.1412658691406], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0015892028808593972, "correction_degrees": 0.0, "heading_offset": -35.78}
+{"time_utc": "1970-01-01T01:14:33.342058+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:33.578175+00:00", "stage": "vision_frame", "frame": 63, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:14:33.589150+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9305122494697571, "xyxy": [398.4533386230469, 158.16952514648438, 564.6234130859375, 450.2406005859375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0016024748484293472, "correction_degrees": 0.0, "heading_offset": -35.78}
+{"time_utc": "1970-01-01T01:14:33.600596+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:33.755096+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 11, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:33.771536+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9305122494697571, "xyxy": [398.4533386230469, 158.16952514648438, 564.6234130859375, 450.2406005859375], "image_width": 960, "image_height": 540}, "heading_offset": -35.78}
+{"time_utc": "1970-01-01T01:14:33.788941+00:00", "stage": "sorting_grasp", "class_id": 39, "slot": 1, "place_heading": 90}
+{"time_utc": "1970-01-01T01:14:33.802634+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:14:34.853659+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:14:34.870978+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:35.794594+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:36.615830+00:00", "stage": "carry_retract_complete", "actual_raw": 1184}
+{"time_utc": "1970-01-01T01:14:36.637091+00:00", "stage": "return_path_turn_heading_reached", "offset": -35.44, "target": -35.670000000000016}
+{"time_utc": "1970-01-01T01:14:36.647581+00:00", "stage": "return_short_segment_skipped", "error_m": 0.02651441306157841}
+{"time_utc": "1970-01-01T01:14:36.658864+00:00", "stage": "return_path_turn_heading_reached", "offset": -35.43000000000001, "target": -35.639999999999986}
+{"time_utc": "1970-01-01T01:14:36.669338+00:00", "stage": "return_path_step_request", "distance_m": 0.05494834781030843, "speed_mps": -0.03, "start_position": [0.04664, 0.04475], "heading_offset": -35.43000000000001, "return_target": [0.00213, 0.01204]}
+{"time_utc": "1970-01-01T01:14:38.453568+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:38.816218+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.01, 0.0], "wheel_rpm": [2, -11, -5, 2], "encoder_counts": [10023, 28922, 21326, 5322], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:14:38.987687+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [3, 0, 0, -3], "encoder_counts": [10114, 28668, 20916, 5273], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:39.133433+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [-2, 1, 2, -3], "encoder_counts": [10112, 28680, 20928, 5276], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:39.250055+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [6, 1, -2, 3], "encoder_counts": [10113, 28676, 20924, 5278], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:39.395332+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [-1, 1, 2, 0], "encoder_counts": [10114, 28675, 20925, 5280], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:39.514534+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [-2, 2, -4, 4], "encoder_counts": [10113, 28678, 20926, 5277], "consecutive_samples": 7, "stable_seconds": 0.317976895999891}
+{"time_utc": "1970-01-01T01:14:39.535479+00:00", "stage": "return_path_step_complete", "end_position": [0.01048, 0.01199], "actual_distance_m": 0.0487930650810133}
+{"time_utc": "1970-01-01T01:14:39.550823+00:00", "stage": "startup_center_reached", "position": [0.01048, 0.01199], "error_m": 0.01595007836971342}
+{"time_utc": "1970-01-01T01:14:39.564184+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:41.076904+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:41.893315+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:43.435527+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:44.251099+00:00", "stage": "turn_to_place_request", "degrees": 34.78}
+{"time_utc": "1970-01-01T01:14:45.454190+00:00", "stage": "turn_to_place_complete", "degrees": 34.78}
+{"time_utc": "1970-01-01T01:14:46.273984+00:00", "stage": "turn_to_place_heading_reached", "offset": 90.36, "target": 90}
+{"time_utc": "1970-01-01T01:14:46.288864+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:14:46.345861+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:47.663483+00:00", "stage": "place_extend_complete", "actual_raw": 599}
+{"time_utc": "1970-01-01T01:14:47.676280+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:14:48.735100+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:14:48.754997+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:49.716102+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:50.436851+00:00", "stage": "after_place_retract_complete", "actual_raw": 1182}
+{"time_utc": "1970-01-01T01:14:50.507578+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.02, 0.0], "wheel_rpm": [5, 0, 1, -2], "encoder_counts": [24216, 9617, 1976, 18179], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:50.623268+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.02, 0.0], "wheel_rpm": [2, 1, 1, 3], "encoder_counts": [24222, 9610, 1972, 18184], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:50.768120+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.02, 0.0], "wheel_rpm": [-1, -1, -1, -1], "encoder_counts": [24217, 9614, 1975, 18180], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:14:50.831031+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [-2, 0, -1, -1], "encoder_counts": [24219, 9615, 1975, 18180], "consecutive_samples": 7, "stable_seconds": 0.3192138240001441}
+{"time_utc": "1970-01-01T01:14:50.850564+00:00", "stage": "sorting_item_placed", "class_id": 39, "slot": 1, "counts": {"32": 2, "39": 1}, "center_error_m": 0.01599140394086773, "pick_heading": -36, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:14:50.867691+00:00", "stage": "next_pick_direction", "heading": 144, "current_heading": 91.69, "turn_degrees": 52.31, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "pending"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:14:50.881061+00:00", "stage": "search_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:14:50.934725+00:00", "stage": "search_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:51.449000+00:00", "stage": "search_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:14:51.462945+00:00", "stage": "sector_scan_turn_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:52.995417+00:00", "stage": "sector_scan_turn_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:14:53.808906+00:00", "stage": "sector_scan_turn_request", "degrees": 6.560000000000002}
+{"time_utc": "1970-01-01T01:14:54.075115+00:00", "stage": "sector_scan_turn_complete", "degrees": 6.560000000000002}
+{"time_utc": "1970-01-01T01:14:54.889783+00:00", "stage": "sector_scan_turn_heading_reached", "offset": 143.39000000000001, "target": 144.0}
+{"time_utc": "1970-01-01T01:14:54.909313+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:14:54.955652+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:14:56.276027+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:14:56.463543+00:00", "stage": "vision_frame", "frame": 64, "count": 5, "age_s": 0.138}
+{"time_utc": "1970-01-01T01:14:56.476713+00:00", "stage": "sector_observed", "heading": 144, "scan_offset": 0, "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9574279189109802, "xyxy": [425.7025451660156, 278.93292236328125, 523.309814453125, 376.9851379394531], "image_width": 960, "image_height": 540}, "age_s": 0.13838201599992317, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:14:56.612430+00:00", "stage": "vision_frame", "frame": 65, "count": 5, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:14:56.625204+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.963413417339325, "xyxy": [425.789794921875, 278.88934326171875, 523.1975708007812, 377.005615234375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.005735747019449844, "correction_degrees": 0.0, "heading_offset": 143.27}
+{"time_utc": "1970-01-01T01:14:56.637903+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:56.884034+00:00", "stage": "vision_frame", "frame": 66, "count": 5, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:14:56.898566+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9593660235404968, "xyxy": [425.7453918457031, 278.88494873046875, 523.195068359375, 376.78497314453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.005760176976521814, "correction_degrees": 0.0, "heading_offset": 143.28}
+{"time_utc": "1970-01-01T01:14:56.910365+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:57.143588+00:00", "stage": "vision_frame", "frame": 67, "count": 5, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:14:57.155829+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9572431445121765, "xyxy": [425.619384765625, 278.9146423339844, 523.1165161132812, 377.0498046875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.005866718292236339, "correction_degrees": 0.0, "heading_offset": 143.28}
+{"time_utc": "1970-01-01T01:14:57.168387+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:57.297946+00:00", "stage": "approach_distance_pending", "distance_mm": 159, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:57.319181+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.01752, 0.01329], "heading_offset": 143.28, "return_target": null}
+{"time_utc": "1970-01-01T01:14:57.739642+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:14:58.077196+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, 0.01, 0.0], "wheel_rpm": [-1, 0, 1, 0], "encoder_counts": [12343, 26574, 18273, 5391], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:14:58.243765+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [2, 4, 3, -4], "encoder_counts": [12263, 26644, 18323, 5338], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:14:58.340630+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [4, 1, -1, 9], "encoder_counts": [12288, 26620, 18302, 5359], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:14:58.485562+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [-1, -3, 1, 3], "encoder_counts": [12286, 26625, 18306, 5357], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:58.606439+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [-1, 3, -3, -3], "encoder_counts": [12279, 26630, 18312, 5351], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:14:58.700639+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [0, 3, 0, -6], "encoder_counts": [12284, 26627, 18309, 5355], "consecutive_samples": 7, "stable_seconds": 0.3156039679997775}
+{"time_utc": "1970-01-01T01:14:58.715425+00:00", "stage": "approach_step_complete", "end_position": [0.00228, 0.00243], "actual_distance_m": 0.018713556583396965}
+{"time_utc": "1970-01-01T01:14:58.727509+00:00", "stage": "approach_path_recorded", "start_position": [0.01752, 0.01329], "end_position": [0.00228, 0.00243], "forward_axis": [-0.7486759181435579, -0.6629361730905177], "peak_distance_m": 0.011313306324854815}
+{"time_utc": "1970-01-01T01:14:58.982252+00:00", "stage": "vision_frame", "frame": 68, "count": 4, "age_s": 0.105}
+{"time_utc": "1970-01-01T01:14:58.995276+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9613146781921387, "xyxy": [416.7154541015625, 292.1541442871094, 521.182861328125, 397.33404541015625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011511294047037768, "correction_degrees": 0.0, "heading_offset": 142.54}
+{"time_utc": "1970-01-01T01:14:59.008533+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:14:59.246203+00:00", "stage": "vision_frame", "frame": 69, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:14:59.259961+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9588091969490051, "xyxy": [416.58953857421875, 292.1618347167969, 521.2199096679688, 397.53076171875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011557579040527344, "correction_degrees": 0.0, "heading_offset": 142.53}
+{"time_utc": "1970-01-01T01:14:59.272209+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:14:59.513548+00:00", "stage": "vision_frame", "frame": 70, "count": 4, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:14:59.527709+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9629101157188416, "xyxy": [416.8082275390625, 292.0432434082031, 521.1670532226562, 397.39178466796875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011471207936604833, "correction_degrees": 0.0, "heading_offset": 142.53}
+{"time_utc": "1970-01-01T01:14:59.541188+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:14:59.656957+00:00", "stage": "approach_distance_pending", "distance_mm": 137, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:14:59.669492+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.00146, 0.00116], "heading_offset": 142.53, "return_target": null}
+{"time_utc": "1970-01-01T01:15:00.115998+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:00.457148+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, 0.0, 0.0], "wheel_rpm": [-6, 5, 5, -6], "encoder_counts": [15122, 23794, 15279, 7981], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:00.603737+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.0, 0.0], "wheel_rpm": [-1, -1, -6, -2], "encoder_counts": [14914, 24106, 15618, 7876], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:00.723969+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [2, -4, -4, 0], "encoder_counts": [14966, 24068, 15566, 7922], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:00.867826+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, 0.0, 0.0], "wheel_rpm": [2, -2, -3, 3], "encoder_counts": [15028, 23984, 15480, 7964], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:00.989140+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [1, -1, -3, 1], "encoder_counts": [15003, 24019, 15511, 7943], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:01.161174+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [0, 6, -3, -4], "encoder_counts": [15014, 24000, 15493, 7952], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:01.282553+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [2, 0, 1, 0], "encoder_counts": [15017, 23998, 15492, 7955], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:01.404657+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [-1, 2, 1, -1], "encoder_counts": [15015, 24002, 15495, 7953], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:15:01.500001+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [1, -2, 3, -2], "encoder_counts": [15016, 24001, 15493, 7953], "consecutive_samples": 7, "stable_seconds": 0.31541353600005095}
+{"time_utc": "1970-01-01T01:15:01.520985+00:00", "stage": "approach_step_complete", "end_position": [-0.0199, -0.01548], "actual_distance_m": 0.02707654335398077}
+{"time_utc": "1970-01-01T01:15:01.539385+00:00", "stage": "approach_path_recorded", "start_position": [0.00146, 0.00116], "end_position": [-0.0199, -0.01548], "forward_axis": [-0.774045720337846, -0.6331297045840331], "peak_distance_m": 0.01007692413388133}
+{"time_utc": "1970-01-01T01:15:01.780035+00:00", "stage": "vision_frame", "frame": 71, "count": 5, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:15:01.793766+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9640128016471863, "xyxy": [411.8425598144531, 308.6973876953125, 525.45166015625, 423.2875671386719], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011825927098592148, "correction_degrees": 0.0, "heading_offset": 142.5}
+{"time_utc": "1970-01-01T01:15:01.806670+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:02.073338+00:00", "stage": "vision_frame", "frame": 72, "count": 5, "age_s": 0.105}
+{"time_utc": "1970-01-01T01:15:02.088166+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9640406966209412, "xyxy": [412.0015869140625, 308.6023864746094, 525.4342041015625, 423.460693359375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011752192179361964, "correction_degrees": 0.0, "heading_offset": 142.5}
+{"time_utc": "1970-01-01T01:15:02.101690+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:02.337917+00:00", "stage": "vision_frame", "frame": 73, "count": 5, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:15:02.352393+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9652031660079956, "xyxy": [411.9066467285156, 308.8101806640625, 525.38818359375, 423.16387939453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.01182560920715331, "correction_degrees": 0.0, "heading_offset": 142.5}
+{"time_utc": "1970-01-01T01:15:02.366283+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:02.516441+00:00", "stage": "approach_distance_pending", "distance_mm": 99, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:02.538850+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.02009, -0.01566], "heading_offset": 142.5, "return_target": null}
+{"time_utc": "1970-01-01T01:15:03.018168+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:03.356935+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [-1, 1, 1, 1], "encoder_counts": [17949, 21165, 12679, 10707], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:03.478594+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [-4, -4, 1, -3], "encoder_counts": [17780, 21378, 12794, 10585], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:03.574555+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, 0.01, 0.0], "wheel_rpm": [0, -9, -5, -8], "encoder_counts": [17772, 21389, 12793, 10572], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:03.691809+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, 0.01, 0.0], "wheel_rpm": [-1, 3, 0, 1], "encoder_counts": [17868, 21303, 12733, 10655], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:03.833480+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [-3, -2, -3, -3], "encoder_counts": [17851, 21306, 12742, 10644], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:03.954558+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [-2, -6, 6, -3], "encoder_counts": [17874, 21287, 12729, 10661], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:04.100422+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [2, -1, 0, -6], "encoder_counts": [17861, 21301, 12737, 10650], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:04.264910+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, 0.01, 0.0], "wheel_rpm": [3, 3, -5, 0], "encoder_counts": [17866, 21295, 12734, 10654], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:15:04.438429+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.04, 0.01, 0.0], "wheel_rpm": [-2, -3, 0, -3], "encoder_counts": [17869, 21293, 12733, 10656], "consecutive_samples": 7, "stable_seconds": 0.31956134399933944}
+{"time_utc": "1970-01-01T01:15:04.459416+00:00", "stage": "approach_step_complete", "end_position": [-0.03963, -0.03257], "actual_distance_m": 0.025841046805421795}
+{"time_utc": "1970-01-01T01:15:04.481495+00:00", "stage": "approach_path_recorded", "start_position": [-0.02009, -0.01566], "end_position": [-0.03963, -0.03257], "forward_axis": [-0.7543945610702116, -0.6564212414507036], "peak_distance_m": 0.015310290656940515}
+{"time_utc": "1970-01-01T01:15:04.766013+00:00", "stage": "vision_frame", "frame": 74, "count": 5, "age_s": 0.106}
+{"time_utc": "1970-01-01T01:15:04.781131+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9607725739479065, "xyxy": [407.0078125, 329.2559814453125, 531.2708129882812, 447.6956787109375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011313215891520179, "correction_degrees": 0.0, "heading_offset": 142.59}
+{"time_utc": "1970-01-01T01:15:04.794484+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:05.030754+00:00", "stage": "vision_frame", "frame": 75, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:15:05.045737+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9604983925819397, "xyxy": [407.027099609375, 329.22747802734375, 531.3143310546875, 447.76849365234375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011280504862467455, "correction_degrees": 0.0, "heading_offset": 142.59}
+{"time_utc": "1970-01-01T01:15:05.059986+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:05.299852+00:00", "stage": "vision_frame", "frame": 76, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:15:05.313932+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9614993929862976, "xyxy": [406.9796447753906, 329.3291015625, 531.2684326171875, 447.6069030761719], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011329126358032238, "correction_degrees": 0.0, "heading_offset": 142.59}
+{"time_utc": "1970-01-01T01:15:05.327769+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:05.476373+00:00", "stage": "approach_distance_pending", "distance_mm": 69, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:05.499680+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.04065, -0.03327], "heading_offset": 142.59, "return_target": null}
+{"time_utc": "1970-01-01T01:15:05.996506+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:06.361021+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [-1, -2, 2, -1], "encoder_counts": [20777, 18448, 9917, 13541], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:06.527741+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [2, -5, 0, 2], "encoder_counts": [20722, 18538, 9999, 13514], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:06.625510+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [-1, -6, -3, 27], "encoder_counts": [20741, 18513, 9974, 13532], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:06.747015+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [1, 1, 0, -1], "encoder_counts": [20732, 18528, 9989, 13522], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:06.845725+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [1, 0, -2, 1], "encoder_counts": [20739, 18518, 9979, 13528], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:15:06.969859+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [-1, 4, -2, 1], "encoder_counts": [20733, 18525, 9985, 13525], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:15:07.019326+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [1, -7, -1, -3], "encoder_counts": [20734, 18523, 9983, 13526], "consecutive_samples": 7, "stable_seconds": 0.32077596799990715}
+{"time_utc": "1970-01-01T01:15:07.042904+00:00", "stage": "approach_step_complete", "end_position": [-0.05867, -0.05135], "actual_distance_m": 0.02552659005821185}
+{"time_utc": "1970-01-01T01:15:07.057919+00:00", "stage": "approach_path_recorded", "start_position": [-0.04065, -0.03327], "end_position": [-0.05867, -0.05135], "forward_axis": [-0.7078499301039427, -0.7063628504188504], "peak_distance_m": 0.013449178413568618}
+{"time_utc": "1970-01-01T01:15:07.300106+00:00", "stage": "vision_frame", "frame": 77, "count": 4, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:15:07.315653+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9107974767684937, "xyxy": [399.9130859375, 354.24688720703125, 537.8963623046875, 448.0877380371094], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011557579040527344, "correction_degrees": 0.0, "heading_offset": 142.69}
+{"time_utc": "1970-01-01T01:15:07.330289+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:07.589932+00:00", "stage": "vision_frame", "frame": 78, "count": 4, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:15:07.604291+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.8878589868545532, "xyxy": [399.86138916015625, 354.40325927734375, 538.087890625, 448.04278564453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011484750111897812, "correction_degrees": 0.0, "heading_offset": 142.69}
+{"time_utc": "1970-01-01T01:15:07.618663+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:07.860715+00:00", "stage": "vision_frame", "frame": 79, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:15:07.876953+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.8924598097801208, "xyxy": [399.85400390625, 354.29913330078125, 538.01025390625, 448.0399475097656], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.011529032389322902, "correction_degrees": 0.0, "heading_offset": 142.69}
+{"time_utc": "1970-01-01T01:15:07.891216+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:08.081667+00:00", "stage": "approach_distance_pending", "distance_mm": 25, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:08.105650+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.06008, -0.05265], "heading_offset": 142.70000000000002, "return_target": null}
+{"time_utc": "1970-01-01T01:15:08.310053+00:00", "stage": "approach_threshold_seen", "position": [-0.06025, -0.0527], "distance_mm": 24}
+{"time_utc": "1970-01-01T01:15:08.343958+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:08.684064+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, 0.01, 0.0], "wheel_rpm": [-3, 0, 0, -3], "encoder_counts": [21494, 17967, 9436, 14221], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:08.849912+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [-3, 4, 1, -6], "encoder_counts": [21269, 18168, 9652, 13997], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:09.024243+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [-5, 7, 1, -3], "encoder_counts": [20854, 18528, 10005, 13594], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:09.146603+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, 0.02, 0.0], "wheel_rpm": [-4, 2, -4, 8], "encoder_counts": [20719, 18760, 10218, 13502], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:09.318679+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [-7, -3, 1, -2], "encoder_counts": [20789, 18657, 10128, 13559], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:09.415905+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [1, 1, 0, -3], "encoder_counts": [20766, 18684, 10155, 13538], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:09.539078+00:00", "stage": "translation_stop_sample", "body_velocity": [0.03, 0.0, 0.0], "wheel_rpm": [-2, 2, -1, 2], "encoder_counts": [20770, 18683, 10152, 13542], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:09.660193+00:00", "stage": "translation_stop_sample", "body_velocity": [0.03, -0.0, 0.0], "wheel_rpm": [-2, 4, 0, 4], "encoder_counts": [20772, 18678, 10148, 13543], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:15:09.725305+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.03, -0.0, 0.0], "wheel_rpm": [2, 1, 1, -1], "encoder_counts": [20770, 18682, 10152, 13542], "consecutive_samples": 7, "stable_seconds": 0.313746847999937}
+{"time_utc": "1970-01-01T01:15:09.743138+00:00", "stage": "approach_step_complete", "end_position": [-0.06089, -0.05275], "actual_distance_m": 0.000816149496109626}
+{"time_utc": "1970-01-01T01:15:09.761526+00:00", "stage": "approach_path_recorded", "start_position": [-0.06008, -0.05265], "end_position": [-0.06089, -0.05275], "forward_axis": null, "peak_distance_m": 0.00017720045146668863}
+{"time_utc": "1970-01-01T01:15:10.029145+00:00", "stage": "vision_frame", "frame": 80, "count": 5, "age_s": 0.104}
+{"time_utc": "1970-01-01T01:15:10.045630+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9241796731948853, "xyxy": [403.28851318359375, 353.504638671875, 540.7306518554688, 447.7550354003906], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.008323351542154966, "correction_degrees": 0.0, "heading_offset": 142.95000000000002}
+{"time_utc": "1970-01-01T01:15:10.060778+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:10.325387+00:00", "stage": "vision_frame", "frame": 81, "count": 4, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:15:10.341005+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.9100172519683838, "xyxy": [403.01934814453125, 353.58197021484375, 540.6592407226562, 447.8253479003906], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.008500734965006529, "correction_degrees": 0.0, "heading_offset": 142.95000000000002}
+{"time_utc": "1970-01-01T01:15:10.355743+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:10.595209+00:00", "stage": "vision_frame", "frame": 82, "count": 4, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:15:10.610906+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.931290328502655, "xyxy": [403.11553955078125, 353.39691162109375, 540.8556518554688, 447.9872131347656], "image_width": 960, "image_height": 540}, "pixel_error_ratio": -0.008348337809244766, "correction_degrees": 0.0, "heading_offset": 142.95000000000002}
+{"time_utc": "1970-01-01T01:15:10.626626+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:10.776780+00:00", "stage": "approach_distance_pending", "distance_mm": 26, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:10.792023+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.0603, -0.05187], "heading_offset": 142.95000000000002, "return_target": null}
+{"time_utc": "1970-01-01T01:15:10.962780+00:00", "stage": "approach_threshold_seen", "position": [-0.06039, -0.052], "distance_mm": 23}
+{"time_utc": "1970-01-01T01:15:10.996578+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:11.362828+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, 0.01, 0.0], "wheel_rpm": [3, -6, -1, 4], "encoder_counts": [21994, 18087, 9968, 15102], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:11.479688+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, 0.01, 0.0], "wheel_rpm": [4, -5, -3, 6], "encoder_counts": [22125, 17947, 9860, 15251], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:11.628473+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [5, -2, -1, 10], "encoder_counts": [22222, 17897, 9891, 15457], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:11.754078+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.06, 0.01, 0.0], "wheel_rpm": [0, -1, -3, 3], "encoder_counts": [22227, 17899, 9901, 15475], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:11.856713+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.07, 0.01, 0.0], "wheel_rpm": [-2, -3, -3, -3], "encoder_counts": [22228, 17897, 9901, 15476], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:15:12.004916+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.08, 0.02, 0.0], "wheel_rpm": [-2, -2, 0, -6], "encoder_counts": [22228, 17897, 9901, 15476], "consecutive_samples": 7, "stable_seconds": 0.32002819199988153}
+{"time_utc": "1970-01-01T01:15:12.027934+00:00", "stage": "approach_step_complete", "end_position": [-0.06262, -0.05779], "actual_distance_m": 0.006358364569604357}
+{"time_utc": "1970-01-01T01:15:12.047629+00:00", "stage": "approach_path_recorded", "start_position": [-0.0603, -0.05187], "end_position": [-0.06262, -0.05779], "forward_axis": null, "peak_distance_m": 0.00015811388300841734}
+{"time_utc": "1970-01-01T01:15:12.290074+00:00", "stage": "vision_frame", "frame": 83, "count": 3, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:15:12.306797+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.8713310360908508, "xyxy": [415.2448425292969, 364.925537109375, 558.462158203125, 448.871337890625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.007139062881469704, "correction_degrees": 0.0, "heading_offset": 144.6}
+{"time_utc": "1970-01-01T01:15:12.322205+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:12.586433+00:00", "stage": "vision_frame", "frame": 84, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:15:12.603195+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.894264817237854, "xyxy": [415.4585266113281, 365.0032653808594, 558.68408203125, 448.74835205078125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.0073659420013427734, "correction_degrees": 0.0, "heading_offset": 144.6}
+{"time_utc": "1970-01-01T01:15:12.619832+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:12.852013+00:00", "stage": "vision_frame", "frame": 85, "count": 5, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:15:12.868021+00:00", "stage": "target_observed", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.8841153979301453, "xyxy": [415.44189453125, 365.08404541015625, 558.5182495117188, 448.6593933105469], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.007270908355712868, "correction_degrees": 0.0, "heading_offset": 144.6}
+{"time_utc": "1970-01-01T01:15:12.883859+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:13.016494+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 16, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:13.032186+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 32, "class_name": "sports ball", "confidence": 0.8841153979301453, "xyxy": [415.44189453125, 365.08404541015625, 558.5182495117188, 448.6593933105469], "image_width": 960, "image_height": 540}, "heading_offset": 144.6}
+{"time_utc": "1970-01-01T01:15:13.049057+00:00", "stage": "sorting_grasp", "class_id": 32, "slot": 3, "place_heading": -108}
+{"time_utc": "1970-01-01T01:15:13.065191+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:15:14.116528+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:15:14.132481+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:15:15.036076+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:15.963316+00:00", "stage": "carry_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:15:15.988445+00:00", "stage": "return_path_turn_heading_reached", "offset": 144.99, "target": 142.95000000000002}
+{"time_utc": "1970-01-01T01:15:16.011099+00:00", "stage": "return_short_segment_skipped", "error_m": 0.011445636723223396}
+{"time_utc": "1970-01-01T01:15:16.028431+00:00", "stage": "return_path_turn_heading_reached", "offset": 144.99, "target": 142.70000000000002}
+{"time_utc": "1970-01-01T01:15:16.044765+00:00", "stage": "return_short_segment_skipped", "error_m": 0.011080546015427215}
+{"time_utc": "1970-01-01T01:15:16.060638+00:00", "stage": "return_path_turn_heading_reached", "offset": 144.99, "target": 142.59}
+{"time_utc": "1970-01-01T01:15:16.075954+00:00", "stage": "return_path_step_request", "distance_m": 0.038195136104503216, "speed_mps": -0.03, "start_position": [-0.06581, -0.06213], "heading_offset": 144.99, "return_target": [-0.04065, -0.03327]}
+{"time_utc": "1970-01-01T01:15:17.476713+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:17.843457+00:00", "stage": "translation_stop_sample", "body_velocity": [0.03, -0.01, 0.0], "wheel_rpm": [17, -1, -5, 4], "encoder_counts": [18238, 23183, 15453, 12008], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:17.994984+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.01, 0.0], "wheel_rpm": [5, -2, -2, 6], "encoder_counts": [18639, 22914, 15377, 12649], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:18.087841+00:00", "stage": "translation_stop_sample", "body_velocity": [0.03, 0.0, 0.0], "wheel_rpm": [2, -1, -9, 2], "encoder_counts": [18870, 22864, 15475, 13022], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:18.212156+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.01, 0.0], "wheel_rpm": [1, 1, 1, -1], "encoder_counts": [18936, 22814, 15443, 13094], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:18.363400+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [0, -6, -3, 1], "encoder_counts": [18888, 22854, 15480, 13049], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:18.463219+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.01, 0.0], "wheel_rpm": [-3, -2, -1, -3], "encoder_counts": [18910, 22835, 15463, 13070], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:18.614790+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.01, 0.0], "wheel_rpm": [-3, 2, -3, -5], "encoder_counts": [18894, 22849, 15474, 13056], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:15:18.737460+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [0, -4, 4, -3], "encoder_counts": [18904, 22838, 15466, 13065], "consecutive_samples": 7, "stable_seconds": 0.32253401599973586}
+{"time_utc": "1970-01-01T01:15:18.762701+00:00", "stage": "return_path_step_complete", "end_position": [-0.0357, -0.03777], "actual_distance_m": 0.038730113606856346}
+{"time_utc": "1970-01-01T01:15:18.782098+00:00", "stage": "return_path_turn_request", "degrees": -4.969999999999999}
+{"time_utc": "1970-01-01T01:15:18.976718+00:00", "stage": "return_path_turn_complete", "degrees": -4.969999999999999}
+{"time_utc": "1970-01-01T01:15:19.799386+00:00", "stage": "return_path_turn_heading_reached", "offset": 142.83, "target": 142.5}
+{"time_utc": "1970-01-01T01:15:19.824176+00:00", "stage": "return_path_step_request", "distance_m": 0.0250954739272585, "speed_mps": -0.03, "start_position": [-0.03182, -0.04041], "heading_offset": 142.83, "return_target": [-0.02009, -0.01566]}
+{"time_utc": "1970-01-01T01:15:20.979123+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:21.422784+00:00", "stage": "translation_stop_sample", "body_velocity": [0.13, -0.01, 0.0], "wheel_rpm": [4, -2, -1, 0], "encoder_counts": [12901, 24774, 18284, 7846], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:21.649248+00:00", "stage": "translation_stop_sample", "body_velocity": [0.1, -0.02, 0.0], "wheel_rpm": [-6, 2, -2, 1], "encoder_counts": [12955, 24715, 18288, 7886], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:21.849645+00:00", "stage": "translation_stop_sample", "body_velocity": [0.12, -0.01, 0.0], "wheel_rpm": [-2, 4, 2, 1], "encoder_counts": [12978, 24687, 18267, 7905], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:22.051220+00:00", "stage": "translation_stop_sample", "body_velocity": [0.11, -0.02, 0.0], "wheel_rpm": [-6, -2, 0, -1], "encoder_counts": [12979, 24685, 18266, 7906], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:22.256194+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.09, -0.02, 0.0], "wheel_rpm": [-4, -4, 1, -3], "encoder_counts": [12977, 24687, 18268, 7904], "consecutive_samples": 5, "stable_seconds": 0.40741433599941956}
+{"time_utc": "1970-01-01T01:15:22.278415+00:00", "stage": "return_path_step_complete", "end_position": [-0.00858, -0.01993], "actual_distance_m": 0.030976248965941634}
+{"time_utc": "1970-01-01T01:15:22.300116+00:00", "stage": "return_path_turn_heading_reached", "offset": 143.04, "target": 142.53}
+{"time_utc": "1970-01-01T01:15:22.317027+00:00", "stage": "return_path_step_request", "distance_m": 0.020842689416884858, "speed_mps": -0.03, "start_position": [-0.00838, -0.01973], "heading_offset": 143.04, "return_target": [0.00146, 0.00116]}
+{"time_utc": "1970-01-01T01:15:23.297712+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:23.689887+00:00", "stage": "translation_stop_sample", "body_velocity": [0.13, -0.03, 0.0], "wheel_rpm": [-2, -6, -3, 3], "encoder_counts": [10212, 27977, 21222, 5033], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:23.884809+00:00", "stage": "translation_stop_sample", "body_velocity": [0.12, -0.02, 0.0], "wheel_rpm": [1, 0, -4, -1], "encoder_counts": [10495, 27574, 20941, 5345], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:24.109341+00:00", "stage": "translation_stop_sample", "body_velocity": [0.12, -0.02, 0.0], "wheel_rpm": [-2, -4, 2, -5], "encoder_counts": [10434, 27669, 20987, 5291], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:24.302589+00:00", "stage": "translation_stop_sample", "body_velocity": [0.12, -0.02, 0.0], "wheel_rpm": [-5, 1, -2, -1], "encoder_counts": [10426, 27681, 21000, 5281], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:24.502321+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.11, -0.02, 0.0], "wheel_rpm": [-1, 0, 0, 2], "encoder_counts": [10426, 27677, 20997, 5282], "consecutive_samples": 5, "stable_seconds": 0.4014519040001687}
+{"time_utc": "1970-01-01T01:15:24.527524+00:00", "stage": "return_path_step_complete", "end_position": [0.00724, -0.00372], "actual_distance_m": 0.022367487565661013}
+{"time_utc": "1970-01-01T01:15:24.549357+00:00", "stage": "return_path_turn_heading_reached", "offset": 142.77, "target": 143.28}
+{"time_utc": "1970-01-01T01:15:24.566757+00:00", "stage": "return_path_step_request", "distance_m": 0.018800109702035273, "speed_mps": -0.03, "start_position": [0.0074, -0.00364], "heading_offset": 142.77, "return_target": [0.01752, 0.01329]}
+{"time_utc": "1970-01-01T01:15:25.502262+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:25.855220+00:00", "stage": "translation_stop_sample", "body_velocity": [0.07, -0.02, 0.0], "wheel_rpm": [4, -12, -5, 8], "encoder_counts": [7748, 30817, 23988, 2354], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:26.023451+00:00", "stage": "translation_stop_sample", "body_velocity": [0.06, -0.02, 0.0], "wheel_rpm": [-2, -3, 3, 7], "encoder_counts": [7979, 30476, 23705, 2521], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:26.124840+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, -0.02, 0.0], "wheel_rpm": [1, 1, 2, 8], "encoder_counts": [7914, 30563, 23763, 2460], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:26.276199+00:00", "stage": "translation_stop_sample", "body_velocity": [0.06, -0.02, 0.0], "wheel_rpm": [3, -2, 3, 3], "encoder_counts": [7929, 30558, 23752, 2477], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:26.381100+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, -0.02, 0.0], "wheel_rpm": [1, 5, -4, -1], "encoder_counts": [7912, 30575, 23766, 2460], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:26.502434+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, -0.02, 0.0], "wheel_rpm": [0, -4, -1, 5], "encoder_counts": [7916, 30572, 23764, 2465], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:26.651698+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, -0.02, 0.0], "wheel_rpm": [5, -2, -1, -1], "encoder_counts": [7916, 30573, 23765, 2463], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:15:26.705250+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.04, -0.02, 0.0], "wheel_rpm": [5, -2, 1, 7], "encoder_counts": [7920, 30565, 23760, 2470], "consecutive_samples": 7, "stable_seconds": 0.3033231999997952}
+{"time_utc": "1970-01-01T01:15:26.724245+00:00", "stage": "return_path_step_complete", "end_position": [0.02823, 0.01571], "actual_distance_m": 0.028430817786338825}
+{"time_utc": "1970-01-01T01:15:26.743124+00:00", "stage": "startup_center_reached", "position": [0.02823, 0.01571], "error_m": 0.03230995047968969}
+{"time_utc": "1970-01-01T01:15:26.759749+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:15:28.297104+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:15:29.118261+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:15:30.657319+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:15:31.484040+00:00", "stage": "turn_to_place_request", "degrees": 20.159999999999968}
+{"time_utc": "1970-01-01T01:15:32.237029+00:00", "stage": "turn_to_place_complete", "degrees": 20.159999999999968}
+{"time_utc": "1970-01-01T01:15:33.063989+00:00", "stage": "turn_to_place_heading_reached", "offset": -106.37, "target": -108}
+{"time_utc": "1970-01-01T01:15:33.092389+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:15:33.160431+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:34.481097+00:00", "stage": "place_extend_complete", "actual_raw": 595}
+{"time_utc": "1970-01-01T01:15:34.508377+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:15:35.577670+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:15:35.602684+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:15:36.556498+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:37.282012+00:00", "stage": "after_place_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:15:37.332669+00:00", "stage": "translation_stop_sample", "body_velocity": [0.03, 0.0, 0.0], "wheel_rpm": [0, 0, -2, -1], "encoder_counts": [14348, 4002, 31911, 10539], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:37.461682+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-2, 1, -6, -2], "encoder_counts": [14347, 4003, 31911, 10539], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:37.554309+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-3, -1, -5, 6], "encoder_counts": [14346, 4004, 31911, 10537], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:15:37.658368+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [4, -1, 2, 0], "encoder_counts": [14348, 4001, 31909, 10539], "consecutive_samples": 7, "stable_seconds": 0.3156882240000414}
+{"time_utc": "1970-01-01T01:15:37.687250+00:00", "stage": "sorting_item_placed", "class_id": 32, "slot": 3, "counts": {"32": 3, "39": 1}, "center_error_m": 0.028744886501776278, "pick_heading": 144, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:15:37.704682+00:00", "stage": "next_pick_direction", "heading": 180, "current_heading": -108.60000000000002, "turn_degrees": -71.39999999999998, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "pending"}]}
+{"time_utc": "1970-01-01T01:15:37.722459+00:00", "stage": "search_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:15:37.777784+00:00", "stage": "search_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:38.295482+00:00", "stage": "search_retract_complete", "actual_raw": 1184}
+{"time_utc": "1970-01-01T01:15:38.320726+00:00", "stage": "sector_scan_turn_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:39.937468+00:00", "stage": "sector_scan_turn_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:40.764080+00:00", "stage": "sector_scan_turn_request", "degrees": -27.689999999999998}
+{"time_utc": "1970-01-01T01:15:41.797454+00:00", "stage": "sector_scan_turn_complete", "degrees": -27.689999999999998}
+{"time_utc": "1970-01-01T01:15:42.624961+00:00", "stage": "sector_scan_turn_heading_reached", "offset": -179.12, "target": -180.0}
+{"time_utc": "1970-01-01T01:15:42.651125+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:15:42.717358+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:43.986980+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:15:44.195617+00:00", "stage": "vision_frame", "frame": 86, "count": 2, "age_s": 0.138}
+{"time_utc": "1970-01-01T01:15:44.216143+00:00", "stage": "sector_observed", "heading": 180, "scan_offset": 0, "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.8118071556091309, "xyxy": [487.4609375, 76.7256088256836, 619.5944213867188, 456.7415771484375], "image_width": 960, "image_height": 540}, "age_s": 0.13817936000032205, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:15:44.345762+00:00", "stage": "vision_frame", "frame": 87, "count": 1, "age_s": 0.096}
+{"time_utc": "1970-01-01T01:15:44.364196+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.8766981363296509, "xyxy": [487.16644287109375, 75.54434967041016, 619.651611328125, 457.19903564453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.07646773656209305, "correction_degrees": -5.0, "heading_offset": -179.34000000000003}
+{"time_utc": "1970-01-01T01:15:44.381735+00:00", "stage": "align_turn_request", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:15:44.596274+00:00", "stage": "align_turn_complete", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:15:45.420740+00:00", "stage": "align_turn_feedback", "requested_degrees": -5.0, "actual_degrees": -4.0499999999999545}
+{"time_utc": "1970-01-01T01:15:45.570877+00:00", "stage": "vision_frame", "frame": 88, "count": 3, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:15:45.589102+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9516454339027405, "xyxy": [431.842529296875, 74.61811065673828, 560.8109741210938, 448.72509765625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.01700703303019202, "correction_degrees": 0.0, "heading_offset": 176.61}
+{"time_utc": "1970-01-01T01:15:45.607145+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:45.870070+00:00", "stage": "vision_frame", "frame": 89, "count": 3, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:15:45.888631+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9507031440734863, "xyxy": [431.91363525390625, 74.62101745605469, 561.2958984375, 448.670654296875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.017296632130940792, "correction_degrees": 0.0, "heading_offset": 176.61}
+{"time_utc": "1970-01-01T01:15:45.906704+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:46.174758+00:00", "stage": "vision_frame", "frame": 90, "count": 5, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:15:46.192780+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9500712156295776, "xyxy": [430.9633483886719, 74.68123626708984, 560.881103515625, 448.565673828125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.01658565203348794, "correction_degrees": 0.0, "heading_offset": 176.61}
+{"time_utc": "1970-01-01T01:15:46.211177+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:46.343150+00:00", "stage": "approach_distance_pending", "distance_mm": 34, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:46.361960+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.0096, 0.01182], "heading_offset": 176.61, "return_target": null}
+{"time_utc": "1970-01-01T01:15:46.718191+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:47.062244+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.05, -0.0, 0.0], "wheel_rpm": [-1, 4, 5, -7], "encoder_counts": [21924, 5504, 1933, 18623], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:47.162200+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [-1, -1, 2, -7], "encoder_counts": [21857, 5588, 2027, 18550], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:47.339957+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, 0.0, 0.0], "wheel_rpm": [3, -2, -4, 5], "encoder_counts": [22127, 5333, 1731, 18827], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:47.465155+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.0, 0.0], "wheel_rpm": [-3, 0, -3, 3], "encoder_counts": [22117, 5324, 1748, 18824], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:47.585070+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [3, -5, -1, 3], "encoder_counts": [22082, 5370, 1782, 18781], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:47.687951+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-3, 2, -5, -1], "encoder_counts": [22129, 5320, 1730, 18835], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:47.837535+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [5, -3, -6, -1], "encoder_counts": [22110, 5341, 1753, 18814], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:47.941756+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [2, -1, -1, -5], "encoder_counts": [22114, 5334, 1747, 18820], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:15:48.097956+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-5, -2, -1, -3], "encoder_counts": [22112, 5336, 1749, 18818], "consecutive_samples": 7}
+{"time_utc": "1970-01-01T01:15:48.146586+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.0, 0.0, 0.0], "wheel_rpm": [0, 2, -8, -2], "encoder_counts": [22110, 5339, 1751, 18815], "consecutive_samples": 8, "stable_seconds": 0.3609606399995755}
+{"time_utc": "1970-01-01T01:15:48.170965+00:00", "stage": "approach_step_complete", "end_position": [-0.0038, 0.01117], "actual_distance_m": 0.013415755662652774}
+{"time_utc": "1970-01-01T01:15:48.189489+00:00", "stage": "approach_path_recorded", "start_position": [0.0096, 0.01182], "end_position": [-0.0038, 0.01117], "forward_axis": [-0.9857401459261796, -0.16827467043329375], "peak_distance_m": 0.010875077011221576}
+{"time_utc": "1970-01-01T01:15:48.438340+00:00", "stage": "vision_frame", "frame": 91, "count": 3, "age_s": 0.098}
+{"time_utc": "1970-01-01T01:15:48.458025+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9510586261749268, "xyxy": [429.01959228515625, 74.97261047363281, 563.778564453125, 449.00482177734375], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.017082373301188114, "correction_degrees": 0.0, "heading_offset": 176.43}
+{"time_utc": "1970-01-01T01:15:48.475785+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:15:48.723973+00:00", "stage": "vision_frame", "frame": 92, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:15:48.742358+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9504063725471497, "xyxy": [429.1590576171875, 75.030029296875, 563.83349609375, 449.1501159667969], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.01718362172444665, "correction_degrees": 0.0, "heading_offset": 176.43}
+{"time_utc": "1970-01-01T01:15:48.760736+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:15:49.038715+00:00", "stage": "vision_frame", "frame": 93, "count": 4, "age_s": 0.104}
+{"time_utc": "1970-01-01T01:15:49.058566+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9433570504188538, "xyxy": [428.18914794921875, 75.06155395507812, 563.7618408203125, 449.2400207519531], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.01664113998413086, "correction_degrees": 0.0, "heading_offset": 176.43}
+{"time_utc": "1970-01-01T01:15:49.077994+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:15:49.216250+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 14, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:49.240258+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9433570504188538, "xyxy": [428.18914794921875, 75.06155395507812, 563.7618408203125, 449.2400207519531], "image_width": 960, "image_height": 540}, "heading_offset": 176.43}
+{"time_utc": "1970-01-01T01:15:49.260753+00:00", "stage": "sorting_grasp", "class_id": 39, "slot": 2, "place_heading": 72}
+{"time_utc": "1970-01-01T01:15:49.279575+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:15:50.339857+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:15:50.366650+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:15:51.276826+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:15:52.157159+00:00", "stage": "carry_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:15:52.186862+00:00", "stage": "return_path_turn_heading_reached", "offset": 176.62, "target": 176.61}
+{"time_utc": "1970-01-01T01:15:52.212514+00:00", "stage": "return_path_step_request", "distance_m": 0.014222538363673256, "speed_mps": -0.03, "start_position": [-0.00476, 0.01142], "heading_offset": 176.63, "return_target": [0.0096, 0.01182]}
+{"time_utc": "1970-01-01T01:15:52.757804+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:15:53.102725+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.0, 0.0], "wheel_rpm": [-3, -2, -3, 24], "encoder_counts": [20834, 7002, 3429, 17545], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:15:53.260398+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.0, 0.0], "wheel_rpm": [1, -3, -1, 3], "encoder_counts": [21018, 6812, 3262, 17762], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.365515+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.0, 0.0], "wheel_rpm": [-3, -2, -2, 0], "encoder_counts": [21097, 6725, 3190, 17865], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.522223+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, 0.0, 0.0], "wheel_rpm": [-2, 1, 1, 1], "encoder_counts": [21221, 6620, 3106, 18021], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.625675+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [2, -3, -1, 1], "encoder_counts": [21310, 6567, 3076, 18149], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.731023+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [4, -6, 1, 1], "encoder_counts": [21445, 6483, 3017, 18315], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.829606+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [1, -5, -2, 4], "encoder_counts": [21629, 6355, 2928, 18506], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:53.958994+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.01, 0.0], "wheel_rpm": [4, -6, -7, 6], "encoder_counts": [21846, 6148, 2726, 18693], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:54.060871+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [4, -3, -5, 1], "encoder_counts": [22063, 5823, 2348, 18875], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:54.138190+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [0, -2, -3, -1], "encoder_counts": [22071, 5771, 2262, 18849], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:15:54.257595+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [4, 0, 1, -3], "encoder_counts": [22049, 5796, 2284, 18825], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:15:54.364151+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [2, 8, -4, -1], "encoder_counts": [22058, 5788, 2275, 18834], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:15:54.468362+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [-2, -1, -3, -3], "encoder_counts": [22056, 5788, 2275, 18831], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:15:54.573747+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [3, -3, -2, 5], "encoder_counts": [22053, 5792, 2280, 18829], "consecutive_samples": 7, "stable_seconds": 0.32105721599964454}
+{"time_utc": "1970-01-01T01:15:54.602988+00:00", "stage": "return_path_step_complete", "end_position": [-0.0036, 0.01145], "actual_distance_m": 0.0011603878661895777}
+{"time_utc": "1970-01-01T01:15:54.625976+00:00", "stage": "startup_center_reached", "position": [-0.00363, 0.01147], "error_m": 0.012096962428642985}
+{"time_utc": "1970-01-01T01:15:54.646779+00:00", "stage": "turn_to_place_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:56.239613+00:00", "stage": "turn_to_place_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:57.064484+00:00", "stage": "turn_to_place_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:58.657698+00:00", "stage": "turn_to_place_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:15:59.484449+00:00", "stage": "turn_to_place_request", "degrees": -15.009999999999991}
+{"time_utc": "1970-01-01T01:16:00.076918+00:00", "stage": "turn_to_place_complete", "degrees": -15.009999999999991}
+{"time_utc": "1970-01-01T01:16:00.903546+00:00", "stage": "turn_to_place_heading_reached", "offset": 71.49000000000001, "target": 72}
+{"time_utc": "1970-01-01T01:16:00.932974+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:16:00.996218+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:02.317292+00:00", "stage": "place_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:16:02.348029+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:16:03.419904+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:16:03.451966+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:16:04.396971+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:05.174369+00:00", "stage": "after_place_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:16:05.220458+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [-3, 3, -3, 3], "encoder_counts": [16887, 32381, 28946, 13193], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:05.391884+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [0, -2, 0, 4], "encoder_counts": [16884, 32385, 28947, 13191], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:05.497919+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [-2, -4, 2, 0], "encoder_counts": [16881, 32390, 28951, 13188], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:16:05.652649+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.01, 0.01, 0.0], "wheel_rpm": [-1, 5, -3, 1], "encoder_counts": [16882, 32387, 28949, 13189], "consecutive_samples": 7, "stable_seconds": 0.32004998399952456}
+{"time_utc": "1970-01-01T01:16:05.686471+00:00", "stage": "sorting_item_placed", "class_id": 39, "slot": 2, "counts": {"32": 3, "39": 2}, "center_error_m": 0.007286494355998639, "pick_heading": 180, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "taken"}]}
+{"time_utc": "1970-01-01T01:16:05.710692+00:00", "stage": "next_pick_direction", "heading": 36, "current_heading": 71.52000000000001, "turn_degrees": -35.52000000000001, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "pending"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "taken"}]}
+{"time_utc": "1970-01-01T01:16:05.730342+00:00", "stage": "search_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:16:05.790232+00:00", "stage": "search_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:06.310557+00:00", "stage": "search_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:16:06.334628+00:00", "stage": "sector_scan_turn_request", "degrees": -35.52000000000001}
+{"time_utc": "1970-01-01T01:16:07.635966+00:00", "stage": "sector_scan_turn_complete", "degrees": -35.52000000000001}
+{"time_utc": "1970-01-01T01:16:08.461706+00:00", "stage": "sector_scan_turn_heading_reached", "offset": 36.620000000000005, "target": 36.0}
+{"time_utc": "1970-01-01T01:16:08.488512+00:00", "stage": "search_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:16:08.555952+00:00", "stage": "search_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:09.879713+00:00", "stage": "search_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:16:10.068988+00:00", "stage": "vision_frame", "frame": 94, "count": 4, "age_s": 0.13}
+{"time_utc": "1970-01-01T01:16:10.089830+00:00", "stage": "sector_observed", "heading": 36, "scan_offset": 0, "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9434255361557007, "xyxy": [491.39678955078125, 82.84888458251953, 596.485595703125, 441.76605224609375], "image_width": 960, "image_height": 540}, "age_s": 0.1298320319992854, "ignored_off_axis": false}
+{"time_utc": "1970-01-01T01:16:10.231530+00:00", "stage": "vision_frame", "frame": 95, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:16:10.252394+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9433656334877014, "xyxy": [491.5024108886719, 82.82144165039062, 596.358642578125, 441.5362243652344], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.06659429868062339, "correction_degrees": -5.0, "heading_offset": 36.72}
+{"time_utc": "1970-01-01T01:16:10.273919+00:00", "stage": "align_turn_request", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:16:10.478276+00:00", "stage": "align_turn_complete", "degrees": -5.0}
+{"time_utc": "1970-01-01T01:16:11.301512+00:00", "stage": "align_turn_feedback", "requested_degrees": -5.0, "actual_degrees": -4.090000000000003}
+{"time_utc": "1970-01-01T01:16:11.460889+00:00", "stage": "vision_frame", "frame": 96, "count": 4, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:16:11.481320+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9424366354942322, "xyxy": [437.3082275390625, 81.84649658203125, 543.642578125, 441.09649658203125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.010911877950032567, "correction_degrees": 0.0, "heading_offset": 32.629999999999995}
+{"time_utc": "1970-01-01T01:16:11.500912+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:16:11.763000+00:00", "stage": "vision_frame", "frame": 97, "count": 5, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:16:11.783572+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9450615048408508, "xyxy": [437.0994873046875, 81.66891479492188, 543.2188720703125, 441.1242370605469], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.010582478841145826, "correction_degrees": 0.0, "heading_offset": 32.629999999999995}
+{"time_utc": "1970-01-01T01:16:11.803352+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:16:12.060997+00:00", "stage": "vision_frame", "frame": 98, "count": 5, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:16:12.082570+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9456839561462402, "xyxy": [437.5172119140625, 81.75098419189453, 543.1429443359375, 440.97198486328125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.010760498046874956, "correction_degrees": 0.0, "heading_offset": 32.629999999999995}
+{"time_utc": "1970-01-01T01:16:12.103200+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:16:12.256323+00:00", "stage": "approach_distance_pending", "distance_mm": 134, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:12.283617+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [-0.00151, 0.02017], "heading_offset": 32.629999999999995, "return_target": null}
+{"time_utc": "1970-01-01T01:16:12.715424+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:13.138990+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [0, -1, 1, 0], "encoder_counts": [1810, 17339, 15793, 31864], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:13.297603+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.0, 0.0], "wheel_rpm": [3, -6, -9, 5], "encoder_counts": [1946, 17219, 15641, 32021], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:16:13.452436+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-4, 5, -3, -3], "encoder_counts": [2061, 17158, 15542, 32158], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:13.555870+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [-1, 0, -3, -3], "encoder_counts": [2028, 17194, 15584, 32114], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:13.682205+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [2, 0, 1, -2], "encoder_counts": [2042, 17180, 15565, 32130], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:13.802903+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-7, -3, 0, -1], "encoder_counts": [2036, 17186, 15574, 32123], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:13.958840+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, 0.0, 0.0], "wheel_rpm": [-3, -2, -1, 2], "encoder_counts": [2043, 17176, 15563, 32134], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:16:14.014770+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-3, -1, -1, -5], "encoder_counts": [2040, 17182, 15567, 32129], "consecutive_samples": 7, "stable_seconds": 0.32256863999919005}
+{"time_utc": "1970-01-01T01:16:14.045441+00:00", "stage": "approach_step_complete", "end_position": [0.00458, 0.01356], "actual_distance_m": 0.008987780593672725}
+{"time_utc": "1970-01-01T01:16:14.067244+00:00", "stage": "approach_path_recorded", "start_position": [-0.00151, 0.02017], "end_position": [0.00458, 0.01356], "forward_axis": [0.8522110252086248, -0.5231982114962402], "peak_distance_m": 0.011792853768278483}
+{"time_utc": "1970-01-01T01:16:14.329751+00:00", "stage": "vision_frame", "frame": 99, "count": 4, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:16:14.350352+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9436160326004028, "xyxy": [443.56488037109375, 82.42485809326172, 552.2788696289062, 447.0599670410156], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.018668619791666674, "correction_degrees": 0.0, "heading_offset": 33.03}
+{"time_utc": "1970-01-01T01:16:14.371740+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:16:14.627651+00:00", "stage": "vision_frame", "frame": 100, "count": 4, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:16:14.649109+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9442926645278931, "xyxy": [443.77099609375, 82.32264709472656, 552.3223876953125, 447.043701171875], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.018798637390136763, "correction_degrees": 0.0, "heading_offset": 33.03}
+{"time_utc": "1970-01-01T01:16:14.669796+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:16:14.931442+00:00", "stage": "vision_frame", "frame": 101, "count": 5, "age_s": 0.103}
+{"time_utc": "1970-01-01T01:16:14.952423+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9428062438964844, "xyxy": [443.56488037109375, 82.29917907714844, 552.0525512695312, 447.06573486328125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.018550745646158884, "correction_degrees": 0.0, "heading_offset": 33.03}
+{"time_utc": "1970-01-01T01:16:14.973523+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:16:15.115867+00:00", "stage": "approach_distance_pending", "distance_mm": 125, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:15.145861+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.0045, 0.01365], "heading_offset": 33.03, "return_target": null}
+{"time_utc": "1970-01-01T01:16:15.600052+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:15.948430+00:00", "stage": "translation_stop_sample", "body_velocity": [0.02, -0.02, 0.0], "wheel_rpm": [1, -2, -5, -6], "encoder_counts": [5339, 14276, 12540, 2353], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:16.105245+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.0, 0.0], "wheel_rpm": [-4, 2, 2, 0], "encoder_counts": [5116, 14519, 12744, 2192], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:16.213275+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [-3, -2, -1, 0], "encoder_counts": [5073, 14569, 12785, 2159], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:16.370799+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [-1, -3, -2, -4], "encoder_counts": [5195, 14461, 12688, 2251], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:16.517197+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [2, -2, 1, -3], "encoder_counts": [5195, 14455, 12685, 2252], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:16.674113+00:00", "stage": "translation_stop_sample", "body_velocity": [0.01, -0.0, 0.0], "wheel_rpm": [0, 2, -1, -4], "encoder_counts": [5197, 14458, 12686, 2253], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:16:16.831363+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-3, 1, 1, 1], "encoder_counts": [5199, 14453, 12682, 2255], "consecutive_samples": 7}
+{"time_utc": "1970-01-01T01:16:16.889875+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.0, 0.0, 0.0], "wheel_rpm": [-1, 2, 2, -1], "encoder_counts": [5195, 14460, 12686, 2251], "consecutive_samples": 8, "stable_seconds": 0.36036265599977924}
+{"time_utc": "1970-01-01T01:16:16.915993+00:00", "stage": "approach_step_complete", "end_position": [0.02805, -0.00097], "actual_distance_m": 0.027719071052255698}
+{"time_utc": "1970-01-01T01:16:16.938771+00:00", "stage": "approach_path_recorded", "start_position": [0.0045, 0.01365], "end_position": [0.02805, -0.00097], "forward_axis": [0.8405117629586673, -0.5417932966806741], "peak_distance_m": 0.010243759075651868}
+{"time_utc": "1970-01-01T01:16:17.188088+00:00", "stage": "vision_frame", "frame": 102, "count": 4, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:16:17.209721+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9454866647720337, "xyxy": [443.88226318359375, 80.01290130615234, 562.643798828125, 439.5206298828125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.024232323964436864, "correction_degrees": 0.0, "heading_offset": 33.28}
+{"time_utc": "1970-01-01T01:16:17.231176+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:16:17.491668+00:00", "stage": "vision_frame", "frame": 103, "count": 4, "age_s": 0.104}
+{"time_utc": "1970-01-01T01:16:17.513820+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9436627626419067, "xyxy": [443.77813720703125, 80.02015686035156, 562.6348876953125, 441.737548828125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.02417345046997066, "correction_degrees": 0.0, "heading_offset": 33.28}
+{"time_utc": "1970-01-01T01:16:17.535670+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:16:17.924451+00:00", "stage": "vision_frame", "frame": 104, "count": 4, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:16:17.946206+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9453461766242981, "xyxy": [443.4736633300781, 80.04949951171875, 562.5775146484375, 440.60528564453125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.023984988530476925, "correction_degrees": 0.0, "heading_offset": 33.28}
+{"time_utc": "1970-01-01T01:16:17.967425+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:16:18.095691+00:00", "stage": "approach_distance_pending", "distance_mm": 78, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:18.128738+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.0279, -0.00091], "heading_offset": 33.28, "return_target": null}
+{"time_utc": "1970-01-01T01:16:18.576620+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:18.924340+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-1, -4, 2, 0], "encoder_counts": [8277, 11378, 9653, 5294], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.081435+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, -0.01, 0.0], "wheel_rpm": [-1, 1, 4, 1], "encoder_counts": [7986, 11698, 9945, 4975], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.189306+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-1, -4, 0, -4], "encoder_counts": [7946, 11759, 10005, 4921], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:19.322550+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-1, -4, -5, 0], "encoder_counts": [8104, 11588, 9807, 5106], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.429027+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [-2, -1, 0, 0], "encoder_counts": [8134, 11535, 9758, 5138], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:19.536442+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [-3, 5, -4, 3], "encoder_counts": [8082, 11597, 9826, 5084], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.642017+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [0, 7, -4, -2], "encoder_counts": [8114, 11565, 9788, 5119], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.799686+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.03, -0.01, 0.0], "wheel_rpm": [-3, -1, -1, 1], "encoder_counts": [8095, 11585, 9813, 5098], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:19.906612+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [1, 0, -1, 1], "encoder_counts": [8108, 11572, 9797, 5112], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:20.066878+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [1, -8, 0, -4], "encoder_counts": [8101, 11580, 9805, 5104], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:16:20.126510+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-1, -6, 0, -2], "encoder_counts": [8104, 11575, 9800, 5109], "consecutive_samples": 7, "stable_seconds": 0.32148870400033047}
+{"time_utc": "1970-01-01T01:16:20.155270+00:00", "stage": "approach_step_complete", "end_position": [0.05075, -0.01514], "actual_distance_m": 0.026918681245558816}
+{"time_utc": "1970-01-01T01:16:20.177267+00:00", "stage": "approach_path_recorded", "start_position": [0.0279, -0.00091], "end_position": [0.05075, -0.01514], "forward_axis": [0.8905047102875464, -0.4549740222866503], "peak_distance_m": 0.010286301570535446}
+{"time_utc": "1970-01-01T01:16:20.453161+00:00", "stage": "vision_frame", "frame": 105, "count": 4, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:16:20.475755+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9516922831535339, "xyxy": [438.20013427734375, 78.61548614501953, 570.0123291015625, 448.8327941894531], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.02511065800984702, "correction_degrees": 0.0, "heading_offset": 33.099999999999994}
+{"time_utc": "1970-01-01T01:16:20.497883+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:16:20.748445+00:00", "stage": "vision_frame", "frame": 106, "count": 3, "age_s": 0.101}
+{"time_utc": "1970-01-01T01:16:20.771106+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9505582451820374, "xyxy": [438.42645263671875, 78.5229721069336, 569.761962890625, 448.72662353515625], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.025098133087158248, "correction_degrees": 0.0, "heading_offset": 33.09}
+{"time_utc": "1970-01-01T01:16:20.793098+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:16:21.044468+00:00", "stage": "vision_frame", "frame": 107, "count": 3, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:16:21.066761+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9500914216041565, "xyxy": [438.7921142578125, 78.51647186279297, 569.896484375, 448.7100830078125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.025358645121256518, "correction_degrees": 0.0, "heading_offset": 33.09}
+{"time_utc": "1970-01-01T01:16:21.088527+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:16:21.215579+00:00", "stage": "approach_distance_pending", "distance_mm": 36, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:21.244712+00:00", "stage": "approach_step_request", "distance_m": 0.01, "speed_mps": 0.04, "start_position": [0.05132, -0.01528], "heading_offset": 33.09, "return_target": null}
+{"time_utc": "1970-01-01T01:16:21.680364+00:00", "stage": "approach_threshold_seen", "position": [0.06116, -0.02128], "distance_mm": 22}
+{"time_utc": "1970-01-01T01:16:21.720146+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:22.093255+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.04, -0.01, 0.0], "wheel_rpm": [2, 6, 5, -4], "encoder_counts": [10754, 9164, 7257, 7689], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.253490+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [6, -2, -5, -3], "encoder_counts": [10789, 9157, 7244, 7714], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.339411+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [0, -7, 0, 2], "encoder_counts": [10942, 9037, 7116, 7837], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.498794+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [1, 2, -7, -1], "encoder_counts": [10884, 9073, 7159, 7800], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.621459+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [3, -5, 1, -6], "encoder_counts": [10919, 9050, 7135, 7823], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.729400+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [-2, -3, 3, -3], "encoder_counts": [10914, 9052, 7136, 7821], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:22.887871+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-3, 0, 2, 3], "encoder_counts": [10918, 9052, 7136, 7824], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:22.999262+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-1, 2, -4, 2], "encoder_counts": [10908, 9056, 7142, 7816], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:23.080614+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-7, -3, 2, -1], "encoder_counts": [10918, 9051, 7135, 7823], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:23.184044+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [1, 0, -1, -1], "encoder_counts": [10915, 9050, 7136, 7822], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:23.295355+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-5, -2, -8, -1], "encoder_counts": [10913, 9056, 7138, 7819], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:23.408973+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-2, 4, 1, -2], "encoder_counts": [10914, 9055, 7138, 7821], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:23.519026+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [1, -2, 0, 1], "encoder_counts": [10914, 9055, 7138, 7820], "consecutive_samples": 7, "stable_seconds": 0.3204583360002289}
+{"time_utc": "1970-01-01T01:16:23.550488+00:00", "stage": "approach_step_complete", "end_position": [0.07419, -0.0285], "actual_distance_m": 0.026416004618412686}
+{"time_utc": "1970-01-01T01:16:23.574960+00:00", "stage": "approach_path_recorded", "start_position": [0.05132, -0.01528], "end_position": [0.07419, -0.0285], "forward_axis": [0.8537961757940361, -0.5206074242646561], "peak_distance_m": 0.011524998915401251}
+{"time_utc": "1970-01-01T01:16:23.838609+00:00", "stage": "vision_frame", "frame": 108, "count": 2, "age_s": 0.1}
+{"time_utc": "1970-01-01T01:16:23.861392+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.948419988155365, "xyxy": [437.5545654296875, 75.48243713378906, 584.5980834960938, 450.0965881347656], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.03237117131551104, "correction_degrees": 0.0, "heading_offset": 33.26999999999998}
+{"time_utc": "1970-01-01T01:16:23.884163+00:00", "stage": "alignment_stable", "consecutive_frames": 1}
+{"time_utc": "1970-01-01T01:16:24.146224+00:00", "stage": "vision_frame", "frame": 109, "count": 3, "age_s": 0.102}
+{"time_utc": "1970-01-01T01:16:24.170190+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9493524432182312, "xyxy": [437.10076904296875, 75.2271728515625, 584.6094360351562, 450.4527282714844], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.03214073181152344, "correction_degrees": 0.0, "heading_offset": 33.26999999999998}
+{"time_utc": "1970-01-01T01:16:24.194171+00:00", "stage": "alignment_stable", "consecutive_frames": 2}
+{"time_utc": "1970-01-01T01:16:24.445208+00:00", "stage": "vision_frame", "frame": 110, "count": 3, "age_s": 0.099}
+{"time_utc": "1970-01-01T01:16:24.468943+00:00", "stage": "target_observed", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9489513039588928, "xyxy": [436.70947265625, 75.399658203125, 584.6536865234375, 450.36798095703125], "image_width": 960, "image_height": 540}, "pixel_error_ratio": 0.03195997873942058, "correction_degrees": 0.0, "heading_offset": 33.26999999999998}
+{"time_utc": "1970-01-01T01:16:24.491537+00:00", "stage": "alignment_stable", "consecutive_frames": 3}
+{"time_utc": "1970-01-01T01:16:24.636025+00:00", "stage": "grasp_distance_confirmed", "distance_mm": 15, "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:24.668808+00:00", "stage": "alignment_and_distance_ready", "target": {"class_id": 39, "class_name": "bottle", "confidence": 0.9489513039588928, "xyxy": [436.70947265625, 75.399658203125, 584.6536865234375, 450.36798095703125], "image_width": 960, "image_height": 540}, "heading_offset": 33.28}
+{"time_utc": "1970-01-01T01:16:24.696494+00:00", "stage": "sorting_grasp", "class_id": 39, "slot": 3, "place_heading": 108}
+{"time_utc": "1970-01-01T01:16:24.720678+00:00", "stage": "grasp_close_request", "opened": false, "power": 30}
+{"time_utc": "1970-01-01T01:16:25.795544+00:00", "stage": "grasp_close_complete", "opened": false}
+{"time_utc": "1970-01-01T01:16:25.819122+00:00", "stage": "carry_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:16:26.756245+00:00", "stage": "carry_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:27.585251+00:00", "stage": "carry_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:16:27.617611+00:00", "stage": "return_path_turn_heading_reached", "offset": 33.400000000000006, "target": 33.09}
+{"time_utc": "1970-01-01T01:16:27.642816+00:00", "stage": "return_path_step_request", "distance_m": 0.024101000098907994, "speed_mps": -0.03, "start_position": [0.07267, -0.02656], "heading_offset": 33.400000000000006, "return_target": [0.05132, -0.01528]}
+{"time_utc": "1970-01-01T01:16:28.515278+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:28.865316+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.01, 0.0], "wheel_rpm": [3, -5, -5, 1], "encoder_counts": [8295, 12297, 10198, 5098], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:28.996000+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-2, 3, -1, 0], "encoder_counts": [8429, 12104, 10021, 5194], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:29.179339+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [0, -1, 0, -3], "encoder_counts": [8349, 12211, 10121, 5129], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:29.336086+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-2, 0, 0, -2], "encoder_counts": [8381, 12168, 10081, 5159], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:29.418427+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [4, -9, -3, -4], "encoder_counts": [8366, 12190, 10101, 5145], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:16:29.550215+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [4, 2, -1, -4], "encoder_counts": [8374, 12181, 10092, 5152], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:29.686183+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-3, 2, -2, 2], "encoder_counts": [8368, 12187, 10099, 5147], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:29.813587+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [-2, 0, 1, -2], "encoder_counts": [8371, 12183, 10095, 5149], "consecutive_samples": 7, "stable_seconds": 0.318208799999411}
+{"time_utc": "1970-01-01T01:16:29.845284+00:00", "stage": "return_path_step_complete", "end_position": [0.04758, -0.01483], "actual_distance_m": 0.027696588237542907}
+{"time_utc": "1970-01-01T01:16:29.869839+00:00", "stage": "return_path_turn_heading_reached", "offset": 33.75999999999999, "target": 33.28}
+{"time_utc": "1970-01-01T01:16:29.892373+00:00", "stage": "return_path_step_request", "distance_m": 0.023840172127797616, "speed_mps": -0.03, "start_position": [0.04758, -0.01479], "heading_offset": 33.75999999999999, "return_target": [0.0279, -0.00091]}
+{"time_utc": "1970-01-01T01:16:30.677696+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:31.077774+00:00", "stage": "translation_stop_sample", "body_velocity": [0.0, -0.0, 0.0], "wheel_rpm": [2, -3, 0, 3], "encoder_counts": [5723, 15002, 12626, 2266], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:31.217875+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.02, -0.01, 0.0], "wheel_rpm": [2, -5, -6, -5], "encoder_counts": [5749, 14970, 12623, 2296], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:31.381851+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-6, -3, -4, -3], "encoder_counts": [5742, 14989, 12636, 2291], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:31.484217+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-3, -3, -1, -3], "encoder_counts": [5751, 14975, 12627, 2302], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:31.659466+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-9, -4, 21, 3], "encoder_counts": [5745, 14983, 12633, 2297], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:16:31.797369+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-1, 2, 1, -3], "encoder_counts": [5740, 14986, 12635, 2292], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:31.899129+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-1, 2, -1, 1], "encoder_counts": [5740, 14988, 12636, 2292], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:32.004004+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.01, -0.0, 0.0], "wheel_rpm": [-2, -1, 1, -1], "encoder_counts": [5743, 14985, 12634, 2294], "consecutive_samples": 7, "stable_seconds": 0.30338751999988745}
+{"time_utc": "1970-01-01T01:16:32.032043+00:00", "stage": "return_path_step_complete", "end_position": [0.02397, -0.00446], "actual_distance_m": 0.025770933238825473}
+{"time_utc": "1970-01-01T01:16:32.057203+00:00", "stage": "return_path_turn_heading_reached", "offset": 33.650000000000006, "target": 33.03}
+{"time_utc": "1970-01-01T01:16:32.081517+00:00", "stage": "return_path_step_request", "distance_m": 0.02617122269472545, "speed_mps": -0.03, "start_position": [0.02397, -0.00445], "heading_offset": 33.650000000000006, "return_target": [0.0045, 0.01365]}
+{"time_utc": "1970-01-01T01:16:33.255663+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:33.631541+00:00", "stage": "translation_stop_sample", "body_velocity": [0.14, -0.0, 0.0], "wheel_rpm": [1, -9, -6, -3], "encoder_counts": [2622, 18723, 16314, 31822], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:16:33.719278+00:00", "stage": "translation_stop_sample", "body_velocity": [0.15, -0.01, 0.0], "wheel_rpm": [6, -2, -5, 7], "encoder_counts": [2860, 18523, 16132, 32069], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:33.879452+00:00", "stage": "translation_stop_sample", "body_velocity": [0.15, -0.02, 0.0], "wheel_rpm": [3, -12, -14, -1], "encoder_counts": [3327, 17944, 15350, 32430], "consecutive_samples": 0}
+{"time_utc": "1970-01-01T01:16:34.013778+00:00", "stage": "translation_stop_sample", "body_velocity": [0.14, 0.0, 0.0], "wheel_rpm": [-1, 5, 2, -4], "encoder_counts": [3362, 17846, 15225, 32412], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:34.118901+00:00", "stage": "translation_stop_sample", "body_velocity": [0.14, -0.0, 0.0], "wheel_rpm": [1, 4, -2, 3], "encoder_counts": [3307, 17925, 15289, 32383], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:34.249605+00:00", "stage": "translation_stop_sample", "body_velocity": [0.15, -0.0, 0.0], "wheel_rpm": [6, -1, 1, -3], "encoder_counts": [3325, 17902, 15268, 32395], "consecutive_samples": 2}
+{"time_utc": "1970-01-01T01:16:34.360750+00:00", "stage": "translation_stop_sample", "body_velocity": [0.15, 0.0, 0.0], "wheel_rpm": [-1, -5, -3, -7], "encoder_counts": [3311, 17920, 15284, 32382], "consecutive_samples": 4}
+{"time_utc": "1970-01-01T01:16:34.497151+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.15, 0.01, 0.0], "wheel_rpm": [-6, 0, 1, 0], "encoder_counts": [3315, 17910, 15277, 32387], "consecutive_samples": 7, "stable_seconds": 0.3006870079998407}
+{"time_utc": "1970-01-01T01:16:34.530082+00:00", "stage": "return_path_step_complete", "end_position": [0.0104, 0.00128], "actual_distance_m": 0.014730166326284306}
+{"time_utc": "1970-01-01T01:16:34.556945+00:00", "stage": "return_path_turn_heading_reached", "offset": 33.360000000000014, "target": 32.629999999999995}
+{"time_utc": "1970-01-01T01:16:34.581388+00:00", "stage": "return_path_step_request", "distance_m": 0.019805214631614568, "speed_mps": -0.03, "start_position": [0.01028, 0.00152], "heading_offset": 33.360000000000014, "return_target": [-0.00151, 0.02017]}
+{"time_utc": "1970-01-01T01:16:35.277467+00:00", "stage": "wheel_stop_ack", "accepted": true}
+{"time_utc": "1970-01-01T01:16:35.677956+00:00", "stage": "translation_stop_sample", "body_velocity": [0.06, 0.01, 0.0], "wheel_rpm": [0, 1, 1, 6], "encoder_counts": [409, 20966, 18203, 29209], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:35.817801+00:00", "stage": "translation_stop_sample", "body_velocity": [0.07, 0.01, 0.0], "wheel_rpm": [2, -3, -3, 0], "encoder_counts": [619, 20784, 18027, 29400], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:35.917826+00:00", "stage": "translation_stop_sample", "body_velocity": [0.05, 0.01, 0.0], "wheel_rpm": [-5, -1, 1, 5], "encoder_counts": [707, 20704, 17991, 29501], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:36.024800+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.01, 0.0], "wheel_rpm": [-3, 2, 0, 2], "encoder_counts": [665, 20744, 18036, 29463], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:36.184101+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.0, 0.0], "wheel_rpm": [2, -4, -8, -1], "encoder_counts": [678, 20737, 18026, 29477], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:36.294819+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.0, 0.0], "wheel_rpm": [1, -2, -1, -4], "encoder_counts": [667, 20746, 18035, 29465], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:36.406255+00:00", "stage": "translation_stop_sample", "body_velocity": [0.04, 0.0, 0.0], "wheel_rpm": [6, -2, 5, 1], "encoder_counts": [676, 20737, 18027, 29475], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:36.511633+00:00", "stage": "translation_stop_confirmed", "body_velocity": [0.03, 0.0, 0.0], "wheel_rpm": [2, 3, 4, -2], "encoder_counts": [671, 20744, 18031, 29470], "consecutive_samples": 7, "stable_seconds": 0.3222235519997412}
+{"time_utc": "1970-01-01T01:16:36.545514+00:00", "stage": "return_path_step_complete", "end_position": [-0.01858, 0.01797], "actual_distance_m": 0.03321900209217609}
+{"time_utc": "1970-01-01T01:16:36.571039+00:00", "stage": "startup_center_reached", "position": [-0.01859, 0.01798], "error_m": 0.02592577867683052}
+{"time_utc": "1970-01-01T01:16:36.595088+00:00", "stage": "turn_to_place_request", "degrees": 45}
+{"time_utc": "1970-01-01T01:16:38.156945+00:00", "stage": "turn_to_place_complete", "degrees": 45}
+{"time_utc": "1970-01-01T01:16:38.987031+00:00", "stage": "turn_to_place_request", "degrees": 30.47999999999999}
+{"time_utc": "1970-01-01T01:16:40.075986+00:00", "stage": "turn_to_place_complete", "degrees": 30.47999999999999}
+{"time_utc": "1970-01-01T01:16:40.910229+00:00", "stage": "turn_to_place_heading_reached", "offset": 107.01, "target": 108}
+{"time_utc": "1970-01-01T01:16:40.942235+00:00", "stage": "place_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:16:41.016407+00:00", "stage": "place_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:42.344911+00:00", "stage": "place_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:16:42.382770+00:00", "stage": "place_release_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:16:43.457897+00:00", "stage": "place_release_complete", "opened": true}
+{"time_utc": "1970-01-01T01:16:43.493388+00:00", "stage": "after_place_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:16:44.476101+00:00", "stage": "after_place_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:45.257337+00:00", "stage": "after_place_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:16:45.331840+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [4, -2, -1, -3], "encoder_counts": [28040, 14976, 12832, 24397], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:45.434825+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, -0.01, 0.0], "wheel_rpm": [3, 0, 0, -3], "encoder_counts": [28044, 14973, 12829, 24399], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:45.523382+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [-5, 0, -1, -3], "encoder_counts": [28041, 14975, 12832, 24397], "consecutive_samples": 5}
+{"time_utc": "1970-01-01T01:16:45.657890+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.0, -0.01, 0.0], "wheel_rpm": [-3, -4, -4, -3], "encoder_counts": [28043, 14973, 12830, 24398], "consecutive_samples": 7, "stable_seconds": 0.3181081920001816}
+{"time_utc": "1970-01-01T01:16:45.693180+00:00", "stage": "sorting_item_placed", "class_id": 39, "slot": 3, "counts": {"32": 3, "39": 3}, "center_error_m": 0.026532218150769078, "pick_heading": 36, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "taken"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "taken"}]}
+{"time_utc": "1970-01-01T01:16:45.719014+00:00", "stage": "finish_retract_request", "servo_id": 1, "target_raw": 1190, "target_degrees": 29, "expected_dds_raw": 1189, "encoded_target_wire": 2090}
+{"time_utc": "1970-01-01T01:16:45.776267+00:00", "stage": "finish_retract_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:46.302488+00:00", "stage": "finish_retract_complete", "actual_raw": 1183}
+{"time_utc": "1970-01-01T01:16:46.327711+00:00", "stage": "finish_turn_to_start_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:16:47.956326+00:00", "stage": "finish_turn_to_start_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:16:48.793562+00:00", "stage": "finish_turn_to_start_request", "degrees": -45}
+{"time_utc": "1970-01-01T01:16:50.415725+00:00", "stage": "finish_turn_to_start_complete", "degrees": -45}
+{"time_utc": "1970-01-01T01:16:51.256016+00:00", "stage": "finish_turn_to_start_request", "degrees": -18.22}
+{"time_utc": "1970-01-01T01:16:51.956085+00:00", "stage": "finish_turn_to_start_complete", "degrees": -18.22}
+{"time_utc": "1970-01-01T01:16:52.782237+00:00", "stage": "finish_turn_to_start_heading_reached", "offset": 2.0, "target": 0}
+{"time_utc": "1970-01-01T01:16:52.812734+00:00", "stage": "finish_extend_request", "servo_id": 1, "target_raw": 600, "target_degrees": -75, "expected_dds_raw": 597, "encoded_target_wire": 1050}
+{"time_utc": "1970-01-01T01:16:52.877199+00:00", "stage": "finish_extend_action_completed", "state": "action_succeeded", "feedback_validated": false}
+{"time_utc": "1970-01-01T01:16:54.205834+00:00", "stage": "finish_extend_complete", "actual_raw": 598}
+{"time_utc": "1970-01-01T01:16:54.241585+00:00", "stage": "finish_open_gripper_request", "opened": true, "power": 25}
+{"time_utc": "1970-01-01T01:16:55.316035+00:00", "stage": "finish_open_gripper_complete", "opened": true}
+{"time_utc": "1970-01-01T01:16:55.370614+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.01, 0.0, 0.0], "wheel_rpm": [-2, 0, 0, -4], "encoder_counts": [22059, 7764, 7136, 18724], "consecutive_samples": 1}
+{"time_utc": "1970-01-01T01:16:55.498540+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [-2, -1, 3, -6], "encoder_counts": [22063, 7759, 7133, 18728], "consecutive_samples": 3}
+{"time_utc": "1970-01-01T01:16:55.631663+00:00", "stage": "translation_stop_sample", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [-1, -4, -4, -4], "encoder_counts": [22061, 7760, 7135, 18726], "consecutive_samples": 6}
+{"time_utc": "1970-01-01T01:16:55.687828+00:00", "stage": "translation_stop_confirmed", "body_velocity": [-0.0, -0.0, 0.0], "wheel_rpm": [2, 0, 0, 2], "encoder_counts": [22061, 7761, 7134, 18727], "consecutive_samples": 7, "stable_seconds": 0.3214113920003001}
+{"time_utc": "1970-01-01T01:16:55.716508+00:00", "stage": "sorting_complete", "counts": {"32": 3, "39": 3}, "all_six_placed": true, "directions": [{"heading": 0, "status": "taken"}, {"heading": 36, "status": "taken"}, {"heading": -36, "status": "taken"}, {"heading": 144, "status": "taken"}, {"heading": -144, "status": "taken"}, {"heading": 180, "status": "taken"}], "arm": "extended", "gripper": "open"}
+{"time_utc": "1970-01-01T01:16:55.755766+00:00", "stage": "finished_successfully", "directory": "/home/robot/projects/3-LEARN/work/object-sort-19700101T011245258885Z"}
+运行记录：/home/robot/projects/3-LEARN/work/object-sort-19700101T011245258885Z
