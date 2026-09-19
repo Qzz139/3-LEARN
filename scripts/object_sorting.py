@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# main稳定版分拣：按配置方位顺序抓取，球右放、瓶左放，各使用三个位置。
+# 六件分拣：按当前朝向选择最近的待取方位，球右放、瓶左放，各使用三个位置。
 """Sort balls and bottles from configured directions into three slots per class."""
 import math
 import time
@@ -8,6 +8,12 @@ import yolo_align_pick_place_demo as align
 
 
 CLASS_NAMES = {32: 'ball', 39: 'bottle'}
+
+
+def nearest_pending_direction(directions, current_heading):
+    return min((d for d in directions if d['status'] == 'pending'),
+               key=lambda d: abs(align.wrap_degrees(d['heading'] - current_heading)),
+               default=None)
 
 
 # 复用demo2参数校验，再核对六个抓取方位及每类三个放置角度。
@@ -56,8 +62,11 @@ class SortingDemo(align.AlignDemo):
     def find_target(self, heading, available_classes):
         selection = dict(self.cfg['alignment'], target_class_ids=available_classes)
         for offset in self.cfg['sorting']['sector_scan_offsets_degrees']:
-            self.move_base(self.arm['base_retracted_raw'], 'search_retract')
-            self.turn_to_offset(align.wrap_degrees(heading + offset), 'sector_scan_turn')
+            target_heading = align.wrap_degrees(heading + offset)
+            # 已在目标朝向时不转底盘，也无需为这次零角度转向先内收。
+            if abs(align.wrap_degrees(target_heading - self.heading_offset())) > selection['heading_tolerance_degrees']:
+                self.move_base(self.arm['base_retracted_raw'], 'search_retract')
+                self.turn_to_offset(target_heading, 'sector_scan_turn')
             self.move_base(self.arm['base_extended_raw'], 'search_extend')
             # 两帧新图像均无目标才扫描下一方向，过期图像不计数。
             deadline, empty = time.monotonic() + 5.0, 0
@@ -67,9 +76,12 @@ class SortingDemo(align.AlignDemo):
                 if age > selection['max_result_age_s']:
                     continue
                 target = align.choose_target(detections, selection)
+                # 优先取离抓取轴最近的目标；中心±15%外的目标留给相邻取物方向。
+                off_axis = (target is not None and
+                            abs(align.pixel_error(target, selection['axis_x_ratio'])) > .15)
                 self.record('sector_observed', heading=heading, scan_offset=offset,
-                            target=target, age_s=age)
-                if target:
+                            target=target, age_s=age, ignored_off_axis=off_axis)
+                if target and not off_axis:
                     return target
                 empty += 1
             if empty < 2:
@@ -85,15 +97,28 @@ class SortingDemo(align.AlignDemo):
         self.start_yaw = self.feedback.yaw()
         self.start_position = self.position()
         counts = {32: 0, 39: 0}
-        self.record('sorting_started', start_yaw=self.start_yaw, start_position=self.start_position)
-        for heading in self.cfg['sorting']['pick_headings_degrees']:
+        self.pick_directions = [dict(heading=heading, status='pending')
+                                for heading in self.cfg['sorting']['pick_headings_degrees']]
+        self.record('sorting_started', start_yaw=self.start_yaw, start_position=self.start_position,
+                    directions=[dict(d) for d in self.pick_directions])
+        while True:
             available = [class_id for class_id in CLASS_NAMES if counts[class_id] < 3]
             if not available:
                 break
+            current_heading = self.heading_offset()
+            direction = nearest_pending_direction(self.pick_directions, current_heading)
+            if direction is None:
+                break
+            heading = direction['heading']
+            self.record('next_pick_direction', heading=heading, current_heading=current_heading,
+                        turn_degrees=align.wrap_degrees(heading - current_heading),
+                        directions=[dict(d) for d in self.pick_directions])
             # 转向搜索时先内收，到预定朝向后再外伸识别。
             target = self.find_target(heading, available)
             if target is None:
-                self.record('sector_empty', heading=heading)
+                direction['status'] = 'not_found'
+                self.record('sector_empty', heading=heading,
+                            directions=[dict(d) for d in self.pick_directions])
                 continue
             self.approach_path, self.travel_m = [], 0.0
             target = self.align_and_wait_for_grasp(initial_target=target, search_center=heading)
@@ -113,13 +138,16 @@ class SortingDemo(align.AlignDemo):
             if error > self.cfg['approach']['center_tolerance_m']:
                 raise RuntimeError('placement shifted chassis outside starting center tolerance')
             counts[class_id] += 1
+            direction['status'] = 'taken'
             self.record('sorting_item_placed', class_id=class_id, slot=slot + 1,
-                        counts=counts.copy(), center_error_m=error)
+                        counts=counts.copy(), center_error_m=error, pick_heading=heading,
+                        directions=[dict(d) for d in self.pick_directions])
         self.move_base(self.arm['base_retracted_raw'], 'finish_retract')
         self.turn_to_offset(0, 'finish_turn_to_start')
         self.initial_state('finish')
         self.wait_stationary()
         self.record('sorting_complete', counts=counts, all_six_placed=sum(counts.values()) == 6,
+                    directions=[dict(d) for d in self.pick_directions],
                     arm='extended', gripper='open')
 
 
@@ -129,5 +157,5 @@ if __name__ == '__main__':
         default_config=align.ROOT / 'config/object_sorting.json',
         validator=validate_sorting,
         execution_check=require_placement_slots,
-        preview='预览：内收转到搜索角度再外伸 → YOLO锁定球或瓶 → 对准接近抓取 → 内收并退回中心 → 分类放入下一空位 → 松爪内收转到下一搜索角度再外伸；最终内收回正并恢复外伸松爪。',
+        preview='预览：选择转角最小的待取方位 → 内收转向再外伸 → YOLO锁定球或瓶 → 对准接近抓取 → 内收退回中心 → 分类放入下一空位 → 记录方位已取 → 松爪内收转到最近待取方位再外伸；最终内收回正并恢复外伸松爪。',
     ))

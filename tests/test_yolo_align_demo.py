@@ -77,6 +77,18 @@ class TestAlignment(unittest.TestCase):
         self.assertEqual(cfg['alignment']['target_class_ids'], [32])
         self.assertEqual(cfg['chassis']['place_turn_degrees'], -90)
 
+    def test_locked_bottle_survives_same_box_vase_misclassification(self):
+        a = M.validate_alignment(M.select_target_mode(config(), 'bottle'))['alignment']
+        bottle = box(480, 39, width=960, height=540)
+        vase = box(482, 75, width=960, height=540)
+        self.assertIsNone(M.choose_target([vase], a))
+        continued = M.choose_target([vase], a, bottle)
+        self.assertEqual(continued['class_id'], 39)
+        self.assertEqual(continued['observed_class_id'], 75)
+        self.assertIsNone(M.choose_target([box(600, 75, width=960, height=540)], a, bottle))
+        self.assertIsNone(M.choose_target([box(482, 75, width=960, height=540, scale=2)], a, bottle))
+        self.assertEqual(M.choose_target([bottle, vase], a, bottle), bottle)
+
     # 球模式排除瓶子，并保持原目标连续性而不换到另一只球。
     def test_target_selection_excludes_bottles_and_tracks_one_ball(self):
         a = config()['alignment']
