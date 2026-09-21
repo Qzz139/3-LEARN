@@ -1,0 +1,12 @@
+# 阶段只定义任务顺序；舵机、红外和放置角度仍由object_sorting.json控制。
+initial: initialize
+terminal: [finished, failed]
+states:
+  initialize: {ready: select_direction, error: failed}
+  select_direction: {target: search, complete: finish, error: failed}
+  search: {found: align, empty: select_direction, error: failed}
+  align: {ready: grasp, error: failed}
+  grasp: {held: return_to_center, error: failed}
+  return_to_center: {centered: place, error: failed}
+  place: {released: select_direction, error: failed}
+  finish: {done: finished, error: failed}

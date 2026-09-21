@@ -1,0 +1,853 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 24,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.3,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 20.0,
+      "stall_timeout_s": 10.0,
+      "settle_seconds": 0.3,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.05,
+      "stop_timeout_s": 20.0,
+      "stop_wheel_rpm": 8,
+      "stop_encoder_counts": 16,
+      "stop_stable_seconds": 0.3
+    },
+    "alignment": {
+      "target_class_ids": [
+        32,
+        39
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.04,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 30,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 25.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    },
+    "sorting": {
+      "pick_headings_degrees": [
+        0,
+        36,
+        -36,
+        144,
+        -144,
+        180
+      ],
+      "sector_scan_offsets_degrees": [
+        0,
+        15,
+        -15
+      ],
+      "placement_headings_degrees": {
+        "ball": [
+          -90,
+          -72,
+          -108
+        ],
+        "bottle": [
+          90,
+          72,
+          108
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:10:43.909517+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T00:11:07.840726+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T00:11:15.667251+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T00:11:16.811963+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T00:11:16.813908+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:11:16.849397+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.352476+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1072
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.354446+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.355869+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.389315+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.891493+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 603
+    },
+    {
+      "time_utc": "1970-01-01T00:11:17.893596+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:11:18.929082+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:11:18.955739+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        2,
+        -3,
+        1
+      ],
+      "encoder_counts": [
+        4378,
+        26452,
+        1747,
+        9656
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.083698+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        2,
+        -3,
+        2
+      ],
+      "encoder_counts": [
+        4378,
+        26455,
+        1749,
+        9654
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.186312+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -3,
+        -7,
+        2
+      ],
+      "encoder_counts": [
+        4377,
+        26455,
+        1750,
+        9653
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.289360+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        4,
+        -2,
+        2,
+        -3
+      ],
+      "encoder_counts": [
+        4379,
+        26453,
+        1748,
+        9655
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.391546+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -4,
+        -1,
+        2,
+        -2
+      ],
+      "encoder_counts": [
+        4377,
+        26455,
+        1750,
+        9653
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.494534+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.01,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        0,
+        7,
+        4
+      ],
+      "encoder_counts": [
+        4376,
+        26456,
+        1751,
+        9652
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.673034+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        0.01,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        2,
+        1,
+        1,
+        1
+      ],
+      "encoder_counts": [
+        4381,
+        26452,
+        1747,
+        9657
+      ],
+      "consecutive_samples": 8,
+      "stable_seconds": 0.3599046399999679
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.675309+00:00",
+      "stage": "sorting_started",
+      "start_yaw": -5.95,
+      "start_position": [
+        0.00252,
+        -0.00109
+      ],
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.676716+00:00",
+      "stage": "next_pick_direction",
+      "heading": 0,
+      "current_heading": -0.0,
+      "turn_degrees": 0.0,
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:11:19.679139+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:11:20.628766+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:11:21.432626+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1182
+    },
+    {
+      "time_utc": "1970-01-01T00:11:21.435973+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": 1.009999999999991,
+      "target": 0.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:21.437324+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:11:21.489009+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:11:22.943645+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.456886+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 6,
+      "age_s": 0.398
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.458640+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.7768567800521851,
+        "xyxy": [
+          28.829378128051758,
+          96.54818725585938,
+          186.42030334472656,
+          450.8284606933594
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.3977514239999209
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.613493+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 6,
+      "age_s": 0.119
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.615433+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.880822479724884,
+        "xyxy": [
+          28.56448745727539,
+          96.0113754272461,
+          187.36627197265625,
+          451.4434814453125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.3875360627969106,
+      "correction_degrees": 5.0,
+      "heading_offset": 1.0300000000000011
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.616934+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:23.789179+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:24.592036+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.949999999999989
+    },
+    {
+      "time_utc": "1970-01-01T00:11:24.728981+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 5,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:24.731709+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.787365198135376,
+        "xyxy": [
+          103.14390563964844,
+          90.29212188720703,
+          246.34469604492188,
+          437.7322082519531
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.31797468662261963,
+      "correction_degrees": 5.0,
+      "heading_offset": 5.97999999999999
+    },
+    {
+      "time_utc": "1970-01-01T00:11:24.733507+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:24.889835+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:25.692787+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 3.3499999999999943
+    },
+    {
+      "time_utc": "1970-01-01T00:11:25.830050+00:00",
+      "stage": "vision_frame",
+      "frame": 4,
+      "count": 4,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:25.832876+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:25.957301+00:00",
+      "stage": "vision_frame",
+      "frame": 5,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:11:25.959414+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T00:11:26.091432+00:00",
+      "stage": "vision_frame",
+      "frame": 6,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:11:26.093527+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.3844626843929291,
+        "xyxy": [
+          161.26339721679688,
+          90.04124450683594,
+          289.4826354980469,
+          428.02313232421875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.2652364412943522,
+      "correction_degrees": 5.0,
+      "heading_offset": 9.329999999999984
+    },
+    {
+      "time_utc": "1970-01-01T00:11:26.095160+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:26.271161+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.074272+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 3.710000000000008
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.218863+00:00",
+      "stage": "vision_frame",
+      "frame": 7,
+      "count": 4,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.221249+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.344312+00:00",
+      "stage": "vision_frame",
+      "frame": 8,
+      "count": 4,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.346543+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.486555+00:00",
+      "stage": "vision_frame",
+      "frame": 9,
+      "count": 4,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.488886+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.616602+00:00",
+      "stage": "vision_frame",
+      "frame": 10,
+      "count": 4,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.618785+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 4
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.760202+00:00",
+      "stage": "vision_frame",
+      "frame": 11,
+      "count": 5,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.762419+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.889323+00:00",
+      "stage": "vision_frame",
+      "frame": 12,
+      "count": 5,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:11:27.892054+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 6
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.019857+00:00",
+      "stage": "vision_frame",
+      "frame": 13,
+      "count": 5,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.022275+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 7
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.154108+00:00",
+      "stage": "vision_frame",
+      "frame": 14,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.156842+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.35385850071907043,
+        "xyxy": [
+          202.27285766601562,
+          87.87149047851562,
+          322.9046936035156,
+          431.03448486328125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.22647002538045247,
+      "correction_degrees": 5.0,
+      "heading_offset": 13.030000000000001
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.158973+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:28.329868+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:29.134027+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 4.319999999999993
+    },
+    {
+      "time_utc": "1970-01-01T00:11:29.257781+00:00",
+      "stage": "vision_frame",
+      "frame": 15,
+      "count": 7,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:11:29.260254+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.8225768804550171,
+        "xyxy": [
+          261.11138916015625,
+          85.87085723876953,
+          372.3258972167969,
+          423.5732421875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.17008474667867024,
+      "correction_degrees": 5.0,
+      "heading_offset": 17.349999999999994
+    },
+    {
+      "time_utc": "1970-01-01T00:11:29.262157+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:29.448740+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:11:30.253340+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 3.210000000000008
+    },
+    {
+      "time_utc": "1970-01-01T00:11:30.384111+00:00",
+      "stage": "vision_frame",
+      "frame": 16,
+      "count": 5,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T00:11:30.386930+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.30487412214279175,
+        "xyxy": [
+          300.4373474121094,
+          84.48880004882812,
+          404.1711730957031,
+          410.2599792480469
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.13301639556884765,
+      "correction_degrees": 5.0,
+      "heading_offset": 20.55000000000001
+    },
+    {
+      "time_utc": "1970-01-01T00:11:30.470273+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T00:11:30.489476+00:00",
+      "stage": "error",
+      "error": "RuntimeError: target requires a turn beyond configured search range",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: target requires a turn beyond configured search range"
+}

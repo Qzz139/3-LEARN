@@ -4,6 +4,7 @@
 import math
 import time
 
+from sorting_state_machine import SortingStateMachine
 import yolo_align_pick_place_demo as align
 
 
@@ -58,6 +59,10 @@ def require_placement_slots(cfg):
 class SortingDemo(align.AlignDemo):
     """Keep the starting center and heading as the reference for every object."""
 
+    def __init__(self, bot, cfg, feedback, record, detector, state_machine=None):
+        super().__init__(bot, cfg, feedback, record, detector)
+        self.state_machine = state_machine
+
     # 内收转到预定角度后外伸识别；无目标时左右扫描，不直接换锁定目标。
     def find_target(self, heading, available_classes):
         selection = dict(self.cfg['alignment'], target_class_ids=available_classes)
@@ -91,64 +96,96 @@ class SortingDemo(align.AlignDemo):
     # 整轮共享启动中心与朝向，两类分别计数并按顺序占用各自三个放置位。
     def run(self):
         require_placement_slots(self.cfg)
-        self.lock_initial_distal()
-        self.initial_state('start')
-        self.wait_stationary()
-        self.start_yaw = self.feedback.yaw()
-        self.start_position = self.position()
+        machine = self.state_machine or SortingStateMachine.from_file(
+            align.ROOT / 'config/sorting_state_machine.yaml')
         counts = {32: 0, 39: 0}
-        self.pick_directions = [dict(heading=heading, status='pending')
-                                for heading in self.cfg['sorting']['pick_headings_degrees']]
-        self.record('sorting_started', start_yaw=self.start_yaw, start_position=self.start_position,
-                    directions=[dict(d) for d in self.pick_directions])
-        while True:
-            available = [class_id for class_id in CLASS_NAMES if counts[class_id] < 3]
-            if not available:
-                break
-            current_heading = self.heading_offset()
-            direction = nearest_pending_direction(self.pick_directions, current_heading)
-            if direction is None:
-                break
-            heading = direction['heading']
-            self.record('next_pick_direction', heading=heading, current_heading=current_heading,
-                        turn_degrees=align.wrap_degrees(heading - current_heading),
-                        directions=[dict(d) for d in self.pick_directions])
-            # 转向搜索时先内收，到预定朝向后再外伸识别。
-            target = self.find_target(heading, available)
-            if target is None:
-                direction['status'] = 'not_found'
-                self.record('sector_empty', heading=heading,
-                            directions=[dict(d) for d in self.pick_directions])
-                continue
-            self.approach_path, self.travel_m = [], 0.0
-            target = self.align_and_wait_for_grasp(initial_target=target, search_center=heading)
-            class_id = target['class_id']
-            slot = counts[class_id]
-            place_heading = self.cfg['sorting']['placement_headings_degrees'][CLASS_NAMES[class_id]][slot]
-            self.record('sorting_grasp', class_id=class_id, slot=slot + 1, place_heading=place_heading)
-            self.gripper(False, 'grasp_close')
-            self.move_base(self.arm['base_retracted_raw'], 'carry_retract')
-            self.return_to_center()
-            self.turn_to_offset(place_heading, 'turn_to_place')
-            self.move_base(self.arm['base_extended_raw'], 'place_extend')
-            self.gripper(True, 'place_release')
-            self.move_base(self.arm['base_retracted_raw'], 'after_place_retract')
-            self.wait_stationary()
-            error = align.position_distance(self.position(), self.start_position)
-            if error > self.cfg['approach']['center_tolerance_m']:
-                raise RuntimeError('placement shifted chassis outside starting center tolerance')
-            counts[class_id] += 1
-            direction['status'] = 'taken'
-            self.record('sorting_item_placed', class_id=class_id, slot=slot + 1,
-                        counts=counts.copy(), center_error_m=error, pick_heading=heading,
-                        directions=[dict(d) for d in self.pick_directions])
-        self.move_base(self.arm['base_retracted_raw'], 'finish_retract')
-        self.turn_to_offset(0, 'finish_turn_to_start')
-        self.initial_state('finish')
-        self.wait_stationary()
-        self.record('sorting_complete', counts=counts, all_six_placed=sum(counts.values()) == 6,
-                    directions=[dict(d) for d in self.pick_directions],
-                    arm='extended', gripper='open')
+
+        def advance(event):
+            source, _, target_state = machine.advance(event)
+            self.record('sorting_state_transition', source=source, event=event, target=target_state)
+
+        try:
+            while machine.current not in machine.terminal:
+                state = machine.current
+                if state == 'initialize':
+                    self.lock_initial_distal()
+                    self.initial_state('start')
+                    self.wait_stationary()
+                    self.start_yaw = self.feedback.yaw()
+                    self.start_position = self.position()
+                    self.pick_directions = [dict(heading=heading, status='pending')
+                                            for heading in self.cfg['sorting']['pick_headings_degrees']]
+                    self.record('sorting_started', start_yaw=self.start_yaw,
+                                start_position=self.start_position,
+                                directions=[dict(d) for d in self.pick_directions])
+                    advance('ready')
+                elif state == 'select_direction':
+                    available = [class_id for class_id in CLASS_NAMES if counts[class_id] < 3]
+                    current_heading = self.heading_offset()
+                    direction = nearest_pending_direction(self.pick_directions, current_heading) if available else None
+                    if direction is None:
+                        advance('complete')
+                        continue
+                    heading = direction['heading']
+                    self.record('next_pick_direction', heading=heading, current_heading=current_heading,
+                                turn_degrees=align.wrap_degrees(heading - current_heading),
+                                directions=[dict(d) for d in self.pick_directions])
+                    advance('target')
+                elif state == 'search':
+                    target = self.find_target(heading, available)
+                    if target is None:
+                        direction['status'] = 'not_found'
+                        self.record('sector_empty', heading=heading,
+                                    directions=[dict(d) for d in self.pick_directions])
+                        advance('empty')
+                    else:
+                        advance('found')
+                elif state == 'align':
+                    self.approach_path, self.travel_m = [], 0.0
+                    target = self.align_and_wait_for_grasp(initial_target=target, search_center=heading)
+                    class_id = target['class_id']
+                    slot = counts[class_id]
+                    place_heading = self.cfg['sorting']['placement_headings_degrees'][CLASS_NAMES[class_id]][slot]
+                    self.record('sorting_grasp', class_id=class_id, slot=slot + 1,
+                                place_heading=place_heading)
+                    advance('ready')
+                elif state == 'grasp':
+                    self.gripper(False, 'grasp_close')
+                    self.move_base(self.arm['base_retracted_raw'], 'carry_retract')
+                    advance('held')
+                elif state == 'return_to_center':
+                    self.return_to_center()
+                    advance('centered')
+                elif state == 'place':
+                    self.turn_to_offset(place_heading, 'turn_to_place')
+                    self.move_base(self.arm['base_extended_raw'], 'place_extend')
+                    self.gripper(True, 'place_release')
+                    self.move_base(self.arm['base_retracted_raw'], 'after_place_retract')
+                    self.wait_stationary()
+                    error = align.position_distance(self.position(), self.start_position)
+                    if error > self.cfg['approach']['center_tolerance_m']:
+                        raise RuntimeError('placement shifted chassis outside starting center tolerance')
+                    counts[class_id] += 1
+                    direction['status'] = 'taken'
+                    self.record('sorting_item_placed', class_id=class_id, slot=slot + 1,
+                                counts=counts.copy(), center_error_m=error, pick_heading=heading,
+                                directions=[dict(d) for d in self.pick_directions])
+                    advance('released')
+                elif state == 'finish':
+                    self.move_base(self.arm['base_retracted_raw'], 'finish_retract')
+                    self.turn_to_offset(0, 'finish_turn_to_start')
+                    self.initial_state('finish')
+                    self.wait_stationary()
+                    advance('done')
+                    self.record('sorting_complete', counts=counts, all_six_placed=sum(counts.values()) == 6,
+                                directions=[dict(d) for d in self.pick_directions],
+                                arm='extended', gripper='open')
+                else:
+                    raise RuntimeError('state has no implementation: ' + state)
+        except BaseException:
+            if machine.current not in machine.terminal:
+                advance('error')
+            raise
 
 
 if __name__ == '__main__':

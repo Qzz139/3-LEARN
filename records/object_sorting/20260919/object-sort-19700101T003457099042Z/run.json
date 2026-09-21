@@ -1,0 +1,1065 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 24,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.3,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 20.0,
+      "stall_timeout_s": 10.0,
+      "settle_seconds": 0.3,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.05,
+      "stop_timeout_s": 20.0,
+      "stop_wheel_rpm": 8,
+      "stop_encoder_counts": 16,
+      "stop_stable_seconds": 0.3
+    },
+    "alignment": {
+      "target_class_ids": [
+        32,
+        39
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.04,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 30,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 25.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    },
+    "sorting": {
+      "pick_headings_degrees": [
+        0,
+        36,
+        -36,
+        144,
+        -144,
+        180
+      ],
+      "sector_scan_offsets_degrees": [
+        0,
+        15,
+        -15
+      ],
+      "placement_headings_degrees": {
+        "ball": [
+          -90,
+          -72,
+          -108
+        ],
+        "bottle": [
+          90,
+          72,
+          108
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:34:57.550383+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:20.626950+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T00:35:25.471714+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:26.615965+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T00:35:26.617878+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:35:26.669641+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.171941+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1078
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.173876+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.175196+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.231170+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.733743+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:35:27.735787+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:35:28.769923+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:28.872972+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -7,
+        -3,
+        -2,
+        -3
+      ],
+      "encoder_counts": [
+        16453,
+        21108,
+        23527,
+        13253
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:35:28.976048+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -1,
+        2,
+        1
+      ],
+      "encoder_counts": [
+        16457,
+        21103,
+        23524,
+        13256
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:35:29.078791+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -1,
+        0,
+        0,
+        -1
+      ],
+      "encoder_counts": [
+        16459,
+        21103,
+        23523,
+        13258
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:35:29.181675+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        -5,
+        -3,
+        -4
+      ],
+      "encoder_counts": [
+        16456,
+        21105,
+        23525,
+        13256
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3195080959999359
+    },
+    {
+      "time_utc": "1970-01-01T00:35:29.183287+00:00",
+      "stage": "sorting_started",
+      "start_yaw": -4.72,
+      "start_position": [
+        -5e-05,
+        5e-05
+      ],
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:35:29.184447+00:00",
+      "stage": "next_pick_direction",
+      "heading": 0,
+      "current_heading": -0.0,
+      "turn_degrees": 0.0,
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:35:29.185533+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:35:30.130213+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:31.133141+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:35:31.135862+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": -0.09999999999999432,
+      "target": 0.0
+    },
+    {
+      "time_utc": "1970-01-01T00:35:31.138411+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:35:31.192801+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:32.497018+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:35:32.889374+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 3,
+      "age_s": 0.367
+    },
+    {
+      "time_utc": "1970-01-01T00:35:32.891304+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.4709526300430298,
+        "xyxy": [
+          883.6210327148438,
+          325.8360595703125,
+          959.5919189453125,
+          536.9185180664062
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.3670881600000939,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:33.030917+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 3,
+      "age_s": 0.112
+    },
+    {
+      "time_utc": "1970-01-01T00:35:33.032815+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.49593454599380493,
+        "xyxy": [
+          879.39013671875,
+          325.29937744140625,
+          959.596923828125,
+          536.8450317382812
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.11159823999969376,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:33.034158+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:35:33.990195+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:34.944222+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:35:34.947380+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": 15.210000000000008
+    },
+    {
+      "time_utc": "1970-01-01T00:35:35.490867+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": 15.210000000000008
+    },
+    {
+      "time_utc": "1970-01-01T00:35:36.294235+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": 15.150000000000006,
+      "target": 15.0
+    },
+    {
+      "time_utc": "1970-01-01T00:35:36.297049+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:35:36.350420+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:37.655677+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T00:35:37.846507+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 7,
+      "age_s": 0.139
+    },
+    {
+      "time_utc": "1970-01-01T00:35:37.848774+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 15,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.7599315643310547,
+        "xyxy": [
+          157.99847412109375,
+          83.97601318359375,
+          323.987060546875,
+          517.11669921875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.13854899200032378,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:38.020814+00:00",
+      "stage": "vision_frame",
+      "frame": 4,
+      "count": 7,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:35:38.022717+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 15,
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.4146856367588043,
+        "xyxy": [
+          629.4635009765625,
+          360.53070068359375,
+          782.9734497070312,
+          507.79791259765625
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.0992751999997381,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:38.024198+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:35:38.989568+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:39.893731+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:35:39.896352+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": -30.22999999999999
+    },
+    {
+      "time_utc": "1970-01-01T00:35:40.990317+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": -30.22999999999999
+    },
+    {
+      "time_utc": "1970-01-01T00:35:41.794183+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": -15.050000000000011,
+      "target": -15.0
+    },
+    {
+      "time_utc": "1970-01-01T00:35:41.796467+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:35:41.849590+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.154839+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.336456+00:00",
+      "stage": "vision_frame",
+      "frame": 5,
+      "count": 5,
+      "age_s": 0.132
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.338853+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": -15,
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.8947631120681763,
+        "xyxy": [
+          355.61102294921875,
+          263.7156982421875,
+          422.2685852050781,
+          330.53271484375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.13165427200010527,
+      "ignored_off_axis": false
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.500582+00:00",
+      "stage": "vision_frame",
+      "frame": 6,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.502837+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.5370956659317017,
+        "xyxy": [
+          361.95068359375,
+          247.311279296875,
+          420.6505126953125,
+          307.545654296875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": -0.0923952102661133,
+      "correction_degrees": 5.0,
+      "heading_offset": -15.110000000000014
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.504557+00:00",
+      "stage": "align_turn_request",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:35:43.689750+00:00",
+      "stage": "align_turn_complete",
+      "degrees": 5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:35:44.493142+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": 5.0,
+      "actual_degrees": 5.300000000000011
+    },
+    {
+      "time_utc": "1970-01-01T00:35:44.622949+00:00",
+      "stage": "vision_frame",
+      "frame": 7,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:44.625371+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:35:44.782350+00:00",
+      "stage": "vision_frame",
+      "frame": 8,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:44.784937+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.019765+00:00",
+      "stage": "vision_frame",
+      "frame": 9,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.022427+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.173362+00:00",
+      "stage": "vision_frame",
+      "frame": 10,
+      "count": 6,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.175935+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 4
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.311733+00:00",
+      "stage": "vision_frame",
+      "frame": 11,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.314224+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.471895+00:00",
+      "stage": "vision_frame",
+      "frame": 12,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.475439+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 6
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.598124+00:00",
+      "stage": "vision_frame",
+      "frame": 13,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.600762+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 7
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.728174+00:00",
+      "stage": "vision_frame",
+      "frame": 14,
+      "count": 6,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.730584+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 8
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.863357+00:00",
+      "stage": "vision_frame",
+      "frame": 15,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:45.865925+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 9
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.089727+00:00",
+      "stage": "vision_frame",
+      "frame": 16,
+      "count": 4,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.092534+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 10
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.229749+00:00",
+      "stage": "vision_frame",
+      "frame": 17,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.232400+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 11
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.374717+00:00",
+      "stage": "vision_frame",
+      "frame": 18,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.378329+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 12
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.503531+00:00",
+      "stage": "vision_frame",
+      "frame": 19,
+      "count": 5,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.506371+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 13
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.631554+00:00",
+      "stage": "vision_frame",
+      "frame": 20,
+      "count": 5,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.634168+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 14
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.770459+00:00",
+      "stage": "vision_frame",
+      "frame": 21,
+      "count": 4,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.773102+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 15
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.905650+00:00",
+      "stage": "vision_frame",
+      "frame": 22,
+      "count": 5,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:35:46.908371+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 16
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.025245+00:00",
+      "stage": "vision_frame",
+      "frame": 23,
+      "count": 3,
+      "age_s": 0.097
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.028491+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 17
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.159045+00:00",
+      "stage": "vision_frame",
+      "frame": 24,
+      "count": 4,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.161696+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 18
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.305860+00:00",
+      "stage": "vision_frame",
+      "frame": 25,
+      "count": 6,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.308863+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 19
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.438284+00:00",
+      "stage": "vision_frame",
+      "frame": 26,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.441686+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 20
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.573893+00:00",
+      "stage": "vision_frame",
+      "frame": 27,
+      "count": 5,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.576723+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 21
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.744655+00:00",
+      "stage": "vision_frame",
+      "frame": 28,
+      "count": 6,
+      "age_s": 0.106
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.747405+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 22
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.877591+00:00",
+      "stage": "vision_frame",
+      "frame": 29,
+      "count": 8,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:35:47.880529+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 23
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.001659+00:00",
+      "stage": "vision_frame",
+      "frame": 30,
+      "count": 6,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.004415+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 24
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.124298+00:00",
+      "stage": "vision_frame",
+      "frame": 31,
+      "count": 5,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.127189+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.261978+00:00",
+      "stage": "vision_frame",
+      "frame": 32,
+      "count": 6,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.265338+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 26
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.399510+00:00",
+      "stage": "vision_frame",
+      "frame": 33,
+      "count": 7,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.402811+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 27
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.525506+00:00",
+      "stage": "vision_frame",
+      "frame": 34,
+      "count": 8,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.528454+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 28
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.674697+00:00",
+      "stage": "vision_frame",
+      "frame": 35,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.677667+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 29
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.850385+00:00",
+      "stage": "vision_frame",
+      "frame": 36,
+      "count": 6,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.853388+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 30
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.930655+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T00:35:48.950136+00:00",
+      "stage": "error",
+      "error": "RuntimeError: locked target lost; stop instead of switching objects",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: locked target lost; stop instead of switching objects"
+}

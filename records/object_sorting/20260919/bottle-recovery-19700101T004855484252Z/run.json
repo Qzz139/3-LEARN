@@ -1,0 +1,19 @@
+{
+  "source_run": "/home/robot/projects/3-LEARN/work/object-sort-19700101T004234592727Z/run.json",
+  "completed": false,
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:48:55.860321+00:00",
+      "stage": "recovery_checked",
+      "yaw": -89.74,
+      "base_raw": 1119,
+      "distal_raw": 1075,
+      "stopped_offset": 87.44
+    },
+    {
+      "time_utc": "1970-01-01T00:48:55.874715+00:00",
+      "stage": "recovery_error",
+      "error": "RuntimeError: arm is not in logged held-bottle pose; no recovery motion sent"
+    }
+  ]
+}

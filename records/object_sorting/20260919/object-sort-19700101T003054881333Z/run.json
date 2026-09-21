@@ -1,0 +1,1032 @@
+{
+  "config": {
+    "connection": {
+      "conn_type": "ap",
+      "robot_ip": "192.168.2.1",
+      "local_ip": null
+    },
+    "arm": {
+      "calibration_verified": true,
+      "distal_servo_id": 2,
+      "distal_feedback_slot": 1,
+      "distal_hold_raw": 1073,
+      "base_servo_id": 1,
+      "base_feedback_slot": 0,
+      "base_extended_raw": 600,
+      "base_retracted_raw": 1190,
+      "raw_tolerance": 8,
+      "distal_drift_limit_raw": 12,
+      "action_timeout_s": 15.0,
+      "settle_seconds": 0.5
+    },
+    "infrared": {
+      "feedback_slot": 0,
+      "threshold_mm": 24,
+      "consecutive_samples": 3,
+      "wait_timeout_s": 120.0,
+      "freshness_timeout_s": 1.0
+    },
+    "gripper": {
+      "open_power": 25,
+      "close_power": 30,
+      "open_seconds": 1.0,
+      "close_seconds": 1.0
+    },
+    "chassis": {
+      "place_turn_degrees": -90.0,
+      "turn_speed_dps": 30.0,
+      "action_timeout_s": 15.0
+    },
+    "vision": {
+      "enabled": true,
+      "stream_resolution": "540p",
+      "model": "yolo26m.pt",
+      "confidence": 0.3,
+      "image_size": 640,
+      "frame_interval_s": 0.5
+    },
+    "approach": {
+      "step_m": 0.01,
+      "speed_mps": 0.04,
+      "return_speed_mps": 0.03,
+      "max_travel_m": 0.2,
+      "position_freshness_s": 0.25,
+      "segment_timeout_s": 20.0,
+      "stall_timeout_s": 10.0,
+      "settle_seconds": 0.3,
+      "waypoint_tolerance_m": 0.002,
+      "center_tolerance_m": 0.05,
+      "stop_timeout_s": 20.0,
+      "stop_wheel_rpm": 8,
+      "stop_encoder_counts": 16,
+      "stop_stable_seconds": 0.3
+    },
+    "alignment": {
+      "target_class_ids": [
+        32,
+        39
+      ],
+      "axis_x_ratio": 0.5,
+      "tolerance_ratio": 0.04,
+      "gain_degrees": 30.0,
+      "min_turn_degrees": 5.0,
+      "max_turn_degrees": 5.0,
+      "stable_frames": 3,
+      "lost_frames": 30,
+      "max_center_jump_ratio": 0.2,
+      "search_step_degrees": 15.0,
+      "search_limit_degrees": 25.0,
+      "timeout_s": 120.0,
+      "settle_seconds": 0.8,
+      "max_result_age_s": 2.0,
+      "heading_tolerance_degrees": 2.0,
+      "yaw_feedback_sign": -1
+    },
+    "sorting": {
+      "pick_headings_degrees": [
+        0,
+        36,
+        -36,
+        144,
+        -144,
+        180
+      ],
+      "sector_scan_offsets_degrees": [
+        0,
+        15,
+        -15
+      ],
+      "placement_headings_degrees": {
+        "ball": [
+          -90,
+          -72,
+          -108
+        ],
+        "bottle": [
+          90,
+          72,
+          108
+        ]
+      }
+    }
+  },
+  "events": [
+    {
+      "time_utc": "1970-01-01T00:30:55.510690+00:00",
+      "stage": "vision_loading",
+      "motion_started": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:18.569942+00:00",
+      "stage": "vision_warming",
+      "model": "yolo26m.pt"
+    },
+    {
+      "time_utc": "1970-01-01T00:31:23.390781+00:00",
+      "stage": "vision_ready",
+      "model_ready": true
+    },
+    {
+      "time_utc": "1970-01-01T00:31:24.540111+00:00",
+      "stage": "camera_ready",
+      "resolution": "540p"
+    },
+    {
+      "time_utc": "1970-01-01T00:31:24.541872+00:00",
+      "stage": "lock_distal_request",
+      "servo_id": 2,
+      "target_raw": 1073,
+      "target_degrees": 9,
+      "expected_dds_raw": 1075,
+      "encoded_target_wire": 1890
+    },
+    {
+      "time_utc": "1970-01-01T00:31:24.591580+00:00",
+      "stage": "lock_distal_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.093606+00:00",
+      "stage": "lock_distal_complete",
+      "actual_raw": 1076
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.095522+00:00",
+      "stage": "distal_command_guard_enabled",
+      "servo_id": 2,
+      "feedback_slot": 1,
+      "hold_raw": 1073
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.096993+00:00",
+      "stage": "start_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.152772+00:00",
+      "stage": "start_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.654848+00:00",
+      "stage": "start_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:31:25.656990+00:00",
+      "stage": "start_open_gripper_request",
+      "opened": true,
+      "power": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:31:26.696036+00:00",
+      "stage": "start_open_gripper_complete",
+      "opened": true
+    },
+    {
+      "time_utc": "1970-01-01T00:31:26.748604+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        0,
+        1,
+        -5,
+        -2
+      ],
+      "encoder_counts": [
+        15551,
+        21775,
+        24859,
+        13248
+      ],
+      "consecutive_samples": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:26.851708+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        -4,
+        -2,
+        -4
+      ],
+      "encoder_counts": [
+        15552,
+        21776,
+        24859,
+        13248
+      ],
+      "consecutive_samples": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:31:26.953976+00:00",
+      "stage": "translation_stop_sample",
+      "body_velocity": [
+        0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        -2,
+        0,
+        1,
+        3
+      ],
+      "encoder_counts": [
+        15551,
+        21776,
+        24859,
+        13248
+      ],
+      "consecutive_samples": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:31:27.056815+00:00",
+      "stage": "translation_stop_confirmed",
+      "body_velocity": [
+        -0.0,
+        -0.0,
+        0.0
+      ],
+      "wheel_rpm": [
+        1,
+        0,
+        0,
+        -2
+      ],
+      "encoder_counts": [
+        15553,
+        21777,
+        24860,
+        13248
+      ],
+      "consecutive_samples": 7,
+      "stable_seconds": 0.3186348479998742
+    },
+    {
+      "time_utc": "1970-01-01T00:31:27.059128+00:00",
+      "stage": "sorting_started",
+      "start_yaw": -5.28,
+      "start_position": [
+        1e-05,
+        -2e-05
+      ],
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:31:27.061058+00:00",
+      "stage": "next_pick_direction",
+      "heading": 0,
+      "current_heading": -0.0,
+      "turn_degrees": 0.0,
+      "directions": [
+        {
+          "heading": 0,
+          "status": "pending"
+        },
+        {
+          "heading": 36,
+          "status": "pending"
+        },
+        {
+          "heading": -36,
+          "status": "pending"
+        },
+        {
+          "heading": 144,
+          "status": "pending"
+        },
+        {
+          "heading": -144,
+          "status": "pending"
+        },
+        {
+          "heading": 180,
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "time_utc": "1970-01-01T00:31:27.062749+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:31:27.998613+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:29.053395+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:31:29.056281+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": -1.3400000000000034,
+      "target": 0.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:29.058615+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:31:29.094040+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.399281+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 599
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.806574+00:00",
+      "stage": "vision_frame",
+      "frame": 1,
+      "count": 4,
+      "age_s": 0.375
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.808590+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.7227766513824463,
+        "xyxy": [
+          870.5142822265625,
+          277.5394287109375,
+          959.6079711914062,
+          537.49169921875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.3750626880000709,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.953757+00:00",
+      "stage": "vision_frame",
+      "frame": 2,
+      "count": 4,
+      "age_s": 0.115
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.956449+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 0,
+      "target": {
+        "class_id": 39,
+        "class_name": "bottle",
+        "confidence": 0.7250345945358276,
+        "xyxy": [
+          868.16455078125,
+          278.1287841796875,
+          959.6083374023438,
+          537.3397216796875
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.11452003199997307,
+      "ignored_off_axis": true
+    },
+    {
+      "time_utc": "1970-01-01T00:31:30.957980+00:00",
+      "stage": "search_retract_request",
+      "servo_id": 1,
+      "target_raw": 1190,
+      "target_degrees": 29,
+      "expected_dds_raw": 1189,
+      "encoded_target_wire": 2090
+    },
+    {
+      "time_utc": "1970-01-01T00:31:31.912398+00:00",
+      "stage": "search_retract_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:32.866347+00:00",
+      "stage": "search_retract_complete",
+      "actual_raw": 1183
+    },
+    {
+      "time_utc": "1970-01-01T00:31:32.868549+00:00",
+      "stage": "sector_scan_turn_request",
+      "degrees": 16.569999999999993
+    },
+    {
+      "time_utc": "1970-01-01T00:31:33.451838+00:00",
+      "stage": "sector_scan_turn_complete",
+      "degrees": 16.569999999999993
+    },
+    {
+      "time_utc": "1970-01-01T00:31:34.255535+00:00",
+      "stage": "sector_scan_turn_heading_reached",
+      "offset": 13.650000000000006,
+      "target": 15.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:34.258817+00:00",
+      "stage": "search_extend_request",
+      "servo_id": 1,
+      "target_raw": 600,
+      "target_degrees": -75,
+      "expected_dds_raw": 597,
+      "encoded_target_wire": 1050
+    },
+    {
+      "time_utc": "1970-01-01T00:31:34.312359+00:00",
+      "stage": "search_extend_action_completed",
+      "state": "action_succeeded",
+      "feedback_validated": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:35.617737+00:00",
+      "stage": "search_extend_complete",
+      "actual_raw": 598
+    },
+    {
+      "time_utc": "1970-01-01T00:31:35.785831+00:00",
+      "stage": "vision_frame",
+      "frame": 3,
+      "count": 6,
+      "age_s": 0.14
+    },
+    {
+      "time_utc": "1970-01-01T00:31:35.788117+00:00",
+      "stage": "sector_observed",
+      "heading": 0,
+      "scan_offset": 15,
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.3051814138889313,
+        "xyxy": [
+          624.978271484375,
+          342.9321594238281,
+          768.9904174804688,
+          484.7516784667969
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "age_s": 0.1404692480000449,
+      "ignored_off_axis": false
+    },
+    {
+      "time_utc": "1970-01-01T00:31:35.908089+00:00",
+      "stage": "vision_frame",
+      "frame": 4,
+      "count": 6,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:35.910039+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.039282+00:00",
+      "stage": "vision_frame",
+      "frame": 5,
+      "count": 6,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.041537+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.175224+00:00",
+      "stage": "vision_frame",
+      "frame": 6,
+      "count": 7,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.177249+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.313379+00:00",
+      "stage": "vision_frame",
+      "frame": 7,
+      "count": 8,
+      "age_s": 0.105
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.315697+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.3038528263568878,
+        "xyxy": [
+          626.2735595703125,
+          342.4461364746094,
+          769.6082153320312,
+          481.995849609375
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.22702175776163735,
+      "correction_degrees": -5.0,
+      "heading_offset": 15.560000000000002
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.317411+00:00",
+      "stage": "align_turn_request",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:36.491777+00:00",
+      "stage": "align_turn_complete",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:37.295559+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": -5.0,
+      "actual_degrees": -4.25
+    },
+    {
+      "time_utc": "1970-01-01T00:31:37.453628+00:00",
+      "stage": "vision_frame",
+      "frame": 8,
+      "count": 7,
+      "age_s": 0.111
+    },
+    {
+      "time_utc": "1970-01-01T00:31:37.455897+00:00",
+      "stage": "target_observed",
+      "target": {
+        "class_id": 32,
+        "class_name": "sports ball",
+        "confidence": 0.904883623123169,
+        "xyxy": [
+          793.7561645507812,
+          328.521484375,
+          897.754638671875,
+          421.29327392578125
+        ],
+        "image_width": 960,
+        "image_height": 540
+      },
+      "pixel_error_ratio": 0.38099521001180015,
+      "correction_degrees": -5.0,
+      "heading_offset": 11.329999999999984
+    },
+    {
+      "time_utc": "1970-01-01T00:31:37.457661+00:00",
+      "stage": "align_turn_request",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:37.631894+00:00",
+      "stage": "align_turn_complete",
+      "degrees": -5.0
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.434993+00:00",
+      "stage": "align_turn_feedback",
+      "requested_degrees": -5.0,
+      "actual_degrees": -4.1299999999999955
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.575266+00:00",
+      "stage": "vision_frame",
+      "frame": 9,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.577688+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.724005+00:00",
+      "stage": "vision_frame",
+      "frame": 10,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.726244+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 2
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.875274+00:00",
+      "stage": "vision_frame",
+      "frame": 11,
+      "count": 5,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:31:38.877577+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 3
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.031086+00:00",
+      "stage": "vision_frame",
+      "frame": 12,
+      "count": 7,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.033670+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 4
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.171687+00:00",
+      "stage": "vision_frame",
+      "frame": 13,
+      "count": 5,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.174296+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 5
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.309629+00:00",
+      "stage": "vision_frame",
+      "frame": 14,
+      "count": 3,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.313080+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 6
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.434391+00:00",
+      "stage": "vision_frame",
+      "frame": 15,
+      "count": 5,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.436762+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 7
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.569726+00:00",
+      "stage": "vision_frame",
+      "frame": 16,
+      "count": 3,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.572769+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 8
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.697983+00:00",
+      "stage": "vision_frame",
+      "frame": 17,
+      "count": 6,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.700390+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 9
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.838173+00:00",
+      "stage": "vision_frame",
+      "frame": 18,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.840588+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 10
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.967610+00:00",
+      "stage": "vision_frame",
+      "frame": 19,
+      "count": 6,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:39.970203+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 11
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.110730+00:00",
+      "stage": "vision_frame",
+      "frame": 20,
+      "count": 6,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.114031+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 12
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.242190+00:00",
+      "stage": "vision_frame",
+      "frame": 21,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.245227+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 13
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.378165+00:00",
+      "stage": "vision_frame",
+      "frame": 22,
+      "count": 6,
+      "age_s": 0.106
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.380634+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 14
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.505839+00:00",
+      "stage": "vision_frame",
+      "frame": 23,
+      "count": 6,
+      "age_s": 0.1
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.508445+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 15
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.650267+00:00",
+      "stage": "vision_frame",
+      "frame": 24,
+      "count": 6,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.653521+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 16
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.832952+00:00",
+      "stage": "vision_frame",
+      "frame": 25,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.835825+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 17
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.958896+00:00",
+      "stage": "vision_frame",
+      "frame": 26,
+      "count": 5,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:40.961655+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 18
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.099263+00:00",
+      "stage": "vision_frame",
+      "frame": 27,
+      "count": 5,
+      "age_s": 0.103
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.101812+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 19
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.225321+00:00",
+      "stage": "vision_frame",
+      "frame": 28,
+      "count": 4,
+      "age_s": 0.097
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.228137+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 20
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.366820+00:00",
+      "stage": "vision_frame",
+      "frame": 29,
+      "count": 5,
+      "age_s": 0.102
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.369842+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 21
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.491550+00:00",
+      "stage": "vision_frame",
+      "frame": 30,
+      "count": 3,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.494292+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 22
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.643839+00:00",
+      "stage": "vision_frame",
+      "frame": 31,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.646570+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 23
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.767565+00:00",
+      "stage": "vision_frame",
+      "frame": 32,
+      "count": 6,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.770316+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 24
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.893803+00:00",
+      "stage": "vision_frame",
+      "frame": 33,
+      "count": 4,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:41.896621+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 25
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.028130+00:00",
+      "stage": "vision_frame",
+      "frame": 34,
+      "count": 4,
+      "age_s": 0.099
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.030852+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 26
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.162273+00:00",
+      "stage": "vision_frame",
+      "frame": 35,
+      "count": 5,
+      "age_s": 0.098
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.165119+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 27
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.300194+00:00",
+      "stage": "vision_frame",
+      "frame": 36,
+      "count": 4,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.303021+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 28
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.438722+00:00",
+      "stage": "vision_frame",
+      "frame": 37,
+      "count": 5,
+      "age_s": 0.101
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.441646+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 29
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.570430+00:00",
+      "stage": "vision_frame",
+      "frame": 38,
+      "count": 5,
+      "age_s": 0.104
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.574628+00:00",
+      "stage": "target_missing",
+      "consecutive_frames": 30
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.631492+00:00",
+      "stage": "wheel_stop_ack",
+      "accepted": true
+    },
+    {
+      "time_utc": "1970-01-01T00:31:42.650749+00:00",
+      "stage": "error",
+      "error": "RuntimeError: locked target lost; stop instead of switching objects",
+      "automatic_return": false
+    }
+  ],
+  "completed": false,
+  "observe_only": false,
+  "error": "RuntimeError: locked target lost; stop instead of switching objects"
+}

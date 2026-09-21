@@ -1,0 +1,1885 @@
+<?xml version='1.0' encoding='utf-8'?>
+<sdf version="1.7">
+  <world name="ep_six_object_sorting">
+    <gravity>0 0 -9.81</gravity>
+    <scene>
+      <ambient>0.45 0.45 0.45 1</ambient>
+      <background>0.85 0.87 0.9 1</background>
+    </scene>
+    <physics type="ode">
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+    <light name="sun" type="directional">
+      <pose>0 0 4 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse>
+      <specular>0.3 0.3 0.3 1</specular>
+      <direction>-0.2 -0.3 -1</direction>
+    </light>
+    <model name="floor">
+      <static>true</static>
+      <link name="floor">
+        <collision name="collision">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5 5</size>
+            </plane>
+          </geometry>
+        </collision>
+        <visual name="visual">
+          <geometry>
+            <plane>
+              <normal>0 0 1</normal>
+              <size>5 5</size>
+            </plane>
+          </geometry>
+          <material>
+            <ambient>0.47 0.47 0.45 1</ambient>
+            <diffuse>0.47 0.47 0.45 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ep_sim">
+      <pose>0 0 0 0 0 0</pose>
+      <self_collide>false</self_collide>
+      <link name="base_link">
+        <inertial>
+          <pose>-0.009854 0.000293 0.080484 0 -0 0</pose>
+          <mass>2.59</mass>
+          <inertia>
+            <ixx>0.0381299</ixx>
+            <ixy>2.23189e-05</ixy>
+            <ixz>0.00101785</ixz>
+            <iyy>0.0293317</iyy>
+            <iyz>0.00028745</iyz>
+            <izz>0.0320292</izz>
+          </inertia>
+        </inertial>
+        <collision name="base_link_fixed_joint_lump__base_collision_collision">
+          <pose>-0.005879 -0.000113 0.064081 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/base_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__arm_base_collision_collision_1">
+          <pose>-0.002098 0.000548 0.13265 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_base_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__rod_2_collision_collision_2">
+          <pose>-0.021792 -0.028032 0.235697 0 -0.009425 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_2_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__rod_collision_collision_3">
+          <pose>-0.014515 0.02475 0.17087 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__rod_3_collision_collision_4">
+          <pose>-0.032122 0.022925 0.235715 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_3_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__ExtensionBase_collision_5">
+          <pose>-0.004775 0.001038 0.109503 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.279694 0.231779 0.013</size>
+            </box>
+          </geometry>
+        </collision>
+        <collision name="base_link_fixed_joint_lump__top_collision_6">
+          <pose>-0.111667 0.002466 0.156166 0 -0 0</pose>
+          <geometry>
+            <box>
+              <size>0.108973 0.059103 0.022915</size>
+            </box>
+          </geometry>
+        </collision>
+        <visual name="base_link_fixed_joint_lump__armor_visual">
+          <pose>-0.006455 -0.078141 0.063938 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/armor.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__battery_visual_1">
+          <pose>-0.130336 -0.00187 0.052068 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/battery.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__battery_pin_left_visual_2">
+          <pose>-0.115891 0.066115 0.087174 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/battery_pin_left.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__battery_pin_right_visual_3">
+          <pose>-0.115891 -0.065884 0.087174 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/battery_pin_right.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__chassis_visual_4">
+          <pose>-0.005904 0.000415 0.087446 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/chassis.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__controller_visual_5">
+          <pose>-0.114229 -0.000672 0.087325 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/controller.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__controller_cover_visual_6">
+          <pose>-0.078776 -0.002522 0.106733 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/controller_cover.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__arm_base_visual_7">
+          <pose>-0.000898 -0.001936 0.125273 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__left_servo_visual_8">
+          <pose>-0.013507 0.001038 0.11923 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/left_servo.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__right_servo_visual_9">
+          <pose>-0.013507 0.001038 0.11923 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_servo.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__rod_2_visual_10">
+          <pose>-0.024229 -0.028032 0.236898 0 -0.009425 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__rod_visual_11">
+          <pose>-0.016381 0.024719 0.169344 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__rod_3_visual_12">
+          <pose>-0.034322 0.022916 0.24289 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_3.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__extension_base_visual_13">
+          <pose>-0.009195 0.001049 0.105193 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/extension_base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__extension_support_visual_14">
+          <pose>-0.087777 0.008588 0.109839 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/extension_support.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__front_hit_sensor_visual_15">
+          <pose>0.156999 -0.000428 0.077936 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/hit_sensor.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__front_led_visual_16">
+          <pose>0.165741 -0.001712 0.077974 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/led.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__intelligent_controller_visual_17">
+          <pose>-0.134833 0.002487 0.158027 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/intelligent_controller.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__wifi_antenna_left_visual_18">
+          <pose>-0.149543 0.036965 0.170837 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/wifi_antenna_left.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__wifi_antenna_right_visual_19">
+          <pose>-0.149545 -0.032653 0.17175 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/wifi_antenna_right.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__left_hit_sensor_visual_20">
+          <pose>-0.002441 0.088693 0.064484 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/hit_sensor.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__left_led_visual_21">
+          <pose>-0.001157 0.097436 0.064522 0 -0 1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/led.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__rear_hit_sensor_visual_22">
+          <pose>-0.158183 -0.002786 0.065017 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/hit_sensor.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__rear_led_visual_23">
+          <pose>-0.166926 -0.001502 0.065054 0 -0 3.14159</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/led.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__right_hit_sensor_visual_24">
+          <pose>-0.002441 -0.088693 0.064484 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/hit_sensor.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="base_link_fixed_joint_lump__right_led_visual_25">
+          <pose>-0.003725 -0.097436 0.064522 0 0 -1.5708</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/led.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name="arm_1_joint" type="revolute">
+        <pose relative_to="base_link">0.010396 -0.024533 0.156039 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>arm_1_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <lower>-1.4</lower>
+            <upper>0.05</upper>
+            <effort>4</effort>
+            <velocity>1</velocity>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name="arm_1_link">
+        <pose relative_to="arm_1_joint">0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>0.086459 0.022513 0.050214 0 -0 0</pose>
+          <mass>0.349</mass>
+          <inertia>
+            <ixx>0.0631912</ixx>
+            <ixy>0.00476258</ixy>
+            <ixz>-0.00384026</ixz>
+            <iyy>0.047532</iyy>
+            <iyz>0.010738</iyz>
+            <izz>0.042942</izz>
+          </inertia>
+        </inertial>
+        <collision name="arm_1_link_fixed_joint_lump__arm_1_collision_collision">
+          <pose>0.006512 0.021365 0.063945 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_1_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__arm_2_collision_collision_1">
+          <pose>0.024132 0.023591 0.11252 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_2_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__endpoint_bracket_collision_collision_2">
+          <pose>0.119373 0.021814 0.069049 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/endpoint_bracket_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__gripper_base_collision_collision_3">
+          <pose>0.108374 0.023494 0.053816 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_base_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__left_gripper_2_collision_collision_4">
+          <pose>0.159269 0.054513 -0.004485 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_2_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__left_gripper_4_collision_collision_5">
+          <pose>0.150433 0.078217 -0.004485 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_4_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__left_gripper_5_collision_collision_6">
+          <pose>0.189027 0.088559 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_5_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__left_gripper_6_collision_collision_7">
+          <pose>0.179225 0.057722 0.02499 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_6_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__left_gripper_collision_collision_8">
+          <pose>0.164419 0.040851 -0.004467 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__right_gripper_2_collision_collision_9">
+          <pose>0.159066 -0.007982 -0.004485 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_2_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__right_gripper_4_collision_collision_10">
+          <pose>0.150308 -0.031259 -0.004485 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_4_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__right_gripper_5_collision_collision_11">
+          <pose>0.188804 -0.041561 0.025253 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_5_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__right_gripper_6_collision_collision_12">
+          <pose>0.179225 -0.010895 0.02524 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_6_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__right_gripper_7_collision_collision_13">
+          <pose>0.164192 0.006201 -0.004467 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_7_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__rod_1_collision_collision_14">
+          <pose>0.072834 -0.003479 0.112462 0 -0.021293 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_1_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <collision name="arm_1_link_fixed_joint_lump__triangle_collision_collision_15">
+          <pose>-0.003825 -0.007103 0.135503 0 0.25028 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/triangle_collision.dae</uri>
+            </mesh>
+          </geometry>
+        </collision>
+        <visual name="arm_1_link_fixed_joint_lump__arm_1_visual">
+          <pose>0.007311 0.018482 0.043716 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__arm_1_cylinder_visual_1">
+          <pose>-0.023903 0.025571 -0.036808 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_1_cylinder.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__arm_2_visual_2">
+          <pose>0.027483 0.023732 0.119716 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__arm_2_bar_1_visual_3">
+          <pose>0.001947 0.044952 0.120773 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_2_bar_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__arm_2_bar_2_visual_4">
+          <pose>-0.040453 0.033947 0.143221 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/arm_2_bar_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__camera_visual_5">
+          <pose>0.006846 0.024296 0.168375 0 -0.055476 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/camera.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__endpoint_bracket_visual_6">
+          <pose>0.114892 0.026033 0.065755 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/endpoint_bracket.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__gripper_base_visual_7">
+          <pose>0.108005 0.023592 0.065096 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_base.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_1_visual_8">
+          <pose>0.124293 0.044876 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_2_visual_9">
+          <pose>0.159215 0.054476 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_4_visual_10">
+          <pose>0.150461 0.07842 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_4.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_5_visual_11">
+          <pose>0.189027 0.088559 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_5.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_6_visual_12">
+          <pose>0.179295 0.057623 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_6.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__left_gripper_7_visual_13">
+          <pose>0.164005 0.040992 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/gripper_left_7.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_1_visual_14">
+          <pose>0.124294 0.002533 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_2_visual_15">
+          <pose>0.158368 -0.008317 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_2.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_4_visual_16">
+          <pose>0.150326 -0.031444 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_4.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_5_visual_17">
+          <pose>0.188892 -0.041583 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_5.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_6_visual_18">
+          <pose>0.163863 0.005548 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_6.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__right_gripper_7_visual_19">
+          <pose>0.17916 -0.010648 0.025153 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/right_gripper_7.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__rod_1_visual_20">
+          <pose>0.072579 -0.003479 0.115383 0 -0.021293 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/rod_1.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <visual name="arm_1_link_fixed_joint_lump__triangle_visual_21">
+          <pose>-0.004023 -0.007103 0.136326 0 0.25028 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/triangle.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+        <sensor name="camera" type="camera">
+          <always_on>true</always_on>
+          <update_rate>5</update_rate>
+          <pose>0.03 0.023 0.17 0 0.40 0</pose>
+          <camera>
+            <horizontal_fov>1.2</horizontal_fov>
+            <image>
+              <width>960</width>
+              <height>540</height>
+              <format>B8G8R8</format>
+            </image>
+            <clip>
+              <near>0.02</near>
+              <far>4</far>
+            </clip>
+          </camera>
+          <plugin filename="libgazebo_ros_camera.so" name="camera_ros">
+            <ros>
+              <namespace>/ep</namespace>
+            </ros>
+            <camera_name>camera</camera_name>
+            <frame_name>ep_camera</frame_name>
+          </plugin>
+        </sensor>
+        <sensor name="ir" type="ray">
+          <always_on>true</always_on>
+          <update_rate>20</update_rate>
+          <pose>0.23 0.023 -0.122 0 0 0</pose>
+          <ray>
+            <scan>
+              <horizontal>
+                <samples>1</samples>
+                <resolution>1</resolution>
+                <min_angle>0</min_angle>
+                <max_angle>0</max_angle>
+              </horizontal>
+            </scan>
+            <range>
+              <min>0.01</min>
+              <max>0.5</max>
+              <resolution>0.001</resolution>
+            </range>
+          </ray>
+          <plugin filename="libgazebo_ros_ray_sensor.so" name="ir_ros">
+            <ros>
+              <namespace>/ep</namespace>
+              <remapping>~/out:=/ep/ir/range</remapping>
+            </ros>
+            <output_type>sensor_msgs/Range</output_type>
+            <radiation_type>infrared</radiation_type>
+            <frame_name>ep_ir</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+      <joint name="front_left_wheel_joint" type="revolute">
+        <pose relative_to="base_link">0.1 0.1 0.05 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>front_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>0</effort>
+            <velocity>0</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name="front_left_wheel_link">
+        <pose relative_to="front_left_wheel_joint">0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.00021 5.3e-05 -0.000415 0 -0 0</pose>
+          <mass>0.162</mass>
+          <inertia>
+            <ixx>0.0002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00012</iyy>
+            <iyz>0</iyz>
+            <izz>0.00012</izz>
+          </inertia>
+        </inertial>
+        <collision name="front_left_wheel_link_fixed_joint_lump__front_left_wheel_collision">
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.042</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="front_left_wheel_link_fixed_joint_lump__front_left_wheel_bolt_visual">
+          <pose>0 0.0145 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.007</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name="front_left_wheel_link_fixed_joint_lump__front_left_wheel_visual_1">
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name="front_right_wheel_joint" type="revolute">
+        <pose relative_to="base_link">0.1 -0.1 0.05 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>front_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>0</effort>
+            <velocity>0</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name="front_right_wheel_link">
+        <pose relative_to="front_right_wheel_joint">0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.00021 5.3e-05 -0.000415 0 -0 0</pose>
+          <mass>0.162</mass>
+          <inertia>
+            <ixx>0.0002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00012</iyy>
+            <iyz>0</iyz>
+            <izz>0.00012</izz>
+          </inertia>
+        </inertial>
+        <collision name="front_right_wheel_link_fixed_joint_lump__front_right_wheel_collision">
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.042</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="front_right_wheel_link_fixed_joint_lump__front_right_wheel_bolt_visual">
+          <pose>0 -0.0145 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.007</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name="front_right_wheel_link_fixed_joint_lump__front_right_wheel_visual_1">
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 -1 1</scale>
+              <uri>model://robomaster_description/meshes/wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name="rear_left_wheel_joint" type="revolute">
+        <pose relative_to="base_link">-0.1 0.1 0.05 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>rear_left_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>0</effort>
+            <velocity>0</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name="rear_left_wheel_link">
+        <pose relative_to="rear_left_wheel_joint">0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.00021 5.3e-05 -0.000415 0 -0 0</pose>
+          <mass>0.162</mass>
+          <inertia>
+            <ixx>0.0002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00012</iyy>
+            <iyz>0</iyz>
+            <izz>0.00012</izz>
+          </inertia>
+        </inertial>
+        <collision name="rear_left_wheel_link_fixed_joint_lump__rear_left_wheel_collision">
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.042</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="rear_left_wheel_link_fixed_joint_lump__rear_left_wheel_bolt_visual">
+          <pose>0 0.0145 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.007</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name="rear_left_wheel_link_fixed_joint_lump__rear_left_wheel_visual_1">
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 -1 1</scale>
+              <uri>model://robomaster_description/meshes/wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <joint name="rear_right_wheel_joint" type="revolute">
+        <pose relative_to="base_link">-0.1 -0.1 0.05 0 -0 0</pose>
+        <parent>base_link</parent>
+        <child>rear_right_wheel_link</child>
+        <axis>
+          <xyz>0 1 0</xyz>
+          <limit>
+            <effort>0</effort>
+            <velocity>0</velocity>
+            <lower>-1e+16</lower>
+            <upper>1e+16</upper>
+          </limit>
+          <dynamics>
+            <spring_reference>0</spring_reference>
+            <spring_stiffness>0</spring_stiffness>
+          </dynamics>
+        </axis>
+      </joint>
+      <link name="rear_right_wheel_link">
+        <pose relative_to="rear_right_wheel_joint">0 0 0 0 -0 0</pose>
+        <inertial>
+          <pose>-0.00021 5.3e-05 -0.000415 0 -0 0</pose>
+          <mass>0.162</mass>
+          <inertia>
+            <ixx>0.0002</ixx>
+            <ixy>0</ixy>
+            <ixz>0</ixz>
+            <iyy>0.00012</iyy>
+            <iyz>0</iyz>
+            <izz>0.00012</izz>
+          </inertia>
+        </inertial>
+        <collision name="rear_right_wheel_link_fixed_joint_lump__rear_right_wheel_collision">
+          <pose>0 0 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.042</length>
+              <radius>0.05</radius>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>1.2</mu>
+                <mu2>1.2</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="rear_right_wheel_link_fixed_joint_lump__rear_right_wheel_bolt_visual">
+          <pose>0 -0.0145 0 1.5708 -0 0</pose>
+          <geometry>
+            <cylinder>
+              <length>0.001</length>
+              <radius>0.007</radius>
+            </cylinder>
+          </geometry>
+        </visual>
+        <visual name="rear_right_wheel_link_fixed_joint_lump__rear_right_wheel_visual_1">
+          <pose>0 0 0 0 -0 0</pose>
+          <geometry>
+            <mesh>
+              <scale>1 1 1</scale>
+              <uri>model://robomaster_description/meshes/wheel.dae</uri>
+            </mesh>
+          </geometry>
+        </visual>
+      </link>
+      <frame attached_to="arm_base_link" name="rod_2_joint">
+        <pose>-0.022428 -0.02907 0.055478 0 -0.009425 0</pose>
+      </frame>
+      <frame attached_to="rod_2_joint" name="rod_2_link" />
+      <frame attached_to="rod_link" name="rod_3_joint">
+        <pose>-0.042397 0.000453 0.022313 0 -0 0</pose>
+      </frame>
+      <frame attached_to="rod_3_joint" name="rod_3_link" />
+      <frame attached_to="arm_base_link" name="rod_joint">
+        <pose>0.009805 0.021424 0.031923 0 -0 0</pose>
+      </frame>
+      <frame attached_to="rod_joint" name="rod_link" />
+      <frame attached_to="chassis_base_link" name="arm_base_joint">
+        <pose>0 0.001038 0.090648 0 -0 0</pose>
+      </frame>
+      <frame attached_to="arm_base_joint" name="arm_base_link" />
+      <frame attached_to="camera_link" name="camera_optical_joint">
+        <pose>0.002 0 0.004 0.041623 0 -1.5708</pose>
+      </frame>
+      <frame attached_to="camera_optical_joint" name="camera_optical_link" />
+      <frame attached_to="arm_2_link" name="camera_joint">
+        <pose>0.005387 -0.01957 0.047374 3.14159 1.45174 3.14159</pose>
+      </frame>
+      <frame attached_to="camera_joint" name="camera_link" />
+      <frame attached_to="endpoint_bracket_link" name="end_point_joint">
+        <pose>0.011013 -0.027026 -0.010382 0 -0 0</pose>
+      </frame>
+      <frame attached_to="end_point_joint" name="end_point_link" />
+      <frame attached_to="gripper_link" name="gripper_joint_t">
+        <pose>0.124 0 -0.039 0 -0 0</pose>
+      </frame>
+      <frame attached_to="gripper_joint_t" name="gripper_t_link" />
+      <frame attached_to="left_gripper_link_6" name="left_gripper_joint_7">
+        <pose>-0.014882 -0.016851 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_7" name="left_gripper_link_7" />
+      <frame attached_to="left_gripper_link_5" name="left_gripper_joint_6">
+        <pose>0.005114 -0.014085 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_6" name="left_gripper_link_6" />
+      <frame attached_to="left_gripper_link_4" name="left_gripper_joint_5">
+        <pose>0.038592 0.010314 2e-06 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_5" name="left_gripper_link_5" />
+      <frame attached_to="left_gripper_link_2" name="left_gripper_joint_4">
+        <pose>0.00485 0.020415 -6e-06 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_4" name="left_gripper_link_4" />
+      <frame attached_to="left_gripper_link_1" name="left_gripper_joint_2">
+        <pose>0.02135 0.013036 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_2" name="left_gripper_link_2" />
+      <frame attached_to="gripper_m_link" name="left_gripper_joint_1">
+        <pose>0.016303 0.021203 -0.03992 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_gripper_joint_1" name="left_gripper_link_1" />
+      <frame attached_to="right_gripper_link_6" name="right_gripper_joint_7">
+        <pose>-0.015696 0.01763 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_7" name="right_gripper_link_7" />
+      <frame attached_to="right_gripper_link_5" name="right_gripper_joint_6">
+        <pose>0.005928 0.013307 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_6" name="right_gripper_link_6" />
+      <frame attached_to="right_gripper_link_4" name="right_gripper_joint_5">
+        <pose>0.038592 -0.010314 2e-06 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_5" name="right_gripper_link_5" />
+      <frame attached_to="right_gripper_link_2" name="right_gripper_joint_4">
+        <pose>0.004715 -0.020848 -6e-06 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_4" name="right_gripper_link_4" />
+      <frame attached_to="right_gripper_link_1" name="right_gripper_joint_2">
+        <pose>0.02135 -0.013036 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_2" name="right_gripper_link_2" />
+      <frame attached_to="gripper_m_link" name="right_gripper_joint_1">
+        <pose>0.016303 -0.020978 -0.03992 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_gripper_joint_1" name="right_gripper_link_1" />
+      <frame attached_to="gripper_link" name="gripper_m_joint">
+        <pose>0 0 0 0 -0 0</pose>
+      </frame>
+      <frame attached_to="gripper_m_joint" name="gripper_m_link" />
+      <frame attached_to="endpoint_bracket_link" name="gripper_link">
+        <pose>0.000279 -0.027026 0.000182 0 -0 0</pose>
+      </frame>
+      <frame attached_to="endpoint_bracket_link" name="rod_1_joint">
+        <pose>0.013458 -0.054097 0.021307 0 -0.021293 0</pose>
+      </frame>
+      <frame attached_to="rod_1_joint" name="rod_1_link" />
+      <frame attached_to="arm_2_link" name="endpoint_bracket_joint">
+        <pose>0.105856 0.006752 -0.056109 0 -0 0</pose>
+      </frame>
+      <frame attached_to="endpoint_bracket_joint" name="endpoint_bracket_link" />
+      <frame attached_to="arm_1_link" name="arm_2_joint">
+        <pose>0.00187 0.043866 0.121024 0 -0 0</pose>
+      </frame>
+      <frame attached_to="arm_2_joint" name="arm_2_link" />
+      <frame attached_to="arm_1_link" name="triangle_joint">
+        <pose>0.002022 -0.007103 0.121233 0 0.25028 0</pose>
+      </frame>
+      <frame attached_to="triangle_joint" name="triangle_link" />
+      <frame attached_to="chassis_base_link" name="extension_base_joint">
+        <pose>-0.009195 0.001049 0.070543 0 -0 0</pose>
+      </frame>
+      <frame attached_to="extension_base_joint" name="extension_base_link" />
+      <frame attached_to="front_hit_sensor_link" name="front_led_joint">
+        <pose>0.008743 -0.001284 3.8e-05 0 -0 0</pose>
+      </frame>
+      <frame attached_to="front_led_joint" name="front_led_link" />
+      <frame attached_to="chassis_base_link" name="front_hit_sensor_joint">
+        <pose>0.156999 -0.000428 0.043286 0 -0 0</pose>
+      </frame>
+      <frame attached_to="front_hit_sensor_joint" name="front_hit_sensor_link" />
+      <frame attached_to="chassis_base_link" name="intelligent_controller_joint">
+        <pose>-0.134833 0.002487 0.1329 0 -0 0</pose>
+      </frame>
+      <frame attached_to="intelligent_controller_joint" name="intelligent_controller_link" />
+      <frame attached_to="left_hit_sensor_link" name="left_led_joint">
+        <pose>0.008743 -0.001284 3.8e-05 0 -0 0</pose>
+      </frame>
+      <frame attached_to="left_led_joint" name="left_led_link" />
+      <frame attached_to="chassis_base_link" name="left_hit_sensor_joint">
+        <pose>-0.002441 0.088693 0.029834 0 -0 1.5708</pose>
+      </frame>
+      <frame attached_to="left_hit_sensor_joint" name="left_hit_sensor_link" />
+      <frame attached_to="rear_hit_sensor_link" name="rear_led_joint">
+        <pose>0.008743 -0.001284 3.8e-05 0 -0 0</pose>
+      </frame>
+      <frame attached_to="rear_led_joint" name="rear_led_link" />
+      <frame attached_to="chassis_base_link" name="rear_hit_sensor_joint">
+        <pose>-0.158183 -0.002786 0.030367 0 -0 3.14159</pose>
+      </frame>
+      <frame attached_to="rear_hit_sensor_joint" name="rear_hit_sensor_link" />
+      <frame attached_to="right_hit_sensor_link" name="right_led_joint">
+        <pose>0.008743 -0.001284 3.8e-05 0 -0 0</pose>
+      </frame>
+      <frame attached_to="right_led_joint" name="right_led_link" />
+      <frame attached_to="chassis_base_link" name="right_hit_sensor_joint">
+        <pose>-0.002441 -0.088693 0.029834 0 0 -1.5708</pose>
+      </frame>
+      <frame attached_to="right_hit_sensor_joint" name="right_hit_sensor_link" />
+      <frame attached_to="base_link" name="chassis_base_joint">
+        <pose>0 0 0.03465 0 -0 0</pose>
+      </frame>
+      <frame attached_to="chassis_base_joint" name="chassis_base_link" />
+      <link name="gripper_tip_link">
+        <pose relative_to="arm_1_link">0.22 0.023 -0.122 0 0 0</pose>
+        <inertial>
+          <mass>0.01</mass>
+          <inertia>
+            <ixx>0.00001</ixx><iyy>0.00001</iyy><izz>0.00001</izz>
+          </inertia>
+        </inertial>
+        <collision name="tip">
+          <geometry><sphere><radius>0.005</radius></sphere></geometry>
+        </collision>
+      </link>
+      <joint name="gripper_tip_joint" type="fixed">
+        <parent>arm_1_link</parent><child>gripper_tip_link</child>
+      </joint>
+      <plugin filename="libgazebo_ros_diff_drive.so" name="drive">
+        <ros>
+          <namespace>/ep</namespace>
+        </ros>
+        <num_wheel_pairs>2</num_wheel_pairs>
+        <left_joint>front_left_wheel_joint</left_joint>
+        <right_joint>front_right_wheel_joint</right_joint>
+        <left_joint>rear_left_wheel_joint</left_joint>
+        <right_joint>rear_right_wheel_joint</right_joint>
+        <wheel_separation>0.20</wheel_separation>
+        <wheel_diameter>0.10</wheel_diameter>
+        <max_wheel_torque>5</max_wheel_torque>
+        <update_rate>30</update_rate>
+        <odometry_source>1</odometry_source>
+        <publish_odom>true</publish_odom>
+        <robot_base_frame>base_link</robot_base_frame>
+      </plugin>
+      <plugin filename="libgazebo_ros_joint_pose_trajectory.so" name="joint_control">
+        <ros>
+          <namespace>/ep</namespace>
+        </ros>
+        <update_rate>100</update_rate>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_ball_1">
+        <ros><namespace>/ep/grip/ball_1</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>bottle_2</fixed>
+        <fixed>ball_3</fixed>
+        <fixed>bottle_4</fixed>
+        <fixed>ball_5</fixed>
+        <fixed>bottle_6</fixed>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_bottle_2">
+        <ros><namespace>/ep/grip/bottle_2</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>ball_1</fixed>
+        <fixed>ball_3</fixed>
+        <fixed>bottle_4</fixed>
+        <fixed>ball_5</fixed>
+        <fixed>bottle_6</fixed>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_ball_3">
+        <ros><namespace>/ep/grip/ball_3</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>ball_1</fixed>
+        <fixed>bottle_2</fixed>
+        <fixed>bottle_4</fixed>
+        <fixed>ball_5</fixed>
+        <fixed>bottle_6</fixed>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_bottle_4">
+        <ros><namespace>/ep/grip/bottle_4</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>ball_1</fixed>
+        <fixed>bottle_2</fixed>
+        <fixed>ball_3</fixed>
+        <fixed>ball_5</fixed>
+        <fixed>bottle_6</fixed>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_ball_5">
+        <ros><namespace>/ep/grip/ball_5</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>ball_1</fixed>
+        <fixed>bottle_2</fixed>
+        <fixed>ball_3</fixed>
+        <fixed>bottle_4</fixed>
+        <fixed>bottle_6</fixed>
+      </plugin>
+      <plugin filename="libgazebo_ros_vacuum_gripper.so" name="grip_bottle_6">
+        <ros><namespace>/ep/grip/bottle_6</namespace></ros>
+        <link_name>gripper_tip_link</link_name>
+        <max_distance>0.36</max_distance>
+        <fixed>floor</fixed>
+        <fixed>ball_zone_1</fixed>
+        <fixed>ball_zone_2</fixed>
+        <fixed>ball_zone_3</fixed>
+        <fixed>bottle_zone_1</fixed>
+        <fixed>bottle_zone_2</fixed>
+        <fixed>bottle_zone_3</fixed>
+        <fixed>overhead_camera</fixed>
+        <fixed>ball_1</fixed>
+        <fixed>bottle_2</fixed>
+        <fixed>ball_3</fixed>
+        <fixed>bottle_4</fixed>
+        <fixed>ball_5</fixed>
+      </plugin>
+    </model>
+    <model name="ball_zone_1">
+      <static>true</static>
+      <pose>0.0000 -0.3000 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 0.07 1</ambient>
+            <diffuse>0.05 0.45 0.07 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ball_zone_2">
+      <static>true</static>
+      <pose>0.0927 -0.2853 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 0.07 1</ambient>
+            <diffuse>0.05 0.45 0.07 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ball_zone_3">
+      <static>true</static>
+      <pose>-0.0927 -0.2853 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.05 0.45 0.07 1</ambient>
+            <diffuse>0.05 0.45 0.07 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_zone_1">
+      <static>true</static>
+      <pose>0.0000 0.3000 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.52 0.07 0.08 1</ambient>
+            <diffuse>0.52 0.07 0.08 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_zone_2">
+      <static>true</static>
+      <pose>0.0927 0.2853 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.52 0.07 0.08 1</ambient>
+            <diffuse>0.52 0.07 0.08 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_zone_3">
+      <static>true</static>
+      <pose>-0.0927 0.2853 0.002 0 0 0</pose>
+      <link name="marker">
+        <visual name="disk">
+          <geometry>
+            <cylinder>
+              <radius>0.055</radius>
+              <length>0.003</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.52 0.07 0.08 1</ambient>
+            <diffuse>0.52 0.07 0.08 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ball_1">
+      <pose>0.5800 0.0000 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.057</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.97 0.06 1</ambient>
+            <diffuse>0.85 0.97 0.06 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tennis_seam">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://ep_sorting_sim/meshes/tennis_seam.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.88 1</ambient>
+            <diffuse>0.95 0.95 0.88 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_2">
+      <pose>0.4692 0.3409 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.04</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.78 0.86 0.90 1</ambient>
+            <diffuse>0.78 0.86 0.90 1</diffuse>
+          </material>
+        </visual>
+        <visual name="label">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0305</radius>
+              <length>0.045</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.80 0.08 0.10 1</diffuse>
+          </material>
+        </visual>
+        <visual name="neck">
+          <pose>0 0 0.155 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.018</radius>
+              <length>0.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="red_cap">
+          <pose>0 0 0.172 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.020</radius>
+              <length>0.012</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.04 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ball_3">
+      <pose>0.4692 -0.3409 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.057</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.97 0.06 1</ambient>
+            <diffuse>0.85 0.97 0.06 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tennis_seam">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://ep_sorting_sim/meshes/tennis_seam.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.88 1</ambient>
+            <diffuse>0.95 0.95 0.88 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_4">
+      <pose>-0.4692 0.3409 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.04</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.78 0.86 0.90 1</ambient>
+            <diffuse>0.78 0.86 0.90 1</diffuse>
+          </material>
+        </visual>
+        <visual name="label">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0305</radius>
+              <length>0.045</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.80 0.08 0.10 1</diffuse>
+          </material>
+        </visual>
+        <visual name="neck">
+          <pose>0 0 0.155 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.018</radius>
+              <length>0.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="red_cap">
+          <pose>0 0 0.172 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.020</radius>
+              <length>0.012</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.04 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="ball_5">
+      <pose>-0.4692 -0.3409 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.057</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <sphere>
+              <radius>0.034</radius>
+            </sphere>
+          </geometry>
+          <material>
+            <ambient>0.85 0.97 0.06 1</ambient>
+            <diffuse>0.85 0.97 0.06 1</diffuse>
+          </material>
+        </visual>
+        <visual name="tennis_seam">
+          <pose>0 0 0.034 0 0 0</pose>
+          <geometry>
+            <mesh>
+              <uri>model://ep_sorting_sim/meshes/tennis_seam.obj</uri>
+            </mesh>
+          </geometry>
+          <material>
+            <ambient>0.95 0.95 0.88 1</ambient>
+            <diffuse>0.95 0.95 0.88 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="bottle_6">
+      <pose>-0.5800 0.0000 0 0 0 0</pose>
+      <link name="body">
+        <inertial>
+          <mass>0.04</mass>
+          <inertia>
+            <ixx>0.0003</ixx>
+            <iyy>0.0003</iyy>
+            <izz>0.0003</izz>
+          </inertia>
+        </inertial>
+        <collision name="collision">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <surface>
+            <friction>
+              <ode>
+                <mu>0.8</mu>
+                <mu2>0.8</mu2>
+              </ode>
+            </friction>
+          </surface>
+        </collision>
+        <visual name="main">
+          <pose>0 0 0.070 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.030</radius>
+              <length>0.14</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <ambient>0.78 0.86 0.90 1</ambient>
+            <diffuse>0.78 0.86 0.90 1</diffuse>
+          </material>
+        </visual>
+        <visual name="label">
+          <pose>0 0 0.08 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.0305</radius>
+              <length>0.045</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.80 0.08 0.10 1</diffuse>
+          </material>
+        </visual>
+        <visual name="neck">
+          <pose>0 0 0.155 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.018</radius>
+              <length>0.03</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.85 0.9 0.9 1</diffuse>
+          </material>
+        </visual>
+        <visual name="red_cap">
+          <pose>0 0 0.172 0 0 0</pose>
+          <geometry>
+            <cylinder>
+              <radius>0.020</radius>
+              <length>0.012</length>
+            </cylinder>
+          </geometry>
+          <material>
+            <diffuse>0.9 0.04 0.1 1</diffuse>
+          </material>
+        </visual>
+      </link>
+    </model>
+    <model name="overhead_camera">
+      <static>true</static>
+      <pose>0 0 2.1 0 0 0</pose>
+      <link name="camera">
+        <sensor name="overhead" type="camera">
+          <always_on>true</always_on>
+          <update_rate>5</update_rate>
+          <pose>0 0 0 0 1.5707963 0</pose>
+          <camera>
+            <horizontal_fov>1.4</horizontal_fov>
+            <image>
+              <width>960</width>
+              <height>720</height>
+              <format>B8G8R8</format>
+            </image>
+            <clip>
+              <near>0.1</near>
+              <far>5</far>
+            </clip>
+          </camera>
+          <plugin filename="libgazebo_ros_camera.so" name="overhead_ros">
+            <ros>
+              <namespace>/sim</namespace>
+            </ros>
+            <camera_name>overhead</camera_name>
+            <frame_name>sim_overhead</frame_name>
+          </plugin>
+        </sensor>
+      </link>
+    </model>
+  </world>
+</sdf>

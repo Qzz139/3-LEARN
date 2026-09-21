@@ -1,0 +1,26 @@
+{"time_utc": "1970-01-01T05:29:04.752818+00:00", "event": "started", "state": "idle", "log_directory": "/home/robot/projects/3-LEARN-sim/work/gazebo-sort-19700101T052904Z", "pick_headings": [0, 36, -36, 144, -144, 180]}
+{"time_utc": "1970-01-01T05:29:04.759814+00:00", "event": "state", "state": "select"}
+{"time_utc": "1970-01-01T05:29:04.840862+00:00", "event": "selected_direction", "state": "select", "heading": 0}
+{"time_utc": "1970-01-01T05:29:04.845932+00:00", "event": "state", "state": "turn_pick"}
+{"time_utc": "1970-01-01T05:29:05.440718+00:00", "event": "state", "state": "seek"}
+{"time_utc": "1970-01-01T05:29:06.241159+00:00", "event": "target_seen", "state": "seek", "class_id": 32, "box": [467.5848693847656, 278.28594970703125, 550.6826782226562, 360.9814453125]}
+{"time_utc": "1970-01-01T05:29:06.244380+00:00", "event": "state", "state": "align"}
+{"time_utc": "1970-01-01T05:29:06.541798+00:00", "event": "state", "state": "approach", "class_id": 32}
+{"time_utc": "1970-01-01T05:29:12.540924+00:00", "event": "state", "state": "grasp_wait", "distance_m": 0.020926261320710182}
+{"time_utc": "1970-01-01T05:29:13.440515+00:00", "event": "state", "state": "lift"}
+{"time_utc": "1970-01-01T05:29:15.745253+00:00", "event": "state", "state": "return_center"}
+{"time_utc": "1970-01-01T05:29:22.340133+00:00", "event": "state", "state": "turn_place", "class_name": "ball", "slot": 1}
+{"time_utc": "1970-01-01T05:30:44.146853+00:00", "event": "state", "state": "lower"}
+{"time_utc": "1970-01-01T05:30:45.249030+00:00", "event": "state", "state": "release"}
+{"time_utc": "1970-01-01T05:30:46.341836+00:00", "event": "state", "state": "retract"}
+{"time_utc": "1970-01-01T05:30:47.342844+00:00", "event": "placed", "state": "retract", "class_name": "ball", "heading": 0, "slot": 1, "counts": {"ball": 1, "bottle": 0}}
+{"time_utc": "1970-01-01T05:30:47.344299+00:00", "event": "state", "state": "select"}
+{"time_utc": "1970-01-01T05:30:47.440810+00:00", "event": "selected_direction", "state": "select", "heading": -36}
+{"time_utc": "1970-01-01T05:30:47.443066+00:00", "event": "state", "state": "turn_pick"}
+{"time_utc": "1970-01-01T05:31:00.943111+00:00", "event": "state", "state": "seek"}
+{"time_utc": "1970-01-01T05:31:05.048283+00:00", "event": "state", "state": "turn_pick"}
+{"time_utc": "1970-01-01T05:31:22.551771+00:00", "event": "state", "state": "seek"}
+{"time_utc": "1970-01-01T05:31:26.641105+00:00", "event": "state", "state": "turn_pick"}
+{"time_utc": "1970-01-01T05:31:36.751936+00:00", "event": "state", "state": "seek"}
+{"time_utc": "1970-01-01T05:31:37.960146+00:00", "event": "state", "state": "stopped", "reason": "operator_stop"}
+{"time_utc": "1970-01-01T05:31:37.966793+00:00", "event": "result", "state": "stopped", "completed": false, "all_six_placed": false, "counts": {"ball": 1, "bottle": 0}, "unprocessed_headings": [36, -36, 144, -144, 180]}

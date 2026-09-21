@@ -1,0 +1,13 @@
+# Explicit opt-in: an action request with execute=false is rejected without motion.
+bool execute
+---
+bool completed
+bool all_six_placed
+int32 balls_placed
+int32 bottles_placed
+string log_directory
+string error
+---
+string stage
+string state
+int32 placed
