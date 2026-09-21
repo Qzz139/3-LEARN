@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# 视觉抓放demo2及正式分拣公共控制：先对准，再红外接近，最后按路径回退。
 """Align and approach one COCO sports ball or bottle, then use IR pick/place."""
 import argparse
 from datetime import datetime, timezone
@@ -16,6 +17,7 @@ import ir_pick_place_demo as base
 ROOT = base.ROOT
 
 
+# 命令行指定球或瓶时同时切换COCO类别及左右放置角度，未指定则沿用配置。
 def select_target_mode(cfg, target):
     if target is not None:
         class_id, place_angle = {'ball': (32, -90.0), 'bottle': (39, 90.0)}[target]
@@ -135,6 +137,7 @@ def search_offsets(alignment):
 
 # 扩展基础反馈缓存：线程安全地保存航向、位置、速度及四轮状态。
 class Feedback(base.Feedback):
+    # 在基础舵机和红外缓存上增加姿态、位置、速度和电调各自的接收时间。
     def __init__(self):
         super().__init__()
         self.yaw_value = None
@@ -209,6 +212,7 @@ class Feedback(base.Feedback):
 # 后台持续读取相机最新帧，防止解码队列积压影响后续取图。
 class CameraFeed:
     """Continuously drain SDK decoded frames so its H264 receive queue can flow."""
+    # 创建持续取帧线程及条件变量，推理按需等待新帧而不阻塞SDK解码。
     def __init__(self, camera):
         self.camera = camera
         self.condition = threading.Condition()
@@ -262,6 +266,7 @@ class CameraFeed:
 
 # 负责模型预热、单帧识别，以及检测日志和现场图像的保存。
 class Detector:
+    # 加载普通YOLO模型并预热；相机在预热之后开启，避免冷加载期间图传积压。
     def __init__(self, cfg, directory, record):
         from ultralytics import YOLO
         import numpy as np
@@ -316,6 +321,7 @@ class Detector:
 
 # 在基础机械臂抓放流程上增加视觉对准、低速接近和按记录路径返回。
 class AlignDemo(base.Demo):
+    # 绑定检测器，初始化启动基准、实际接近路径和累计前进距离。
     def __init__(self, bot, cfg, feedback, record, detector):
         super().__init__(bot, cfg, feedback, record)
         self.detector = detector
@@ -671,6 +677,7 @@ def main(demo_class=AlignDemo, default_config=None, validator=validate_alignment
     lock = (ROOT / 'work/real-control.lock').open('w')
     # 非阻塞独占锁：已有控制进程占用机器人时，本次立即退出。
     fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    # 将Ctrl-C或终止信号转成异常，进入停车、红灯及清理流程。
     def interrupted(*_):
         raise KeyboardInterrupt('operator stop')
     signal.signal(signal.SIGINT, interrupted)

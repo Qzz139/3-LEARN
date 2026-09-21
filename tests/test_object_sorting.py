@@ -1,3 +1,4 @@
+# 纯软件回归测试：使用模拟模型、时钟及SDK接口，不发送实机动作。
 import json
 from pathlib import Path
 import sys
@@ -10,11 +11,14 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 import object_sorting as sorting
 
 
+# 读取仓库配置，确保测试使用当前稳定版参数。
 def config():
     return sorting.validate_sorting(json.loads((ROOT / 'config/object_sorting.json').read_text()))
 
 
+# 验证稳定版多物品调度、放置位分配和搜索姿态顺序。
 class SortingTests(unittest.TestCase):
+    # 核对六件共享启动基准、两类各三个位及逐件路径状态重置。
     def test_full_cycle_keeps_reference_and_uses_each_slot_once(self):
         cfg = config()
         events = []
@@ -39,6 +43,7 @@ class SortingTests(unittest.TestCase):
 
         demo.find_target = Mock(side_effect=find_target)
 
+        # 校验逐件路径状态已重置和启动基准不变，再生成模拟接近记录。
         def align_target(initial_target, search_center):
             self.assertEqual(demo.approach_path, [])
             self.assertEqual(demo.travel_m, 0)
@@ -66,6 +71,7 @@ class SortingTests(unittest.TestCase):
                              for call in demo.move_base.call_args_list), 6)
         self.assertEqual(demo.move_base.call_args_list[-1][0], (1190, 'finish_retract'))
 
+    # 空方向不夹爪、不占用放置位，也不能宣称已处理六件。
     def test_empty_sector_does_not_consume_slot_or_claim_six_done(self):
         cfg = config()
         events = []
@@ -93,6 +99,7 @@ class SortingTests(unittest.TestCase):
             d['status'] = 'taken'
         self.assertIsNone(sorting.nearest_pending_direction(directions, 179))
 
+    # 记录模拟动作顺序，核对每次搜索转向前内收、取图前外伸。
     def test_each_search_turn_retracts_before_turn_and_extends_before_detection(self):
         cfg = config()
         target = dict(class_id=39, confidence=.9, xyxy=[420, 50, 540, 450],
@@ -100,6 +107,7 @@ class SortingTests(unittest.TestCase):
         actions = []
         frames = iter([[], [], [target]])
 
+        # 按预设次序返回图像识别结果，用于核对搜索和动作先后。
         def detect(_camera):
             actions.append(('detect',))
             return next(frames), .1
@@ -165,6 +173,7 @@ class SortingTests(unittest.TestCase):
         demo.turn_to_offset(90, 'turn_to_place')
         demo.turn.assert_not_called()
 
+    # 放置位不能落到错误侧或重复，缺少位置时不能进入实机流程。
     def test_wrong_side_duplicate_and_missing_slots_are_rejected(self):
         for slots in ([90, -72, -108], [-90, -90, -108]):
             cfg = config()
@@ -177,6 +186,7 @@ class SortingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             sorting.require_placement_slots(cfg)
 
+    # 后方对准以当前扇区为基准，不能误用正前方的角度限制。
     def test_rear_alignment_does_not_use_front_sector_bounds(self):
         cfg = config()
         target = dict(class_id=32, confidence=.9, xyxy=[480, 200, 580, 300],
