@@ -1,0 +1,37 @@
+/* @theme ep-basic */
+@import 'default';
+section { background:#fafaf8; color:#161719; font-family:"PingFang SC","Hiragino Sans GB",Arial,sans-serif; padding:58px 72px; font-size:30px; line-height:1.55; justify-content:center; }
+h1 { color:inherit; font-size:56px; line-height:1.2; letter-spacing:-1.5px; margin:0 0 36px; }
+h2 { color:inherit; font-size:36px; font-weight:600; margin:22px 0 10px; }
+p { margin:12px 0; }
+strong { color:#087c75; }
+a { color:#087c75; text-decoration:none; }
+li { margin:14px 0; }
+section::after { color:#85888c; font-size:18px; right:35px; bottom:26px; }
+section.cover,section.divider { background:#121416; color:#fff; }
+section.cover h1 { font-size:78px; max-width:850px; margin-bottom:35px; }
+section.cover strong { color:#57c8b9; }
+section.cover p { color:#bfc4c5; }
+section.divider h1 { font-size:86px; margin-bottom:16px; }
+section.divider p { color:#a7acae; font-size:30px; }
+section.divider .number { font-size:180px; line-height:1; color:#272c2e; position:absolute; right:70px; top:55px; font-weight:700; }
+section.code pre { background:#edf0ef; border:0; padding:25px 28px; border-radius:0; font-size:25px; line-height:1.5; margin:16px 0; }
+section.code h1 { margin-bottom:18px; }
+section.code p { font-size:27px; }
+section.photo h1 { font-size:49px; }
+section.photo p,section.photo li { font-size:28px; }
+section.photo { padding-left:65px; padding-right:40px; }
+section.refs h1 { font-size:66px; }
+section.refs a { font-size:25px; }
+section.refs h2 { margin-top:35px; }
+small { font-size:22px; color:#71767a; }
+table { display:table; table-layout:fixed; font-size:30px; width:100%; background:transparent; }
+thead { background:transparent; }
+th,td { border:0; border-bottom:1px solid #d7dcda; padding:17px 14px; background:transparent!important; }
+blockquote { border-left:4px solid #087c75; color:#59615f; font-size:27px; padding-left:22px; margin:25px 0; }
+.connection { display:flex; align-items:center; justify-content:space-between; margin:35px 0; }
+.connection .device { width:27%; border-top:3px solid #087c75; padding-top:20px; }
+.connection h2 { font-size:34px; margin:0 0 12px; }
+.connection p { font-size:25px; }
+.connection .arrow { font-size:42px; color:#087c75; }
+.steps { font-size:34px; line-height:2; }

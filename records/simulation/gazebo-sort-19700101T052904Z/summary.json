@@ -1,0 +1,15 @@
+{
+  "completed": false,
+  "all_six_placed": false,
+  "counts": {
+    "ball": 1,
+    "bottle": 0
+  },
+  "unprocessed_headings": [
+    36,
+    -36,
+    144,
+    -144,
+    180
+  ]
+}

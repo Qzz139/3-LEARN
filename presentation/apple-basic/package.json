@@ -1,0 +1,15 @@
+{
+  "name": "ep-apple-basic-presentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev slides.md",
+    "export": "bash export.sh"
+  },
+  "devDependencies": {
+    "@slidev/cli": "53.0.0",
+    "@slidev/theme-apple-basic": "0.25.1",
+    "playwright-chromium": "1.63.0",
+    "vite-plugin-singlefile": "2.3.3"
+  }
+}
